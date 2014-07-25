@@ -18,6 +18,12 @@
 		   $sub = html_entity_decode($sub);
         $sitemap->addUrl("".$site_url.'/p/'.$sub.'-p'.$p_id.'#.'.rand(0, 9999)."",                date('c'),  'daily',    '1');
 		}
+		getMembers();
+		global $getmembers,$profile_name;
+		while ($getmembers->fetch()){
+			$sitemap->addUrl($site_url.'/profile/'.$profile_name,          date('c'),  'daily',    '0.5');
+		}
+		
         $sitemap->addUrl($site_url.'/login',          date('c'),  'daily',    '0.5');
 		$sitemap->addUrl($site_url.'/auth/forgot_password',          date('c'),  'daily',    '0.5');
 

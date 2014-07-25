@@ -287,13 +287,16 @@ if (empty($pass)) {
 		{
 			$chkusrnme->bind_result($id,$active,$user);
 			$chkusrnme->fetch();
-			   if ($active === 0){
+			   if ($active == 0){
 				$_SESSION['err'] =N_ACCOUNT_NOT_VALID;
 				header ('location:'.$from_url.'');
 				exit();
 		}
- 	else
-		{  
+ 	else if ($active == 3){
+				$_SESSION['err'] =ACC_SUSPENDED;
+				header ('location:'.$from_url.'');
+				exit();
+	} else {  
 		// Retrieve password and try to authenticate
 		$chkusrlog = $db->prepare("SELECT password FROM members WHERE email=?");
 		$chkusrlog->bind_param("s",$email);
@@ -404,6 +407,7 @@ if ($op === 'feed') {
 		
 		//success('Update successful');
 			$_SESSION['succ'] =S_SUCCESS;
+			echo $_SESSION['succ'];
 			header ('location:'.$from_url.'');
 			exit();
 			$db->close();

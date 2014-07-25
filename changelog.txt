@@ -1,14 +1,9 @@
-Version 1.0.2
-+ Added localization (language support) - you can now change create language files and change site language
-+ Added meta tags - you can now edit meta keywords and description for enhanced SEO in the admin backend
-+ Admin can now change logo and favicon from admin backend
-+ Modified timeline feeds
-+ Added the ability to add image posts
-+ Added post commenting system
-+ Added post liking and unliking system
-+ Added post sharing system
-+ Added the ability to detect mobile devices and load a theme for mobile sites. 
-  This theme will be available for purchase from our site
-+ Modified feeds to only show those from your friends
-= made some changes to site notifications
-= modified some aspects of the script styling
+Version 1.1.1
+
++Added new languages
++Added check for Mcrypt and GD library for PHP
+
+Fixed photo upload in the timeline
+Fixed sitemap related issues
+Fixed suspension of users
+Fixed lagging in the timeline as a result of queued Ajax requests

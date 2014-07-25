@@ -1,22 +1,89 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(1) NOT NULL,
+  `level` int(1) NOT NULL,
+  `online` int(1) NOT NULL,
+  `ip` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `user_agent` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_activity` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE IF NOT EXISTS `announcements` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `date` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `feed_id` int(100) NOT NULL,
+  `comment` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
+  `comment_by` int(50) NOT NULL,
+  `timestamp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_likes`
+--
+
+CREATE TABLE IF NOT EXISTS `comment_likes` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `feed_id` int(100) NOT NULL,
+  `comment_id` int(50) NOT NULL,
+  `user_like` int(50) NOT NULL,
+  `timestamp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `country`
 --
- 
+
 CREATE TABLE IF NOT EXISTS `country` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `iso` char(2) NOT NULL,
-  `name` varchar(80) NOT NULL,
-  `nicename` varchar(80) NOT NULL,
-  `iso3` char(3) DEFAULT NULL,
+  `iso` char(2) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `nicename` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
+  `iso3` char(3) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numcode` smallint(6) DEFAULT NULL,
   `phonecode` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
- 
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=254 ;
+
 --
 -- Dumping data for table `country`
 --
- 
+
 INSERT INTO `country` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phonecode`) VALUES
 (1, 'AF', 'AFGHANISTAN', 'Afghanistan', 'AFG', 4, 93),
 (2, 'AL', 'ALBANIA', 'Albania', 'ALB', 8, 355),
@@ -272,24 +339,25 @@ INSERT INTO `country` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `phon
 (252, 'SX', 'SINT MAARTEN', 'Sint Maarten', 'SXM', 534, 1),
 (253, 'SS', 'SOUTH SUDAN', 'South Sudan', 'SSD', 728, 211);
 
---
--- Table structure for table `site_settings`
---
-
-CREATE TABLE IF NOT EXISTS `site_settings` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
-  `site_url` varchar(85) NOT NULL,
-  `site_title` varchar(85) NOT NULL,
-  `site_email` varchar(85) NOT NULL,
-  `theme` varchar(85) NOT NULL,
-  `time_zone` varchar(155) NOT NULL,
-  `last_version_check` varchar(155) NOT NULL,
-  `status` int(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+-- --------------------------------------------------------
 
 --
--- Table structure for table `General Settings`
+-- Table structure for table `friend_requests`
+--
+
+CREATE TABLE IF NOT EXISTS `friend_requests` (
+  `request_id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `to_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` datetime NOT NULL,
+  PRIMARY KEY (`request_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `general_settings`
 --
 
 CREATE TABLE IF NOT EXISTS `general_settings` (
@@ -298,28 +366,54 @@ CREATE TABLE IF NOT EXISTS `general_settings` (
   `user_validate` int(1) NOT NULL,
   `sys_cron` int(1) NOT NULL,
   `timezone` int(1) NOT NULL,
-  `admin_end` varchar(50) NOT NULL,
-  `lang` varchar(5) NOT NULL,
-  `logo_name` varchar(100) NOT NULL DEFAULT  'logo.png',
-  `favicon_name` varchar(100) NOT NULL DEFAULT  'favicon.png',
-  `mobile_enabled` int(1) NOT NULL DEFAULT  '0',
+  `admin_end` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `lang` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
+  `logo_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'logo.png',
+  `favicon_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'favicon.png',
+  `mobile_enabled` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `Themes`
+-- Table structure for table `languages`
 --
 
-CREATE TABLE IF NOT EXISTS `themes` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `theme_name` varchar(85) NOT NULL,
-  `theme_url` varchar(155) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `version` varchar(10) NOT NULL,
-  `author` varchar(155) NOT NULL,
-  `author_url` varchar(155) NOT NULL,
+CREATE TABLE IF NOT EXISTS `languages` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `abbr` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `name`, `abbr`) VALUES
+(1, 'ENGLISH', 'en'),
+(2, 'SPANISH', 'es'),
+(3, 'NORWEGIAN', 'no'),
+(4, 'PORTUGUESE', 'bp'),
+(5, 'Lao', 'lo'),
+(6, 'DUTCH', 'nl');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `feed_id` int(100) NOT NULL,
+  `user_like` int(100) NOT NULL,
+  `timestamp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `members`
@@ -327,55 +421,19 @@ CREATE TABLE IF NOT EXISTS `themes` (
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `email` varchar(35) NOT NULL,
-  `a_code` varchar(50) NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `a_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `active` int(1) NOT NULL,
   `level` int(1) NOT NULL,
-  `reg_date` varchar(45) NOT NULL,
+  `reg_date` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `online` int(1) NOT NULL,
-  `last_activity` varchar(45) NOT NULL,
+  `last_activity` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
 
---
--- Table structure for table `admin`
---
-
-CREATE TABLE IF NOT EXISTS `admin` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `email` varchar(35) NOT NULL,
-  `active` int(1) NOT NULL,
-  `level` int(1) NOT NULL,
-  `online` int(1) NOT NULL,
-  `ip` varchar(255) NOT NULL,
-  `user_agent` varchar(255) NOT NULL,
-  `last_activity` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
---
--- Table structure for table `Site Messages`
---
-
-CREATE TABLE IF NOT EXISTS `site_messages` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `purpose` varchar(140) NOT NULL,
-  `subject` varchar(140) NOT NULL,
-  `message` varchar(1500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
---
--- Dumping data for table `site_messages`
---
-
-INSERT INTO `site_messages` (`id`, `purpose`, `subject`, `message`) VALUES
-(1, 'recovery', 'Recover Password', '<html>\n<head>\n<title>Change Password Request at ".$site_title."</title>\n</head>\n<body>\n<table style=''width:700px;'' align=''center'' bgcolor=''#CCCCCC'' cellpadding=''2''>\n<th bgcolor=''#FFFFFF'' height=''20px''><h1> ".$site_title." - Reset Password</h1></th>\n<tr>\n<td><p>Dear ".$username.",</p></td>\n</tr>\n<tr>\n<td><p>You recently requested to change your password at ".$site_title." </p>\n    <p> Your password reset link is ".$site_url."/auth/recover_password/".$randomstring."</p>\n    <p> -------------------------------</p>\n    <p> If you however did not make this request please ignore this email</p>\n    </td>\n</tr>\n<tr bgcolor=''#FFFFFF''>\n      <td>Best Regards,<br />\n      ".$site_title." Team.<br />\n	  ".$site_url."\n	  </td>\n    </tr>\n</table>\n</html>'),
-(2, 'activation', 'Account Activation', '<html>\n<head>\n<title>Activate your account at ".$site_title."</title>\n</head>\n<body>\n<table style=''width:700px;'' align=''center'' bgcolor=''#CCCCCC'' cellpadding=''2''>\n<th bgcolor=''#FFFFFF'' height=''50px''><h1> ".$site_title." - Account Activation</h1></th>\n<tr>\n<td><p>Dear ".$user.",</p></td>\n</tr>\n<tr>\n<td><p>Your account at ".$site_title." has been created. You will however need to validate your email before you can log in. To validate your email, please click the link below.</p>\n                      <p> Link: ".$site_url."/auth/activate/".$randomstring."</p>\n                      <p> If for some reason you cannot click on the link above, copy and paste it in your browser.</p></td>\n</tr>\n<tr bgcolor=''#FFFFFF''>\n      <td>Best Regards,<br />\n      ".$site_title." Team.<br />\n	  ".$site_url."\n	  </td>\n    </tr>\n</table>\n</body>\n</html>');
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `member_sett`
@@ -384,90 +442,17 @@ INSERT INTO `site_messages` (`id`, `purpose`, `subject`, `message`) VALUES
 CREATE TABLE IF NOT EXISTS `member_sett` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` int(20) NOT NULL,
-  `d_name` varchar(150) NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `dob` varchar(85) NOT NULL,
-  `phone` varchar(40) NOT NULL,
-  `city` varchar(155) NOT NULL,
-  `country` varchar(155) NOT NULL,
-  `thumbnail` varchar(500) NOT NULL,
+  `d_name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `gender` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `dob` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `country` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `thumbnail` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Table structure for table `timeline`
---
-
-CREATE TABLE IF NOT EXISTS `timeline` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `uid` int(250) NOT NULL,
-  `username` varchar(140) NOT NULL DEFAULT '',
-  `activity` varchar(1000) DEFAULT NULL,
-  `time` datetime NOT NULL,
-  `feed_img` varchar(250) NOT NULL,
-  `shared` int( 5 ) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Table structure for table `notifications`
---
-
-CREATE TABLE IF NOT EXISTS `notifications` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user` int(140) NOT NULL,
-  `notice` varchar(500) NOT NULL,
-  `time` datetime NOT NULL,
-  `seen` varchar(8) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
---
--- Table structure for table `Announcements`
---
-
-CREATE TABLE IF NOT EXISTS `announcements` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `date` varchar(100) NOT NULL,
-  `subject` varchar(150) NOT NULL,
-  `content` varchar(1000) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
---
--- Table structure for table `pages`
---
-
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `p_slug` varchar(150) NOT NULL,
-  `date` varchar(100) NOT NULL,
-  `title` varchar(150) NOT NULL,
-  `content` varchar(2000) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `pages`
---
-
-INSERT INTO `pages` (`id`, `p_slug`, `date`, `title`, `content`) VALUES
-(1, 'terms', '2014-03-07 16:24:46', 'Terms', 'Terms and conditions go here...'),
-(2, 'pPolicy', '2014-03-07 16:24:46', 'Privacy Policy', 'Privacy Policy goes here...');
-
---
--- Table structure for table `friend_requests`
---
-
-CREATE TABLE IF NOT EXISTS `friend_requests` (
-  `request_id` int(11) NOT NULL AUTO_INCREMENT,
-  `from_id` varchar(255) NOT NULL,
-  `to_id` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `timestamp` datetime NOT NULL,
-  PRIMARY KEY (`request_id`)
-) ENGINE=MyISAM;
-
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `my_friends`
@@ -479,7 +464,47 @@ CREATE TABLE IF NOT EXISTS `my_friends` (
   `user2` int(12) NOT NULL,
   `timestamp` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user` int(140) NOT NULL,
+  `notice` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `time` datetime NOT NULL,
+  `seen` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `p_slug` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `date` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `p_slug`, `date`, `title`, `content`) VALUES
+(1, 'terms', '2014-03-07 16:24:46', 'Terms', 'Terms and conditions go here...'),
+(2, 'pPolicy', '2014-03-07 16:24:46', 'Privacy Policy', 'Privacy Policy goes here...');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `pm`
@@ -490,43 +515,25 @@ CREATE TABLE IF NOT EXISTS `pm` (
   `unique_id` bigint(50) NOT NULL,
   `user1` bigint(20) NOT NULL,
   `user2` bigint(20) NOT NULL,
-  `message` text NOT NULL,
+  `message` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `timestamp` datetime NOT NULL,
-  `user1read` varchar(3) NOT NULL,
-  `user2read` varchar(3) NOT NULL,
+  `user1read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `user2read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `Languages`
---
-
-CREATE TABLE IF NOT EXISTS `languages` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `abbr` varchar(5) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM;
-
---
--- Dumping data for table `languages`
---
-
-INSERT INTO `languages` (`id`, `name`, `abbr`) VALUES
-(1, 'ENGLISH', 'en'),
-(2, 'NORWEGIAN', 'nor');
-
-
---
--- Table structure for table `SEO`
+-- Table structure for table `seo`
 --
 
 CREATE TABLE IF NOT EXISTS `seo` (
-  	`id` int(1) NOT NULL AUTO_INCREMENT,
-  	`meta_tags` varchar(250) NOT NULL,
-  	`meta_description` varchar(250) NOT NULL,
-  	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM;
+  `id` int(1) NOT NULL AUTO_INCREMENT,
+  `meta_tags` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `meta_description` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `seo`
@@ -535,52 +542,133 @@ CREATE TABLE IF NOT EXISTS `seo` (
 INSERT INTO `seo` (`id`, `meta_tags`, `meta_description`) VALUES
 (1, 'social network,community,friendship,meet new people,interact', 'This is a social nework where people meet, interact, create new friends and explore the social life');
 
---
--- Table structure for table `likes`
---
+-- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `likes` (
-  	`id` int(50) NOT NULL AUTO_INCREMENT,
-  	`feed_id` int(100) NOT NULL,
-  	`user_like` int(100) NOT NULL,
-	`timestamp` varchar(20) NOT NULL,
-  	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM;
-	
 --
 -- Table structure for table `shares`
 --
-	
-	CREATE TABLE IF NOT EXISTS `shares` (
-  	`id` int(50) NOT NULL AUTO_INCREMENT,
-  	`feed_id` int(100) NOT NULL,
-  	`user_share` int(100) NOT NULL,
-	`timestamp` varchar(20) NOT NULL,
+
+CREATE TABLE IF NOT EXISTS `shares` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `feed_id` int(100) NOT NULL,
+  `user_share` int(100) NOT NULL,
+  `timestamp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_messages`
+--
+
+CREATE TABLE IF NOT EXISTS `site_messages` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `purpose` varchar(140) COLLATE utf8_unicode_ci NOT NULL,
+  `subject` varchar(140) COLLATE utf8_unicode_ci NOT NULL,
+  `message` varchar(1500) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `site_messages`
+--
+
+INSERT INTO `site_messages` (`id`, `purpose`, `subject`, `message`) VALUES
+(1, 'recovery', 'Recover Password', '<html>\n<head>\n<title>Change Password Request at ".$site_title."</title>\n</head>\n<body>\n<table style=''width:700px;'' align=''center'' bgcolor=''#CCCCCC'' cellpadding=''2''>\n<th bgcolor=''#FFFFFF'' height=''20px''><h1> ".$site_title." - Reset Password</h1></th>\n<tr>\n<td><p>Dear ".$username.",</p></td>\n</tr>\n<tr>\n<td><p>You recently requested to change your password at ".$site_title." </p>\n    <p> Your password reset link is ".$site_url."/auth/recover_password/".$randomstring."</p>\n    <p> -------------------------------</p>\n    <p> If you however did not make this request please ignore this email</p>\n    </td>\n</tr>\n<tr bgcolor=''#FFFFFF''>\n      <td>Best Regards,<br />\n      ".$site_title." Team.<br />\n	  ".$site_url."\n	  </td>\n    </tr>\n</table>\n</html>'),
+(2, 'activation', 'Account Activation', '<html>\n<head>\n<title>Activate your account at ".$site_title."</title>\n</head>\n<body>\n<table style=''width:700px;'' align=''center'' bgcolor=''#CCCCCC'' cellpadding=''2''>\n<th bgcolor=''#FFFFFF'' height=''50px''><h1> ".$site_title." - Account Activation</h1></th>\n<tr>\n<td><p>Dear ".$user.",</p></td>\n</tr>\n<tr>\n<td><p>Your account at ".$site_title." has been created. You will however need to validate your email before you can log in. To validate your email, please click the link below.</p>\n                      <p> Link: ".$site_url."/auth/activate/".$randomstring."</p>\n                      <p> If for some reason you cannot click on the link above, copy and paste it in your browser.</p></td>\n</tr>\n<tr bgcolor=''#FFFFFF''>\n      <td>Best Regards,<br />\n      ".$site_title." Team.<br />\n	  ".$site_url."\n	  </td>\n    </tr>\n</table>\n</body>\n</html>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `site_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `site_settings` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `site_url` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `site_title` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `site_email` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `theme` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `time_zone` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `last_version_check` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `themes`
+--
+
+CREATE TABLE IF NOT EXISTS `themes` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `theme_name` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `theme_url` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `author_url` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timeline`
+--
+
+CREATE TABLE IF NOT EXISTS `timeline` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(250) NOT NULL,
+  `username` varchar(140) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `activity` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time` datetime NOT NULL,
+  `feed_img` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `shared` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `albums`
+--
+
+CREATE TABLE IF NOT EXISTS `albums` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `thumb` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `album_likes`
+--
+
+CREATE TABLE IF NOT EXISTS `album_likes` (
+  	`id` int(8) NOT NULL AUTO_INCREMENT,
+  	`albm_id` int(20) COLLATE utf8_unicode_ci NOT NULL,
+  	`user_like` int(20) COLLATE utf8_unicode_ci NOT NULL,
+ 	`timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM;
-	
+	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
 --
--- Table structure for table `comments`
+-- Table structure for table `sent_msgs`
 --
-	
-	CREATE TABLE IF NOT EXISTS `comments` (
-  	`id` int(50) NOT NULL AUTO_INCREMENT,
-  	`feed_id` int(100) NOT NULL,
-  	`comment` varchar(1500) NOT NULL,
-	`comment_by` int(50) NOT NULL,
-	`timestamp` varchar(20) NOT NULL,
+
+CREATE TABLE IF NOT EXISTS `sent_msgs` (
+  	`id` int(8) NOT NULL AUTO_INCREMENT,
+  	`msg_to` int(20) COLLATE utf8_unicode_ci NOT NULL,
+  	`subject` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+	`message` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+ 	`timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM;
-	
---
--- Table structure for table `comment_likes`
---
-	
-	CREATE TABLE IF NOT EXISTS `comment_likes` (
-  	`id` int(50) NOT NULL AUTO_INCREMENT,
-  	`feed_id` int(100) NOT NULL,
-  	`comment_id` int(50) NOT NULL,
-	`user_like` int(50) NOT NULL,
-	`timestamp` varchar(20) NOT NULL,
-  	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM;
+	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

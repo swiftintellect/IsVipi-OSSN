@@ -30,9 +30,11 @@
 											?> 
                                             
                                             <li>
+                                            <?php getUserDetails($id); ?>
                                             <div class="member_pic">
                               <?php if(htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8') == ""){$m_thumbnail=".gif";}?>
-                                 <a href="<?php echo ISVIPI_URL.'profile/' ?><?php echo htmlspecialchars($username, ENT_QUOTES, 'utf-8');?>" title="<?php echo htmlspecialchars($m_name, ENT_QUOTES, 'utf-8');?>"><img src="<?php echo ISVIPI_PROFILE_PIC_URL.ISVIPI_THUMB_150.htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8');?>" height="100%" width="100%" alt="" /></a>
+                                 <a href="<?php echo ISVIPI_URL.'profile/'.$username ?>"
+								 title="<?php echo $username;?>"><img src="<?php echo ISVIPI_PROFILE_PIC_URL.ISVIPI_THUMB_150.htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8');?>" height="100%" width="100%" alt="" /></a>
                                             </div>
                                             <div class="member_info">
                                             <span class="members_list_info">                                  

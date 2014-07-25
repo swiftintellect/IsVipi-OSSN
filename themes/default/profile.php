@@ -1,12 +1,15 @@
 <?php get_header()?>
 <?php get_sidebar()?>
+<?php getUserDetails($id); ?>
                        <div class="dash_content">
                         <div class="panel panel-primary">
                           <div class="panel-heading"><strong><?php echo htmlspecialchars($username, ENT_QUOTES, 'utf-8');?>'s <?php echo PROFILE ?></strong></div>
                                <div class="panel-body">
                                  <div class="my_pic">
                                  <?php if(htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8') == ""){$m_thumbnail=".gif";}?>
+                                 <a href="<?php echo ISVIPI_PROFILE_PIC_URL.ISVIPI_THUMB_500.htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8');?>" class="boxer">
                                  <img src="<?php echo ISVIPI_PROFILE_PIC_URL.ISVIPI_THUMB_150.htmlspecialchars($m_thumbnail, ENT_QUOTES, 'utf-8');?>" alt="" />
+                                 </a>
                                  </div>
                                  <div class="my_details">
                                   <table class="table table-bordered">
@@ -70,6 +73,14 @@
                                 <?php }?>
                                  <a href="<?php echo $_SERVER['HTTP_REFERER'];?>" class="btn btn-default pull-right" role="button"><?php echo BACK ?></a>
                                  <?php }?>
+                                 <?php if(ALBUM == "yes"){?>
+                                 <?php getAlbum($uid)?>
+                                 <?php if (checkFriendship($id,$user) && $ToTPics > 0){?>
+                                 <a href="<?php echo ISVIPI_URL. 'album/index/'.$username?>"><button type="submit" class="btn btn-info">View User Album</button></a>
+                                 <?php } else if ($uid == $user){?>
+                                 <a href="<?php echo ISVIPI_URL. 'album/index/'?>"><button type="submit" class="btn btn-info">My Photo Album</button></a>
+                                 <?php } ?>
+                                 <?php } ?>
                                  </div>
                                </div>
                           </div><!--end of panel-->
@@ -111,14 +122,13 @@
                         <h4 class="modal-title" id="myModalLabel"><?php echo MSG_TO ?>: <span class="green"><?php echo htmlspecialchars($username, ENT_QUOTES, 'utf-8');?></span></h4>
                       </div>
                       <div class="modal-body">
-                              <form method="post" action="<?php echo ISVIPI_URL. 'users/processPM'?>">
+                              <form method="post" action="<?php echo ISVIPI_URL.'users/processPM'?>">
                                 <input type="hidden" name="msg" value="0">
                               <div class="form-group">
                                 <input class="form-control" type="hidden" name="recip" value="<?php echo htmlspecialchars($id, ENT_QUOTES, 'utf-8');?>" placeholder="Recipient">
                               </div>
                               <div class="form-group">
-                                <textarea id="message" name="message" required="required">
-								</textarea>
+                                <textarea id="message" name="message" required="required"></textarea>
                               </div>
                                 
 

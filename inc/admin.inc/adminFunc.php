@@ -65,13 +65,13 @@ function getAdminDetails($value){
 }
 function getIsVipiFeeds(){
 		$rss = new DOMDocument();
-	$rss->load('http://isvipi.com/feed/');
+	$rss->load('http://isvipi.org/feed/');
 	$feed = array();
 	foreach ($rss->getElementsByTagName('item') as $node) {
 		$item = array ( 
 			'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
 			'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
-			'link' => $node->getElementsByTagName('link')->item(0)->nodeValue,
+			'guid' => $node->getElementsByTagName('guid')->item(0)->nodeValue,
 			'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
 			);
 		array_push($feed, $item);
@@ -79,12 +79,12 @@ function getIsVipiFeeds(){
 	$limit = 2;
 	for($x=0;$x<$limit;$x++) {
 		$title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
-		$link = $feed[$x]['link'];
+		$link = $feed[$x]['guid'];
 		$description = $feed[$x]['desc'];
 		$descr = trunc_text($description, 20);
 		$date = date('l F d, Y', strtotime($feed[$x]['date']));
 		echo '<small><em>'.POSTED_ON.' '.$date.'</em></small></p>';
-		echo '<p><strong><a href="'.$link.'" title="'.$title.'">'.$title.'</a></strong><br />';
+		echo '<p><strong><a href="'.$link.'" title="'.$title.'" target="_blank">'.$title.'</a></strong><br />';
 		echo '<p>'.$descr.'</p>';
 	}
 }
@@ -105,22 +105,6 @@ function getMembersAll(){
 	$Allcount = $getmembersAll->num_rows();
 }
 
-//Check if isOnline
-function isOnlineNOW($value){
-	global $db;
-	$online = '1';
-	$isOnline = $db->prepare("SELECT username FROM members WHERE (online=? AND id=?)");
-	$isOnline->bind_param('ii', $online,$value);
-	$isOnline->execute();
-	$isOnline->store_result();
-	if ($isOnline->num_rows() > 0){
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
-}
 //Get Members function
 function getMembersAll2($pager,$filter,$p_limit){
 	global $db;
@@ -148,17 +132,6 @@ function getMembersAll2($pager,$filter,$p_limit){
 	}
 }
 
-function vInit(){
-	$curl = curl_init();
-	curl_setopt_array($curl, array(
-    CURLOPT_RETURNTRANSFER => 1,
-    CURLOPT_URL => 'http://isvipi.com/version/sites.php?url='.urlencode(ISVIPI_FULL_HTTP_URL),
-    CURLOPT_USERAGENT => 'IsVipi Curl Ping Request'
-	));
-$resp = curl_exec($curl);
-curl_close($curl);
-upSiteStatus("1");
-	}
 //Get New Members function
 function getNewMembersAll(){
 	global $db;
@@ -229,7 +202,7 @@ function isOneWeeks(){
 function updateSystem() {
 	global $db;
 	upSiteStatus('3');
-	$url  = 'http://isvipi.com/files/isvipi.zip';
+	$url  = 'http://isvipi.org/files/isvipi.zip';
     $path = ISVIPI_ROOT.'temp/isvipi.zip';
     $fp = fopen($path, 'w');
     $ch = curl_init($url);
@@ -255,7 +228,7 @@ function updateSystem() {
 }
 function checkVersion(){
 	global $db;
-define('REMOTE_VERSION', 'http://isvipi.com/version/version.php');
+define('REMOTE_VERSION', 'http://isvipi.org/version/version.php');
 $script = file_get_contents(REMOTE_VERSION);
 $version = str_replace(".", "", VERSION);
 $script = str_replace(".", "", $script);
@@ -348,5 +321,53 @@ function selectLang(){
     <?php }
 	echo '</select>';
 }
+function getAllEmails($to){
+	global $db;
+	global $usrEmail;
+	global $usrID;
+	global $stmt;
+	if ($to == 5) {
+	$stmt = $db->prepare("SELECT id,email FROM members");
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($usrID,$usrEmail);
+	} else if ($to == 9){
+		$tr = 0;
+		$stmt = $db->prepare("SELECT id,email FROM members WHERE active=?");
+		$stmt ->bind_param('i',$tr);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($usrID,$usrEmail);	
+	} else {
+	$stmt = $db->prepare("SELECT id,email FROM members WHERE active=?");
+	$stmt ->bind_param('i',$to);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($usrID,$usrEmail);
+	}
+}
+function recordSentMsgs($usrID,$subject,$message){
+	global $db;
+	$limit = 250;
+	$message = trunc_text($message, $limit);
+	$stmt = $db->prepare('insert into sent_msgs (msg_to,subject,message,timestamp) values (?,?,?,NOW())');
+	$stmt->bind_param('iss', $usrID,$subject,$message);
+	$stmt->execute();
+	$stmt->close();
+}
+
+function getSentMessages(){
+	global $db;
+	global $stmt;
+	global $msgTO;
+	global $message;
+	global $timestamp;
+	global $subject;
+	$stmt = $db->prepare("SELECT msg_to,subject,message,timestamp FROM sent_msgs ORDER BY id DESC LIMIT 10");
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($msgTO,$subject,$message,$timestamp);
+}
+
 
 ?>

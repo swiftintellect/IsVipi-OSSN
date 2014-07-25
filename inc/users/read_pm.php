@@ -16,43 +16,29 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
+ if (isset($_SERVER['HTTP_REFERER'])){
+ 	$from_url = $_SERVER['HTTP_REFERER'];
+ } else {
+	$from_url = ISVIPI_URL.'messages';
+ }
  isLoggedIn();
- if (isset($_SESSION['user_id'])){
  $user = $_SESSION['user_id'];
  getUserDetails($user);
- pollUser($user);
- }
- //Define key actions
-//It will return fail if no correct action is defined from a POST command
-//We retrieve the message id then update the message as read
-	/*if (strlen($ACTION[1]) !== 23)
-	{
-	$_SESSION['err'] ="Error! No such conversation found";
-    die404();
-	exit();
-	}	*/
-	$string = $ACTION[1];
-	if (isset($string)){
-	$str = decrypt_str($string);
-	$str = strip_tags($str);
-	$str = substr($str, 0, 110);
-	
-    $parts = explode("/", $str);
-	if ((!$parts[0])||(!$parts[1])||(!$parts[2])||(!$parts[3])){$_SESSION['err'] =NO_SUCH_CONV;die404();}
-    $msg_from = $parts[0];
-    $unique_id = $parts[1];
-	$msg_to = $parts[2];
-	$msg_id = $parts[3];
-	//Update as read
-	updMsgRead($msg_from,$user,$unique_id);
-	}
-	else
-	{
+ pollUser($_SESSION['user_id']);
+	if (isset($ACTION[1])){
+		$convUser = $ACTION[1];
+		if (!preg_match('/^[a-zA-Z0-9_]{1,60}$/', $convUser)){
 		$_SESSION['err'] =NO_SUCH_CONV;
-		die404();
-	}
+		header ('location:'.$from_url.'');
+		exit();
+		}
+		xtractUID($convUser);
+		$GLOBALS['uid'] = $uid;
+		
  base_header($site_title,$ACTION[0]);
  include_once ISVIPI_THEMES_BASE.'read_pm.php';
- globalAlerts();?>
+ globalAlerts();
+}
+ ?>
 </body>
 </html>

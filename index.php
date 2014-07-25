@@ -31,14 +31,19 @@ getAdminGenSett();
 if ($mobileEnabled == "1"){
 isMobile();
 }
+?>
+<?php
 define('ISVIPI_THEMES_BASE', ISVIPI_ROOT . 'themes/'.$theme.'' . DIRECTORY_SEPARATOR);
 define ('ISVIPI_THEME_URL', ISVIPI_URL. 'themes/'.$theme.''.DIRECTORY_SEPARATOR);
-define('VERSION', '1.0.2');
+define('VERSION', '1.1.1');
+define('ALBUM', 'no');
+define('CHAT_ENB', 'no');
+define('MASS_EMAIL', 'no');
 include_once "lang/".$lang.".php";
 if ($timeZ=="1"){
 $zone = ini_get('date.timezone');	
 } else { $zone = $time_zone;}
-date_default_timezone_set ($zone);
+date_default_timezone_set (''.$zone.'');
 $URL = str_replace(
 	array( '\\', '../' ),
 	array( '/',  '' ),
@@ -76,6 +81,9 @@ if ($ACTION[0] == 'cron'){
 else if ($ACTION[0] == 'auth'){
 			include_once 'auth/'.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
 		}
+else if ($ACTION[0] == 'sitemap'){
+			include_once preg_replace('/[^\w]/','',$ACTION[0]).'.xml';
+		}
 else if ($ACTION[0] == 'users'){
 			require_once ''.ISVIPI_USER_INC_BASE.''.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
 		}
@@ -85,10 +93,22 @@ else if ($ACTION[0] == $adminPath){
 		}
 else if ($ACTION[0] == 'conf'){
 			require_once ''.ISVIPI_ADMIN_INC_BASE.''.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
-		}	
+		}
 else if ($ACTION[0] == 'feed'){
 			require_once 'inc/feeds/'.preg_replace('/[^\w]/','',$ACTION[0]).'.php';
 		}	
+else if ($ACTION[0] == 'album'){
+			require_once 'inc/mods/albums/'.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
+		}	
+
+else if ($ACTION[0] == 'chat'){
+			require_once 'inc/mods/chat/'.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
+		}	
+		
+else if ($ACTION[0] == 'remote'){
+			require_once ISVIPI_THEMES_BASE.'remote/'.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
+		}	
+
 else if (is_file($includeFile)) {
 		include($includeFile);
 } 

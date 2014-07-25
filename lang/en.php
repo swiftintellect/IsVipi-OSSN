@@ -103,7 +103,7 @@ define('ACTION', "Action");
 define('NEW_M', "New");
 define('READ', "Read");
 define('NO_MSGS', "You have no messages");
-define('NO_SUCH_CONV', "No such conversation");
+define('NO_SUCH_CONV', "No such conversation found");
 define('ERR_PM_NOT_ALLOWED', "WARNING!! You cannot access someone else's chat!");
 define('REPLY', "Reply");
 define('OPTIONS', "Options");
@@ -383,9 +383,6 @@ define('S_ACC_VALIDATED', "Your account has been validated. Please log in.");
 define('S_REG_VALID', "Registration successful. We have sent you an email with an activation code. Please follow instructions provided");
 define('S_REG_NO_VALID', "Registration successful. Please log in to your new account");
 define('S_DB_BACKUP_COMPL', "Database Backup complete! Your backup is at ");
-
-
-//=======
 define('LIKE', "Like");
 define('ALREADY_LIKED', "You have already liked this post");
 define('UNLIKE', "Unlike");
@@ -411,4 +408,23 @@ define('NO_FRIENDS', "You do not have any friends yet. Click <a href='".ISVIPI_U
 //////
 define('ENABLE_MOBILE_THEME', "Enable mobile theme (only if you purchased it)");
 define('ENABLE_MOBILE_THEME_TXT', "If enabled, the site will detect mobile devices and change the site theme accordingly. Do not enable this option if you have not purchased the mobile theme from our site as it will result in site errors");
+define('N_MSG', "Message");
+define('N_MSGS', "Messages");
+define('N_ONLINE', "Online");
+define('N_OFFLINE', "Offline");
+
+////// 1.1.0
+define('EMAILS', "Emails");
+define('ADM_EMAILS', "Emails & Settings");
+define('BY', "By");
+define('SHARE_ON_TIMELINE', "Share on my timeline");
+define('SAY_SMTHN', "Say something...");
+define('ALREADY_LOGGED', "Your session is still active");
+define('JAVA_PROMPT', "For full functionality of this site it is necessary to enable JavaScript.
+         Here are the <a href='http://www.enable-javascript.com/' target='_blank'>
+         instructions how to enable JavaScript in your web browser</a>.");
+define('WELCOME', "Welcome");
+define('ACCEPT', "Accept");
+define('REJECT', "Reject");
+define('ACC_SUSPENDED', "Your account was suspended. Please contact support for more info");
 ?>

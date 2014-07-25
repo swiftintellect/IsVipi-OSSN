@@ -17,7 +17,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
 global $db;
-define('REMOTE_VERSION', 'http://isvipi.com/version/version.php');
+define('REMOTE_VERSION', 'http://isvipi.org/version/version.php');
 $script = file_get_contents(REMOTE_VERSION);
 $version = str_replace(".", "", VERSION);
 $script = str_replace(".", "", $script);

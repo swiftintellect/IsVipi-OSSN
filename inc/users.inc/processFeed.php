@@ -24,14 +24,14 @@
  $feedAction = get_post_var('action');
  } else {
  $_SESSION['err'] =UNKNOWN_REQ;
-    header ('location:'.$from_url.'#'.$ACTION['3']);
+    header ('location:'.$from_url);
 	exit(); 
  }
  $feedAction = preg_replace('/[^0-9]/','',$feedAction);
  if ($feedAction !== '1' && $feedAction !== '2' && $feedAction !== '3' && $feedAction !== '4' && $feedAction 
  !== '5' && $feedAction !== '6' && $feedAction !== '7' && $feedAction !== '8' && $feedAction !== '9'){
 	$_SESSION['err'] =UNKNOWN_REQ;
-    header ('location:'.$from_url.'#'.$ACTION['3']);
+    header ('location:'.$from_url);
 	exit();
 } 
 
@@ -40,14 +40,13 @@
 ////////////////////////////////////////////////////////////
 if ($feedAction === '1') {
 	global $db;
-	$feedID = decryptHardened($ACTION['3']);
+	$feedID = $ACTION['3'];
 	$feedID = preg_replace('/[^0-9]/','',$feedID);
-	$user = decryptHardened($ACTION['4']);
+	$user = $ACTION['4'];
 	$user = preg_replace('/[^0-9]/','',$user);
-	
 		if (hasLiked($feedID,$user)){
 			$_SESSION['err'] =ALREADY_LIKED;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.$from_url);
 			exit();
 		}
 		$stmt = $db->prepare('insert into likes (feed_id, user_like, timestamp) values (?, ?, NOW())');
@@ -55,12 +54,14 @@ if ($feedAction === '1') {
 		$stmt->execute();
 		$stmt->close();
 		selectFeed($feedID);
+		if ($uid != $user){
 		getUserDetails($user);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".LIKED_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
 		updNotices($uid,$notice);
+		}
 
 			$_SESSION['succ'] =S_SUCCESS;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.$from_url);
 			exit();
 }
 
@@ -69,15 +70,15 @@ if ($feedAction === '1') {
 ////////////////////////////////////////////////////////////
 if ($feedAction === '2') {
 	global $db;
-	$feedID = decryptHardened($ACTION['3']);
+	$feedID = $ACTION['3'];
 	$feedID = preg_replace('/[^0-9]/','',$feedID);
-	$user = decryptHardened($ACTION['4']);
+	$user = $ACTION['4'];
 	$user = preg_replace('/[^0-9]/','',$user);
 		$stmt = $db->prepare('DELETE from likes WHERE (feed_id=? AND user_like=?) ');
 		$stmt->bind_param('ii', $feedID,$user);
 		$stmt->execute();
 			$_SESSION['succ'] =S_SUCCESS;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.$from_url);
 			exit();
 }
 
@@ -86,22 +87,28 @@ if ($feedAction === '2') {
 ////////////////////////////////////////////////////////////
 if ($feedAction === '3') {
 	global $db;
-	$feedID = decryptHardened($ACTION['3']);
+	$feedID = get_post_var('feedId');
 	$feedID = preg_replace('/[^0-9]/','',$feedID);
-	$userID = decryptHardened($ACTION['4']);
+	$usrComment = get_post_var('myfeed');
+	$userID = $_SESSION['user_id'];
 	$userID = preg_replace('/[^0-9]/','',$userID);
+	
 		selectFeed($feedID);
 		getUserDetails($uid);
 		getUserDetails($userID);
-		shareTimeline($userID,$username,$activity,$feedIMG,$uid);
+	$combPost = $usrComment."<div style='margin-top:10px; border-left: solid thick #EEEEEE; color:#666; padding:5px 10px'>".$activity."</div>";	
+		
+		shareTimeline($userID,$username,$combPost,$feedIMG,$uid);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".SHARED_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
+		if ($uid != $_SESSION['user_id']){
 		updNotices($uid,$notice);
+		}
 			$stmt = $db->prepare('insert into shares (feed_id, user_share, timestamp) values (?, ?, NOW())');
 			$stmt->bind_param('ii', $feedID,$userID);
 			$stmt->execute();
 			$stmt->close();
-				$_SESSION['succ'] =S_SUCCESS;
-				header ('location:'.$from_url.'');
+				//$_SESSION['succ'] =S_SUCCESS;
+				//header ('location:'.$from_url.'');
 				exit();
 }
 
@@ -110,9 +117,9 @@ if ($feedAction === '3') {
 ////////////////////////////////////////////////////////////
 if ($feedAction === '5') {
 	global $db;
-	$feedID = decryptHardened($ACTION['3']);
+	$feedID = $ACTION['3'];
 	$feedID = preg_replace('/[^0-9]/','',$feedID);
-	$userID = decryptHardened($ACTION['4']);
+	$userID = $ACTION['4'];
 	$userID = preg_replace('/[^0-9]/','',$userID);
 	selectFeed($feedID);
 		$stmt = $db->prepare('DELETE from timeline WHERE id=?');
@@ -127,13 +134,17 @@ if ($feedAction === '5') {
 				$stmt->bind_param('i', $feedID);
 				$stmt->execute();
 				$stmt->close();
+					$stmt = $db->prepare('DELETE from comments WHERE feed_id=?');
+					$stmt->bind_param('i', $feedID);
+					$stmt->execute();
+					$stmt->close();
 			//Delete any images associated with it
 			if($feedIMG !=""){
 			$Delpath = ISVIPI_INC_BASE."images/timeline/".$feedIMG;
 			unlink ($Delpath);	
 			}
 			$_SESSION['succ'] =S_SUCCESS;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.ISVIPI_URL.'home');
 			exit();
 }
 
@@ -167,7 +178,9 @@ if ($feedAction === '4') {
 		selectFeed($feedID);
 		getUserDetails($commentBy);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".COMMENTED_ON_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
+		if ($uid != $_SESSION['user_id']){
 		updNotices($uid,$notice);
+		}
 	$_SESSION['succ'] =S_SUCCESS;
 	header ('location:'.$from_url.'#'.encryptHardened($feedID));
 	exit();
@@ -177,15 +190,14 @@ if ($feedAction === '4') {
 //////////////// LIKE COMMENT (6) //////////////////////////
 ////////////////////////////////////////////////////////////
 if ($feedAction === '6') {
-	$feedID = decryptHardened($ACTION['3']);
+	$feedID = $ACTION['3'];
 	$feedID = preg_replace('/[^0-9]/','',$feedID);
-	$commentID = decryptHardened($ACTION['4']);
+	$commentID = $ACTION['4'];
 	$commentID = preg_replace('/[^0-9]/','',$commentID);
-	$userLiking = decryptHardened($ACTION['5']);
-	$userLiking = preg_replace('/[^0-9]/','',$userLiking);
+	$userLiking = $_SESSION['user_id'];
 	if (hasLikedComment($commentID,$userLiking)){
 	$_SESSION['err'] =ALREADY_LIKED;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.$from_url);
 			exit();	
 		
 	}
@@ -196,9 +208,11 @@ if ($feedAction === '6') {
 		selectthisComment($feedID);
 		getUserDetails($userLiking);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".LIKED_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".COMMENT."</a>";
+		if ($commBy != $_SESSION['user_id']){
 		updNotices($commBy,$notice);
+		}
 	$_SESSION['succ'] =S_SUCCESS;
-	header ('location:'.$from_url.'#'.$ACTION['3']);
+	header ('location:'.$from_url);
 	exit();
 }
 
@@ -206,16 +220,15 @@ if ($feedAction === '6') {
 //////////////// UNLIKE COMMENT (7) ////////////////////////
 ////////////////////////////////////////////////////////////
 if ($feedAction === '7') {
-	$commentID = decryptHardened($ACTION['3']);
+	$commentID = $ACTION['4'];
 	$commentID = preg_replace('/[^0-9]/','',$commentID);
-	$userLiking = decryptHardened($ACTION['4']);
-	$userLiking = preg_replace('/[^0-9]/','',$userLiking);
+	$userLiking = $_SESSION['user_id'];
 		$stmt = $db->prepare('DELETE from comment_likes WHERE (comment_id=? AND user_like=?) ');
 		$stmt->bind_param('ii', $commentID,$userLiking);
 		$stmt->execute();
 		$stmt->close();
 			$_SESSION['succ'] =S_SUCCESS;
-			header ('location:'.$from_url.'#'.$ACTION['3']);
+			header ('location:'.$from_url);
 			exit();
 }
 
@@ -223,7 +236,7 @@ if ($feedAction === '7') {
 //////////////// DELETE COMMENT (8) ////////////////////////
 ////////////////////////////////////////////////////////////
 if ($feedAction === '8') {
-	$commentID = decryptHardened($ACTION['3']);
+	$commentID = $ACTION['3'];
 	$commentID = preg_replace('/[^0-9]/','',$commentID);
 	//Delete comment
 		$stmt = $db->prepare('DELETE from comments WHERE id=?');
@@ -237,7 +250,7 @@ if ($feedAction === '8') {
 			$stmt->execute();
 			$stmt->close();
 				$_SESSION['succ'] =S_SUCCESS;
-				header ('location:'.$from_url.'#'.$ACTION['3']);
+				header ('location:'.$from_url);
 				exit();	
 }
 
@@ -273,15 +286,15 @@ if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/x-png")
 || ($_FILES["file"]["type"] == "image/png"))
 && in_array($extension, $allowedExts)) {
-  if ($_FILES["file"]["size"] > 200000) {
-    $_SESSION['err'] =E_FILE_TOO_LARGE. " 200kb";
+  if ($_FILES["file"]["size"] > 5000000) {
+    $_SESSION['err'] =E_FILE_TOO_LARGE. " 5mb";
 	  header ('location:'.$from_url.'');
 	  exit();   
   } else {
 	  $imagename = $_FILES["file"]["name"];
-$manipulator = new ImageManipulator($_FILES['file']['tmp_name']);
+		$manipulator = new ImageManipulator($_FILES['file']['tmp_name']);
         // resizing to 300x200
-        $newImage = $manipulator->resample(300, 200);
+        $newImage = $manipulator->resample(600, 500);
 		$newname = $postByUsername."-".microtime();
 		$newnameFinal =$newname.$imagename.".".$extension;
 		$manipulator->save($path .$newnameFinal );

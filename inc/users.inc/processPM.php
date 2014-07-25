@@ -70,7 +70,8 @@ if (checkConv($user,$recip)){
 $unique_id = mt_rand(0,1000).rand(0,1000);
 addPM($user,$recip,$message,$unique_id);
 }
-updMsgUnRead($user,$recip);
+getLastMsg ($unique_id);
+updMsgUnRead($lastMsgID,$unique_id);
 
 		$_SESSION['succ'] =S_MSG_SENT;
 		header("location:".$from_url."");

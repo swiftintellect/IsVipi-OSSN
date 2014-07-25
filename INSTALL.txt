@@ -1,7 +1,53 @@
 /////////////////////////////////////////////
 //////////SYSTEM REQUIREMENTS////////////////
+///////// UPDATED: 13/07/2014////////////////
 ////////////////////////////////////////////
 PHP 5.3+, MySQL 4.1+
+
+////////////////////////////////////////////
+Preparing your system for IsVipi
+
+/////////////////// Working with Debian Wheezy
+1) Packets that we need to install to run IsVipi
+aptitude install apache2 php5 php5-mysql php5-curl php5-mcrypt mysql-server mysql-client php5-gd
+
+2) We need to enable rewrite module for Apache
+a2enmod rewrite
+
+3) If you use the default Virtual Host for run IsVipi when you need to change the follow configuration
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		#We need to chenge the AllowOverride to All to can check .htaccess in root directory
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+3.1) If you use a new Virtual Host don't forget to cnange AllowOverride to All.
+
+
+4) Now in /var/www you need to create the follow file
+vim /var/www/.htaccess
+#Controllers for rewrite
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule !\.(gif|jpg|png|css|js|html|ico|zip|rar|pdf|xml|mp4|mpg|flv|swf|mkv|ogg|avi|woff|svg|eot|ttf|jar)$ index.php
+</IfModule>
+
+# directory browsing
+Options All -Indexes
+
+5) Now we need to create the database for IsVipi on MySQL
+CREATE DATABASE isvipi;
+GRANT ALL PRIVILEGES ON isvipi.* to isvipi@'localhost' identified by 'isvipi';
+FLUSH PRIVILEGES;
+
+6) Now we need to change the permission for /var/www/
+chown -R www-data:www-data /var/www
+find /var/www -type f -exec chmod 644 {} \;
+find /var/www -type d -exec chmod 755 {} \;
+
+6) Now you can follow the instructions below.
 
 ////////////////////////////////////////////
 INSTALL INSTRUCTIONS
@@ -64,8 +110,9 @@ To manually install this script, do the following
 //////////////////////////////////////////////
 /////////COMMON ISSUES///////////////////////
 ////////////////////////////////////////////
+1) Forgot to enable rewrite mode on Apache
+2) Forgot to create .htaccess in document root for IsVipi
 
-None Reported so far 
 
 //////////////////////////////////////////////
 //////////////SUPPORT////////////////////////

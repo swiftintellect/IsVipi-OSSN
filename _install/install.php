@@ -89,10 +89,33 @@ else{
 	 $sys_req = 'err';
 	 $curLexs = "<i class='fa fa-times-circle red'></i>";
 }
+
+if (function_exists('mcrypt_generic_init'))
+{
+	$mcryptLexs = "<i class='fa fa-check-circle green'></i>";
+}
+else
+{
+	$sys_req = 'err';
+	$mcryptLexs = "<i class='fa fa-times-circle red'></i>";
+}
+
+if (function_exists('imagecreatefromstring'))
+{
+	$gdLexs = "<i class='fa fa-check-circle green'></i>";
+}
+else
+{
+	$sys_req = 'err';
+	$gdLexs = "<i class='fa fa-times-circle red'></i>";
+}
+
 ?>
 	<p>PHP version is 5.3 and above <?php echo $phpVer ?></p>
     <p>MySQL version is 4.1 and above <?php echo $MySQLVer ?></p>
     <p>Curl installed <?php echo $curLexs ?></p>
+    <p>Mcrypt installed <?php echo $mcryptLexs ?></p>
+    <p>GD installed <?php echo $mcryptLexs ?></p>
     </div>
     </div>
   <div class="row">

@@ -10,7 +10,7 @@
      <p><?php footer_text()?></p>
     </div>
 </div><!--end of row-->
-   <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+   <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/jQuery_v2.1.js"></script>
    <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/bootstrap.min.js"></script>
    <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/alertify.min.js"></script>
     </body>

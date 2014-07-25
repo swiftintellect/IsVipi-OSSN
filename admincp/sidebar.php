@@ -13,6 +13,9 @@
         <li <?php if ($ACTION[1]=="edit_profile"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/edit_profile' ?>">&raquo; <?php echo EDIT_MY_PROFILE ?></a></li>
         </ul>
     </li>
+    <?php if (MASS_EMAIL == "yes"){?>
+    <li <?php if ($ACTION[1]=="emails"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/emails' ?>"><i class="fa fa-envelope"></i>&nbsp;<?php echo ADM_EMAILS ?></a></li>
+    <?php }?>
     <li <?php if ($ACTION[1]=="sys_management"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/sys_management' ?>"><i class="fa fa-cog"></i>&nbsp;<?php echo SYS_MGMT ?></a></li>
   </ul> 
 </div>

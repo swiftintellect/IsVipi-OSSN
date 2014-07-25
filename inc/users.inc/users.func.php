@@ -491,7 +491,7 @@ function logout($value){
 }
 
 //Get activity feeds
-function getFeed($statusID){
+function getFeeds($user,$load){
 	global $activity;
 	global $db;
 	global $getusrFeed;
@@ -500,11 +500,31 @@ function getFeed($statusID){
 	global $FIDentinty;
 	global $feedUID;
 	global $feedImage;
-	$getusrFeed = $db->prepare("SELECT id,uid,username,activity,time,feed_img FROM timeline where id=? ORDER BY id DESC LIMIT 55");
-	$getusrFeed->bind_param('i', $statusID);
+	global $shared;
+	global $postCount;
+	
+	$getusrFeed = $db->prepare('SELECT t.id,t.uid,t.username,t.activity,t.time,t.feed_img,t.shared FROM timeline t
+INNER JOIN my_friends mf
+ON t.uid=mf.user2 WHERE mf.user1=? OR t.uid=?
+GROUP BY t.id
+ORDER by t.time DESC LIMIT 0, '.$load.'
+            ');
+	$getusrFeed->bind_param('ii',$user,$user);
 	$getusrFeed->execute();
 	$getusrFeed->store_result();
-	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage);
+	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);
+	$rFound = $getusrFeed->num_rows();
+	if ($rFound == 0){
+	$getusrFeed = $db->prepare('SELECT id,uid,username,activity,time,feed_img,shared FROM timeline WHERE uid=? 
+ORDER by time DESC
+            ');
+	$getusrFeed->bind_param('i',$user);
+	$getusrFeed->execute();
+	$getusrFeed->store_result();
+	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);	
+	$postCount = $getusrFeed->num_rows;
+		
+	}
 }
 
 function getFeeds2($user){
@@ -522,7 +542,7 @@ function getFeeds2($user){
 INNER JOIN my_friends mf
 ON t.uid=mf.user2 WHERE mf.user1=? OR t.uid=?
 GROUP BY t.id
-ORDER by t.time DESC
+ORDER by t.time DESC LIMIT 10
             ');
 	$getusrFeed->bind_param('ii',$user,$user);
 	$getusrFeed->execute();
@@ -530,13 +550,13 @@ ORDER by t.time DESC
 	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);
 	$rFound = $getusrFeed->num_rows();
 	if ($rFound == 0){
-	$getusrFeed = $db->prepare('SELECT id,uid,username,activity,time,feed_img FROM timeline WHERE uid=? 
+	$getusrFeed = $db->prepare('SELECT id,uid,username,activity,time,feed_img,shared FROM timeline WHERE uid=? 
 ORDER by time DESC
             ');
 	$getusrFeed->bind_param('i',$user);
 	$getusrFeed->execute();
 	$getusrFeed->store_result();
-	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage);	
+	$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);	
 		
 	}
 	}
@@ -545,11 +565,12 @@ function selectFeed($value){
 	global $uid;
 	global $activity;
 	global $feedIMG;
-$stmt = $db->prepare('SELECT uid,activity,feed_img FROM timeline WHERE id=? ');
+	global $time;
+$stmt = $db->prepare('SELECT uid,activity,time,feed_img FROM timeline WHERE id=? ');
 		$stmt->bind_param('i', $value);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($uid,$activity,$feedIMG);
+		$stmt->bind_result($uid,$activity,$time,$feedIMG);
 		$stmt->fetch();
 		$stmt->close();	
 }
@@ -629,6 +650,21 @@ function getMembers(){
 	global $m_count;
 	$active = '1';
 	$getmembers = $db->prepare("SELECT id,username FROM members where active=?");
+	$getmembers->bind_param('i', $active);
+	$getmembers->execute();
+	$getmembers->store_result();
+	$getmembers->bind_result($id,$profile_name);
+	$m_count = $getmembers->num_rows();
+}
+
+function getMembersMobile(){
+	global $db;
+	global $getmembers;
+	global $id;
+	global $profile_name;
+	global $m_count;
+	$active = '1';
+	$getmembers = $db->prepare("SELECT id,username FROM members where active=? ORDER by online DESC");
 	$getmembers->bind_param('i', $active);
 	$getmembers->execute();
 	$getmembers->store_result();
@@ -869,6 +905,18 @@ function getUserN($value){
 	$getusrst->fetch();
 	$getusrst->close();
 }
+function echoUsername($value){
+	global $db;
+	global $name;
+	$getusrst = $db->prepare("SELECT username FROM members WHERE id=?");
+	$getusrst->bind_param("i",$value);
+	$getusrst->execute();
+	$getusrst->store_result();
+	$getusrst->bind_result($name);
+	$getusrst->fetch();
+	$getusrst->close();
+	echo $name;
+}
 //Add my friend function after successful confirmation of a friend request
 function addMyFriend($id,$user){
 	global $db;
@@ -894,7 +942,7 @@ function getMyFriends($user){
 	global $db;
 	global $getfriends;
 	global $id;
-	$getfriends = $db->prepare("SELECT user2 FROM my_friends WHERE (user1=?)");
+	$getfriends = $db->prepare("SELECT user2 FROM my_friends WHERE user1=?");
 	$getfriends->bind_param('i', $user);
 	$getfriends->execute();
 	$getfriends->store_result();
@@ -972,26 +1020,45 @@ function getAllmsgs($user){
 	global $date;
 	global $unique_id;
 	global $msg_id;
-	$geAllmsgs = $db->prepare("SELECT id,unique_id,user1,user2,message,timestamp FROM pm WHERE (user2=? OR user1=?) GROUP BY unique_id ORDER by timestamp DESC");
+	global $AllmsgCount;
+	$geAllmsgs = $db->prepare("SELECT id,unique_id,user1,user2,message,timestamp FROM pm WHERE (user2=? OR user1=?) GROUP BY unique_id ORDER by user2read DESC");
 	$geAllmsgs->bind_param('ii', $user,$user);
 	$geAllmsgs->execute();
 	$geAllmsgs->store_result();
 	$geAllmsgs->bind_result($msg_id,$unique_id,$msg_from,$msg_to,$message,$timestamp);
-	if ($geAllmsgs->num_rows >0){
-return true;
-	}
-return false;
+	$AllmsgCount = $geAllmsgs->num_rows();
 }
 //Get Unread Messages
 function newMsgs($user){
 	global $db;
 	global $newmsg;
+	global $chkunR;
+	global $UnMsgID;
+	global $UnMsgUniqID;
+	global $unUser1;
+	global $unUser2;
+	global $UnMsgs;
+	global $UnMsgtime;
 	$read = "no";
-	$chkusr = $db->prepare("SELECT * FROM pm WHERE (user2=? AND user2read=?)  GROUP BY unique_id");
-	$chkusr->bind_param("is",$user,$read);
-	$chkusr->execute();
-	$chkusr->store_result();
-	$newmsg = $chkusr->num_rows;
+	$chkunR = $db->prepare("SELECT id,unique_id,user1,user2,message,timestamp FROM pm WHERE (user2=? AND user2read=?)  GROUP BY unique_id");
+	$chkunR->bind_param("is",$user,$read);
+	$chkunR->execute();
+	$chkunR->store_result();
+	$chkunR->bind_result($UnMsgID,$UnMsgUniqID,$unUser1,$unUser2,$UnMsgs,$UnMsgtime);
+	$newmsg = $chkunR->num_rows;
+	}
+
+//Get Unread Messages
+function unMsgCount($user,$unique_id){
+	global $db;
+	global $unMsgs;
+	$read = "no";
+	$unMsgC = $db->prepare("SELECT id FROM pm WHERE (user2=? AND user2read=? AND unique_id=?)");
+	$unMsgC->bind_param("isi",$user,$read,$unique_id);
+	$unMsgC->execute();
+	$unMsgC->store_result();
+	$unMsgC->bind_result($unMSGid);
+	$unMsgs = $unMsgC->num_rows;
 	}
 	
 //Retrieve Single user message
@@ -1027,6 +1094,58 @@ return true;
 	}
 return false;
 }
+function getConv($uid,$user){
+	global $db;
+	global $message;
+	global $timestamp;
+	global $uniqID;
+	global $geUtmsgs;
+	global $convCount;
+	global $user1;
+	global $user2;
+	$read = "no";
+	$geUtmsgs = $db->prepare("SELECT unique_id,user1,user2,message,timestamp FROM pm WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)ORDER by timestamp ASC");
+	$geUtmsgs->bind_param('iiii', $uid,$user,$uid,$user);
+	$geUtmsgs->execute();
+	$geUtmsgs->store_result();
+	$geUtmsgs->bind_result($uniqID,$user1,$user2,$message,$timestamp);
+	$convCount = $geUtmsgs->num_rows();
+	
+	
+}
+
+function getChatConv($uid,$user){
+	global $db;
+	global $message;
+	global $timestamp;
+	global $uniqID;
+	global $getChat;
+	global $convChatCount;
+	global $user1;
+	global $user2;
+	$read = "no";
+	$getChat = $db->prepare("SELECT unique_id,user1,user2,message,timestamp FROM pm WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)ORDER by timestamp DESC");
+	$getChat->bind_param('iiii', $uid,$user,$uid,$user);
+	$getChat->execute();
+	$getChat->store_result();
+	$getChat->bind_result($uniqID,$user1,$user2,$message,$timestamp);
+	$convChatCount = $getChat->num_rows();
+	
+	
+}
+
+function getLastMsg($unique_id){
+	global $db;
+	global $lastMsgID;
+	$getLastUsrMsg = $db->prepare("SELECT id FROM pm WHERE unique_id=? ORDER by timestamp DESC");
+	$getLastUsrMsg->bind_param('i', $unique_id);
+	$getLastUsrMsg->execute();
+	$getLastUsrMsg->store_result();
+	$getLastUsrMsg->bind_result($lastMsgID);
+	$getLastUsrMsg->fetch();
+	$getLastUsrMsg->close();
+}
+
 //Check if an existing conversation between the two parties is available
 function checkConv($user,$recip){
 	global $db;
@@ -1046,23 +1165,23 @@ return false;
 }
 
 //Update message as unread
-function updMsgUnRead($user,$recip){
+function updMsgUnRead($lastMsgID,$unique_id){
 	global $db;
 	$read = "no";
-	($updMsgUnRead = $db->prepare('UPDATE pm SET user2read=? WHERE (user1=? AND user2=?)'));
-	 $updMsgUnRead->bind_param('sii', $read,$user,$recip);
+	$updMsgUnRead = $db->prepare('UPDATE pm SET user2read=? WHERE (id=? AND unique_id=?)');
+	 $updMsgUnRead->bind_param('sii', $read,$lastMsgID,$unique_id);
 	 $updMsgUnRead->execute();
 	 $updMsgUnRead->close();
 }
 
 //Update message as read
-function updMsgRead($msg_from,$user,$unique_id){
+function updMsgRead($user,$uniqID){
 	global $db;
 	$read = "yes";
-	($updMsgRead = $db->prepare('UPDATE pm SET user2read=? WHERE (user2=?) AND (unique_id=?)'));
-	 $updMsgRead->bind_param('sii', $read,$user,$unique_id);
-	 $updMsgRead->execute();
-	 $updMsgRead->close();
+	$updMsgR = $db->prepare('UPDATE pm SET user2read=? WHERE (user2=? AND unique_id=?)');
+	 $updMsgR->bind_param('sii', $read,$user,$uniqID);
+	 $updMsgR->execute();
+	 $updMsgR->close();
 }
 
 //Function to encrypt and decrypt
@@ -1406,12 +1525,12 @@ function decryptHardened($string) {
      return $decrypted_value;
 }
  
-function hasLiked($value,$user){
+function hasLiked($value){
 	global $db;
 	global $F_ID;
 	global $hasliked;
 	$stmt = $db->prepare("SELECT id FROM likes WHERE feed_id=? AND user_like=?");
-	$stmt->bind_param("ii",$value,$user);
+	$stmt->bind_param("ii",$value,$_SESSION['user_id']);
 	$stmt->execute();
 	$stmt->store_result();
 	$stmt->bind_result($F_ID);	
@@ -1546,9 +1665,71 @@ if($ismobi->CheckMobile()) {
     $theme="mobile";
 }
 else {
-   
+   //$theme="mobile";
 }	
 }
+//Check if isOnline
+function isOnlineNOW($value){
+	global $db;
+	$online = '1';
+	$isOnline = $db->prepare("SELECT username FROM members WHERE (online=? AND id=?)");
+	$isOnline->bind_param('ii', $online,$value);
+	$isOnline->execute();
+	$isOnline->store_result();
+	if ($isOnline->num_rows() > 0){
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+function getAlbum($uid){
+	global $db;
+	global $getAlb;
+	global $alb_ID;
+	global $alb_thumb;
+	global $alb_time;
+	global $ToTPics;
+	$getAlb = $db->prepare("SELECT id,thumb,timestamp FROM albums WHERE uid=? ORDER by timestamp DESC");
+	$getAlb->bind_param('i', $uid);
+	$getAlb->execute();
+	$getAlb->store_result();
+	$getAlb->bind_result($alb_ID,$alb_thumb,$alb_time);	
+	$ToTPics = $getAlb->num_rows();
+}
 
+function getAlbumLikes($value){
+	global $db;
+	global $getAlbumLik;
+	global $albLike_ID;
+	global $albUserLike;
+	global $albLikeTime;
+	global $TAlbLikes;
+	$getAlbumLik = $db->prepare("SELECT id,user_like,timestamp FROM album_likes WHERE albm_id=?");
+	$getAlbumLik->bind_param('i', $value);
+	$getAlbumLik->execute();
+	$getAlbumLik->store_result();
+	$getAlbumLik->bind_result($albLike_ID,$albUserLike,$albLikeTime);	
+	$TAlbLikes = $getAlbumLik->num_rows();
+}
 
+function hasLikedAlbum($alb_ID,$user){
+	global $db;
+	global $likeAlbID;
+	global $hasLiked;
+	$hasLikedAlb = $db->prepare("SELECT id FROM album_likes WHERE (albm_id=? AND user_like=?)");
+	$hasLikedAlb->bind_param('ii', $alb_ID,$user);
+	$hasLikedAlb->execute();
+	$hasLikedAlb->store_result();
+	$hasLikedAlb->bind_result($likeAlbID);
+	$hasLikedAlb->fetch();	
+	$hasLiked = $hasLikedAlb->num_rows();
+	if ($hasLiked >0){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+	$hasLikedAlb ->close();
+}
 ?>
