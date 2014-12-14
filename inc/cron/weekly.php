@@ -17,16 +17,16 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
 global $db;
-define('REMOTE_VERSION', 'http://isvipi.org/version/version.php');
-$script = file_get_contents(REMOTE_VERSION);
-$version = str_replace(".", "", VERSION);
-$script = str_replace(".", "", $script);
-if($version == $script || $version > $script) {
+define('REMOTE_VERSION', 'http://isvipi.org/version/version');
+$Realesed_Ver = file_get_contents(REMOTE_VERSION);
+$Realesed_Ver = str_replace(".", "", $Realesed_Ver);
+$Inst_Ver = str_replace(".", "", VERSION);
+if($Realesed_Ver == $Inst_Ver || $Inst_Ver > $Realesed_Ver ) {
 	$uplastVcheck = $db->prepare('UPDATE site_settings set last_version_check=NOW() LIMIT 1');
 	$uplastVcheck->execute();
 	$uplastVcheck->close();
 	$_SESSION['up-to-date'] = TRUE;
-} else  if ($version < $script) {
+} else {
 	upSiteStatus("5"); //status 5 for update available
 	$uplastVcheck = $db->prepare('UPDATE site_settings set last_version_check=NOW() LIMIT 1');
 	$uplastVcheck->execute();

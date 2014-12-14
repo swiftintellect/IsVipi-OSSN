@@ -55,6 +55,7 @@
                                             
                                             </div>
                                             <div class="friend_req_button">
+                                            <?php isBlocked($_SESSION['user_id'],$id); ?>
                                             <?php if(checkExistingReq($id,$user)){
 												//Check if a friend request exists
 													echo '<span class="label label-primary">';
@@ -75,6 +76,18 @@
 													echo '<span class="label label-default">';
 													echo ALREADY_FRIENDS;
 													echo '</span>';
+											}
+											else if ($blockCount > 0){
+												if ($usr2 == $_SESSION['user_id']){
+												echo '<span class="label label-danger">';
+												echo N_YOU_WERE_BLOCKED;
+												echo '</span>';
+												} else {
+													echo '<span class="label label-danger">';
+													echo N_USER_BLOCKED;
+													echo '</span>';
+													
+												}
 											}
 												else
 											{?>

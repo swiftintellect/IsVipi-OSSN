@@ -8,6 +8,7 @@
 			$("#sharedBox").hide();
 			$("#sharedBoxAfter").fadeIn('slow');
 			}, 2000);
+			LoadTimeline();
             }); 
         }); 
 	</script>

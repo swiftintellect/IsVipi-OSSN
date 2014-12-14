@@ -34,6 +34,8 @@
                                   </table>
                                  </div>
                                  <div class="profile_edit">
+                                 <?php isBlocked($_SESSION['user_id'],$id) ?>
+                                 <?php if ($blockCount < 1){?>
                                  <?php if($id==$user) {?>
                                     <?php if ($m_thumbnail !="no-image.gif"){?>
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#profilePic"><?php echo CHANGE_PIC ?></button>
@@ -71,7 +73,9 @@
                                 <?php if(checkFriendship($id,$user)){?>
                                 <a href="#" id="focus"><button type="submit" class="btn btn-danger"><?php echo REM_FRIEND ?></button></a>
                                 <?php }?>
+                                <?php if (isset($_SERVER['HTTP_REFERER'])){?>
                                  <a href="<?php echo $_SERVER['HTTP_REFERER'];?>" class="btn btn-default pull-right" role="button"><?php echo BACK ?></a>
+                                 <?php } ?>
                                  <?php }?>
                                  <?php if(ALBUM == "yes"){?>
                                  <?php getAlbum($uid)?>
@@ -80,6 +84,14 @@
                                  <?php } else if ($uid == $user){?>
                                  <a href="<?php echo ISVIPI_URL. 'album/index/'?>"><button type="submit" class="btn btn-info">My Photo Album</button></a>
                                  <?php } ?>
+                                 <?php } ?>
+                                 <?php if ($id != $_SESSION['user_id'] ){?>
+                                 <a href="<?php echo ISVIPI_URL. 'users/fRequests'?>?action=5&id=<?php echo htmlspecialchars($id, ENT_QUOTES, 'utf-8');?>" onclick="return confirm('<?php echo N_BLOCK_USER_NOTICE ?>')"><button type="submit" class="btn btn-danger"><?php echo N_BLOCK ?></button></a>
+                                 <?php } ?>
+								 <?php } else if ($usr1 == $_SESSION['user_id']){?>
+                                 <a href="<?php echo ISVIPI_URL. 'users/fRequests'?>?action=6&id=<?php echo htmlspecialchars($id, ENT_QUOTES, 'utf-8');?>" >
+                                 <button type="submit" class="btn btn-danger"><?php echo N_UNBLOCK ?></button>
+                                 </a>
                                  <?php } ?>
                                  </div>
                                </div>
@@ -165,4 +177,9 @@
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+<script>
+	$(function() {
+	$(".boxer").boxer();
+	});
+</script>
 <?php get_footer()?>         

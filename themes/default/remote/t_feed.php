@@ -7,32 +7,6 @@
 6. comment textarea event handler
 ---------------------->
 <script>
-function submitenter(myfield,e)
-{
-var keycode;
-if (window.event) keycode = window.event.keyCode;
-else if (e) keycode = e.which;
-else return true;
-
-if (keycode == 13)
-   {
-   document.querySelector('#CommSubMButt').click();
-   return false;
-   }
-else
-   return true;
-}
-        $(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
-            $('#PostComm').ajaxForm(function() {
-				$('.refresh_timeline').timer('start');
-                $('#PostComm').resetForm();
-				$("#workingGen").show(); 
-				
-            }); 
-        }); 
-</script>
-<script>
 $('.emoticon p').emoticonize({
 				animate: false,
 			});
@@ -50,7 +24,7 @@ $user = $_SESSION['user_id'];
 								} else {
 									$pager = 0;
 								}
-								$cons = 20;
+								$cons = 25;
 								$load = $pager + $cons;
 								?>
 								<?php getFeeds($_SESSION['user_id'],$load);?>
@@ -58,7 +32,7 @@ $user = $_SESSION['user_id'];
                                 <?php 	
 								xtractUID($act_user)
 								?>
-                                <div id="<?php echo encryptHardened($FIDentinty) ?>">
+                                <div id="<?php echo $FIDentinty ?>">
                                 <div id="feed_block">
                                 <div class="feed_user_head">
                                  <div class='timeline_pic'>
@@ -139,19 +113,30 @@ $user = $_SESSION['user_id'];
                                     <div class="comments_show">
                                     
                                     <div id="slidepanel<?php echo $FIDentinty; ?>">
-                                        <form action="<?php echo ISVIPI_URL. 'users/processFeed/'?>" method="post" id="PostComm">
+                                        <form action="<?php echo ISVIPI_URL. 'users/processFeed/'?>" method="post" id="<?php echo $FIDentinty; ?>">
                                     <?php t_thumb($user);?>
                                     <?php if(htmlspecialchars($t_thumb, ENT_QUOTES, 'utf-8') == ""){$t_thumb=".gif";}?>
                                     <div class="comment_thumb">
                                     <a href="<?php echo ISVIPI_URL.'profile/' ?><?php getUserDetails($user); echo $username;?>" data-toggle="tooltip" data-placement="top" title="<?php getUserDetails($user); echo $username;?>"><img src='<?php echo ISVIPI_PROFILE_PIC_URL.ISVIPI_THUMB_150.htmlspecialchars($t_thumb, ENT_QUOTES, 'utf-8');?>' height='40' width='40' alt='' /></a>
                                     </div>
-                                        <textarea class="form-control common" name="comment_reply" id="coMMentArea" placeholder="<?php echo N_PLEASE_TYPE_COMM;?>" required="required" onKeyPress="return submitenter(this,event)" ></textarea>
+                                        <textarea class="form-control common" name="comment_reply" id="coMMentArea" placeholder="<?php echo N_PLEASE_TYPE_COMM;?>" required="required"></textarea>
                                         <input type="hidden" name="feed_identity" value="<?php echo $FIDentinty; ?>" />
                                         <input type="hidden" name="userid" value="<?php echo $user; ?>" />
                                         <input type="hidden" name="action" value="4" />
-                                        <input type="submit" style="visibility: hidden;position: absolute;" class="btn btn-primary btn-xs pull-right" value="<?php echo COMMENT ?>" id="CommSubMButt" />
+                                        <input type="submit" class="btn btn-primary btn-xs pull-right" value="<?php echo COMMENT ?>" id="CommSubMButt" />
                                         <div style="clear:both"></div>
                                         </form>
+                                        <!-- We submit the comment form -->
+                                        <script>
+											$(document).ready(function() { 
+												$('#<?php echo $FIDentinty; ?>').ajaxForm(function() {
+													$('#PostComm').resetForm();
+													$("#workingGen").show(); 
+													LoadTimeline();
+												}); 
+											}); 
+										</script>
+                                        <!--//end of comment form submit-->
                                         </div>
                                     <div class="comment_display_container">
 									<?php getComments ($FIDentinty) ?>
@@ -197,15 +182,23 @@ $user = $_SESSION['user_id'];
                                     </div>
                                     <?php } ?>
                                     </div>
+
                       <script>
-					  $( "#coMMentArea" )
-						.focusin(function() {
-						$('.refresh_timeline').timer('stop');
-						})
-						.focusout(function() {
-						$('.refresh_timeline').timer('start');
-						})
 						$(".boxer").boxer();
 						$("[data-toggle='tooltip']").tooltip();
+						//LoadTimeline();
+					  </script>
+                      <script>
+						$( "textarea" ).on({
+							mouseenter: function() {
+								$('.refresh_timeline').timer('stop');
+							},
+							mouseleave: function() {
+								$('.refresh_timeline').timer('start');
+							},
+							click: function() {
+								$('.refresh_timeline').timer('stop');
+							}
+						});
 					  </script>
 						

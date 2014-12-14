@@ -41,7 +41,6 @@
                                             <a href="<?php echo ISVIPI_URL.'profile/'; getUserDetails($id); echo $username;?>"><button class="btn btn-info"><?php echo VIEW_N_MSG ?></button></a>
                                             <br />
                                             <br />
-                                            
                                             </div>
                                         </li>
 										<?php }?>

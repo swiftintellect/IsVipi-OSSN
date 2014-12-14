@@ -79,9 +79,18 @@
            <td width="70"><input type="checkbox" name="mobileTheme" <?php if ($mobileEnabled=="1"){echo "checked='checked'";}?> / value="1"></td>
            </tr>
            <tr>
+           <td><strong><?php echo N_HIDE_ERR ?> </strong> <a href="#" title="<?php echo N_HIDE_ERR_1 ?>" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-question"></i></a></td>
+           <td><input type="checkbox" name="siteErr" value="1" <?php if ($phpErrHide=="1"){echo "checked='checked'";}?>></td>
+           </tr>
+           <tr>
+           <td><strong><?php echo N_NEW_USER_NOTICE ?> </strong> <a href="#" title="<?php echo N_NEW_USER_NOTICE2 ?>" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-question"></i></a></td>
+           <td><input type="checkbox" name="newUserNotice" value="1" <?php if ($NewUserNotice=="1"){echo "checked='checked'";}?>></td>
+           </tr>
+                      <tr>
            <td><strong><?php echo SYS_CRON ?> </strong> <a href="#" title="<?php echo SYS_CRON_I ?>" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-question"></i></a></td>
            <td><input type="checkbox" name="sysCron" value="1" <?php if ($sysCron=="1"){echo "checked='checked'";}?>></td>
            </tr>
+
            <?php if ($sysCron=="0"){?>
            <tr>
            <td>

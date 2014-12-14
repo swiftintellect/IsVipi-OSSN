@@ -47,8 +47,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="http://isvipi.com/documentation" target="_blank">Documentation</a></li>
-            <li><a href="http://forum.isvipi.com" target="_blank">Help/Forum</a></li>
+            <li><a href="http://isvipi.org/docs" target="_blank">Documentation</a></li>
+            <li><a href="http://forum.isvipi.org" target="_blank">Help/Forum</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -121,7 +121,6 @@ print '</select>';
 ?>
   </div>
   <div class="form-group">
-    <input type="hidden" class="form-control" value="default" name="theme">
     <input type="hidden" name="op" value="step2">
   </div>
   <button type="submit" class="btn btn-default">Save Settings</button>

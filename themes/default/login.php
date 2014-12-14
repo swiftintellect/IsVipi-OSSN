@@ -1,25 +1,23 @@
-<?php get_home_header()?>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<div class="home_log_content">
-    <div class="home_login_welcome">
-        <div class="home_register">
-      <form method="post" action="<?php echo ISVIPI_USER_PROCESS; ?>" class="login-form">
-        <input type="hidden" name="op" value="login">
-      <h3><?php echo LOG_IN ?></h3>
-      <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="<?php echo ENTER_EMAIL ?>" required>
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="pass" placeholder="<?php echo PASSWORD ?>" required>
-      </div>
-        <button class="btn btn-lg btn-primary" type="submit"><?php echo SIGN_IN ?></button>
-     <span style="margin-left:50px"><a href="<?php echo ISVIPI_URL.'auth/forgot_password' ?>"><?php echo FORGOT_PASSWORD ?></a></span>
-     </form>
-     
-     </div>
+<?php
+/*
+Theme Name: Default
+Theme URL: http://isvipi.com
+Description: Default IsVipi Theme
+Version: 1.1.0
+Author: IsVipi
+Author URL: http://isvipi.com
+*/
+get_home_header();
+if ($sysCron=="1"){
+tenMinsCron();
+}
+?>
+<div class="home_content">
+    <div class="home_welcome">
+	    <h1><?php echo MEET_NEW_PEOPLE ?></h1>
     </div>
     <div class="home_register">
-      <form method="post" action="<?php echo ISVIPI_USER_PROCESS; ?>" class="login-form">
+      <form method="post" action="<?php echo ISVIPI_USER_PROCESS; ?>" class="login-form" id="regForm">
         <input type="hidden" name="op" value="new">
       <h3><?php echo CREATE_NEW_ACCOUNT ?></h3>
       <div class="form-group">
@@ -39,13 +37,17 @@
       </div>
       <div class="form-group">
         <select name="user_gender" class="form-control" required="required">
-           <option><?php echo MALE ?></option>
-           <option selected><?php echo FEMALE ?></option>
+           <option selected="selected"><?php echo MALE ?></option>
+           <option><?php echo FEMALE ?></option>
         </select>
       </div>
       <div class="form-group">
-        <input class="form-control shortened" type="text" id="datepicker" name="user_dob" required="required">
-        <span class="label label-info"><?php echo DOB ?></span>
+      	<div class="dob">
+            <input class="form-control" type="text" name="month" placeholder="mm" >/
+            <input class="form-control" type="text" name="day" placeholder="dd" >/
+            <input class="form-control" type="text" name="year" placeholder="yyyy" >        
+    		<span class="label label-info"><?php echo DOB ?></span>
+        </div>
       </div>
       <div class="form-group">
         <input class="form-control" type="text" name="user_city" placeholder="<?php echo CITY ?>" required="required">
@@ -53,14 +55,17 @@
       <div class="form-group">
         <?php cSelect();?>
       </div>
-        <button class="btn btn-lg btn-primary" type="submit"><?php echo REGISTER ?></button>
+      <?php getAdminGenSett(); if ($usrReg == "1"){?>
+      <button class="btn btn-lg btn-primary" type="submit" disabled="disabled"><?php echo REG_DISABLED ?></button>
+      <?php } else {?>
+        <button class="btn btn-lg btn-primary" type="submit" ><?php echo REGISTER ?></button>
+        <?php }?>
+       <div class="alert" id="notice" style="margin-top:5px; padding:5px; color:#03F;font-size:13px; font-weight:700; display:none; background:#FF9; max-width:360px"></div> 
      </form>
+     
+     
      </div>
+     
 </div>
+
 <?php get_home_footer()?>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>

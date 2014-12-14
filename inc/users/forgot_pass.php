@@ -1,4 +1,4 @@
-<?php include ISVIPI_THEMES_BASE.'/global/index_header.php';?>
+<?php get_header(); ?>
 <div class="home_log_content">
     <div class="home_login_welcome">
         <div class="home_register" style="width:500px; margin-right:-200px; ">
@@ -15,6 +15,17 @@
      </form>
      
      </div>
+     
     </div>
+    <?php if(isset($_SESSION['succ'])){?>
+    <div class="alert alert-success" style="width:40%; margin:0px auto; padding:10px">
+    	<?php echo $_SESSION['succ'] ?>
+    </div>
+    <?php } else if (isset($_SESSION['err'])){?>
+    <div class="alert alert-success" style="width:40%; margin:0px auto; padding:10px">
+    	<?php echo $_SESSION['err'] ?>
+    </div>
+    <?php } ?>
+    
 </div>
-<?php get_home_footer();?>
+<?php get_footer(); ?>

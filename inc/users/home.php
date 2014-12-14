@@ -20,6 +20,7 @@
  if (isset($_SESSION['user_id'])){
  $user = $_SESSION['user_id'];
  getUserDetails($user);
+ getMemberDet($user);
  pollUser($user);
  }
  base_header($site_title,$ACTION[0]);

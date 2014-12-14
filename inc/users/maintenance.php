@@ -18,6 +18,8 @@
  ******************************************************/ 
  require_once 'init.php';
  include_once ISVIPI_USER_INC_BASE. 'users.func.php';
+ global $logoname;
+ if (!isset($logoname)){$logoname == "logo.png";}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +42,7 @@
           <nav class="navbar navbar-default top-menu" role="navigation">
             <div class="container">
                 <div class="row">
-                  <a href="<?php echo ISVIPI_URL ?>" title="IsVipi Logo"><div class="admin_logo"><img src="<?php echo ISVIPI_STYLE_URL.'images/logo.png';?>" width="70%" alt="" /></div></a>
+                  <a href="<?php echo ISVIPI_URL.'home/' ?>" title="<?php echo LOGO ?>"><div class="admin_logo"><img src="<?php echo ISVIPI_STYLE_URL.'images/site/'.$logoname.'';?>" width="70%" /></div></a>
                     </div><!--end of row-->
                   </div><!-- /.container -->
                 </div><!--end of top-menu-->

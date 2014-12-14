@@ -30,7 +30,7 @@ if(isset($_POST['sysUpdate']))
 	$sanitized = get_post_var($check);
 	if ($sanitized = "sysUpdate"){
 	updateSystem();
-	upSiteStatus('1');
+	//upSiteStatus('1');
 	$_SESSION['succ'] =UPD_SUCCESS;
 	echo "<meta http-equiv='refresh' content='5'>";
 	
@@ -67,10 +67,12 @@ include_once'sidebar.php';?>
 		  unset ($_SESSION['up-to-date']);
 		  }?>
           </div>
+          
           <button type="submit" class="btn btn-primary pull-right"><?php echo CHECK_FOR_UPDTS ?></button>
            <?php }?>
           </form>
           </div>
+          
           <?php if ($site_status=="5"){?>
           <div>
     		<form method="post" action="">
@@ -89,6 +91,11 @@ include_once'sidebar.php';?>
 			 echo "<meta http-equiv='refresh' content='0'>";
 		  }
 		  ?>
+          <?php if (isset($_SESSION['upd_succ'])){?>
+          <div class="alert alert-success" style="margin:5px">
+          	Your system files and database have been updated successfully!
+          </div>
+          <?php unset ($_SESSION['upd_succ']); } ?>
           <hr />
           
           <div class="panel-heading"><strong><?php echo DB_BACKUP ?> </strong></div>

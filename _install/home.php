@@ -47,8 +47,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
           <ul class="nav navbar-nav">
-            <li><a href="http://isvipi.com/documentation" target="_blank">Documentation</a></li>
-            <li><a href="http://forum.isvipi.com" target="_blank">Help/Forum</a></li>
+            <li><a href="http://isvipi.org/docs" target="_blank">Documentation</a></li>
+            <li><a href="http://forum.isvipi.org" target="_blank">Help/Forum</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -60,7 +60,7 @@
   </div>
   <div class="panel panel-default">
   <div class="panel-body">
-  <p>Easy, wasn't it? If you have questions or suggestions for new features please visit our <a href="http://forum.isvipi.com" target="_blank">forum</a> and create a new post. You can also go through our <a href="http://isvipi.com/documentation/" target="_blank">Documentation</a> to find out more about this software.</p>
+  <p>Easy, wasn't it? If you have questions or suggestions for new features please visit our <a href="http://forum.isvipi.org" target="_blank">forum</a> and create a new post. You can also go through our <a href="http://isvipi.org/docs/general/" target="_blank">Documentation</a> to find out more about this software.</p>
    <p style="font-weight:600; background:#CCF;padding:10px">It has taken us many hours of research and development of this software only to provide it for <strong>FREE</strong> and all we can ask from you is a simple donation to this project. Your donations will help us keep this software <strong>FREE</strong> while developing new features of interest to you. Support this project by making a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8EKWYJABNLDE2" target="_blank"><strong>Donation</strong>.</a></p>
    <p>Visit my <a href="../" target="_blank">newly installed site</a> &raquo;</p>
    <p>Visit my <a href="../admin/" target="_blank">Admin Area</a> &raquo;</p>

@@ -1,6 +1,6 @@
 <?php
 /*******************************************************
- *   Copyright (C) 2014  http://isvipi.com
+ *   Copyright (C) 2014  http://isvipi.org
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,13 +20,12 @@
 $chop = -strlen(basename($_SERVER['SCRIPT_NAME']));
 define('DOC_ROOT',substr($_SERVER['SCRIPT_FILENAME'],0,$chop));
 define('URL_ROOT',substr($_SERVER['SCRIPT_NAME'],0,$chop));
-//if (!isset($time_zone)){$time_zone = 'US/Central';}
-//if (!isset($theme)){$theme = 'default';}
+
 // directory paths
 define('ISVIPI_ROOT', DOC_ROOT);
 define('ISVIPI_THEMES', ISVIPI_ROOT . 'themes' . DIRECTORY_SEPARATOR);
 define('ISVIPI_MOBILE_THEME_BASE', ISVIPI_ROOT . 'themes/mobile' . DIRECTORY_SEPARATOR);
-define('ISVIPI_ADMIN_BASE', ISVIPI_ROOT . 'admin' . DIRECTORY_SEPARATOR);
+define('ISVIPI_ADMIN_BASE', ISVIPI_ROOT . 'admincp' . DIRECTORY_SEPARATOR);
 define('ISVIPI_DB_BASE', ISVIPI_ROOT . 'inc/db' . DIRECTORY_SEPARATOR);
 define('ISVIPI_INC_BASE', ISVIPI_ROOT . 'inc' . DIRECTORY_SEPARATOR);
 define('ISVIPI_INC_MODS', ISVIPI_ROOT . 'inc/mods' . DIRECTORY_SEPARATOR);
@@ -55,4 +54,5 @@ define('ISVIPI_ALBUM_PICS_URL', ISVIPI_URL . 'inc/images/albums' . DIRECTORY_SEP
 //Image thumbnail sizes
 define('ISVIPI_THUMB_100', '100x100_');
 define('ISVIPI_THUMB_150', '150x150_');
-define('ISVIPI_THUMB_500', '500x500_');?>
+define('ISVIPI_THUMB_500', '500x500_');
+?>

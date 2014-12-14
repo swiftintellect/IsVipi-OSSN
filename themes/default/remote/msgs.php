@@ -26,8 +26,8 @@ $user = $_SESSION['user_id'];
            				<td><a href="<?php echo ISVIPI_URL.'profile/'?><?php if ($user==$msg_from){$msgFrom=$msg_to;}else {$msgFrom=$msg_from;}getUserDetails($msgFrom); echo $username;?>"><?php echo $username ?></a> <span class="badge bluebg"><?php echo $unMsgs." ". NEW_M;?></span></td>
                                             <td>
                          <a href="<?php echo ISVIPI_URL.'read_pm/'?><?php if ($user==$msg_from){$msgFrom=$msg_to;} else {$msgFrom=$msg_from;}getUserDetails($msgFrom); echo $username;?>"><?php echo READ ?>
-                                 <i class="fa fa-external-link"></i></a>
-                                    </td>
+                                 </a> | 
+						<a href="<?php echo ISVIPI_URL.'users/processPM/3/'.$unique_id.'/'.$msgFrom?>"><?php echo DELETE ?></a>                                    </td>
                                         </tr>
                                         <?php } else {?>
                                         <tr class="warning">
@@ -35,7 +35,8 @@ $user = $_SESSION['user_id'];
            				<td><a href="<?php echo ISVIPI_URL.'profile/'?><?php if ($user==$msg_from){$msgFrom=$msg_to;}else {$msgFrom=$msg_from;}getUserDetails($msgFrom); echo $username;?>"><?php echo $username ?></a></td>
                                             <td>
                          <a href="<?php echo ISVIPI_URL.'read_pm/'?><?php if ($user==$msg_from){$msgFrom=$msg_to;} else {$msgFrom=$msg_from;}getUserDetails($msgFrom); echo $username;?>"><?php echo READ ?>
-                                 <i class="fa fa-external-link"></i></a>
+                                 </a> | 
+                        <a href="<?php echo ISVIPI_URL.'users/processPM/3/'.$unique_id.'/'.$msgFrom?>" onclick="return confirm('<?php echo DELETE_PROMPT ?>')"><?php echo DELETE ?></a>
                                     </td>
                                         </tr>
                                         

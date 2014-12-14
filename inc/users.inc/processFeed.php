@@ -54,10 +54,10 @@ if ($feedAction === '1') {
 		$stmt->execute();
 		$stmt->close();
 		selectFeed($feedID);
-		if ($uid != $user){
+		if ($feedUID != $user){
 		getUserDetails($user);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".LIKED_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
-		updNotices($uid,$notice);
+		updNotices($feedUID,$notice);
 		}
 
 			$_SESSION['succ'] =S_SUCCESS;
@@ -94,21 +94,23 @@ if ($feedAction === '3') {
 	$userID = preg_replace('/[^0-9]/','',$userID);
 	
 		selectFeed($feedID);
-		getUserDetails($uid);
+		getUserDetails($feedUID);
 		getUserDetails($userID);
 	$combPost = $usrComment."<div style='margin-top:10px; border-left: solid thick #EEEEEE; color:#666; padding:5px 10px'>".$activity."</div>";	
-		
-		shareTimeline($userID,$username,$combPost,$feedIMG,$uid);
+		if (!isset($feedIMG)){
+			$feedIMG = "";
+		}
+		shareTimeline($userID,$username,$combPost,$feedImage,$feedUID);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".SHARED_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
-		if ($uid != $_SESSION['user_id']){
-		updNotices($uid,$notice);
+		if ($feedUID != $_SESSION['user_id']){
+		updNotices($feedUID,$notice);
 		}
 			$stmt = $db->prepare('insert into shares (feed_id, user_share, timestamp) values (?, ?, NOW())');
 			$stmt->bind_param('ii', $feedID,$userID);
 			$stmt->execute();
 			$stmt->close();
-				//$_SESSION['succ'] =S_SUCCESS;
-				//header ('location:'.$from_url.'');
+				$_SESSION['succ'] =S_SUCCESS;
+				header ('location:'.$from_url.'');
 				exit();
 }
 
@@ -139,9 +141,11 @@ if ($feedAction === '5') {
 					$stmt->execute();
 					$stmt->close();
 			//Delete any images associated with it
+			if (isset($feedIMG)){
 			if($feedIMG !=""){
 			$Delpath = ISVIPI_INC_BASE."images/timeline/".$feedIMG;
 			unlink ($Delpath);	
+			}
 			}
 			$_SESSION['succ'] =S_SUCCESS;
 			header ('location:'.ISVIPI_URL.'home');
@@ -178,8 +182,8 @@ if ($feedAction === '4') {
 		selectFeed($feedID);
 		getUserDetails($commentBy);
 		$notice = "<a href=".ISVIPI_URL."profile/".$username.">".$username."</a> ".COMMENTED_ON_YOUR." <a href=".ISVIPI_URL."status/".encryptHardened($feedID).">".STATUS."</a>";
-		if ($uid != $_SESSION['user_id']){
-		updNotices($uid,$notice);
+		if ($feedUID != $_SESSION['user_id']){
+		updNotices($feedUID,$notice);
 		}
 	$_SESSION['succ'] =S_SUCCESS;
 	header ('location:'.$from_url.'#'.encryptHardened($feedID));

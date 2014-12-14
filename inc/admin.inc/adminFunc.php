@@ -16,7 +16,7 @@
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
-//include_once ISVIPI_USER_INC_BASE. 'emailFunc.php';
+//include_once ISVIPI_USER_INC_BASE. 'emails/emailFunc.php';
 function AgentIPCheck(){
 	global $db;
 	$admin_id =$_SESSION['admin_id'];
@@ -228,16 +228,16 @@ function updateSystem() {
 }
 function checkVersion(){
 	global $db;
-define('REMOTE_VERSION', 'http://isvipi.org/version/version.php');
-$script = file_get_contents(REMOTE_VERSION);
-$version = str_replace(".", "", VERSION);
-$script = str_replace(".", "", $script);
-if($version == $script || $version > $script) {
+define('REMOTE_VERSION', 'http://isvipi.org/version/version');
+$Realesed_Ver = file_get_contents(REMOTE_VERSION);
+$Realesed_Ver = str_replace(".", "", $Realesed_Ver);
+$Inst_Ver = str_replace(".", "", VERSION);
+if($Realesed_Ver == $Inst_Ver || $Inst_Ver > $Realesed_Ver ) {
 	$uplastVcheck = $db->prepare('UPDATE site_settings set last_version_check=NOW() LIMIT 1');
 	$uplastVcheck->execute();
 	$uplastVcheck->close();
 	$_SESSION['up-to-date'] = TRUE;
-} else  if ($version < $script) {
+} else {
 	upSiteStatus("5"); //status 5 for update available
 	$uplastVcheck = $db->prepare('UPDATE site_settings set last_version_check=NOW() LIMIT 1');
 	$uplastVcheck->execute();
@@ -368,6 +368,17 @@ function getSentMessages(){
 	$stmt->store_result();
 	$stmt->bind_result($msgTO,$subject,$message,$timestamp);
 }
-
+function AddonIsInstalled($value){
+	global $db,$ADDonID,$Addcount,$ADDURI,$ADDDESC,$ADDVER,$ADDAUTH,$ADDAUTHURI,$ADDSTATUS;
+	$stmt = $db->prepare("SELECT id,mod_url,description,version,author,author_url,active FROM mods WHERE mod_name=?");
+	$stmt->bind_param('s', $value);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($ADDonID,$ADDURI,$ADDDESC,$ADDVER,$ADDAUTH,$ADDAUTHURI,$ADDSTATUS);
+	$stmt->fetch();
+	$Addcount = $stmt->num_rows();
+	$stmt->close();
+	
+}
 
 ?>

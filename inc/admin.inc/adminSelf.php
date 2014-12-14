@@ -17,7 +17,7 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
 include_once ISVIPI_ADMIN_INC_BASE. 'adminFunc.php';
-include_once ISVIPI_USER_INC_BASE. 'PasswordHash.php';
+include_once ISVIPI_USER_INC_BASE. 'classes/PasswordHash.php';
 	$hash_cost_log2 = 8;
 	$hash_portable = FALSE;
 	$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
@@ -91,6 +91,7 @@ if ($adm == 'login') {
 			session_regenerate_id(true);
 			$useragent = $_SERVER['HTTP_USER_AGENT'];
 			$ip = $_SERVER['REMOTE_ADDR'];
+			$_SESSION['user_id'] = 0;
 			$_SESSION['admin_id'] = $id;
 			$_SESSION['admin_logged_in'] = TRUE;
 			$_SESSION['succ'] =S_SUCCESS;

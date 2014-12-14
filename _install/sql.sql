@@ -1,6 +1,8 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `admin`
 --
@@ -22,6 +24,34 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `albums`
+--
+
+CREATE TABLE IF NOT EXISTS `albums` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `thumb` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `album_likes`
+--
+
+CREATE TABLE IF NOT EXISTS `album_likes` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `albm_id` int(20) NOT NULL,
+  `user_like` int(20) NOT NULL,
+  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `announcements`
 --
 
@@ -30,6 +60,20 @@ CREATE TABLE IF NOT EXISTS `announcements` (
   `date` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `subject` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blocked_users`
+--
+
+CREATE TABLE IF NOT EXISTS `blocked_users` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `user1` int(100) NOT NULL,
+  `user2` int(100) NOT NULL,
+  `timestamp` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -371,6 +415,9 @@ CREATE TABLE IF NOT EXISTS `general_settings` (
   `logo_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'logo.png',
   `favicon_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'favicon.png',
   `mobile_enabled` int(1) NOT NULL DEFAULT '0',
+  `addons_enabled` int(1) NOT NULL DEFAULT '0',
+  `err_disabled` int(1) NOT NULL DEFAULT '0',
+  `newuser_notice` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -385,7 +432,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `abbr` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `languages`
@@ -394,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 INSERT INTO `languages` (`id`, `name`, `abbr`) VALUES
 (1, 'ENGLISH', 'en'),
 (2, 'SPANISH', 'es'),
-(3, 'NORWEGIAN', 'no'),
+(3, 'NORWEIGIAN', 'no'),
 (4, 'PORTUGUESE', 'bp'),
 (5, 'Lao', 'lo'),
 (6, 'DUTCH', 'nl');
@@ -431,7 +478,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `online` int(1) NOT NULL,
   `last_activity` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -449,6 +496,39 @@ CREATE TABLE IF NOT EXISTS `member_sett` (
   `city` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
   `country` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
   `thumbnail` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `cover` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `membersettings`
+--
+
+CREATE TABLE IF NOT EXISTS `membersettings` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(20) NOT NULL,
+  `view_profile` int(1) NOT NULL,
+  `act_timeline` int(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mods`
+--
+
+CREATE TABLE IF NOT EXISTS `mods` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `mod_name` varchar(85) COLLATE utf8_unicode_ci NOT NULL,
+  `mod_url` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `version` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `author` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `author_url` varchar(155) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -519,6 +599,22 @@ CREATE TABLE IF NOT EXISTS `pm` (
   `timestamp` datetime NOT NULL,
   `user1read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `user2read` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `pm_deleted` varchar(10) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sent_msgs`
+--
+
+CREATE TABLE IF NOT EXISTS `sent_msgs` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `msg_to` int(20) NOT NULL,
+  `subject` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `message` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -614,6 +710,13 @@ CREATE TABLE IF NOT EXISTS `themes` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
+--
+-- Dumping data for table `themes`
+--
+
+INSERT INTO `themes` (`id`, `theme_name`, `theme_url`, `description`, `version`, `author`, `author_url`) VALUES
+(1, 'default', 'http://isvipi.com', 'Default IsVipi Theme', '1.0.0', 'IsVipi', 'http://isvipi.com'),
+(2, 'bluezorra', 'http://isvipi.org', 'New Default Theme', '1.0.0', 'IsVipi', 'http://isvipi.org');
 
 --
 -- Table structure for table `timeline`
@@ -629,46 +732,3 @@ CREATE TABLE IF NOT EXISTS `timeline` (
   `shared` int(5) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `albums`
---
-
-CREATE TABLE IF NOT EXISTS `albums` (
-  `id` int(8) NOT NULL AUTO_INCREMENT,
-  `uid` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `thumb` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `album_likes`
---
-
-CREATE TABLE IF NOT EXISTS `album_likes` (
-  	`id` int(8) NOT NULL AUTO_INCREMENT,
-  	`albm_id` int(20) COLLATE utf8_unicode_ci NOT NULL,
-  	`user_like` int(20) COLLATE utf8_unicode_ci NOT NULL,
- 	`timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sent_msgs`
---
-
-CREATE TABLE IF NOT EXISTS `sent_msgs` (
-  	`id` int(8) NOT NULL AUTO_INCREMENT,
-  	`msg_to` int(20) COLLATE utf8_unicode_ci NOT NULL,
-  	`subject` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-	`message` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
- 	`timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  	PRIMARY KEY (`id`)
-	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

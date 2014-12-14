@@ -5,7 +5,14 @@
                           <div class="panel-heading"><?php echo CHAT_WITH ?> <span class="chat_with">
                           <?php if ($uid !== $user){$chatWith = $uid;} 
 						  else {$chatWith = $user;} getUserDetails($chatWith); echo $username;?>
-                           </span></div>
+                           </span>
+                           <?php isBlocked($_SESSION['user_id'],$uid);
+						   	if ($blockCount > 0){?>
+                            <span class="label label-danger" style="font-size:13px;">
+                            <?php echo N_BLOCK_NOTICE ?>
+                            </span>
+                            <?php } ?>
+                           </div>
                           <div class="panel-body">
                            <div id="pmRefresh">
                            <center>
@@ -24,7 +31,7 @@
                                 <input class="form-control" type="hidden" name="recip" value="<?php echo $uid; ?>">
                               </div>
                               <div class="form-group">
-                                <textarea id="message" name="message" required="required"></textarea>
+                                <textarea id="message" name="message" required="required" <?php if ($blockCount > 0){?>disabled="disabled" <?php } ?>></textarea>
                               </div>
                                 <button class="btn btn-primary" type="submit"><?php echo REPLY ?></button>
                             <div id="pmSending" style="float:left; margin-right:10px; margin-top:5px; display:none">
@@ -54,6 +61,7 @@ $(document).ready(function() {
 			setTimeout(function(){
 			$("#pmSending").hide();
 			$("#pmSend").resetForm();
+			$("#pmSend").clearForm();
 			}, 1000);
             }); 
         }); 

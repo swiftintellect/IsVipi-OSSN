@@ -212,6 +212,16 @@ if (isset($_POST["sysCron"])){
 	} else {
 		$sysCron = "0";
 	}
+if (isset($_POST["siteErr"])){
+	$err = $_POST["siteErr"];	
+	} else {
+		$err = "0";
+	}
+if (isset($_POST["newUserNotice"])){
+	$newUserNotice = $_POST["newUserNotice"];	
+	} else {
+		$newUserNotice = "0";
+	}
 if (isset($_POST["mobileTheme"])){
 	$mobileEnab = $_POST["mobileTheme"];	
 	} else {
@@ -222,8 +232,8 @@ if (isset($_POST["sysMaint"])){
 	} else {
 	upSiteStatus('1');
 	}
-	$stmt = $db->prepare('UPDATE general_settings SET user_registration=?,user_validate=?,sys_cron=?,timezone=?,mobile_enabled=? LIMIT 1');
-	$stmt->bind_param('iiiii', $AllowReg,$usrValidate,$sysCron,$sysZone,$mobileEnab);
+	$stmt = $db->prepare('UPDATE general_settings SET user_registration=?,user_validate=?,sys_cron=?,timezone=?,mobile_enabled=?,err_disabled=?,newuser_notice=? LIMIT 1');
+	$stmt->bind_param('iiiiiii', $AllowReg,$usrValidate,$sysCron,$sysZone,$mobileEnab,$err,$newUserNotice);
 	$stmt->execute();
 		$_SESSION['succ'] =S_SUCCESS;
     	header ('location:'.$from_url.'');

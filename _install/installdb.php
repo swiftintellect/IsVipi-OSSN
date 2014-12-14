@@ -216,12 +216,7 @@ if (!preg_match('/^[A-Za-z0-9:_.\/\\\\ ]+$/', $site_timezone)){
 }	
 
 //SITE THEME
-$site_theme = $_POST["theme"];
-if (!preg_match('/^[a-zA-Z0-9_]{1,60}$/', $site_theme)){
-	$_SESSION['err'] ="Invalid input for hidden field theme";
-    header ('location:'.$from_url.'');
-	exit();
-}	
+$site_theme = 'bluezorra';
 
 //Add to our database
 global $db;
@@ -240,16 +235,6 @@ $stmt = $db->prepare('insert into general_settings (user_registration,user_valid
 	$stmt->bind_param('iiiiss', $user_registration,$user_validate,$sys_cron,$timezone,$admin_end,$lang);
 	$stmt->execute();
 	$stmt->close();
-$stmt = $db->prepare('insert into themes (theme_name,theme_url,description,version,author,author_url) values (?,?,?,?,?,?)');
-	$theme_name = "default";
-	$theme_url = "http://isvipi.com";
-	$description = "Default IsVipi Theme";
-	$author = "IsVipi";
-	$version = "1.0.0";
-	$author_url = "http://isvipi.com";
-	$stmt->bind_param('ssssss', $theme_name, $theme_url,$description,$version,$author,$author_url);
-	$stmt->execute();
-	$stmt->close();
 $_SESSION['succ'] ="Site settings saved";
     header ('location:install_step_3.php');
 	exit();
@@ -262,7 +247,7 @@ $_SESSION['succ'] ="Site settings saved";
 if ($op === 'step3') {
 
 include_once '../inc/db/db.php';
-include_once '../inc/users.inc/PasswordHash.php';
+include_once '../inc/users.inc/classes/PasswordHash.php';
 //Admin Username
 $adm_username = $_POST["admin_username"];
 if (empty($adm_username)) {

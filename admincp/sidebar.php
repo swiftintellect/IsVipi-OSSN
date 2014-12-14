@@ -13,9 +13,32 @@
         <li <?php if ($ACTION[1]=="edit_profile"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/edit_profile' ?>">&raquo; <?php echo EDIT_MY_PROFILE ?></a></li>
         </ul>
     </li>
-    <?php if (MASS_EMAIL == "yes"){?>
     <li <?php if ($ACTION[1]=="emails"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/emails' ?>"><i class="fa fa-envelope"></i>&nbsp;<?php echo ADM_EMAILS ?></a></li>
-    <?php }?>
     <li <?php if ($ACTION[1]=="sys_management"){echo "class='active'";}?>><a href="<?php echo ISVIPI_URL.$adminPath.'/sys_management' ?>"><i class="fa fa-cog"></i>&nbsp;<?php echo SYS_MGMT ?></a></li>
+    <li class="dropdown <?php if($ACTION[1]=="addons" || $ACTION[1]=="addon"){echo "has_active";}?>">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-plus-square"></i>&nbsp;<?php echo ADDONS ?><span class="caret"></span></a>
+    	<ul class="dropdown-menu">
+        	<li <?php if ($ACTION[1]=="addons"){echo "class='active'";}?>>
+    		<a href="<?php echo ISVIPI_URL.$adminPath.'/addons' ?>">
+            &raquo; <?php echo ADDONS." ".SETTINGS ?>
+            </a>
+            </li>
+            <!---This is where we will include any addon admin urls--->
+            <?php getModUrls();
+            while ($getModUrl->fetch()){
+                if (file_exists(ISVIPI_INC_MODS.$modName.'/admin/settings.php')){
+            ?>
+            <li <?php if (isset($ACTION[2]))if ($ACTION[2]==$modName){echo "class='active'";}?>>
+            <a href="<?php echo ISVIPI_URL."settings/addon/".$modName."/settings/"?>">
+            &raquo; <?php echo ADDON." <i class='fa fa-angle-double-right'></i> ".$modName ?>
+            </a>
+            </li>
+            <?php } ?>
+            <?php } ?>
+            <!-- they end here -->
+    	</ul>
+    </li>
+    
   </ul> 
 </div>

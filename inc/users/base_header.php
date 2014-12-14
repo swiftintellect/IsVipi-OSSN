@@ -12,7 +12,7 @@ siteMaintanance();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+<meta charset="iso-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="keywords" content="<?php echo $meta_tags ?>" />
 <meta name="description" content="<?php echo $meta_description ?>">

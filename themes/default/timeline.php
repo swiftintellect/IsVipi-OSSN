@@ -1,4 +1,9 @@
 <?php get_header()?>
+<script>
+$(document).ready(function() {
+TimelineInit();
+}); 
+</script>
 <link href="<?php echo ISVIPI_STYLE_URL; ?>css/isvipi-timeline.css" rel="stylesheet" type="text/css" />
 <?php get_sidebar()?>
                   
@@ -73,6 +78,7 @@
                                 <!--------------------------->
                                 <div class="refresh_timeline">
                                 <!--------------------------->
+
                                 <center>
                                 <div id="loadingFeeds" style="font-size:18px">
                                 <img src="<?php echo ISVIPI_STYLE_URL.'images/t_loading.gif'?>" height="20" />
@@ -90,15 +96,54 @@
 } else {
 	$loader = 0;
 }?>
-<script>
-$('.refresh_timeline').ready(function() {
-	$('.refresh_timeline').load(fullURL+"/remote/t_feed/");
-    $('.refresh_timeline').timer({
-		delay: 3000,
-		repeat: true,
-		url: fullURL+"/remote/t_feed/<?php echo $loader ?>"
-	});
-}); 
-</script> 
 <?php get_r_sidebar()?>
+<script>
+		$(function() {
+				$(".boxer").boxer();
+			});
+        $(document).ready(function() {
+            $('#textUpdate').ajaxForm({ 
+				success: function() { 
+			$("#workingGenPost").show();
+			setTimeout(function(){
+            $('#textUpdate').resetForm();
+			$("#workingGenPost").hide();
+			}, 500);
+			LoadTimeline();
+        } 
+    });
+	 
+});
+
+(function() {
+    
+var bar = $('.bar');
+var percent = $('.percent');
+var status = $('#status');
+   
+$('#photoUpdate').ajaxForm({
+    beforeSend: function() {
+        status.empty();
+        var percentVal = '0%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+    },
+    uploadProgress: function(event, position, total, percentComplete) {
+        var percentVal = percentComplete + '%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+    },
+    success: function() {
+        var percentVal = '100%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+		$('#photoUpdate').resetForm();
+    },
+	complete: function(xhr) {
+		status.html(xhr.responseText);
+	}
+}); 
+})();       
+</script>
+
 <?php get_footer()?>

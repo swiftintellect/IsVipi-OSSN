@@ -22,7 +22,7 @@ if (isset($ACTION[2])){
 	$adm = $ACTION[2];
 	}
 if (isset($_POST['adm_users'])){$adm = $_POST['adm_users'];}
-if ($adm !== 'new' && $adm !== '1'/*Validate*/ && $adm !== '2'/*Suspend*/ && $adm !== '3'/*Unsuspend*/ && $adm !== '4'/*Delete*/ && $adm !== 's_All'/*Suspend All*/ && $adm !== 'uns_All'/*Unsuspend All*/ && $adm !== 'del_unv_All'/*Delete All Unvalidated*/ && $adm !== 'del_sus_All'/*Delete All Suspended*/ && $adm !== 'edit_user'/*Delete All Suspended*/ ){
+if ($adm !== 'new' && $adm !== '1'/*Validate*/ && $adm !== '2'/*Suspend*/ && $adm !== '3'/*Unsuspend*/ && $adm !== '4'/*Delete*/ && $adm !== 's_All'/*Suspend All*/ && $adm !== 'uns_All'/*Unsuspend All*/ && $adm !== 'del_unv_All'/*Delete All Unvalidated*/ && $adm !== 'del_sus_All'/*Delete All Suspended*/ && $adm !== 'edit_user'/*Delete All Suspended*/ && $adm !== 'as_user'/*Delete All Suspended*/ ){
 	$_SESSION['err'] =UNKNOWN_REQ;
     header ('location:'.$from_url.'');
 	exit();
@@ -31,7 +31,7 @@ if ($adm !== 'new' && $adm !== '1'/*Validate*/ && $adm !== '2'/*Suspend*/ && $ad
 //////////////// ADD NEW USER //////////////////////////////
 ////////////////////////////////////////////////////////////
 if ($adm == 'new') {
-	include_once ISVIPI_USER_INC_BASE. 'PasswordHash.php';
+	include_once ISVIPI_USER_INC_BASE. 'classes/PasswordHash.php';
 	$hash_cost_log2 = 8;
 	$hash_portable = FALSE;
 	$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
@@ -222,7 +222,7 @@ if(checkEmail($email))
 	$stmt->close();
 	 
 	 if (isset($sendActEmail)){
-	 include_once ISVIPI_USER_INC_BASE. 'emailFunc.php';
+	 include_once ISVIPI_USER_INC_BASE. 'emails/emailFunc.php';
 	 sendActEmail($site_url,$site_email,$user,$site_title,$randomstring,$email);
 	 }
 	 $_SESSION['succ'] =S_SUCCESS;
@@ -475,6 +475,15 @@ $coutry_n = preg_replace('/[^a-zA-Z0-9 ]/','',$coutry_nn);
 			exit();
 		}
 }
-
+/////////////////////////////////////////////////////////////
+//////////////// LOGIN AS USER /////////////////////////////
+////////////////////////////////////////////////////////////
+if ($adm == 'as_user') {
+	$userid = $ACTION[3];
+	unset($_SESSION['user_id']);
+	$_SESSION['user_id'] = $userid;
+		header('location:'.ISVIPI_URL.'home');
+		exit();
+}
 $db->close();
 ?>

@@ -53,4 +53,23 @@ $cont[0].scrollTop = $cont[0].scrollHeight;
                                  		</div>
                                  	</div>
                                </div>
+                       <script>
+						$( "div" ).on({
+							mouseenter: function() {
+								$('#pmRefresh').timer('stop');
+							},
+							mouseleave: function() {
+								$('#pmRefresh').timer('stop');
+							},
+							click: function() {
+								$('#pmRefresh').timer('start');
+							}
+						});
+						$( "textarea" ).on({
+							click: function() {
+								$('#pmRefresh').timer('start');
+							}
+						});
+					  </script>
+
                                

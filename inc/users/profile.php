@@ -26,11 +26,16 @@
 if (isset($ACTION[1])){
 $xid = $ACTION[1];
 xtractUID($xid);
+if (!isset($uid) || empty($uid)){
+	die404();
+}
 $id = $uid;
 if (!is_numeric($id)){
 	$_SESSION['err'] =INVALID_ID;
 }
 	getMemberDet($id);
+} else {
+	die404();
 }
 	base_header($site_title,$ACTION[0]);
  include_once ISVIPI_THEMES_BASE.'profile.php';

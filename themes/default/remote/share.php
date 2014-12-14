@@ -48,13 +48,13 @@ body {overflow:hidden}
 <div style="clear:both"></div>
 <div style="clear:both"></div>
 <div class="share_popup_content emoticon">
-<?php if (empty($feedIMG)){?>
+<?php if (empty($feedImage)){?>
 <?php echo trunc_text($activity,50) ?>
 <?php } else {?>
 <?php echo trunc_text($activity,20)?>
 <center>
 <div class="feed_popupImg">
-<img src="<?php echo ISVIPI_TIMELINE_PICS_URL.$feedIMG;?>" height="150" />
+<img src="<?php echo ISVIPI_TIMELINE_PICS_URL.$feedImage;?>" height="150" />
 </div>
 </center>
 </div>
@@ -65,7 +65,7 @@ body {overflow:hidden}
 </div>
 <hr />
 <div class="share_popup_user">
-<?php getUserDetails($uid); ?>
+<?php getUserDetails($feedUID); ?>
 <i class="fa fa-user"></i> <?php echo $username;?>   
  <span><i class="fa fa-clock-o"></i> <?php echo relativeTime($time);?></span>
 </div>

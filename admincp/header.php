@@ -17,6 +17,23 @@ if (!isset($faviconname)){$faviconname == "favicon.png";}
     <script>$(function () { $("[data-toggle='tooltip']").tooltip(); });</script>
 	</head>
 <body>
+<?php
+siteGenSett();
+	if ($site_status == 3 && file_exists(ISVIPI_ADMIN_BASE.'/update/update.php')){
+		?>
+        <div style="padding:20px; width:100%; height:100%; min-height:100%">
+        	<div style="background:#FFF; border-radius:5px;margin:10px auto; border:solid #CCC thin; width:60%; padding:10px">
+                <h2 style="margin:10px; font-size:18px; line-height:25px; color:#333">
+                Your site files have been updated successfully. A database upgrade is however required.
+                Click the button below to update. 
+                </h2>
+                <a href="<?php echo ISVIPI_URL.'conf/updates/dbupdate/' ?>">
+                <button type="button" class="btn btn-primary btn-lg">Update Database</button>
+                </a>
+            </div>
+        </div>
+	<?php exit();
+	}?>
   <div class="navbar navbar-fixed-top navbar-inverse" id="header-navigation" role="navigation">
   	<div class="navbar-header">
     <a href="<?php echo ISVIPI_URL.$adminPath.'/dashboard' ?>" title="<?php echo LOGO ?>"><img src="<?php echo ISVIPI_STYLE_URL.'images/site/'.$logoname.'';?>" width="50%" alt="" /></a><span class="admin_logo_text"><?php echo ADMIN ?></span>

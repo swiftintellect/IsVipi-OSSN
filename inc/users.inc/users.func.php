@@ -364,9 +364,9 @@ $_SESSION['timeout'] = time();
 
 //Check login function to authenticate users before accessing the member area
 function isLoggedIn(){
-	if(!isset($_SESSION['logged_in'])&&(!isAdmin())&&(!isset($_SESSION['user_id']))) {
+	if((!isAdmin())&&(!isset($_SESSION['user_id']))) {
 		$_SESSION['err'] =E_LOG_IN_PROMPT;
-		header('location: '.ISVIPI_URL.'login/');
+		header('location: '.ISVIPI_URL.'');
 		exit();
 	}
 	else if(timedOut()){
@@ -388,6 +388,7 @@ function isLoggedIn(){
   }
   function isAdmin(){
 	if(isset($_SESSION['admin_logged_in'])) {
+		$_SESSION['user_id'] == 0;
 		return true;
 	}
 	else {
@@ -439,11 +440,12 @@ function getUserDetails($value){
 	global $email;
 	global $reg_date;
 	global $username;
-	$getusr = $db->prepare("SELECT username,email,reg_date FROM members WHERE id=?");
+	global $level;
+	$getusr = $db->prepare("SELECT username,level,email,reg_date FROM members WHERE id=?");
 	$getusr->bind_param("i",$value);
 	$getusr->execute();
 	$getusr->store_result();
-	$getusr->bind_result($username,$email,$reg_date);
+	$getusr->bind_result($username,$level,$email,$reg_date);
 	$getusr->fetch();
 	$getusr->close();
 		//Get user settings
@@ -502,6 +504,7 @@ function getFeeds($user,$load){
 	global $feedImage;
 	global $shared;
 	global $postCount;
+	global $rFound;
 	
 	$getusrFeed = $db->prepare('SELECT t.id,t.uid,t.username,t.activity,t.time,t.feed_img,t.shared FROM timeline t
 INNER JOIN my_friends mf
@@ -542,7 +545,7 @@ function getFeeds2($user){
 INNER JOIN my_friends mf
 ON t.uid=mf.user2 WHERE mf.user1=? OR t.uid=?
 GROUP BY t.id
-ORDER by t.time DESC LIMIT 10
+ORDER by t.time DESC LIMIT 30
             ');
 	$getusrFeed->bind_param('ii',$user,$user);
 	$getusrFeed->execute();
@@ -561,19 +564,42 @@ ORDER by time DESC
 	}
 	}
 function selectFeed($value){
-	global $db;
-	global $uid;
 	global $activity;
-	global $feedIMG;
+	global $db;
+	global $getusrFeed;
 	global $time;
-$stmt = $db->prepare('SELECT uid,activity,time,feed_img FROM timeline WHERE id=? ');
+	global $act_user;
+	global $FIDentinty;
+	global $feedUID;
+	global $feedImage;
+	global $shared;
+	global $stmt;
+$stmt = $db->prepare('SELECT id,uid,username,activity,time,feed_img,shared FROM timeline WHERE id=? ');
 		$stmt->bind_param('i', $value);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($uid,$activity,$time,$feedIMG);
+		$stmt->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);
 		$stmt->fetch();
 		$stmt->close();	
 }
+function selectMobileFeed($value){
+	global $activity;
+	global $db;
+	global $getusrFeed;
+	global $time;
+	global $act_user;
+	global $FIDentinty;
+	global $feedUID;
+	global $feedImage;
+	global $shared;
+	global $stmt;
+		$getusrFeed = $db->prepare('SELECT id,uid,username,activity,time,feed_img,shared FROM timeline WHERE id=? ');
+		$getusrFeed->bind_param('i', $value);
+		$getusrFeed->execute();
+		$getusrFeed->store_result();
+		$getusrFeed->bind_result($FIDentinty,$feedUID,$act_user,$activity,$time,$feedImage,$shared);
+}
+
 function selectthisComment($value){
 	global $db;
 	global $CommId;
@@ -593,12 +619,12 @@ $stmt = $db->prepare('SELECT id,comment,comment_by,timestamp FROM comments WHERE
 //Get relative time
 function relativeTime($time,$precision=3)
                    {$times=array(	365*24*60*60	=> "year",
-					30*24*60*60		=> "month",
-					7*24*60*60		=> "week",
-					24*60*60		=> "day",
-					60*60			=> "hour",
-					60				=> "minute",
-					1				=> "second");
+					30*24*60*60		=> MONTH,
+					7*24*60*60		=> WEEK,
+					24*60*60		=> DAY,
+					60*60			=> HOUR,
+					60				=> MINUTE,
+					1				=> SECOND);
 	                if(is_string($time)) $time=strtotime($time);
 					$passed=time()-$time;
 	            if($passed<5)
@@ -615,7 +641,7 @@ function relativeTime($time,$precision=3)
 			     $result = floor($passed/$period);
 			     if($result>0)
 			     {
-				$output[]=$result.' '.$name.($result==1?'':'s');
+				$output[]=$result.' '.$name.($result==1?'':LETTER_S);
 				$passed-=$result*$period;
 				$exit++;
 			}
@@ -791,11 +817,12 @@ function getMemberDet($value){
 	global $m_country;
 	global $m_phone;
 	global $m_thumbnail;
-	$getusrst = $db->prepare("SELECT d_name,gender,dob,city,country,phone,thumbnail FROM member_sett WHERE user_id=?");
+	global $coverPhoto;
+	$getusrst = $db->prepare("SELECT d_name,gender,dob,city,country,phone,thumbnail,cover FROM member_sett WHERE user_id=?");
 	$getusrst->bind_param("i",$value);
 	$getusrst->execute();
 	$getusrst->store_result();
-	$getusrst->bind_result($m_name,$m_gender,$m_dob,$m_city,$m_country,$m_phone,$m_thumbnail);
+	$getusrst->bind_result($m_name,$m_gender,$m_dob,$m_city,$m_country,$m_phone,$m_thumbnail,$coverPhoto);
 	$getusrst->fetch();
 	$getusrst->close();
 		$now      = new DateTime();
@@ -807,9 +834,8 @@ function getMemberDet($value){
 //Check for existing friend request
 function checkExistingReq($id,$user){
 	global $db;
-	$status = "0";
-	$chkusr = $db->prepare("SELECT status FROM friend_requests WHERE (from_id=? AND to_id=? AND status=?) OR (to_id=? AND from_id=? AND status=?)");
-	$chkusr->bind_param("iiiiii",$user,$id,$status,$user,$id,$status);
+	$chkusr = $db->prepare("SELECT status FROM friend_requests WHERE (from_id=? AND to_id=?) OR (to_id=? AND from_id=?)");
+	$chkusr->bind_param("iiii",$user,$id,$user,$id);
 	$chkusr->execute();
 	$chkusr->store_result();
 	if ($chkusr->num_rows > 0){
@@ -836,13 +862,13 @@ $chkusr->close();
 
 //Check for pending friend request
 function pendingFReq($user){
-	global $db;
-	global $pendreq;
+	global $db,$chkusr,$pendreq,$pen_reqID,$pen_from,$pen_time;
 	$status = "0";
-	$chkusr = $db->prepare("SELECT * FROM friend_requests WHERE to_id=? AND status=?");
+	$chkusr = $db->prepare("SELECT request_id,from_id,timestamp FROM friend_requests WHERE to_id=? AND status=?");
 	$chkusr->bind_param("ii",$user,$status);
 	$chkusr->execute();
 	$chkusr->store_result();
+	$chkusr->bind_result($pen_reqID,$pen_from,$pen_time);
 	$pendreq = $chkusr->num_rows;
 	if ($chkusr->num_rows > 0){
 return true;
@@ -942,11 +968,13 @@ function getMyFriends($user){
 	global $db;
 	global $getfriends;
 	global $id;
+	global $MyfriendCount;
 	$getfriends = $db->prepare("SELECT user2 FROM my_friends WHERE user1=?");
 	$getfriends->bind_param('i', $user);
 	$getfriends->execute();
 	$getfriends->store_result();
 	$getfriends->bind_result($id);
+	$MyfriendCount = $getfriends->num_rows();
 }
 
 //Get Site Notificatios
@@ -966,8 +994,8 @@ function getNotices($user){
 }
 //Get unseen notice count
 function getUnseenNotices($user){
-	global $db;
-	global $noticesno;
+	global $db,$notice_id,$notice,$time;
+	global $noticesno,$getnotice;
 	$seen = "no";
 	$getnotice = $db->prepare("SELECT id, notice, time FROM notifications WHERE user=? AND seen=?");
 	$getnotice->bind_param('is', $user,$seen);
@@ -1003,8 +1031,9 @@ function addPM($user,$recip,$message,$unique_id){
 	global $db;
 	$read1 = "yes";
 	$read2 = "no";
-	$addPM = $db->prepare('insert into pm (unique_id, user1, user2, message, timestamp, user1read, user2read)values(?,?,?,?,NOW(),?,?)');
-	$addPM->bind_param('iiisss', $unique_id,$user,$recip,$message,$read1,$read2);
+	$pmdel = 0;
+	$addPM = $db->prepare('insert into pm (unique_id, user1, user2, message, timestamp, user1read, user2read,pm_deleted)values(?,?,?,?,NOW(),?,?,?)');
+	$addPM->bind_param('iiisssi', $unique_id,$user,$recip,$message,$read1,$read2,$pmdel);
 	$addPM->execute();
 	return true;
 	$addPM->close();
@@ -1021,8 +1050,9 @@ function getAllmsgs($user){
 	global $unique_id;
 	global $msg_id;
 	global $AllmsgCount;
-	$geAllmsgs = $db->prepare("SELECT id,unique_id,user1,user2,message,timestamp FROM pm WHERE (user2=? OR user1=?) GROUP BY unique_id ORDER by user2read DESC");
-	$geAllmsgs->bind_param('ii', $user,$user);
+	$deleted = "both";
+	$geAllmsgs = $db->prepare("SELECT id,unique_id,user1,user2,message,timestamp FROM pm WHERE (user2=? OR user1=?) AND (pm_deleted !=? AND pm_deleted !=?)GROUP BY unique_id ORDER by user2read DESC");
+	$geAllmsgs->bind_param('iisi', $user,$user,$deleted,$user);
 	$geAllmsgs->execute();
 	$geAllmsgs->store_result();
 	$geAllmsgs->bind_result($msg_id,$unique_id,$msg_from,$msg_to,$message,$timestamp);
@@ -1104,8 +1134,9 @@ function getConv($uid,$user){
 	global $user1;
 	global $user2;
 	$read = "no";
-	$geUtmsgs = $db->prepare("SELECT unique_id,user1,user2,message,timestamp FROM pm WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)ORDER by timestamp ASC");
-	$geUtmsgs->bind_param('iiii', $uid,$user,$uid,$user);
+	$zero = 0;
+	$geUtmsgs = $db->prepare("SELECT unique_id,user1,user2,message,timestamp FROM pm WHERE (user1=? AND user2=? AND pm_deleted !=?) OR (user2=? AND user1=? AND pm_deleted !=?) ORDER by timestamp ASC");
+	$geUtmsgs->bind_param('iiiiii', $uid,$user,$user,$uid,$user,$user);
 	$geUtmsgs->execute();
 	$geUtmsgs->store_result();
 	$geUtmsgs->bind_result($uniqID,$user1,$user2,$message,$timestamp);
@@ -1150,16 +1181,17 @@ function getLastMsg($unique_id){
 function checkConv($user,$recip){
 	global $db;
 	global $unique_id;
-	$checkConv = $db->prepare("SELECT unique_id FROM pm WHERE (user1=? OR user2=?) AND (user2=? OR user1=?)");
-	$checkConv->bind_param("iiii",$user,$user,$recip,$recip);
+	$both = "both";
+	$checkConv = $db->prepare("SELECT unique_id FROM pm WHERE (user1=? OR user2=?) AND (user2=? OR user1=?) AND (pm_deleted != ?)");
+	$checkConv->bind_param("iiiis",$user,$user,$recip,$recip,$both);
 	$checkConv->execute();
 	$checkConv->store_result();
 	$checkConv->bind_result($unique_id);
 	$checkConv->fetch();
 	if ($checkConv->num_rows > 0){
-return true;
+		return true;
 	}
-return false;
+		return false;
 	$checkConv->free_result();
 	$checkConv->close();
 }
@@ -1175,11 +1207,20 @@ function updMsgUnRead($lastMsgID,$unique_id){
 }
 
 //Update message as read
-function updMsgRead($user,$uniqID){
+function updMsgRead($chtWth,$user){
 	global $db;
+	
+	// we first extract the user id of the chatee
+	xtractUID($chtWth);
+	global $uid;
+	// then we get the unique id, if any of the existing chat
+	checkConv($user,$uid);
+	global $unique_id;
+	
+	
 	$read = "yes";
 	$updMsgR = $db->prepare('UPDATE pm SET user2read=? WHERE (user2=? AND unique_id=?)');
-	 $updMsgR->bind_param('sii', $read,$user,$uniqID);
+	 $updMsgR->bind_param('sii', $read,$user,$unique_id);
 	 $updMsgR->execute();
 	 $updMsgR->close();
 }
@@ -1293,7 +1334,18 @@ foreach($timezones as $region => $list)
 }
 print '</select>';
 }
-
+function isBlocked($user1,$user2){
+	global $db,$blockCount,$usr1,$usr2;
+	$stmt = $db->prepare("SELECT id,user1,user2 FROM blocked_users WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)");
+	$stmt->bind_param('iiii',$user1,$user2,$user1,$user2);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($blockID,$usr1,$usr2);
+	$stmt->fetch();
+	$blockCount = $stmt->num_rows();
+	$stmt->close();
+	
+}
 function getAdminGenSett(){
 	global $db;
 	global $usrReg;
@@ -1305,10 +1357,13 @@ function getAdminGenSett(){
 	global $logoname;
 	global $faviconname;
 	global $mobileEnabled;
-	$getAdminGen = $db->prepare("SELECT user_registration,user_validate,sys_cron,timezone,admin_end,lang,logo_name,favicon_name,mobile_enabled FROM general_settings LIMIT 1");
+	global $addonEnabled;
+	global $phpErrHide;
+	global $NewUserNotice;
+	$getAdminGen = $db->prepare("SELECT user_registration,user_validate,sys_cron,timezone,admin_end,lang,logo_name,favicon_name,mobile_enabled,addons_enabled,err_disabled,newuser_notice FROM general_settings LIMIT 1");
 	$getAdminGen->execute();
 	$getAdminGen->store_result();
-	$getAdminGen->bind_result($usrReg,$usrValid,$sysCron,$timeZ,$adminPath,$lang,$logoname,$faviconname,$mobileEnabled);
+	$getAdminGen->bind_result($usrReg,$usrValid,$sysCron,$timeZ,$adminPath,$lang,$logoname,$faviconname,$mobileEnabled,$addonEnabled,$phpErrHide,$NewUserNotice);
 	$getAdminGen->fetch();
 	$getAdminGen->close();	
 }
@@ -1731,5 +1786,23 @@ function hasLikedAlbum($alb_ID,$user){
 		return FALSE;
 	}
 	$hasLikedAlb ->close();
+}
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
 }
 ?>

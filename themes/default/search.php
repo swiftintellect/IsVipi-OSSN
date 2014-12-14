@@ -8,7 +8,8 @@
 							   if ($results == 1){$ResNumber = RESULT;} else {$ResNumber = RESULTS;}
 							   
 							   ?>
-							   <?php echo $results."&nbsp;".$ResNumber."&nbsp;".FOUND_FOR ?> "<?php echo $term ?>"</span>
+							   <?php echo $results."&nbsp;".$ResNumber."&nbsp;".FOUND_FOR ?> "<?php echo $term ?>"
+                               </span>
                             </div>
                             
                            </div>

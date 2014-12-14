@@ -1,4 +1,4 @@
-<?php include ISVIPI_THEMES_BASE.'/global/index_header.php';?>
+<?php get_header(); ?>
 <div class="home_log_content">
     <div class="home_login_welcome">
         <div class="home_register" style="width:500px; margin-right:-200px; ">
@@ -21,4 +21,5 @@
      </div>
     </div>
 </div>
-<?php get_home_footer();?>
+<?php get_footer(); ?>
+

@@ -26,7 +26,7 @@ if (!isset($faviconname)){$faviconname == "favicon.png";}
    	<script>
 		var fullURL = "<?php echo $site_url."/" ?>";
 	</script>
-   <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/ajax/ajaxProcesses.js"></script>
+   <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/ajax/ajaxFunctions.js"></script>
    <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/plugins/timer/jquery.plugin.min.js"></script>
    <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/plugins/timer/jquery.timer.min.js"></script>
    <script type="text/javascript" src="<?php echo ISVIPI_STYLE_URL; ?>js/jquery.cssemoticons.min.js"></script>
@@ -76,7 +76,7 @@ if (!isset($faviconname)){$faviconname == "favicon.png";}
                            <li><a href="<?php echo ISVIPI_URL.'edit_profile/' ?>"><?php echo EDIT_PROFILE ?></a></li>
                            <li class="disabled"><a href="#"><?php echo SETTINGS ?></a></li>
                            <li role="presentation" class="divider"></li>
-                           <li><a href="<?php echo ISVIPI_URL.'logout/' ?>">Log Out</a></li>
+                           <li><a href="<?php echo ISVIPI_URL.'logout/' ?>"><?php echo LOGOUT ?></a></li>
                          </ul>
                       </div><!--end of dropdown-->
                       <?php } else {?>
