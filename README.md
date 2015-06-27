@@ -16,7 +16,7 @@ SYSTEM REQUIREMENTS
 ==============================================
 DEMO
 
-You can check out the demo at <a href="http://demo.isvipi.org" target="_blank">http://demo.isvipi.org</a>
+Check out our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
 
 ==============================================
 ISSUES/BUGS
