@@ -21,4 +21,4 @@ Check out our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
 ==============================================
 ISSUES/BUGS
 
-For issues or bugs, please visit our forum and start a new thread http://forum.isvipi.com
+For issues or bugs, you can visit our <a href="http://forum.isvipi.org" target="_blank">forum</a> or leave a bug report here.
