@@ -13,8 +13,6 @@ SYSTEM REQUIREMENTS
 <li>Mcrypt</li>
 <li>GD Library</li>
 
-If your system does not meet the above then the script will not function properly
-
 ==============================================
 DEMO
 
