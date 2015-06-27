@@ -19,12 +19,10 @@ session_start();
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/ 
-if (!file_exists('inc/db/db.php')){
+	if (!file_exists('inc/db/db.php')){
 		include_once ('inc/install/prompt.php');
-		exit;
+		exit();
 	} 
-		else 
-	{
 		//require_once important files
 		require_once 'inc/db/db.php';
 		require_once 'init.php';
@@ -50,7 +48,7 @@ if (!file_exists('inc/db/db.php')){
 			$countryCode = geoip_country_code_by_addr($gi, $VisitorIP);
 			$countryName = geoip_country_name_by_addr($gi, $VisitorIP);
 				$cookieVar = $countryCode."/".$countryName;
-				//then we set a cookie that tell's us if it is the same user
+				//then we set a cookie that will store the user country and country code
 				//the cookie is valid for 30 days only
 				$number_of_days = 30 ;
 				$date_of_expiry = time() + 60 * 60 * 24 * $number_of_days ;
@@ -58,9 +56,11 @@ if (!file_exists('inc/db/db.php')){
 			//we close our class
 			geoip_close($gi);
 		}
+			//we try to get the user timezone from the country code we got above
 			require_once 'inc/users.inc/classes/geoip/timezone.php';
 			$IPtimezone = @get_time_zone($countryCode,"");
-		//We then call important functions
+		
+		//We then call some two important functions
 		getModUrls();
 		getAdminGenSett();
 		//We check to see if php errors are to be hidden
@@ -123,6 +123,9 @@ if (!file_exists('inc/db/db.php')){
 if ($ACTION[0] == 'cron'){
 			include_once ''.ISVIPI_CRON_BASE.'/'.preg_replace('/[^\w]/','',$ACTION[0]).'.php';
 		}
+else if ($ACTION[0] == 'install'){
+			include_once '_install/'.preg_replace('/[^\w]/','',$ACTION[0]).'.php';
+		}
 else if ($ACTION[0] == 'auth'){
 			include_once 'auth/'.preg_replace('/[^\w]/','',$ACTION[1]).'.php';
 		}
@@ -167,6 +170,5 @@ else if (MODS == "1" && $modeCount>0){
 			die404();
 }
 else die404();
-}
 ob_end_flush();
 ?>

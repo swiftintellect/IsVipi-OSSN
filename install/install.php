@@ -1,11 +1,11 @@
 <?php
 date_default_timezone_set ('US/Central');
 /*******************************************************
- *   Copyright (C) 2014  http://isvipi.com
+ *   Copyright (C) 2014  http://isvipi.org
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
+    the Free Software Foundation; either version 3 of the License, or
     (at your option) any later version.
 
     This program is distributed in the hope that it will be useful,
@@ -17,27 +17,26 @@ date_default_timezone_set ('US/Central');
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ******************************************************/
-include_once '../init.php';
-include_once DOC_ROOT. '../inc/users.inc/users.func.php';
-session_start();
+	include_once '../init.php';
+	include_once DOC_ROOT. '../inc/users.inc/users.func.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IsVipi System Installation</title>
-<link rel="shortcut icon" type="image/x-icon" href="<?php echo ISVIPI_STYLE_URL; ?>images/favicon.png">
-  <!-- Bootstrap -->
-  <link href="../inc/style.lib/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link href="../inc/style.lib/css/isvipi-install.css" rel="stylesheet" media="screen">
-  <!-- FontAwesome -->
-  <link rel="stylesheet" href="../inc/style.lib/fontawesome/css/font-awesome.min.css">
-  <!-- Alertify -->
-  <link rel="stylesheet" href="../inc/style.lib/css/alertify.core.css">
-  <link rel="stylesheet" href="../inc/style.lib/css/alertify.default.css">
-   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install IsVipi OSSN</title>
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/style.lib/images/favicon.png">
+      <!-- Bootstrap -->
+      <link href="../inc/style.lib/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="../inc/style.lib/css/isvipi-install.css" rel="stylesheet" media="screen">
+      <!-- FontAwesome -->
+      <link rel="stylesheet" href="../inc/style.lib/fontawesome/css/font-awesome.min.css">
+      <!-- Alertify -->
+      <link rel="stylesheet" href="../inc/style.lib/css/alertify.core.css">
+      <link rel="stylesheet" href="../inc/style.lib/css/alertify.default.css">
+       <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">

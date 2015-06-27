@@ -1,6 +1,6 @@
 <?php
 /*******************************************************
- *   Copyright (C) 2014  http://isvipi.com
+ *   Copyright (C) 2014  http://isvipi.org
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -151,8 +151,8 @@ define('SEND_REC_EMAIL', "Send Recovery Email");
 define('CREATE_NEW_PASS_FOR', "Create a new password for");
 define('MAINTEN_TITLE', "Site Maintenance");
 define('MAINTEN_TITLE_TXT', "The site is undergoing maintenance and will be back in a short while.");
-define('INSTALL_PROMPT', "Installation Prompt");
-define('INSTALL_PROMPT_TXT', "Oops! Seems like your site is not yet set up. Don't worry, just click install to proceed...");
+define('INSTALL_PROMPT', "Install IsVipi OSSN");
+define('INSTALL_PROMPT_TXT', "<a href='http://isvipi.org' target='_blank'>IsVipi OSSN</a> hasn't been installed. Click install to proceed!");
 define('INSTALL', "Install");
 define('INV_ACTION', "Invalid Action");
 define('UNKNOWN_REQ', "Unknown Request");

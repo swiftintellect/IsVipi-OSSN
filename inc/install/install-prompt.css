@@ -1,43 +1,67 @@
+/*******************************************************
+ *   Copyright (C) 2014  http://isvipi.org
+ ******************************************************/
 body{
-background:url(imgs/bg.png);
+	background:url(imgs/bg.png);
 }
-.install_prompt_cont {width:60%; min-height:200px; background:#09F; margin-top:100px; margin-left:auto; margin-right:auto; padding:20px; border-radius:7px}
-.install_prompt_cont h3 {color:#FFF; font-size:21px; margin:20px 5px}
+.install_prompt_cont {
+	width: 40%;
+	min-height: 100px;
+	background: #FFF;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+	border: solid thin #CCC
+}
+.install_prompt_cont h3 {
+	color: #333;
+	font-size: 16px;
+	margin: 20px 5px;
+	font-weight: 500;
+	font-family: Georgia, "Times New Roman", Times, serif
+}
+.install_prompt_cont h3 a {
+	text-decoration:none !important;
+	color:#09F;
+}
 .myButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
-	box-shadow:inset 0px 1px 0px 0px #a4e271;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
-	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
-	background-color:#89c403;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #74b807;
+	border:1px solid rgb(64,150,238);
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:arial;
-	font-size:25px;
+	font-size:16px;
 	font-weight:bold;
-	padding:17px 58px;
+	padding:10px 30px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #528009;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: rgb(64,150,238); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(64,150,238,1) 0%, rgba(64,150,238,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(64,150,238,1)), color-stop(100%,rgba(64,150,238,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(64,150,238,1) 0%,rgba(64,150,238,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(64,150,238,1) 0%,rgba(64,150,238,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(64,150,238,1) 0%,rgba(64,150,238,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(64,150,238,1) 0%,rgba(64,150,238,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4096ee', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
 }
 .myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403));
-	background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
-	background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
-	background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
-	background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
-	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
-	background-color:#77a809;
+	background: rgb(37,141,200); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(37,141,200,1) 0%, rgba(37,141,200,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(37,141,200,1)), color-stop(100%,rgba(37,141,200,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', endColorstr='#258dc8',GradientType=0 ); /* IE6-9 */
 }
 .myButton:active {
 	position:relative;
