@@ -1,37 +1,24 @@
 IsVipi-Open-Source-Social-Networking-Script
 ===========================================
 
-IsVipi Open Source Social Networking Script is a free software provided under GPL V.3. It is our first alpha release of the software which contains only the members area. Some of the basic functions of the member area include:
-
--Profile pictures
-
--User timeline/feeds
-
--Browse members
-
--Filter members by status "online"
-
--Filter members by recently signed up
-
--Friend request system where a member can accept or reject a friend request
-
--Unfriend module
-
--Personal Messaging
-
--Notifications
+IsVipi OSSN (Open Source Social Network) is a free php/mysql based software that allows you to set up a social network or community for your site. The project was started in December 2013 and amid all the challenges, we have endeavored to provide this platform for free to any individual or entity that wants to set up a social collaboration platform.
 
 ==============================================
 SYSTEM REQUIREMENTS
 
-PHP 5.3+, MySQL 4.1+
+*PHP version 5.3 and above
+*MySQL version 4.1 and above
+*mod_rewrite
+*Curl
+*Mcrypt
+*GD
 
 If your system does not meet the above then the script will not function properly
 
 ==============================================
 DEMO
 
-You can check out the demo at http://demo.isvipi.com
+You can check out the demo at <a href="http://demo.isvipi.org" target="_blank">http://demo.isvipi.org</a>
 
 ==============================================
 ISSUES/BUGS
