@@ -1,4 +1,4 @@
-IsVipi-Open-Source-Social-Networking-Script
+IsVipi OSSN (Open Source Social Networking Script)
 ===========================================
 
 IsVipi OSSN (Open Source Social Network) is a free php/mysql based software that allows you to set up a social network or community for your site. The project was started in December 2013 and amid all the challenges, we have endeavored to provide this platform for free to any individual or entity that wants to set up a social collaboration platform.
