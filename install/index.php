@@ -1,4 +1,7 @@
 <?php
+ob_start();
+session_set_cookie_params(0);
+session_start();
 /*******************************************************
  *   Copyright (C) 2014  http://isvipi.org
 
@@ -46,8 +49,12 @@
 		) ? array('index') : explode('/',html_entity_decode($URL));
 		$includeFile = 'install'.preg_replace('/[^\w]/','','').'.php';
 			//We set our site url parameters
-			if (is_file($includeFile)) {
+			if ($ACTION[0] == 'installdb'){
+				include_once DOC_ROOT.preg_replace('/[^\w]/','',$ACTION[0]).'.php';
+			}
+			else if (is_file($includeFile)) {
 					include($includeFile);
 			} 
 			else die404();
+	ob_end_flush();
 ?>

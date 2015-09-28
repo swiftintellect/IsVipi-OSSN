@@ -15,7 +15,10 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- ******************************************************/ 
+ ******************************************************/
+ 
+ //flag system to initiate installation on click "install" -->
+ $_SESSION['sysCheck'] = 'start';
  include_once 'init.php';
  include_once 'lang/en.php';
  ?>
