@@ -49,9 +49,10 @@
                     
                     
                 </div>
-                <div class="" id="">
+                <div class="" id="tFeeds">
 					<?php require_once(ISVIPI_ACT_THEME .'pages/feeds.php') ?>
 				</div>
+
              <div class="clear"></div> 
 			</section>
 			

@@ -25,16 +25,9 @@ class getFeeds {
 	public $feed;
 	
 	public function __construct ($page){
-		$this->limit = 10;
+		$this->limit = 4;
 		$this->user_id = $_SESSION['isv_user_id'];
 		$this->feedTotal = $this->getTotalFeeds();
-		$this->page = $page; //page 1
-		$this->start = ($this->page * $this->limit) - $this->limit; //starts at 0
-		if($this->feedTotal > ($this->page * $this->limit) ){
-		  $this->nextP = $this->page + 1;
-		} else {
-			$this->nextP = $this->page * $this->limit;
-		}
 		//return ($this->allFeeds()); 
 	}
 	
@@ -67,8 +60,8 @@ class getFeeds {
 		FROM feeds f
 		JOIN users u ON u.id = f.user_id
 		JOIN user_profile p ON p.user_id = f.user_id
-		WHERE f.user_id=? ORDER BY f.id DESC LIMIT ?,?"); 
-		$sqlAllFeeds->bind_param('iii', $this->user_id,$this->start,$this->nextP);
+		WHERE f.user_id=? ORDER BY f.id DESC LIMIT 0,?"); 
+		$sqlAllFeeds->bind_param('ii', $this->user_id,$this->limit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();

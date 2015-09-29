@@ -18,7 +18,6 @@
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php'); 
-	$_SESSION['isv_feed_p'] = (int) (!isset($_GET['p'])) ? 1 : $_GET['p'];
 	
 	/*foreach ($feed as $key => $f) {
 			echo $f['feed_id'];
