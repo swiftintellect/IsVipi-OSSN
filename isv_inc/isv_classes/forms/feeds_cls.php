@@ -7,14 +7,17 @@ class feeds {
 	private $size;
 	private $newName;
 	
+	public $feedArray;
+	
 	
 	public function __construct($feed,$type){
+		$this->feedArray = $feed;
 		$this->feedType = $type;
 		$this->size = '1000000';
 		$maxSize = $this->size / 1000000;
 		
 		if ($this->feedType == 'text'){
-			
+
 			$this->feedText = $feed;
 			
 		} else if ($this->feedType == 'img'){

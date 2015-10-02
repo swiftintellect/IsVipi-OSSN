@@ -25,10 +25,9 @@ class getFeeds {
 	public $feed;
 	
 	public function __construct ($page){
-		$this->limit = 4;
+		$this->limit = 10;
 		$this->user_id = $_SESSION['isv_user_id'];
 		$this->feedTotal = $this->getTotalFeeds();
-		//return ($this->allFeeds()); 
 	}
 	
 	private function getTotalFeeds(){
@@ -84,5 +83,5 @@ class getFeeds {
 	} 
 
 }
-$getFeeds = new getFeeds($_SESSION['isv_feed_p']);
+$getFeeds = new getFeeds(2);
 $feed = $getFeeds->allFeeds();

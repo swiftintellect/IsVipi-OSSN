@@ -76,6 +76,7 @@
 		
 		/** add our feed **/
 		$addFeed = new feeds($newFeed,'text');
+		
 	}
 	
 	/** NEW IMAGE FEED **/

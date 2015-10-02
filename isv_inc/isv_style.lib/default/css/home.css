@@ -4763,6 +4763,13 @@ table.text-center th {
 	min-height:50px;
 	margin-top:10px;
 }
+#preview2 {
+	width:12%;
+	margin-left:1%;
+	float:left;
+	min-height:50px;
+	margin-top:10px;
+}
 .fileUpload input.upload {
     position: absolute;
     top: 0;
@@ -4807,4 +4814,14 @@ table.text-center th {
 .feed-action {
 	font-size:12px !important;
 	margin-right:10px;
+}
+#loader-feed{
+	width:100%;
+}
+
+#loader-feed i {
+	text-align:center;
+	font-size:20px;
+	margin-left:-50px;
+	margin-top:-20px;
 }
