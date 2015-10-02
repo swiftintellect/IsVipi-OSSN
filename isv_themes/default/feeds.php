@@ -1,8 +1,12 @@
-﻿                <?php $last_id = 0; if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];?>
+﻿                <?php $last_id = 0; if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
+				  	/** get feed properties (likes, comments, shares, if liked, if shared) **/
+				  	$feedProperties = new getFeedProperties($f['feed_id']);
+				  	
+				  ?>
                 <div class="box box-widget" style="margin:0;" id="f_content">
                 <div class='box-header with-border'>
                   <div class='user-block'>
-                    <img class='img-circle' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
+                    <img class='img-square' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
                     <span class='username'><a href="#"><?php echo $f['feed_fullname'] ?></a></span>
                     <span class='description'><i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
                   </div><!-- /.user-block -->
@@ -38,58 +42,77 @@
                   </div><!-- /.attachment-block -->
                   <?php } ?>
 
-                  <div class='text-muted social-count'>45 likes &nbsp;&nbsp; 2 comments &nbsp;&nbsp; 3 shares</div>
+                  <div class='text-muted social-count'><?php echo $feedProperties->f_likes_count() ?> &nbsp;&nbsp; <?php echo $feedProperties->f_comment_count() ?> &nbsp;&nbsp; 3 shares</div>
                   <!-- Social sharing buttons -->
-                  <a href="" class="feed-action"><i class='fa fa-thumbs-o-up'></i> Like</a>
-                  <a href="" class="feed-action"><i class='fa fa-share'></i> Share</a>
+                  <?php if(!$feedProperties->hasLiked()) {?>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <?php } else {?>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'unlike');">Unlike</a>
+                  <?php } ?>
+                  <a href="javascript:void(0)" class="feed-action"><i class='fa fa-share'></i> Share</a>
                   
-                  
+                  <div id="FAction<?php echo $f['feed_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
+				  <div id="FActionComment<?php echo $f['feed_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>                
                 </div><!-- /.box-body -->
-                
-                <?php if(isset($comments)){?>
-                <div class='box-footer box-comments'>
-                  <div class='box-comment'>
-                    <!-- User image -->
-                    <img class='img-circle img-sm' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
-                    <div class='comment-text'>
-                      <span class="username">
-                        Maria Gonzales
-                        <span class='text-muted pull-right'>8:03 PM Today</span>
-                      </span><!-- /.username -->
-                      It is a long established fact that a reader will be distracted
-                      by the readable content of a page when looking at its layout.
-                    </div><!-- /.comment-text -->
-                  </div><!-- /.box-comment -->
-                  
-                  <div class='box-comment'>
-                    <!-- User image -->
-                    <img class='img-circle img-sm' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
-                    <div class='comment-text'>
-                      <span class="username">
-                        Nora Havisham
-                        <span class='text-muted pull-right'>8:03 PM Today</span>
-                      </span><!-- /.username -->
-                      The point of using Lorem Ipsum is that it has a more-or-less
-                      normal distribution of letters, as opposed to using
-                      'Content here, content here', making it look like readable English.
-                    </div><!-- /.comment-text -->
-                  </div><!-- /.box-comment -->
-                </div><!-- /.box-footer -->
-                <?php } ?>
-                
-                
                 <div class="box-footer">
-                  <form action="#" method="post">
-                    <img class="img-responsive img-circle img-sm" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="alt text">
+                  <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="post" id="comment<?php echo $f['feed_id'] ?>">
+                    <img class="img-responsive img-square img-sm" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="alt text">
                     <!-- .img-push is used to add margin to elements next to floating images -->
                     <div class="img-push">
-                      <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                      <input type="text" name="comment" class="form-control input-sm" placeholder="Press enter to post comment">
                     </div>
+                    
+                    <input type="hidden" name="f_id" value="<?php echo $f['feed_id'] ?>" />
+                    <input type="hidden" name="isv_op" value="new-comment" />
                   </form>
                 </div><!-- /.box-footer -->
+                
+                <?php if($feedProperties->f_comment_count() > 0){
+					/** instantiate comments **/
+					$getComments = new getComments($f['feed_id']);
+					$allComments = $getComments->allComments();
+					
+					foreach ($allComments as $key => $c) {
+				?>
+                <div class='box-footer box-comments bordered-bottom'>
+                  <div class='box-comment'>
+                    <!-- User image -->
+                    <img class='img-square img-sm' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
+                    <div class='comment-text'>
+                      <span class="username">
+                      <a href="<?php echo ISVIPI_URL .'profile/'.$c['comm_username'] ?>">
+                        <?php echo $c['comm_fullname'] ?>
+                      </a>
+                        <span class='text-muted pull-right'><?php echo elapsedTime($c['comm_time']) ?></span>
+                      </span><!-- /.username -->
+                      <?php echo $c['comment'] ?>
+                    </div><!-- /.comment-text -->
+                  </div><!-- /.box-comment -->
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like');"><i class='fa fa-thumbs-o-up'></i> Like</a> <div class="comm_like_count"><i class='fa fa-thumbs-o-up'></i> 3</div>
+                  <div id="CAction<?php echo $c['comm_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
+                  
+                </div><!-- /.box-footer -->
+                <?php } ?>
+                <?php } ?>
               </div><!-- /.box -->
               <!-- end of timeline feed -->
               <br/>
+              
+              <!-- COMMENT -->
+              <script>
+                $(document).ready(function() { 
+                    $('#comment<?php echo $f['feed_id'] ?>').ajaxForm(function() { 
+                        $('#FActionComment<?php echo $f['feed_id'] ?>').css('display','inline-block');
+                        setTimeout(function(){
+                            $('#comment<?php echo $f['feed_id'] ?>').resetForm();
+                            $('#comment<?php echo $f['feed_id'] ?>').clearForm();
+                            $('#FActionComment<?php echo $f['feed_id'] ?>').css('display','none');
+                            loadTimeline();
+                        }, 2000);
+                    }); 
+                });
+                </script>
+
               <?php } ?>
               
 

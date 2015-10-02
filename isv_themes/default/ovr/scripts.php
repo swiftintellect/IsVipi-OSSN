@@ -78,14 +78,45 @@
 		});
 		</script>
         
+
+        
         <!-- LOAD TIMELINE -->
         <script>
 			function loadTimeline(){
-				$('#f_content').fadeOut('slow', function(){
-					$('#tFeeds').load('<?php echo ISVIPI_URL .'feeds/' ?>', function(){
-						$('#f_content').fadeIn('slow');
-					});
-				});
+				$('#tFeeds').load('<?php echo ISVIPI_URL .'feeds/' ?>');
 			}
 		</script>
+        
+        <!-- FEED ACTIONS (Like, Unlike, Delete) -->
+        <script>
+			function feedAction($feed,$type){
+				$('#FAction' + $feed).css('display','inline-block');
+				$.ajax({
+				  type: "POST",
+				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				})
+				setTimeout(function(){
+					$('#FAction' + $feed).css('display','none');
+					loadTimeline();
+					return false;
+				}, 2000);
+			}
+		</script>
+        
+                <!-- FEED ACTIONS (Like, Unlike, Delete) -->
+        <script>
+			function commentAction($commentID,$type){
+				$('#CAction' + $commentID).css('display','inline-block');
+				$.ajax({
+				  type: "POST",
+				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				})
+				setTimeout(function(){
+					$('#CAction' + $feed).css('display','none');
+					loadTimeline();
+					return false;
+				}, 2000);
+			}
+		</script>
+
         <?php } ?>

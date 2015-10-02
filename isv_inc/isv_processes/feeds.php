@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'new-feed' && $operation !== 'img-feed'){
+	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -75,7 +75,7 @@
 		$newFeed = nl2br($newFeed);
 		
 		/** add our feed **/
-		$addFeed = new feeds($newFeed,'text');
+		new feeds($newFeed,'text');
 		
 	}
 	
@@ -103,7 +103,84 @@
 		);
 		
 		/** add our feed **/
-		$addPhotoFeed = new feeds($post,'img');
+		new feeds($post,'img');
+	}
+	
+	/*** LIKE USER FEED **/
+	if ($operation === 'like'){
+		
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
+		
+		$feedID = cleanGET($PAGE[3]);
+		
+		//strip non numeric characters
+		$feedID = preg_replace('/[^0-9,.]+/i', '', $feedID);
+		
+		/** add our feed like **/
+		$addNewLike = new feedActions();
+		$addNewLike->like($feedID);
+		
+	}
+
+	/*** UNLIKE USER FEED **/
+	if ($operation === 'unlike'){
+		
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
+		
+		$feedID = cleanGET($PAGE[3]);
+		
+		//strip non numeric characters
+		$feedID = preg_replace('/[^0-9,.]+/i', '', $feedID);
+		
+		/** add our feed like **/
+		$unLike = new feedActions();
+		$unLike->unlike($feedID);
+		
+	}
+	
+	/*** COMMENT ON FEED **/
+	if ($operation === 'new-comment'){
+		if (!isset($_POST['comment']) || empty($_POST['comment'])){
+			//do nothing
+			exit();
+		}
+		if (!isset($_POST['f_id']) || empty($_POST['f_id'])){
+			//do nothing
+			exit();
+		}
+	
+		$comment = cleanPOST('comment');
+		$comment = str_replace("  ","",$comment);
+		$comment = nl2br($comment);
+		
+		$feed_id = cleanPOST('f_id');
+		
+		$addComment = new feedActions();
+		$addComment->addComment($comment,$feed_id);
+	
+	}
+	
+	/*** COMMENT ON FEED **/
+	if ($operation === 'comm_like'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
+		
+		$commentID = cleanGET($PAGE[3]);
+		
+		//strip non numeric characters
+		$commentID = preg_replace('/[^0-9,.]+/i', '', $commentID);
+		
+		/** add our feed like **/
+		$addNewCommentLike = new feedActions();
+		$addNewCommentLike->commentLike($commentID);
 		
 		
 	}

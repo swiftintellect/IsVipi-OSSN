@@ -1,3 +1,4 @@
+@charset "utf-8";
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
 html,
 body {
@@ -8,8 +9,6 @@ body {
   height: 100%;
 }
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
@@ -1804,6 +1803,9 @@ a:focus {
 .box-comments {
   background: #f7f7f7;
 }
+#f_content {
+	border:solid thin #EBEBEB;
+}
 .box-comments .box-comment {
   padding: 8px 0;
   border-bottom: 1px solid #eee;
@@ -1829,6 +1831,14 @@ a:focus {
   margin-left: 40px;
   color: #555;
 }
+.bordered-bottom {
+	margin-bottom:5px !important;
+}
+.comm_like_count {
+	display: inline-block;
+	margin-left: 10px;
+	color: #646464;
+}
 .box-comments .username {
   color: #444;
   display: block;
@@ -1838,6 +1848,7 @@ a:focus {
   font-weight: 400;
   font-size: 12px;
 }
+
 /* Widget: TODO LIST */
 .todo-list {
   margin: 0;
@@ -2438,10 +2449,13 @@ a:focus {
 }
 /* NAV TABS */
 .nav-tabs-custom {
-  margin-bottom: 10px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+}
+#tFeeds {
+	margin:0;
+	padding:0;
 }
 .nav-tabs-custom > .nav-tabs {
   margin: 0;
@@ -3186,6 +3200,9 @@ table.text-center th {
     width: 90%;
     margin-top: 20px;
   }
+  .search-form, .announcements, .friends-sidebar {
+		display:none !important;
+  }
 }
 .login-box-body,
 .register-box-body {
@@ -3247,6 +3264,9 @@ table.text-center th {
 @media (max-width: 991px) {
   .error-page > .error-content > h3 {
     text-align: center;
+  }
+  .search-form, .announcements, .friends-sidebar {
+		display:none !important;
   }
 }
 /*
@@ -4716,7 +4736,17 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal!important;
   }
+  .search-form, .announcements, .friends-sidebar {
+		display:none !important;
+  }
 }
+@media (max-width: 480px) {
+	.search-form, .announcements, .friends-sidebar, .updt-status {
+		display:none !important;
+	}
+
+}
+
 .content-wrapper {
 	margin-top:-20px;
 }
@@ -4733,6 +4763,8 @@ table.text-center th {
 }
 .timeline-feed {
 	min-height:100px;
+	margin:0;
+	padding:0;
 }
 .announcements {
 	min-height:100px;
@@ -4809,11 +4841,19 @@ table.text-center th {
 	width:100%;
 	border-bottom:solid thin #EAEAEA;
 	margin-bottom:5px;
-	font-size:13px !important;
+	font-size:14px !important;
 }
 .feed-action {
 	font-size:12px !important;
 	margin-right:10px;
+}
+.processingFAction {
+	margin-right:10px;
+	margin-top:5px;
+	display:none;
+	font-size:14px;
+	font-weight:800;
+	color:#06F;
 }
 #loader-feed{
 	width:100%;

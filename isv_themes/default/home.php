@@ -8,11 +8,12 @@
         <section class="content">
         <!-- timeline feed-->
         	<section class="col-lg-6 timeline-feed">
-				<div class="box box-solid">
+				<div class="box box-solid" style="margin:0; padding:0">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                          <li class="active"><a href="#update-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> Update Status</a></li>
-                          <li><a href="#upload-photo" data-toggle="tab"><i class="fa fa-image"></i> Upload Photo</a></li>
+                          <li class="active"><a href="#update-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> 
+                          <span class="updt-status">Update Status</span></a></li>
+                          <li><a href="#upload-photo" data-toggle="tab"><i class="fa fa-image"></i> <span class="updt-status">Upload Photo</span></a></li>
                         </ul>
                      	<div class="tab-content">
                   			<div class="tab-pane active" id="update-timeline">
@@ -48,10 +49,13 @@
                     </div>
                     
                 </div>
+                <?php require_once(ISVIPI_ACT_THEME .'ovr/scripts.php') ?>
                 <div class="" id="tFeeds">
-					<?php require_once(ISVIPI_ACT_THEME .'pages/feeds.php') ?>
+					<script>
+						loadTimeline();
+					</script>
 				</div>
-					<?php require_once(ISVIPI_ACT_THEME .'ovr/scripts.php') ?>
+					
              <div class="clear"></div> 
 			</section>
 			

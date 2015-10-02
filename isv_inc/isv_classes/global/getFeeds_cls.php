@@ -85,3 +85,141 @@ class getFeeds {
 }
 $getFeeds = new getFeeds(2);
 $feed = $getFeeds->allFeeds();
+
+class getFeedProperties {
+	private $f_id;
+	private $user_id;
+	public $total_likes;
+	public $total_shares;
+	public $total_comments;
+	
+	public function __construct($feedID){
+		$this->f_id = $feedID;
+		$this->user_id = $_SESSION['isv_user_id'];
+	}
+	
+	public function f_likes_count(){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_likes WHERE feed_id=?"); 
+		$stmt->bind_param('i', $this->f_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($this->hasLiked() && $totalCount > 1){
+			return "You and $totalCount others like this";
+		} else if ($this->hasLiked() && $totalCount === 1){
+			return "You like this";
+		} else if (!$this->hasLiked() && $totalCount > 1){
+			return "$totalCount like this";
+		} else if (!$this->hasLiked() && $totalCount === 1){
+			return "$totalCount likes this";
+		} else if (!$this->hasLiked() && $totalCount < 1){
+			return "";
+		}
+		
+	}
+	
+	public function f_comment_count(){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_comments WHERE feed_id=?"); 
+		$stmt->bind_param('i', $this->f_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if ($totalCount === 1){
+			return $totalCount ." Comment";
+		} else if ($totalCount > 1){
+			return $totalCount ." Comments";
+		} else {
+			return "";
+		}
+	}
+	
+		public function f_comments_available(){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_comments WHERE feed_id=?"); 
+		$stmt->bind_param('i', $this->f_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		return $totalCount;
+	}
+
+	
+	public function hasLiked(){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_likes WHERE feed_id=? AND user_id=?"); 
+		$stmt->bind_param('ii', $this->f_id, $this->user_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if ($totalCount > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	
+}
+
+class getComments {
+	public $feed_id;
+	public $comm_id;
+	public $comment;
+	public $comm_time;
+	public $comm_username;
+	public $comm_fullname;
+	public $comm_profilepic;
+	public $feedComments;
+	
+	public function __construct($feedID){
+		$this->feed_id = $feedID;
+	}
+	
+	public function allComments(){
+		global $isv_db;
+		
+		$sqlAllComments = $isv_db->prepare ("SELECT 
+		c.id,
+		c.feed_comment,
+		c.time,
+		u.username,
+		p.fullname,
+		p.profile_pic
+		FROM feed_comments c
+		JOIN users u ON u.id = c.user_id
+		JOIN user_profile p ON p.user_id = c.user_id
+		WHERE c.feed_id=? ORDER BY c.id"); 
+		$sqlAllComments->bind_param('i', $this->feed_id);
+		$sqlAllComments->execute(); 
+		$sqlAllComments->store_result(); 
+		$resultCount =  $sqlAllComments->num_rows();
+		$sqlAllComments->bind_result($this->comm_id,$this->comment,$this->comm_time,$this->comm_username,$this->comm_fullname,$this->comm_profilepic); 
+		
+			while($sqlAllComments->fetch()){
+				$this->feedComments[] = array(
+					'comm_id' => $this->comm_id,
+					'comment' => $this->comment,
+					'comm_time' => $this->comm_time,
+					'comm_username' => $this->comm_username,
+					'comm_fullname' => $this->comm_fullname,
+					'comm_profilepic' => $this->comm_profilepic,
+				);
+			}
+		return $this->feedComments;
+		
+	}
+	
+}

@@ -18,7 +18,6 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <!-- search form (Optional) -->
           <form action="#" method="get" class="search-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search...">
