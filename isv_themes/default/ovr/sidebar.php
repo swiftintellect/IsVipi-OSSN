@@ -18,7 +18,7 @@
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-            <li class="active"><a href="#"><i class="fa fa-feed"></i> <span>News Feed</span></a></li>
+            <li class="active"><a href="<?php echo ISVIPI_URL .'home/' ?>"><i class="fa fa-feed"></i> <span>News Feed</span></a></li>
             <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Messages</span></a></li>
             <li><a href="#"><i class="fa fa-users"></i> <span>Friends</span></a></li>
             <li><a href="#"><i class="fa fa-search"></i> <span>Browse</span></a></li>

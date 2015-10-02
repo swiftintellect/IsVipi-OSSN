@@ -34,6 +34,7 @@
                                     <input type="file" class="upload" name="feedImg" id="imgInp"/>
                                 </div>
                                 <img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
+                                <img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/success.png' ?>" style="display:none"/>
                                 <input type="hidden" name="isv_op" value="img-feed" />
                                 <div class="clear"></div>
                                 <hr />
@@ -45,14 +46,12 @@
                           <div class="alert alert-danger alert-dismissable errorLog" id="errorLog" style="display:none;"></div> 
                         </div>
                     </div>
-                            
-                    
                     
                 </div>
                 <div class="" id="tFeeds">
 					<?php require_once(ISVIPI_ACT_THEME .'pages/feeds.php') ?>
 				</div>
-
+					<?php require_once(ISVIPI_ACT_THEME .'ovr/scripts.php') ?>
              <div class="clear"></div> 
 			</section>
 			
@@ -89,72 +88,4 @@
       <!-- /.content-wrapper -->
       
       <!-- scripts section -->
-      
-      <!-- TEXT FEED -->
-      <script>
-		$('#text-update').ajaxForm({ 
-			dataType: 'json', 
-			success: function(json) { 
-			$("#processing").show();
-			$('#errorLog').css('display','none');
-			$('input[type="submit"]').prop('disabled', true);
-				setTimeout(function(){
-					if(json.err == true) {
-						$('#errorLog').css('display','block');
-						$('#errorLog').html(json.message);
-					} else if (json.err == false){
-						$('#errorLog').css('display','none');
-						$('#text-update').clearForm();
-					}
-					$('input[type="submit"]').prop('disabled', false);
-					$("#processing").hide();
-				}, 3000);
-			 } 
-			});
-		</script>
-      <!-- IMAGE FEED -->
-      <script>
-		$('#imgFeed').ajaxForm({ 
-			dataType: 'json', 
-			success: function(json) { 
-			$("#processing2").show();
-			$('#errorLog').css('display','none');
-			$('input[type="submit"]').prop('disabled', true);
-				setTimeout(function(){
-					if(json.err == true) {
-						$('#errorLog').css('display','block');
-						$('#errorLog').html(json.message);
-					} else if (json.err == false){
-						$('#errorLog').css('display','none');
-						$('#imgFeed').clearForm();
-					}
-					$('input[type="submit"]').prop('disabled', false);
-					$("#processing2").hide();
-				}, 3000);
-			 } 
-			});
-		</script>
-        <script>
-			function readURL(input) {
-			var url = input.value;
-			var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-			if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
-				var reader = new FileReader();
-		
-				reader.onload = function (e) {
-					$('#preview').css('display','block');
-					$('#preview').attr('src', e.target.result);
-				}
-		
-				reader.readAsDataURL(input.files[0]);
-			}else{
-				 $('#preview').attr('src', 'http://localhost/isvipi/isv_inc/isv_style.lib/default/images/logo.png');
-			}
-		}
-		$("#imgInp").change(function(){
-			readURL(this);
-		});
-		</script>
-        
-
 <?php $pageManager->loadCustomFooter('g_footer','m_footer'); ?>

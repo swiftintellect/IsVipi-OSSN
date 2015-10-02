@@ -1,5 +1,5 @@
 ﻿                <?php $last_id = 0; if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];?>
-                <div class="box box-widget" style="margin-top:-25px" id="f_content">
+                <div class="box box-widget" style="margin:0;" id="f_content">
                 <div class='box-header with-border'>
                   <div class='user-block'>
                     <img class='img-circle' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
@@ -91,7 +91,5 @@
               <!-- end of timeline feed -->
               <br/>
               <?php } ?>
-              <script type="text/javascript">var last_id = <?php echo $last_id; ?>;</script>
-              <div id="loader-feed" style="display:none"><center><i class="fa fa-spinner fa-pulse"></i></center></div>
               
 
