@@ -206,7 +206,25 @@ class feedActions {
 			$stmt->close();
 		}
 	}
-
+	
+	/******************************
+	________ COMMENT UNLIKE _________
+	
+	******************************/
+	public function unlikeComment($commID){
+	global $isv_db;
+	$this->comm_id = $commID;
+	$this->me = $_SESSION['isv_user_id'];
+		
+	//first check if this feed exists and check if already liked
+	if (($this->commentFeedExists($this->comm_id)) && (!$this->feedCommLikeNotExists($this->comm_id,$this->me))){
+			//save in the db
+			$stmt = $isv_db->prepare("DELETE FROM feed_comment_likes WHERE user_id=? AND comment_id=?");
+			$stmt->bind_param('ii',$this->me,$this->comm_id);
+			$stmt->execute();
+			$stmt->close();
+		}
+	}
 	
 	
 	/******************************
@@ -233,7 +251,7 @@ class feedActions {
 	public function commentFeedExists($commID){
 		global $isv_db,$comm_user;
 		
-		$stmt = $isv_db->prepare("SELECT user_id FROM feed_comment_likes WHERE id=?");
+		$stmt = $isv_db->prepare("SELECT user_id FROM feed_comments WHERE id=?");
 		$stmt->bind_param('i',$commID);
 		$stmt->execute();
 		$stmt->store_result();

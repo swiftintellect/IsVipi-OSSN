@@ -109,10 +109,10 @@
 				$('#CAction' + $commentID).css('display','inline-block');
 				$.ajax({
 				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$commentID,
 				})
 				setTimeout(function(){
-					$('#CAction' + $feed).css('display','none');
+					$('#CAction' + $commentID).css('display','none');
 					loadTimeline();
 					return false;
 				}, 2000);

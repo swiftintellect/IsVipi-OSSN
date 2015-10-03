@@ -1838,6 +1838,7 @@ a:focus {
 	display: inline-block;
 	margin-left: 10px;
 	color: #646464;
+	font-size:12px;
 }
 .box-comments .username {
   color: #444;

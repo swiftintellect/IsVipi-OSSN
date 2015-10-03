@@ -88,7 +88,12 @@
                       <?php echo $c['comment'] ?>
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like');"><i class='fa fa-thumbs-o-up'></i> Like</a> <div class="comm_like_count"><i class='fa fa-thumbs-o-up'></i> 3</div>
+                 <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <?php } else {?>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_unlike');"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
+                  <?php } ?>
+                   <div class="comm_like_count"><?php echo $getComments->totalCommentLikes($c['comm_id']) ?></div>
                   <div id="CAction<?php echo $c['comm_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
                   
                 </div><!-- /.box-footer -->

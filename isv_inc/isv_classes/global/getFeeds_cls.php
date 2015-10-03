@@ -219,7 +219,41 @@ class getComments {
 				);
 			}
 		return $this->feedComments;
+	}
+	
+	public function hasLikedComment($comm_id){
+		global $isv_db;
 		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_comment_likes WHERE comment_id=? AND user_id=?"); 
+		$stmt->bind_param('ii', $comm_id, $_SESSION['isv_user_id']);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if ($totalCount > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+		
+	}
+	
+	public function totalCommentLikes($comm_id){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_comment_likes WHERE comment_id=?"); 
+		$stmt->bind_param('i', $comm_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($totalCount > 0){
+			return "<i class='fa fa-thumbs-o-up'></i> $totalCount";
+		} else {
+			return "";
+		}
 	}
 	
 }

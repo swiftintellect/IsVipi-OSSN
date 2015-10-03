@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like'){
+	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like' && $operation !== 'comm_unlike'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -138,7 +138,7 @@
 		//strip non numeric characters
 		$feedID = preg_replace('/[^0-9,.]+/i', '', $feedID);
 		
-		/** add our feed like **/
+		/** unlike feed**/
 		$unLike = new feedActions();
 		$unLike->unlike($feedID);
 		
@@ -181,6 +181,22 @@
 		/** add our feed like **/
 		$addNewCommentLike = new feedActions();
 		$addNewCommentLike->commentLike($commentID);
+	}
+	
+	/*** COMMENT ON FEED **/
+	if ($operation === 'comm_unlike'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
 		
+		$commID = cleanGET($PAGE[3]);
+		
+		//strip non numeric characters
+		$commID = preg_replace('/[^0-9,.]+/i', '', $commID);
+		
+		/** unlike feed comment**/
+		$unLikeComment = new feedActions();
+		$unLikeComment->unlikeComment($commID);
 		
 	}
