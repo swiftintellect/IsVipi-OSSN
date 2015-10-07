@@ -11,8 +11,9 @@ class getFeeds {
 	public $feedID;
 	public $feedUser;
 	public $feedText;
+	public $feedSharedText;
 	public $feedImg;
-	public $feedStatus;
+	public $old_feed_id;
 	public $feedTime;
 	
 	//from users table
@@ -50,29 +51,31 @@ class getFeeds {
 		f.id,
 		f.user_id,
 		f.text_feed,
+		f.shared_feed,
 		f.img_feed,
-		f.status,
+		f.old_feed_id,
 		f.time,
 		u.username,
 		p.fullname,
 		p.profile_pic
 		FROM feeds f
 		JOIN users u ON u.id = f.user_id
-		JOIN user_profile p ON p.user_id = f.user_id
+		JOIN user_profile p ON p.user_id = u.id
 		WHERE f.user_id=? ORDER BY f.id DESC LIMIT 0,?"); 
 		$sqlAllFeeds->bind_param('ii', $this->user_id,$this->limit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
-		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedImg,$this->feedStatus,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
+		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
 		
 			while($sqlAllFeeds->fetch()){
 				$this->feed[] = array(
 					'feed_id' => $this->feedID,
 					'feed_user' => $this->feedUser,
 					'feed_text' => $this->feedText,
+					'feed_shared_text' => $this->feedSharedText,
 					'feed_image' => $this->feedImg,
-					'feed_status' => $this->feedStatus,
+					'old_feed_id' => $this->old_feed_id,
 					'feed_time' => $this->feedTime,
 					'feed_username' => $this->f_username,
 					'feed_fullname' => $this->f_fullname,
@@ -83,7 +86,7 @@ class getFeeds {
 	} 
 
 }
-$getFeeds = new getFeeds(2);
+$getFeeds = new getFeeds(2/* dont mind this */);
 $feed = $getFeeds->allFeeds();
 
 class getFeedProperties {
@@ -109,13 +112,13 @@ class getFeedProperties {
 		$stmt->close();
 		
 		if($this->hasLiked() && $totalCount > 1){
-			return "You and $totalCount others like this";
+			return "You and $totalCount others like this &nbsp;&nbsp;";
 		} else if ($this->hasLiked() && $totalCount === 1){
-			return "You like this";
+			return "You like this &nbsp;&nbsp;";
 		} else if (!$this->hasLiked() && $totalCount > 1){
-			return "$totalCount like this";
+			return "$totalCount like this &nbsp;&nbsp;";
 		} else if (!$this->hasLiked() && $totalCount === 1){
-			return "$totalCount likes this";
+			return "$totalCount likes this &nbsp;&nbsp;";
 		} else if (!$this->hasLiked() && $totalCount < 1){
 			return "";
 		}
@@ -133,9 +136,9 @@ class getFeedProperties {
 		$stmt->close();
 		
 		if ($totalCount === 1){
-			return $totalCount ." Comment";
+			return $totalCount ." Comment &nbsp;&nbsp;";
 		} else if ($totalCount > 1){
-			return $totalCount ." Comments";
+			return $totalCount ." Comments &nbsp;&nbsp;";
 		} else {
 			return "";
 		}
@@ -177,6 +180,7 @@ class getFeedProperties {
 class getComments {
 	public $feed_id;
 	public $comm_id;
+	public $comm_user_id;
 	public $comment;
 	public $comm_time;
 	public $comm_username;
@@ -193,6 +197,7 @@ class getComments {
 		
 		$sqlAllComments = $isv_db->prepare ("SELECT 
 		c.id,
+		c.user_id,
 		c.feed_comment,
 		c.time,
 		u.username,
@@ -206,11 +211,12 @@ class getComments {
 		$sqlAllComments->execute(); 
 		$sqlAllComments->store_result(); 
 		$resultCount =  $sqlAllComments->num_rows();
-		$sqlAllComments->bind_result($this->comm_id,$this->comment,$this->comm_time,$this->comm_username,$this->comm_fullname,$this->comm_profilepic); 
+		$sqlAllComments->bind_result($this->comm_id,$this->comm_user_id,$this->comment,$this->comm_time,$this->comm_username,$this->comm_fullname,$this->comm_profilepic); 
 		
 			while($sqlAllComments->fetch()){
 				$this->feedComments[] = array(
 					'comm_id' => $this->comm_id,
+					'comm_user_id' => $this->comm_user_id,
 					'comment' => $this->comment,
 					'comm_time' => $this->comm_time,
 					'comm_username' => $this->comm_username,
@@ -254,6 +260,69 @@ class getComments {
 		} else {
 			return "";
 		}
+	}
+}
+
+class getShares {
+	private $feed_id;
+	private $me;
+	public $shares;
+	
+	public function __construct($feed_id){
+		$this->feed_id = $feed_id;
+		$this->me = $_SESSION['isv_user_id'];
+		
+	}
+	
+	public function isSharedFeed($oldFeed){
+		global $isv_db;
+		$isShared = $isv_db->prepare ("SELECT 
+		s.id,
+		s.time,
+		s.old_feed_id,
+		u.username,
+		p.fullname,
+		p.profile_pic
+		FROM feed_shares s
+		JOIN users u ON u.id = s.feed_user
+		JOIN user_profile p ON p.user_id = s.feed_user
+		WHERE s.old_feed_id=? AND s.new_feed_id=?"); 
+		$isShared->bind_param('ii', $oldFeed,$this->feed_id);
+		$isShared->execute(); 
+		$isShared->store_result(); 
+		$resultCount =  $isShared->num_rows();
+		$isShared->bind_result($share_id,$share_time,$sOldFeed_id,$sFromUsername,$sFromFullName,$sFromProfPic);
+		$isShared->fetch();
+			$this->shares = array(
+				's_id' => $share_id,
+				's_time' => $share_time,
+				's_old_feed_id' => $sOldFeed_id,
+				's_from_username' => $sFromUsername,
+				's_from_fullname' => $sFromFullName,
+				's_from_prof_pic' => $sFromProfPic,
+			);
+		return $this->shares; 
+		
+	}
+	
+	public function totalFeedShares(){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_shares WHERE old_feed_id=?"); 
+		$stmt->bind_param('i', $this->feed_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if ($totalCount == 1 ){
+			return $totalCount .' Share';
+		} else if ($totalCount > 1){
+			return $totalCount .' Shares';
+		} else {
+			return "";
+		}
+		
 	}
 	
 }

@@ -176,3 +176,17 @@ function elapsedTime($dbTime){
         return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'') .' ago';
     }
 }
+
+function userGender($user_id){
+	global $isv_db,$userGender;
+	
+	$stmt = $isv_db->prepare("SELECT gender FROM user_profile WHERE user_id=?");
+	$stmt->bind_param('i', $user_id);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($userGender);
+	$stmt->fetch();
+	$stmt->close();
+	
+	return $userGender;
+}

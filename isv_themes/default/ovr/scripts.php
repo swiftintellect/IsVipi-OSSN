@@ -103,7 +103,22 @@
 			}
 		</script>
         
-                <!-- FEED ACTIONS (Like, Unlike, Delete) -->
+        <!-- DELETE FEED -->
+        <script>
+			function deleteFeed($feed,$type){
+				$('#f_content' + $feed).fadeTo( "slow" , 0.4, function() {});
+				$.ajax({
+				  type: "POST",
+				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				})
+				setTimeout(function(){
+					loadTimeline();
+					return false;
+				}, 2000);
+			}
+		</script>
+        
+        <!-- COMMENT FEED ACTIONS (Like, Unlike) -->
         <script>
 			function commentAction($commentID,$type){
 				$('#CAction' + $commentID).css('display','inline-block');
@@ -114,6 +129,22 @@
 				setTimeout(function(){
 					$('#CAction' + $commentID).css('display','none');
 					loadTimeline();
+					return false;
+				}, 2000);
+			}
+		</script>
+        
+        <!-- DELETE COMMENT -->
+        <script>
+			function deleteComment($comm_id,$type){
+				$('#comBox' + $comm_id).fadeTo( "slow" , 0.2, function() {});
+				$.ajax({
+				  type: "POST",
+				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$comm_id,
+				})
+				setTimeout(function(){
+					$('#comBox' + $comm_id).fadeOut();
+					//loadTimeline();
 					return false;
 				}, 2000);
 			}

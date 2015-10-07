@@ -53,17 +53,10 @@ class feeds {
 			
 			$newUpload = new Upload($this->feedImg); 
 			
-			$newUpload->file_new_name_body = '600x600_'.$this->newName;
+			$newUpload->file_new_name_body = ISVIPI_600.$this->newName;
 		    $newUpload->image_resize = true;
 		    $newUpload->image_convert = 'jpg';
 		    $newUpload->image_x = 600;
-		    $newUpload->image_ratio_y = true;
-		    $newUpload->Process($path);
-			
-			$newUpload->file_new_name_body = '150x150_'.$this->newName;
-			$newUpload->image_resize = true;
-		    $newUpload->image_convert = 'jpg';
-		    $newUpload->image_x = 250;
 		    $newUpload->image_ratio_y = true;
 		    $newUpload->Process($path);
 			
@@ -107,6 +100,7 @@ class feedActions {
 	private $notice;
 	private $comment;
 	private $comm_id;
+	private $user_feed;
 	
 	public function __construct(){}
 	
@@ -226,19 +220,140 @@ class feedActions {
 		}
 	}
 	
+	/******************************
+	___________ SHARES ____________
+	
+	******************************/
+	public function shareFeed($feed, $feed_id){
+		$this->user_feed = $feed;
+		$this->feed_id = $feed_id;
+		$this->me = $_SESSION['isv_user_id'];
+		
+		//check if the feed exists
+		if (!$this->feedExists($this->feed_id)){
+			$_SESSION['isv_error'] = 'Feed not found!';
+			header('location:'.ISVIPI_URL.'home/');
+			exit();
+		}
+		
+		//get the feed details
+		global $isv_db,$feed_user,$feedTxT,$feedIMG;
+		
+		//duplicate image if exists
+		if (!empty($feedIMG)){
+			$path = ISVIPI_UPLOADS_BASE .'feeds/';
+			$oldIMG = $path.ISVIPI_600.$feedIMG;
+			$newName = $_SESSION['isv_user_id'] . str_replace(' ', '', microtime()).'.jpg';
+			$newIMG = $path.ISVIPI_600.$newName;
+			
+			copy($oldIMG, $newIMG);
+		} else {
+			$newName = "";
+		}
+		
+		//add feed
+		$stmt = $isv_db->prepare("INSERT INTO feeds (user_id,text_feed,shared_feed,img_feed,old_feed_id,time) VALUES (?,?,?,?,?,UTC_TIMESTAMP())");
+		$stmt->bind_param('isssi',$_SESSION['isv_user_id'],$this->user_feed,$feedTxT,$newName,$this->feed_id);
+		$stmt->execute();
+		
+		//get the new feed id
+		$stmt->prepare ("SELECT id FROM feeds WHERE (user_id=? AND old_feed_id=?) ORDER BY ID DESC LIMIT 1"); 
+		$stmt->bind_param('ii', $this->me,$this->feed_id);
+		$stmt->execute();  
+		$stmt->bind_result($newFeedId); 
+		$stmt->fetch();
+		
+		//insert into shared table
+		$stmt->prepare("INSERT INTO feed_shares (new_feed_id,old_feed_id,feed_user,time) VALUES (?,?,?,UTC_TIMESTAMP())");
+		$stmt->bind_param('iii',$newFeedId,$this->feed_id,$feed_user);
+		$stmt->execute();
+		$stmt->close();
+		
+		//notify feed owner
+		$this->notice = 'shared on your';
+		$this->notifyFeedOwner($_SESSION['isv_user_id'],$feed_user,$this->feed_id,$this->notice);
+		
+		//we return success
+		header('location:'.ISVIPI_URL.'home/');
+		exit();
+	}
+	
+	/******************************
+	________ DELETE FEED __________
+	
+	******************************/
+	public function delFeed($feed_id){
+		$this->feed_id = $feed_id;
+		
+		//check if feed exists
+		if (!$this->feedExists($this->feed_id)){
+			//do nothing
+			exit();
+		}
+		
+		//ready our important variables
+		global $isv_db,$feedIMG;
+		
+		//delete
+		$stmt = $isv_db->prepare ("
+			DELETE f, fl, fc, fcl
+			  FROM feeds f
+			  LEFT JOIN feed_likes fl ON fl.feed_id = f.id
+			  LEFT JOIN feed_comments fc ON fc.feed_id = f.id
+			  LEFT JOIN feed_comment_likes fcl ON fcl.comment_id = fc.id
+			 WHERE f.id =? 
+		"); 
+		$stmt->bind_param('i', $this->feed_id);
+		$stmt->execute(); 
+		$stmt->close();
+		
+		//check if there is any image post then delete it
+		if(isset($feedIMG) && !empty($feedIMG)){
+			$path = ISVIPI_UPLOADS_BASE .'feeds/';
+			unlink($path.ISVIPI_600.$feedIMG);
+		}
+	}
+	
+	/******************************
+	______ DELETE FEED COMMENT _____
+	
+	******************************/
+	public function delComment($comm_id){
+		global $isv_db;
+		
+		$this->comm_id = $comm_id;
+		
+		//check if the comment exists
+		if (!$this->commentFeedExists($this->comm_id)){
+			//do nothing
+			exit();
+		}
+		
+		//delete comment
+		$stmt = $isv_db->prepare ("
+			DELETE fc, fcl
+			  FROM feed_comments fc
+			  LEFT JOIN feed_comment_likes fcl ON fcl.comment_id = fc.id
+			 WHERE fc.id =? 
+		"); 
+		$stmt->bind_param('i', $this->comm_id);
+		$stmt->execute(); 
+		$stmt->close();
+	}
+	
 	
 	/******************************
 	______ HELPER FUNCTIONS _______
 	
 	******************************/
 	public function feedExists($feedID){
-		global $isv_db,$feed_user;
+		global $isv_db,$feed_user,$feedTxT,$feedIMG;
 		
-		$stmt = $isv_db->prepare("SELECT user_id FROM feeds WHERE id=?");
+		$stmt = $isv_db->prepare("SELECT user_id,text_feed,img_feed FROM feeds WHERE id=?");
 		$stmt->bind_param('i',$feedID);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($feed_user);
+		$stmt->bind_result($feed_user,$feedTxT,$feedIMG);
 		$stmt->fetch();
 			if($stmt->num_rows() > 0){
 				return TRUE;

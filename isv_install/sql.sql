@@ -413,8 +413,9 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `text_feed` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `shared_feed` longtext COLLATE utf8_unicode_ci NOT NULL,
   `img_feed` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(2) NOT NULL DEFAULT 1,
+  `old_feed_id` bigint(20) NOT NULL,
   `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -429,6 +430,21 @@ CREATE TABLE IF NOT EXISTS `feed_likes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `feed_id` bigint(20) NOT NULL,
+  `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feed_shares`
+--
+
+CREATE TABLE IF NOT EXISTS `feed_shares` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `new_feed_id` bigint(20) NOT NULL,
+  `old_feed_id` bigint(20) NOT NULL,
+  `feed_user` bigint(20) NOT NULL,
   `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

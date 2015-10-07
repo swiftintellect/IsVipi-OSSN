@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like' && $operation !== 'comm_unlike'){
+	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like' && $operation !== 'comm_unlike' && $operation !== 'share' && $operation !== 'delete' && $operation !== 'comm_del'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -198,5 +198,56 @@
 		/** unlike feed comment**/
 		$unLikeComment = new feedActions();
 		$unLikeComment->unlikeComment($commID);
+		
+	}
+	
+	
+	/*** SHARE **/
+	if ($operation === 'share'){
+		if (!isset($_POST['feed']) && empty($_POST['feed'])){
+			$feed = "";
+		} else {
+			$feed = cleanPOST('feed');
+		}
+		
+		if (!isset($_POST['f_id']) && empty($_POST['f_id'])){
+			$_SESSION['isv_error'] = 'An error occurred. Please try again.';
+			header('location:'.ISVIPI_URL.'home/');
+			exit();
+		}
+		
+		$feed_id = cleanPOST('f_id');	
+		
+		/** share feed **/
+		$share = new feedActions();
+		$share->shareFeed($feed, $feed_id);
+	}
+	
+	/*** DELETE FEED **/
+	if ($operation === 'delete'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
+		
+		$feedID = cleanGET($PAGE[3]);
+		
+		/** delete feed **/
+		$delete = new feedActions();
+		$delete->delFeed($feedID);
+	}
+	
+	/*** DELETE COMMENT **/
+	if ($operation === 'comm_del'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			//do nothing
+			exit();
+		}
+		
+		$comment_ID = cleanGET($PAGE[3]);
+		
+		/** delete comment **/
+		$delete = new feedActions();
+		$delete->delComment($comment_ID);
 		
 	}

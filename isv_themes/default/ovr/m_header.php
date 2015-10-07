@@ -159,3 +159,16 @@
           </div>
         </nav>
       </header>
+      
+      <!-- our site notifications -->
+      <?php if (isset($_SESSION['isv_error']) && !empty($_SESSION['isv_error'])){?>
+      <div class="alert alert-danger alert-dismissable" id="global-alert">
+      	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   		<?php echo $_SESSION['isv_error']; unset($_SESSION['isv_error']); ?>
+     </div>
+     <?php } else if(isset($_SESSION['isv_success']) && !empty($_SESSION['isv_success'])){?>
+     <div class="alert alert-success alert-dismissable" id="global-alert">
+      	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   		<?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?>
+     </div>
+     <?php } ?>
