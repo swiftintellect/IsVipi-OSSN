@@ -32,6 +32,17 @@
 		exit();
 	}
 	
+	//check if the user has status active
+	if (!isStatusActive()){
+		$_SESSION['isv_error'] = 'You account has either been inactivated or was never activated.';
+		
+		if(isset($_SESSION['isv_user_id'])){
+			unset($_SESSION['isv_user_id']);
+		}
+		header('location:'.ISVIPI_URL.'');
+		exit();
+	}
+	
 	/** require our members class **/
 	require_once(ISVIPI_CLASSES_BASE .'global/member_cls.php');
 	$member = new member($_SESSION['isv_user_id']);

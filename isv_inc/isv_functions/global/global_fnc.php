@@ -43,6 +43,23 @@ function checkUserSession($sess_id){
 	$stmt->close();
 }
 
+function isStatusActive(){
+	global $isv_db;
+	$stmt = $isv_db->prepare("SELECT last_activity FROM users where id=? AND status=1");
+	$stmt->bind_param('i',$_SESSION['isv_user_id']);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($lastActivity);
+	$stmt->fetch();
+		if ($stmt->num_rows() > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	$stmt->close();
+	
+}
+
 function regCountrySelectOptions(){
 	global $isv_db,$countryISO,$countryName,$countryPhoneCode;
 	$stmt = $isv_db->prepare("SELECT iso,nicename,phonecode FROM countries");

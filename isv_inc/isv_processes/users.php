@@ -35,7 +35,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'registration' && $operation !== 'validate' && $operation !== 'reset' && $operation !== 'change' && $operation !== 'signin'){
+	 if ($operation !== 'registration' && $operation !== 'validate' && $operation !== 'reset' && $operation !== 'change' && $operation !== 'signin' && $operation !== 'resend_activation'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -191,4 +191,18 @@
 		//instantiate our class
 		require_once(ISVIPI_CLASSES_BASE .'forms/signin_cls.php');
 		$signIn = new signIn($userType,$user,$pwd);
+	}
+	
+	/*** RESEND ACTIVATION CODE **/
+	if ($operation === 'resend_activation'){
+		//check if our session exists
+		if(!isset($_SESSION['act_email']) && empty($_SESSION['act_email'])){
+			$_SESSION['isv_error'] = 'An error occured. Please try to sign in again and click activate to retry.';
+			header('location:'.ISVIPI_URL.'');
+			exit();
+		}
+		
+		//resend activation email
+		require_once(ISVIPI_CLASSES_BASE .'forms/signin_cls.php');
+		$s = new resendActEmail();
 	}

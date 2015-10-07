@@ -32,7 +32,7 @@
     </header><!--/header-->
     
     <!--notification alerts -->
-    <?php if (isset($_SESSION['isv_error']) && !empty($_SESSION['isv_error'])){?>
+    <?php if (isset($_SESSION['isv_error']) && !empty($_SESSION['isv_error']) ){?>
     	<div class="headerAlerts error"><?php echo $_SESSION['isv_error']; unset($_SESSION['isv_error']); ?></div>
     <?php } else if(isset($_SESSION['isv_success']) && !empty($_SESSION['isv_success'])){?>
     	<div class="headerAlerts success"><?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?></div>
