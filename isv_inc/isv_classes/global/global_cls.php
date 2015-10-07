@@ -42,7 +42,7 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadsideBar($sidebar){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE;
 		require_once(ISVIPI_ACT_THEME . 'ovr/'.$sidebar.'.php');
 	}
 	

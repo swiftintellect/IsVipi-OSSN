@@ -207,3 +207,10 @@ function userGender($user_id){
 	
 	return $userGender;
 }
+
+function age($dob){
+	 $date = new DateTime($dob);
+	 $now = new DateTime();
+	 $interval = $now->diff($date);
+	 return $interval->y .' years old';
+}

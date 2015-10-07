@@ -70,7 +70,7 @@
 		
 				reader.readAsDataURL(input.files[0]);
 			}else{
-				 $('#preview').attr('src', 'http://localhost/isvipi/isv_inc/isv_style.lib/default/images/logo.png');
+				 //$('#preview').attr('src', 'http://localhost/isvipi/isv_inc/isv_style.lib/default/images/logo.png');
 			}
 		}
 		$("#imgInp").change(function(){

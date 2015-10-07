@@ -3024,14 +3024,16 @@ table.text-center th {
   padding-top: 30px;
 }
 .widget-user-2 .widget-user-header {
-  padding: 20px;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+	padding: 20px;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border-bottom: solid thin #D4D4D4;
+	background-color: #F9F9F9;
 }
 .widget-user-2 .widget-user-username {
-  margin-top: 5px;
+  margin-top: 0px;
   margin-bottom: 5px;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 300;
 }
 .widget-user-2 .widget-user-desc {
@@ -4914,4 +4916,14 @@ table.text-center th {
 .sh-feed p {
 	padding-left:10px;
 	margin:0;
+}
+.members {
+	background:#FFF;
+	padding:20px;
+	min-height:50px;
+}
+.pend_f_req {
+	font-size:12px;
+	font-family:Tahoma, Geneva, sans-serif;
+	padding:5px;
 }

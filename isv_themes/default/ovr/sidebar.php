@@ -18,10 +18,18 @@
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
-            <li class="active"><a href="<?php echo ISVIPI_URL .'home/' ?>"><i class="fa fa-feed"></i> <span>News Feed</span></a></li>
-            <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Messages</span></a></li>
-            <li><a href="#"><i class="fa fa-users"></i> <span>Friends</span></a></li>
-            <li><a href="#"><i class="fa fa-search"></i> <span>Browse</span></a></li>
+            <li <?php if ($PAGE['0'] === "home"){?> class="active" <?php } ?>>
+            	<a href="<?php echo ISVIPI_URL .'home/' ?>"><i class="fa fa-feed"></i> <span>News Feed</span></a>
+            </li>
+            <li>
+            	<a href="#"><i class="fa fa-envelope-o"></i> <span>Messages</span></a>
+            </li>
+            <li>
+            	<a href="#"><i class="fa fa-users"></i> <span>Friends</span></a>
+            </li>
+            <li <?php if ($PAGE['0'] === "members"){?> class="active" <?php } ?>>
+            	<a href="<?php echo ISVIPI_URL .'members/' ?>"><i class="fa fa-search"></i> <span>Browse</span></a>
+            </li>
           </ul><!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
