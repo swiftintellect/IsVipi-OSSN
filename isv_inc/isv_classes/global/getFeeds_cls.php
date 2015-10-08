@@ -64,7 +64,7 @@ class getFeeds {
 		LEFT JOIN friends fr ON f.user_id = fr.user1
 		JOIN users u ON u.id = f.user_id
 		JOIN user_profile p ON p.user_id = u.id
-		WHERE f.user_id=? OR (fr.user1=? OR fr.user2=?) ORDER BY f.id DESC LIMIT 0,?"); 
+		WHERE f.user_id=? OR (fr.user1=? OR fr.user2=?) GROUP BY f.id ORDER BY f.id DESC LIMIT 0,?"); 
 		$sqlAllFeeds->bind_param('iiii', $this->user_id,$this->user_id,$this->user_id,$this->limit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
@@ -209,7 +209,7 @@ class getComments {
 		FROM feed_comments c
 		JOIN users u ON u.id = c.user_id
 		JOIN user_profile p ON p.user_id = c.user_id
-		WHERE c.feed_id=? ORDER BY c.id"); 
+		WHERE c.feed_id=? GROUP BY c.id ORDER BY c.id"); 
 		$sqlAllComments->bind_param('i', $this->feed_id);
 		$sqlAllComments->execute(); 
 		$sqlAllComments->store_result(); 

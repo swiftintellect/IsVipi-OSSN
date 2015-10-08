@@ -117,7 +117,7 @@
                   <?php } ?>
                   
                   <!-- only the owner of the comment or the owner of the post can delete a comment -->
-                  <?php if ($c['comm_user_id'] === $_SESSION['isv_user_id'] || $c['comm_user_id'] === $f['feed_user']){?>
+                  <?php if ($c['comm_user_id'] === $_SESSION['isv_user_id']){?>
                   <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, 'comm_del');"> Delete</a>
                    <?php } ?>
                    <div class="comm_like_count"><?php echo $getComments->totalCommentLikes($c['comm_id']) ?></div>

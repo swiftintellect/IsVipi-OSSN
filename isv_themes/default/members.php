@@ -22,7 +22,8 @@
 						?>
                     	<div class="col-md-12">
                           <!-- Widget: user widget style 1 -->
-                          <div class="box box-widget widget-user-2">
+                          <div class="box box-widget widget-user-2 <?php if($fr_rquest->friendReqExists($mi['m_id']) && ($fr_to === $_SESSION['isv_user_id']) && $friendReq_status === 1){ echo "f_req_exists"; }?>">
+                          <div class="showme">pending friend request</div>
                             <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header bg-white">
                               <a href="<?php echo ISVIPI_URL.'profile'.$mi['m_username'] ?>">
@@ -42,7 +43,6 @@
                                   	<button type="button" class="btn bg-navy btn-xs btn-flat disabled">Request Pending</button>
                                   <!-- if friend request exists and has not been ignored (recepient point of view) -->
 								  <?php } else if($fr_rquest->friendReqExists($mi['m_id']) && ($fr_to === $_SESSION['isv_user_id']) && $friendReq_status === 1) {?>
-                                  <div class="pend_f_req bg-olive">You have a pending friend request</div>
                                   <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fr_id.'/'.$fr_from ?>" class="btn btn-primary btn-xs btn-flat">Accept</a>
                                   <a href="<?php echo ISVIPI_URL.'p/friends/f_ignore/'.$fr_id ?>" class="btn btn-danger btn-xs btn-flat">Ignore</a> &nbsp;
 								  <!-- if friend request exists and recepient had ignored it (recepient point of view) -->
