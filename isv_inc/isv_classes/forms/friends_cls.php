@@ -92,7 +92,7 @@ class friends {
 		//notify the one who sent the friend request that the request was accepted
 		$notice = 'accepted your friend request';
 		$stmt = $isv_db->prepare("INSERT INTO friend_req_alerts (from_id,to_id,notice,time) VALUES (?,?,?,UTC_TIMESTAMP())");
-		$stmt->bind_param('iis',$user_sent,$this->me,$notice);
+		$stmt->bind_param('iis',$this->me,$user_sent,$notice);
 		$stmt->execute();
 		$stmt->close();
 		

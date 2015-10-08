@@ -16,7 +16,7 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
-	global $PAGE,$p;
+global $PAGE,$p;
 	if(!isset($PAGE[0]) || empty($PAGE[0])){
 		$p = '';
 	} else {
@@ -24,19 +24,24 @@
 	}
 	
 	//if logged in, redirect to member page
-	if (isLoggedIn()){
+	if (!isLoggedIn()){
 		$_SESSION['isv_error'] = '404 Error: The page you are looking for could not be found or you go not have permission to view it.';
 		header('location:'.ISVIPI_URL.'err_404/');
 		exit();
 	}
 	
-	/** instantiate pageManager **/
-	$pageManager = new pageManager();
-	$s_m = $pageManager->siteMeta();
-	
 	/** instantiate site_settings */
 	$siteInfo = new siteManager();
 	$isv_siteDetails = $siteInfo->getSiteInfo();
 	$isv_siteSettings = $siteInfo->getSiteSettings();
+	
+	/** require our members class **/
+	require_once(ISVIPI_CLASSES_BASE .'global/member_cls.php');
+	$member = new member($_SESSION['isv_user_id']);
+	$memberinfo = $member->memberDetails();
 
- 	include_once ISVIPI_ACT_THEME.'404.php'; 
+	/** Page Manager **/
+	$pageManager = new pageManager();
+	$s_m = $pageManager->siteMeta();
+
+ 	include_once ISVIPI_ACT_THEME.'err_404.php'; 

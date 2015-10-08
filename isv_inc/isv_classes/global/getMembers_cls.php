@@ -40,7 +40,7 @@ class getMembers {
 	public function allMembers($status){
 		global $isv_db,$feed;
 		
-		$this->limit = 20;
+		$this->limit = 50;
 
 		$stmt = $isv_db->prepare ("
 			SELECT 
@@ -54,10 +54,10 @@ class getMembers {
 			FROM users u
 			LEFT JOIN friends f ON u.id = f.user1
 			JOIN user_profile p ON p.user_id = u.id
-			WHERE u.status=? AND u.id !=? AND f.user1 IS NULL
+			WHERE u.status=? AND u.id !=? AND f.user1 IS NULL ORDER BY u.id DESC LIMIT 0,?
 			
-		"); //I wont appear in this list 
-		$stmt->bind_param('ii', $status,$this->me);
+		"); 
+		$stmt->bind_param('iii', $status,$this->me,$this->limit);
 		$stmt->execute(); 
 		$stmt->store_result(); 
 		$stmt->bind_result($this->m_id,$this->m_username,$user1,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic); 
