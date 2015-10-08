@@ -10,8 +10,10 @@
                 <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">
                 <div class='box-header with-border'>
                   <div class='user-block'>
-                    <img class='img-square' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
-                    <div class='username' style="display:block; font-size:15px"><a href="#"><?php echo $f['feed_fullname'] ?></a>
+                  <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
+                    <img class='img-square' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='<?php echo $f['feed_fullname'] ?> photo update'>
+                  </a>
+                    <div class='username' style="display:block; font-size:15px"><a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>"><?php echo $f['feed_fullname'] ?></a>
                     	<!--check if it is a shared feed and show corresponding details -->
 						<?php if (isset($sh['s_id']) && !empty($sh['s_id'])){?>
                         
@@ -22,10 +24,10 @@
 							} else if ($sh['s_from_username'] === $f['feed_username'] && userGender($f['feed_user']) === 'female'){
 								$shtxt = "her own";
 							} else {
-								$shtxt = "<a href=''> ".$sh['s_from_fullname']."</a>'s";
+								$shtxt = "<a href='".ISVIPI_URL."profile/".$sh['s_from_username']."'> ".$sh['s_from_fullname']."</a>'s";
 							}
 						?>
-                        <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="">post</a></span>
+                        <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="#" title="<?php echo $sh['s_from_fullname'] ?> update">post</a></span>
                         <?php } ?>
                     </div>
                     <span class='description' style="display:block"><i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
@@ -44,7 +46,7 @@
                   
                   <!-- feed image -->
                   <?php if (empty($sh['s_id']) && !empty($f['feed_image'])){?>
-                  	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="feed image">
+                  	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="<?php echo $f['feed_fullname'] ?> image post">
                   <?php }?>
                   
                   <hr style="margin:5px 0"/>
@@ -56,7 +58,7 @@
                   	<p><?php echo $f['feed_shared_text'] ?></p>
                   
                   <?php if (isset($f['feed_image']) && !empty($f['feed_image'])){?>
-                  	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="feed image">
+                  	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="image post">
                   <?php }?>
                   </div>
                   <?php } ?>
@@ -99,7 +101,9 @@
                 <div class='box-footer box-comments bordered-bottom' id="comBox<?php echo $c['comm_id'] ?>">
                   <div class='box-comment'>
                     <!-- User image -->
+                    <a href="<?php echo ISVIPI_URL .'profile/'.$c['comm_username'] ?>">
                     <img class='img-square img-sm' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
+                    </a>
                     <div class='comment-text'>
                       <span class="username">
                       <a href="<?php echo ISVIPI_URL .'profile/'.$c['comm_username'] ?>">
