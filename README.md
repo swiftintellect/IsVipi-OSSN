@@ -1,3 +1,8 @@
+IsVipi OSSN (Open Source Social Network) New
+===========================================
+
+Please note that the previous versions of IsVipi OSSN have been depreciated.
+
 IsVipi OSSN (Open Source Social Network)
 ===========================================
 
