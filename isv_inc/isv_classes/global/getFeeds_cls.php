@@ -15,6 +15,7 @@ class getFeeds {
 	public $feedImg;
 	public $old_feed_id;
 	public $feedTime;
+	public $friend_id;
 	
 	//from users table
 	public $f_username;
@@ -55,18 +56,20 @@ class getFeeds {
 		f.img_feed,
 		f.old_feed_id,
 		f.time,
+		fr.user1,
 		u.username,
 		p.fullname,
 		p.profile_pic
 		FROM feeds f
+		LEFT JOIN friends fr ON f.user_id = fr.user1
 		JOIN users u ON u.id = f.user_id
 		JOIN user_profile p ON p.user_id = u.id
-		WHERE f.user_id=? ORDER BY f.id DESC LIMIT 0,?"); 
-		$sqlAllFeeds->bind_param('ii', $this->user_id,$this->limit);
+		WHERE f.user_id=? OR (fr.user1=? OR fr.user2=?) ORDER BY f.id DESC LIMIT 0,?"); 
+		$sqlAllFeeds->bind_param('iiii', $this->user_id,$this->user_id,$this->user_id,$this->limit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
-		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
+		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->friend_id,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
 		
 			while($sqlAllFeeds->fetch()){
 				$this->feed[] = array(

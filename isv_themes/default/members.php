@@ -30,7 +30,7 @@
                                 <img class="img-square" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="User Avatar">
                               </div><!-- /.widget-user-image -->
                               </a>
-                              <h3 class="widget-user-username" style="color:#000; font-weight:500"><?php echo $mi['m_fullname']; ?></h3><?php echo $mi['f_user1'] ?>
+                              <h3 class="widget-user-username" style="color:#000; font-weight:500"><?php echo $mi['m_fullname']; ?></h3>
                               <h5 class="widget-user-desc" style="color:#000"><?php echo ucfirst($mi['m_gender']); ?> (
 							  <?php echo age($mi['m_dob']) ?>)</h5>
                               <div class="widget-user-username" style="margin-top:-5px;">

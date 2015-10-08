@@ -44,29 +44,29 @@ class getMembers {
 
 		$stmt = $isv_db->prepare ("
 			SELECT 
-			u.id,
-			u.username,
-			f.user1,
-			p.fullname,
-			p.gender,
-			p.dob,
-			p.profile_pic
-			FROM users u
-			LEFT JOIN friends f ON u.id = f.user1
-			JOIN user_profile p ON p.user_id = u.id
-			WHERE u.status=? AND u.id !=? AND f.user1 IS NULL ORDER BY u.id DESC LIMIT 0,?
-			
+				u1.id,
+				u1.username,
+				p.fullname,
+				p.gender,
+				p.dob,
+				p.profile_pic, 
+	
+			GROUP_CONCAT(u2.id)
+			FROM users u1
+			JOIN users u2 ON u1.id <> u2.id 
+			LEFT JOIN friends f ON u1.id = f.user1 AND u2.id = f.user2 
+			LEFT JOIN user_profile p ON u1.id = p.user_id 
+			WHERE f.user2 IS NULL AND (u2.id = ? OR u1.id = ?) AND u1.id != ? GROUP BY u1.id
 		"); 
-		$stmt->bind_param('iii', $status,$this->me,$this->limit);
+		$stmt->bind_param('iii',$this->me,$this->me,$this->me);
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($this->m_id,$this->m_username,$user1,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic); 
+		$stmt->bind_result($this->m_id,$this->m_username,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic,$var); 
 		
 			while($stmt->fetch()){
 				$this->m_info[] = array(
 					'm_id' => $this->m_id,
 					'm_username' => $this->m_username,
-					'f_user1' => $user1,
 					'm_fullname' => $this->m_fullname,
 					'm_gender' => $this->m_gender,
 					'm_dob' => $this->m_dob,
