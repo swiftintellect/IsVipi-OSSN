@@ -42,25 +42,31 @@ class getMembers {
 		
 		$this->limit = 20;
 
-		$stmt = $isv_db->prepare ("SELECT 
+		$stmt = $isv_db->prepare ("
+			SELECT 
 			u.id,
 			u.username,
+			f.user1,
 			p.fullname,
 			p.gender,
 			p.dob,
 			p.profile_pic
 			FROM users u
+			LEFT JOIN friends f ON u.id = f.user1
 			JOIN user_profile p ON p.user_id = u.id
-			WHERE u.status=? AND u.id !=? ORDER BY u.id DESC LIMIT 0,?"); //I wont appear in this list 
-		$stmt->bind_param('iii', $status,$this->me,$this->limit);
+			WHERE u.status=? AND u.id !=? AND f.user1 IS NULL
+			
+		"); //I wont appear in this list 
+		$stmt->bind_param('ii', $status,$this->me);
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($this->m_id,$this->m_username,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic); 
+		$stmt->bind_result($this->m_id,$this->m_username,$user1,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic); 
 		
 			while($stmt->fetch()){
 				$this->m_info[] = array(
 					'm_id' => $this->m_id,
 					'm_username' => $this->m_username,
+					'f_user1' => $user1,
 					'm_fullname' => $this->m_fullname,
 					'm_gender' => $this->m_gender,
 					'm_dob' => $this->m_dob,
