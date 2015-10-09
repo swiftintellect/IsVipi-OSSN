@@ -25,7 +25,6 @@
 	
 	//if logged in, redirect to member page
 	if (isLoggedIn()){
-		$_SESSION['isv_error'] = '404 Error: The page you are looking for could not be found or you go not have permission to view it.';
 		header('location:'.ISVIPI_URL.'err_404/');
 		exit();
 	}

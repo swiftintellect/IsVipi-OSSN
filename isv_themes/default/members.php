@@ -26,7 +26,7 @@
                           <div class="showme">pending friend request</div>
                             <!-- Add the bg color to the header using any of the bg-* classes -->
                             <div class="widget-user-header bg-white">
-                              <a href="<?php echo ISVIPI_URL.'profile'.$mi['m_username'] ?>">
+                              <a href="<?php echo ISVIPI_URL.'profile/'.$mi['m_username'] ?>">
                               <div class="widget-user-image">
                                 <img class="img-square" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="User Avatar">
                               </div><!-- /.widget-user-image -->

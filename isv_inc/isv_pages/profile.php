@@ -17,9 +17,17 @@
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
+	
+	//we check if a username is set
+	if(!isset($PAGE[1]) || empty($PAGE[1])){
+		notFound404Err();
+	}
+	$username = cleanGET($PAGE[1]);
+
 	require_once(ISVIPI_CLASSES_BASE .'global/getMembers_cls.php');
 	require_once(ISVIPI_CLASSES_BASE .'forms/friends_cls.php'); 
-	$m = new getMembers();
-	$m_info = $m->allMembers(1 /* load only active users */);
+	
+	$m = new getSingleMember();
+	$m_info = $m->members($username,'username');
 	
  	include_once ISVIPI_ACT_THEME.'profile.php'; 

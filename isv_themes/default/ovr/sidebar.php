@@ -7,12 +7,12 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-            <img src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" class="img-circle" alt="User Image">
+            <img src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" class="img-circle" alt="Profile Picture <?php echo $memberinfo['full_name'] ?>">
             </div>
             <div class="pull-left info">
               <p><?php echo $memberinfo['full_name'] ?></p>
               <!-- Status -->
-              <a href="#"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+              <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'] ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
             </div>
           </div>
 
