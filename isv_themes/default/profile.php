@@ -73,9 +73,9 @@
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
                           <!-- end::About Me Box -->
-                    
                     </div>
                     <!-- end::col-md-3-->
+                    
                     
                     
                     
