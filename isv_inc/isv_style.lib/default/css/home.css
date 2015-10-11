@@ -4765,6 +4765,15 @@ table.text-center th {
 	#global-alert {
 		width:100% !important;
 	}
+	.cover-photo img {
+		width:100%; 
+		height:100%;
+		margin:auto;
+		display:block;
+	}
+	.content {
+		margin-bottom: 0 !important;
+	}
 
 }
 
@@ -4943,4 +4952,21 @@ table.text-center th {
 }
 .f_req_exists:hover > .showme{
 	display:block;
+}
+.cover-photo {
+	height:250px;
+	background:#06F;
+	width:100%;
+	padding:0 !important;
+	margin-top:-20px;
+}
+.cover-photo img {
+	width:100%; 
+	height:100%;
+	margin:auto;
+	display:block;
+}
+.profile-pic-box {
+	margin-top:-150px !important;
+	border-top:none !important;
 }

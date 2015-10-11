@@ -9,14 +9,17 @@
         	<!-- user profile -->
         	<section class="col-lg-10">
 				<div class="box box-solid members">
-                    <div class="box-header with-border">
-                      <h3 class="box-title"><?php echo $m_info['m_fullname']; ?>'s Profile</h3>
-                    </div>
                 	<div class="row">
+                    
+                    <!-- cover photo goes here -->
+                    <div class="col-md-12 cover-photo">
+                    	<img class="" src="<?php echo ISVIPI_STYLE_URL . 'site/cover.jpg' ?>" alt="cover photo" style="width: 100%;max-height: 100%">
+                    </div>
+                    <!-- end::cover photo -->
                     <!-- col-md-3 -->
                     <div class="col-md-4">
                     	<!-- Profile Image -->
-                          <div class="box box-primary">
+                          <div class="box profile-pic-box">
                             <div class="box-body box-profile">
                               <img class="profile-user-img img-responsive square-circle" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="User profile picture">
                               <h3 class="profile-username text-center"><?php echo $m_info['m_fullname']; ?></h3>
