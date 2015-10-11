@@ -1,4 +1,4 @@
-Previous Versions of IsVipi OSSN Depreciated
+Previous Versions Depreciated
 ===========================================
 
 Please note that the previous versions of IsVipi OSSN have been depreciated.
