@@ -2,6 +2,11 @@
 class member {
 	public $user_id;
 	
+	private $newName;
+	private $path;
+	private $feedImg;
+	private $size;
+	
 	public function __construct($user){
 		$this->user_id = $user;
 	}
@@ -54,6 +59,68 @@ class member {
 			);
 	}
 	
-	
+	public function profile_pic($pic){
+		global $isv_db;
+		
+		$from_url = $_SERVER['HTTP_REFERER'];
+		
+		$this->feedImg = $pic;
+		$this->size = '1000000';
+		$maxSize = $this->size / 1000000;
+		
+		$this->newName = $_SESSION['isv_user_id'] . str_replace(' ', '', microtime());
+		$this->newName = str_replace('.', '', $this->newName);
+		$this->path = ISVIPI_UPLOADS_BASE .'ppics/';
+		
+		//check file size
+		if ($this->feedImg["size"] > $this->size) {
+			 $_SESSION['isv_error'] = 'The file is too large. Maximum file size is '.$maxSize.' MB.';
+			 header('location:'.$from_url.'');
+			 exit();
+		}
+		
+		//check file type
+		if($this->feedImg["type"] != "image/jpg" && 
+			$this->feedImg["type"] != "image/png" && 
+			$this->feedImg["type"] != "image/jpeg" && 
+			$this->feedImg["type"] != "image/gif" ) {
+				 $_SESSION['isv_error'] = 'Allowed file types are .jpg .jpeg .png .gif';
+				 header('location:'.$from_url.'');
+				 exit();
+		}
+		
+			//require file upload class
+			require_once(ISVIPI_CLASSES_BASE .'utilities/class.upload.php');
+		
+			$newUpload = new Upload($this->feedImg); 
+			
+			$newUpload->file_new_name_body = ISVIPI_THUMBS.$this->newName;
+		    $newUpload->image_resize = true;
+		    $newUpload->image_convert = 'jpg';
+		    $newUpload->image_x = 150;
+		    $newUpload->image_ratio_y = true;
+		    $newUpload->Process($this->path);
+			
+		    if (!$newUpload->processed) {
+				 $array['err'] = true;
+				 $array['message'] = 'An error occurred: '.$newUpload->error.'';
+				 echo json_encode($array);
+				 exit();
+		    }
+			$newUpload->Clean();
+		
+		//update our db
+		$newN = $this->newName .'.jpg';
+		$stmt = $isv_db->prepare("UPDATE user_profile SET profile_pic=? WHERE user_id=?");
+		$stmt->bind_param('si',$newN,$this->user_id);
+		$stmt->execute();
+		$stmt->close();	
+		
+		//return success
+		$_SESSION['isv_success'] = 'Profile picture uploaded.';
+		header('location:'.$from_url.'');
+		exit();
+		
+	}
 	
 }

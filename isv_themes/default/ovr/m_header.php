@@ -46,7 +46,7 @@
                         <a href="#">
                           <div class="pull-left">
                             <!-- User Image -->
-                            <img src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" class="img-circle" alt="User Image">
+                            <img src="<?php echo user_pic($memberinfo['profile_pic']) ?>" class="img-circle" alt="User Image">
                           </div>
                           <!-- Message title and timestamp -->
                           <h4>
@@ -129,7 +129,7 @@
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <img src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" class="img-circle" alt="User Image">
+                    <img src="<?php echo user_pic($memberinfo['profile_pic']) ?>" class="img-circle" alt="User Image">
                     <p>
                      <?php echo $memberinfo['full_name'] ?>
                       <small>Member since <?php echo UTC2Local($memberinfo['reg_date']) ?></small>

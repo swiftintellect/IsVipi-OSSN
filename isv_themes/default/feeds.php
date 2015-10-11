@@ -11,9 +11,9 @@
                 <div class='box-header with-border'>
                   <div class='user-block'>
                   <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
-                    <img class='img-square' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='<?php echo $f['feed_fullname'] ?> photo update'>
+                    <img class='img-square' src='<?php echo user_pic($f['feed_profilePIC']) ?>' alt='<?php echo $f['feed_fullname'] ?> photo update'>
                   </a>
-                    <div class='username' style="display:block; font-size:15px"><a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>"><?php echo $f['feed_fullname'] ?></a>
+                    <div class='username' style="display:block; font-size:15px;"><a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">&nbsp; <?php echo $f['feed_fullname'] ?></a>
                     	<!--check if it is a shared feed and show corresponding details -->
 						<?php if (isset($sh['s_id']) && !empty($sh['s_id'])){?>
                         
@@ -30,7 +30,7 @@
                         <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="#" title="<?php echo $sh['s_from_fullname'] ?> update">post</a></span>
                         <?php } ?>
                     </div>
-                    <span class='description' style="display:block"><i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
+                    <span class='description' style="display:block">&nbsp; <i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
                   </div><!-- /.user-block -->
                   <div class='box-tools'>
                   	<?php if ($f['feed_user'] == $_SESSION['isv_user_id']){?>
@@ -80,7 +80,7 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                   <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="post" id="comment<?php echo $f['feed_id'] ?>">
-                    <img class="img-responsive img-square img-sm" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="alt text">
+                    <img class="img-responsive img-square img-sm" src="<?php echo user_pic($memberinfo['profile_pic']) ?>" alt="alt text">
                     <!-- .img-push is used to add margin to elements next to floating images -->
                     <div class="img-push">
                       <input type="text" name="comment" class="form-control input-sm" placeholder="Press enter to post comment">
@@ -102,7 +102,7 @@
                   <div class='box-comment'>
                     <!-- User image -->
                     <a href="<?php echo ISVIPI_URL .'profile/'.$c['comm_username'] ?>">
-                    <img class='img-square img-sm' src='<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>' alt='user image'>
+                    <img class='img-square img-sm' src='<?php echo user_pic($c['comm_profilepic']) ?>' alt='user image'>
                     </a>
                     <div class='comment-text'>
                       <span class="username">

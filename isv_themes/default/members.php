@@ -28,7 +28,7 @@
                             <div class="widget-user-header bg-white">
                               <a href="<?php echo ISVIPI_URL.'profile/'.$mi['m_username'] ?>">
                               <div class="widget-user-image">
-                                <img class="img-square" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="User Avatar">
+                                <img class="img-square" src="<?php echo user_pic($mi['m_profile_pic']) ?>" alt="User Avatar">
                               </div><!-- /.widget-user-image -->
                               </a>
                               <h3 class="widget-user-username" style="color:#000; font-weight:500"><?php echo $mi['m_fullname']; ?></h3>

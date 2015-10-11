@@ -3308,7 +3308,7 @@ table.text-center th {
  */
 .profile-user-img {
   margin: 0 auto;
-  width: 100px;
+  width: 150px;
   padding: 3px;
   border: 3px solid #d2d6de;
 }
@@ -4969,4 +4969,16 @@ table.text-center th {
 .profile-pic-box {
 	margin-top:-150px !important;
 	border-top:none !important;
+}
+.change-cover-photo {
+	position:absolute;
+	right:0;
+	bottom:0;
+	margin-bottom:5px;
+	background:#FFF;
+	padding:5px 20px;
+	display:none;
+}
+.cover-photo:hover > .change-cover-photo {
+	display:block;
 }

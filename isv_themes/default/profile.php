@@ -14,18 +14,22 @@
                     <!-- cover photo goes here -->
                     <div class="col-md-12 cover-photo">
                     	<img class="" src="<?php echo ISVIPI_STYLE_URL . 'site/cover.jpg' ?>" alt="cover photo" style="width: 100%;max-height: 100%">
+                    <div class="change-cover-photo">
+                    	<a href="">Change Cover Photo</a>
                     </div>
+                    </div>
+                    
                     <!-- end::cover photo -->
                     <!-- col-md-3 -->
                     <div class="col-md-4">
                     	<!-- Profile Image -->
                           <div class="box profile-pic-box">
                             <div class="box-body box-profile">
-                              <img class="profile-user-img img-responsive square-circle" src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" alt="User profile picture">
+                              <img class="profile-user-img img-responsive square-circle" src="<?php echo user_pic($m_info['m_profile_pic']) ?>" alt="User profile picture">
                               <h3 class="profile-username text-center"><?php echo $m_info['m_fullname']; ?></h3>
                               
                               <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
-                              <a href="#" class="btn btn-warning btn-block"><b>Change Profile Pic</b></a>
+                              <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#profilePic"><b>Change Profile Pic</b></a>
                               <a href="#" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
                               <?php } ?>
             
@@ -108,6 +112,7 @@
         
       </div>
       <!-- /.content-wrapper -->
-      
+      <!-- load our profile page related modals -->
+      <?php require_once(ISVIPI_ACT_THEME .'pages/modals.php') ?>
       <!-- scripts section -->
 <?php $pageManager->loadCustomFooter('g_footer','m_footer'); ?>

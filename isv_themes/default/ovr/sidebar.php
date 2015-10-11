@@ -7,7 +7,7 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-            <img src="<?php echo ISVIPI_STYLE_URL . 'site/user.jpg' ?>" class="img-circle" alt="Profile Picture <?php echo $memberinfo['full_name'] ?>">
+            <img src="<?php echo user_pic($memberinfo['profile_pic']) ?>" class="img-square" alt="Profile Picture <?php echo $memberinfo['full_name'] ?>">
             </div>
             <div class="pull-left info">
               <p><?php echo $memberinfo['full_name'] ?></p>

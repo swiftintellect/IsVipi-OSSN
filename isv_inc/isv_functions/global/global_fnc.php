@@ -214,3 +214,14 @@ function age($dob){
 	 $interval = $now->diff($date);
 	 return $interval->y .' years old';
 }
+
+function user_pic($pic){
+	if(empty($pic)){
+		return ISVIPI_STYLE_URL . 'site/user.jpg';
+	} else if (!empty($pic) && !file_exists(ISVIPI_UPLOADS_BASE . 'ppics/'.ISVIPI_THUMBS.$pic)){
+		return ISVIPI_STYLE_URL . 'site/user.jpg';
+	} else if (!empty($pic) && file_exists(ISVIPI_UPLOADS_BASE . 'ppics/'.ISVIPI_THUMBS.$pic)){
+		return ISVIPI_UPLOADS_URL . 'ppics/'.ISVIPI_THUMBS.$pic;
+	}
+	
+}
