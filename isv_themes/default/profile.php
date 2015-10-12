@@ -15,7 +15,7 @@
                     <div class="col-md-12 cover-photo">
                     	<img class="" src="<?php echo ISVIPI_STYLE_URL . 'site/cover.jpg' ?>" alt="cover photo" style="width: 100%;max-height: 100%">
                     <div class="change-cover-photo">
-                    	<a href="">Change Cover Photo</a>
+                    	<a href="#" data-toggle="modal" data-target="#cover">Change Cover Photo</a>
                     </div>
                     </div>
                     
@@ -41,10 +41,12 @@
                                   <b>User Level</b> <a class="pull-right"><?php echo $m_info['m_level']; ?></a>
                                 </li>
                               </ul>
-            
+            				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>
                               <a href="#" class="btn btn-primary"><b>Add Friend</b></a>
                               <a href="#" class="btn btn-success"><b>Message</b></a>
                               <a href="#" class="btn btn-danger"><b>Block</b></a>
+                              <?php } ?>
+                              
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
                           <!-- end::Profile Image -->

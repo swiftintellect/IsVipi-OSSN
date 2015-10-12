@@ -34,7 +34,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'prof_pic' && $operation !== 'validate'){
+	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -53,9 +53,27 @@
 		
 		$image = $_FILES['p_pic'];
 		
-		/** add our feed **/
-		
+		/** change profile pic **/
 		$ppic = new member($_SESSION['isv_user_id']);
 		$ppic->profile_pic($image);
 
+	}
+	
+	/*** CHANGE COVER PICTURE **/
+	if ($operation === 'cover_pic'){
+		
+		//check if an image is set
+		if (!is_uploaded_file($_FILES['cover']['tmp_name'])) {
+			 $_SESSION['isv_error'] = 'Please select an image to upload.';
+			 header('location:'.$from_url.'');
+			 exit();
+		}
+		
+		$cover = $_FILES['cover'];
+		
+		/** change cover pic **/
+		$ppic = new member($_SESSION['isv_user_id']);
+		$ppic->cover_photo($cover);
+		
+		
 	}

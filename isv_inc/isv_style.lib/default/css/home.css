@@ -1722,7 +1722,7 @@ a:focus {
 .box-header > .ion {
   margin-right: 5px;
 }
-.box-header > .box-tools {
+.box-header .box-tools {
   position: absolute;
   right: 10px;
   top: 5px;

@@ -1,5 +1,5 @@
-﻿<!-- upload prifle pic modal-->
-<?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
+﻿<?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
+<!-- upload prifle pic modal-->
 <div class="modal fade" id="profilePic" tabindex="-1" role="dialog" aria-labelledby="profilePic">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -25,8 +25,37 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<?php } ?>
 
+
+<!-- upload cover photo modal-->
+<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="cover">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form action="<?php echo ISVIPI_URL .'p/member' ?>" method="post" enctype="multipart/form-data" id="imgFeed" runat="server">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload Cover Photo</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="alert alert-info" style="padding:10px">
+        	Your cover photo should be approximately 800px by 250 px
+        </div>
+      	<div class="fileUpload btn btn-upload">
+        	<span>Click to Choose Image</span>
+           	<input type="file" class="upload" name="cover" id="imgInp"/>
+      	</div>
+       	<img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
+       	<input type="hidden" name="isv_op" value="cover_pic" />
+      	<div class="clear"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!------------------------------------------------------------!>
         <!-- FEED IMAGE PREVIEW -->
@@ -38,7 +67,6 @@
 				var reader = new FileReader();
 		
 				reader.onload = function (e) {
-					$('#preview2').css('display','none');
 					$('#preview').css('display','block');
 					$('#preview').attr('src', e.target.result);
 				}
@@ -52,3 +80,7 @@
 			readURL(this);
 		});
 		</script>
+
+<?php } ?>
+
+
