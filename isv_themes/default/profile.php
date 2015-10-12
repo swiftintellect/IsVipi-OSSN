@@ -13,7 +13,7 @@
                     
                     <!-- cover photo goes here -->
                     <div class="col-md-12 cover-photo">
-                    	<img class="" src="<?php echo ISVIPI_STYLE_URL . 'site/cover.jpg' ?>" alt="cover photo" style="width: 100%;max-height: 100%">
+                    	<img class="" src="<?php echo user_cover_pic($m_info['m_cover_photo']) ?>" alt="cover photo" style="width: 100%;max-height: 100%">
                     <div class="change-cover-photo">
                     	<a href="#" data-toggle="modal" data-target="#cover">Change Cover Photo</a>
                     </div>

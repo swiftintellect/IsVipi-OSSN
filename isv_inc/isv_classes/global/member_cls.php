@@ -165,7 +165,7 @@ class member {
 		
 			$newUpload = new Upload($this->feedImg); 
 			
-			$newUpload->file_new_name_body = ISVIPI_THUMBS.$this->newName;
+			$newUpload->file_new_name_body = $this->newName;
 		    $newUpload->image_resize = true;
 		    $newUpload->image_convert = 'jpg';
 		    $newUpload->image_x = 800;

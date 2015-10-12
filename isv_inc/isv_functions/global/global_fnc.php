@@ -223,5 +223,14 @@ function user_pic($pic){
 	} else if (!empty($pic) && file_exists(ISVIPI_UPLOADS_BASE . 'ppics/'.ISVIPI_THUMBS.$pic)){
 		return ISVIPI_UPLOADS_URL . 'ppics/'.ISVIPI_THUMBS.$pic;
 	}
-	
+}
+
+function user_cover_pic($pic){
+	if(empty($pic)){
+		return ISVIPI_STYLE_URL . 'site/cover.jpg';
+	} else if (!empty($pic) && !file_exists(ISVIPI_UPLOADS_BASE . 'cover/'.$pic)){
+		ISVIPI_STYLE_URL . 'site/cover.jpg';
+	} else if (!empty($pic) && file_exists(ISVIPI_UPLOADS_BASE . 'cover/'.$pic)){
+		return ISVIPI_UPLOADS_URL . 'cover/'.$pic;
+	}
 }
