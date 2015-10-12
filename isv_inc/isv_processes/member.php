@@ -22,7 +22,24 @@
 		notFound404Err();
 		exit();
 	 }
+	 
 	 $from_url = $_SERVER['HTTP_REFERER'];
+	 
+	 /** check if he is a logged in user **/
+	 if(!isLoggedIn()){
+		 $_SESSION['isv_error'] = "You must be logged in to complete this action.";
+		 header('location:'.ISVIPI_URL.'sign_in');
+		 exit();
+	 }
+	 
+	 /** an extra layer of security => check if there is a session matching these details in the database **/
+	 $currSession = session_id();
+	 $currentUser = $_SESSION['isv_user_id'];
+	 if (!isMemberSessionValid($currentUser,$currSession)){
+		 $_SESSION['isv_error'] = "Your session either changed or expired. Please sign in to continue.";
+		 header('location:'.ISVIPI_URL.'sign_in');
+		 exit();
+	 }
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
 		 $operation = cleanPOST('isv_op');
@@ -34,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic'){
+	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic' && $operation !== 'edit_prof'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -56,7 +73,6 @@
 		/** change profile pic **/
 		$ppic = new member($_SESSION['isv_user_id']);
 		$ppic->profile_pic($image);
-
 	}
 	
 	/*** CHANGE COVER PICTURE **/
@@ -74,6 +90,23 @@
 		/** change cover pic **/
 		$ppic = new member($_SESSION['isv_user_id']);
 		$ppic->cover_photo($cover);
+	}
+	
+	/*** EDIT PROFILE **/
+	if ($operation === 'edit_prof'){
+		/** capture our fields **/
+		$userFields = array (
+			'Full Name' => cleanPOST('fname'),
+			'Gender' => cleanPOST('gender'),
+			'Date of Birth' => cleanPOST('dob'),
+			'Phone' => cleanPOST('phone'),
+			'Country' => cleanPOST('country'),
+			'City' => cleanPOST('city'),
+			'Relationship' => cleanPOST('relnship'),
+			'Hobbies' => cleanPOST('hobbies')
+		);
 		
-		
+		/** edit profile **/
+		$edit = new member($_SESSION['isv_user_id']);
+		$edit->edit_profile($userFields);
 	}

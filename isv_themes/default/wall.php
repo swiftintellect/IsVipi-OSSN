@@ -78,9 +78,9 @@
                   <?php } ?>
                   <!-- Social sharing buttons -->
                   <?php if(!$feedProperties->hasLiked()) {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'like', <?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'unlike');">Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'unlike', <?php echo $f['feed_user'] ?>);">Unlike</a>
                   <?php } ?>
                   <a href="javascript:void(0)" class="feed-action" data-toggle="modal" data-target="#share<?php echo $f['feed_id'] ?>"><i class='fa fa-share'></i> Share</a>
                   
@@ -124,14 +124,14 @@
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
                  <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like', <?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_unlike');"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_unlike', <?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
                   <?php } ?>
                   
                   <!-- only the owner of the comment or the owner of the post can delete a comment -->
                   <?php if ($c['comm_user_id'] === $_SESSION['isv_user_id']){?>
-                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, 'comm_del');"> Delete</a>
+                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, 'comm_del', <?php echo $f['feed_user'] ?>);"> Delete</a>
                    <?php } ?>
                    <div class="comm_like_count"><?php echo $getComments->totalCommentLikes($c['comm_id']) ?></div>
                   <div id="CAction<?php echo $c['comm_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -152,7 +152,7 @@
                             $('#comment<?php echo $f['feed_id'] ?>').resetForm();
                             $('#comment<?php echo $f['feed_id'] ?>').clearForm();
                             $('#FActionComment<?php echo $f['feed_id'] ?>').css('display','none');
-                            loadTimeline();
+                            loadWall(<?php echo $f['feed_user'] ?>);
                         }, 2000);
                     }); 
                 });

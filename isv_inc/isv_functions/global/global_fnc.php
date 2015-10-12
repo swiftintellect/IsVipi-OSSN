@@ -67,10 +67,41 @@ function regCountrySelectOptions(){
 	$stmt->store_result();
 	$stmt->bind_result($countryISO,$countryName,$countryPhoneCode);
 		while ($stmt->fetch()){
-			echo "<option value=".$countryISO.">$countryName</option>";
+			echo "<option value=".$countryName.">$countryName</option>";
 		}
 	$stmt->close();
 }
+
+function memberCountry($country){
+	global $isv_db,$countryISO,$countryName,$countryPhoneCode;
+	$stmt = $isv_db->prepare("SELECT iso,nicename,phonecode FROM countries");
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($countryISO,$countryName,$countryPhoneCode);
+		while ($stmt->fetch()){
+			echo "<option " .$countryName . ( $country == $countryName ? ' selected' : '' ) . ">$countryName</option>";
+		}
+	$stmt->close();
+}
+
+function relOptions($rel){
+	$statuses = array( 
+		'Single', 
+		'Married', 
+		'In a relationship',
+		'Divorced',
+		'It is Complicated',
+		'Open Relationship',
+		'Forever Alone'
+	 );
+	 
+	 foreach ( $statuses as $status ) {
+		echo '<option' . ( $rel == $status ? ' selected' : '' ) . '>';
+		echo $status;
+		echo '</option>';
+	}
+}
+
 function isLoggedIn(){
 	if (isset($_SESSION['isv_user_id']) && !empty($_SESSION['isv_user_id'])){
 		return TRUE;

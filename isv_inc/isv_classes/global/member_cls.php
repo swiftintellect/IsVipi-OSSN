@@ -2,6 +2,17 @@
 class member {
 	public $user_id;
 	
+	//edit profile fields
+	private $f_name;
+	private $gender;
+	private $dob;
+	private $phone;
+	private $country;
+	private $city;
+	private $relationship;
+	private $hobbies;
+	
+	//image upload (both profile pic anc cover photo)
 	private $newName;
 	private $path;
 	private $feedImg;
@@ -191,6 +202,61 @@ class member {
 		header('location:'.$from_url.'');
 		exit();
 		
+	}
+	
+	public function edit_profile($userFields){
+		
+		$from_url = $_SERVER['HTTP_REFERER'];
+		
+		//check if our array is set
+		if(!is_array($userFields)){
+			$_SESSION['isv_error'] = 'Something went wrong. Please try again.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		//assign our variables
+		$this->f_name = $userFields['Full Name'];
+		$this->gender = $userFields['Gender'];
+		$this->dob = $userFields['Date of Birth'];
+		$this->phone = $userFields['Phone'];
+		$this->country = $userFields['Country'];
+		$this->city = $userFields['City'];
+		$this->relationship = $userFields['Relationship'];
+		$this->hobbies = $userFields['Hobbies'];
+		
+		//update our database
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare("UPDATE user_profile SET 
+			fullname=?,
+			gender =?,
+			dob=?,
+			country=?,
+			city=?,
+			phone=?,
+			hobbies=?,
+			relshp_status=?
+		
+		WHERE user_id=?");
+		$stmt->bind_param('ssssssssi',
+			$this->f_name,
+			$this->gender,
+			$this->dob,
+			$this->country,
+			$this->city,
+			$this->phone,
+			$this->hobbies,
+			$this->relationship,
+			$this->user_id
+		);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Profile updated!';
+		header('location:'.$from_url.'');
+		exit();
 	}
 	
 }

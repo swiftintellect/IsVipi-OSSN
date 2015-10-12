@@ -20,7 +20,7 @@
                     </div>
                     
                     <!-- end::cover photo -->
-                    <!-- col-md-3 -->
+                    <!-- col-md-4 -->
                     <div class="col-md-4">
                     	<!-- Profile Image -->
                           <div class="box profile-pic-box">
@@ -30,7 +30,7 @@
                               
                               <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
                               <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#profilePic"><b>Change Profile Pic</b></a>
-                              <a href="#" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                              <a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/edit'?>" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
                               <?php } ?>
             
                               <ul class="list-group list-group-unbordered">
@@ -83,11 +83,52 @@
                           </div><!-- /.box -->
                           <!-- end::About Me Box -->
                     </div>
-                    <!-- end::col-md-3-->
+                    <!-- end::col-md-4-->
+                    
+                    <!-- col-md-8 -->
+                    <div class="col-md-8 prof-nav" id="profile-menu">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                          <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'feeds'){?>class="active"<?php } ?>>
+                          	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/feeds'?>">Timeline</a>
+                          </li>
+                          <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'friends'){?>class="active"<?php } ?>>
+                          	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/friends'?>">Friends</a>
+                          </li>
+                          <?php if($_SESSION['isv_user_id'] == $m_info['m_user_id']){?>
+                          <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'settings'){?>class="active"<?php } ?>>
+                          	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/settings'?>">Settings</a>
+                          </li>
+                          <?php } ?>
+                        </ul>
+                    </div>
+                    <div class="right-content" id="tWall">
+                    <!-- load the user timeline -->
+                    <?php if (!isset($PAGE[2]) || (isset($PAGE[2]) && ($PAGE[2] === 'feeds'))){
+                    	require_once(ISVIPI_ACT_THEME .'ovr/profile_scripts.php') 
+					?>
+                    <script>
+						loadWall(<?php echo $m_info['m_user_id'] ?>);
+					</script>
+                    
+					<?php } else if (isset($PAGE[2]) && $PAGE[2] === 'edit' && ($m_info['m_user_id'] === $_SESSION['isv_user_id'])) {
+						require_once(ISVIPI_ACT_THEME .'pages/edit.php');
+					} else if (isset($PAGE[2]) && $PAGE[2] === 'friends'){
+						require_once(ISVIPI_ACT_THEME .'pages/friends.php');
+					} else if (isset($PAGE[2]) && $PAGE[2] === 'settings' && ($m_info['m_user_id'] === $_SESSION['isv_user_id'])){
+						require_once(ISVIPI_ACT_THEME .'pages/settings.php');
+					} else { 
+						require_once(ISVIPI_ACT_THEME .'ovr/profile_scripts.php');
+					?>
+                    <script>
+						loadWall(<?php echo $m_info['m_user_id'] ?>);
+					</script>
+                    <?php } ?>
                     
                     
-                    
-                    
+                    </div>
+                    </div>
+                    <!-- end::col-md-8 -->
                     </div>
                 </div>
             <div class="clear"></div> 

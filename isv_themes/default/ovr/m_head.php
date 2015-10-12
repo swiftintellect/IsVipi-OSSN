@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home.css' ?>" rel="stylesheet">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home-blue.css' ?>" rel="stylesheet">
+    <link href="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.css'?>" rel="stylesheet">
     
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/formsubmit/form.submit.min.js'?>"></script>
+    <script src="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.js'?>"></script>
     
     <link rel="shortcut icon" href="<?php echo ISVIPI_STYLE_URL .'site/imgs/'.$isv_siteSettings['favicon']?>">
 

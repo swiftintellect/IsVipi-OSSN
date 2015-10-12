@@ -78,8 +78,6 @@
 		});
 		</script>
         
-
-        
         <!-- LOAD TIMELINE -->
         <script>
 			function loadTimeline(){

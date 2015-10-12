@@ -11,9 +11,9 @@
       <div class="modal-body">
       	<div class="fileUpload btn btn-upload">
         	<span>Click to Choose Image</span>
-           	<input type="file" class="upload" name="p_pic" id="imgInp"/>
+           	<input type="file" class="upload" name="p_pic" id="imgInp1"/>
       	</div>
-       	<img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
+       	<img id="preview1" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
        	<input type="hidden" name="isv_op" value="prof_pic" />
       	<div class="clear"></div>
       </div>
@@ -42,9 +42,9 @@
         </div>
       	<div class="fileUpload btn btn-upload">
         	<span>Click to Choose Image</span>
-           	<input type="file" class="upload" name="cover" id="imgInp"/>
+           	<input type="file" class="upload" name="cover" id="imgInp2"/>
       	</div>
-       	<img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
+       	<img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
        	<input type="hidden" name="isv_op" value="cover_pic" />
       	<div class="clear"></div>
       </div>
@@ -60,6 +60,26 @@
 <!------------------------------------------------------------!>
         <!-- FEED IMAGE PREVIEW -->
         <script>
+			function readURL1(input) {
+			var url = input.value;
+			var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+			if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+				var reader = new FileReader();
+		
+				reader.onload = function (e) {
+					$('#preview1').css('display','block');
+					$('#preview1').attr('src', e.target.result);
+				}
+		
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		$("#imgInp1").change(function(){
+			readURL1(this);
+		});
+		</script>
+        
+        <script>
 			function readURL(input) {
 			var url = input.value;
 			var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
@@ -67,16 +87,14 @@
 				var reader = new FileReader();
 		
 				reader.onload = function (e) {
-					$('#preview').css('display','block');
-					$('#preview').attr('src', e.target.result);
+					$('#preview2').css('display','block');
+					$('#preview2').attr('src', e.target.result);
 				}
 		
 				reader.readAsDataURL(input.files[0]);
-			}else{
-				 //$('#preview').attr('src', 'http://localhost/isvipi/isv_inc/isv_style.lib/default/images/logo.png');
 			}
 		}
-		$("#imgInp").change(function(){
+		$("#imgInp2").change(function(){
 			readURL(this);
 		});
 		</script>
