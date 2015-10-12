@@ -225,6 +225,9 @@ class feedActions {
 	
 	******************************/
 	public function shareFeed($feed, $feed_id){
+		
+		$from_url = $_SERVER['HTTP_REFERER'];
+		
 		$this->user_feed = $feed;
 		$this->feed_id = $feed_id;
 		$this->me = $_SESSION['isv_user_id'];
@@ -274,7 +277,8 @@ class feedActions {
 		$this->notifyFeedOwner($_SESSION['isv_user_id'],$feed_user,$this->feed_id,$this->notice);
 		
 		//we return success
-		header('location:'.ISVIPI_URL.'home/');
+		$_SESSION['isv_success'] = 'Status shared!';
+		header('location:'.$from_url.'');
 		exit();
 	}
 	
