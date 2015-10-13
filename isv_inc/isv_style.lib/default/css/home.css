@@ -2327,7 +2327,7 @@ a:focus {
 	width:30%;
 	position:fixed;
 	z-index:999;
-	left:0;
+	right:0;
 	bottom:0;
 	margin-bottom:10px !important;
 	margin-left:5px;

@@ -12,6 +12,10 @@ class member {
 	private $relationship;
 	private $hobbies;
 	
+	//change password
+	private $pwd;
+	private $new_pwd;
+	
 	//image upload (both profile pic anc cover photo)
 	private $newName;
 	private $path;
@@ -255,6 +259,42 @@ class member {
 		
 		//return success
 		$_SESSION['isv_success'] = 'Profile updated!';
+		header('location:'.$from_url.'');
+		exit();
+	}
+	
+	public function change_pwd($pwd){
+		
+		$from_url = $_SERVER['HTTP_REFERER'];
+		
+		$this->pwd = $pwd['Current Password'];
+		$this->new_pwd = $pwd['New Password'];
+		
+		//check if the current password matches the one in our db
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare("SELECT pwd FROM users WHERE id=?");
+		$stmt->bind_param('i',$this->user_id);
+		$stmt->execute();
+		$stmt->bind_result($dbPWD);
+		$stmt->fetch();
+		
+		if (!password_verify($this->pwd, $dbPWD)) {
+			$_SESSION['isv_error'] = 'Your current password is incorrect.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		//hash and save the new password
+		$this->new_pwd = password_hash($this->new_pwd, PASSWORD_DEFAULT);
+		
+		$stmt->prepare("UPDATE users SET pwd=? WHERE id=?");
+		$stmt->bind_param('si',$this->new_pwd,$this->user_id);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Password changed.';
 		header('location:'.$from_url.'');
 		exit();
 	}

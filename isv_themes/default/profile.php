@@ -38,7 +38,7 @@
                                   <b>Friends</b> <a class="pull-right"><?php echo $m->friendsTotal(number_format($m_info['m_user_id'])) ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                  <b>User Level</b> <a class="pull-right"><?php echo $m_info['m_level']; ?></a>
+                                  <b>Member Level</b> <a class="pull-right"><?php echo $m_info['m_level']; ?></a>
                                 </li>
                               </ul>
             				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>

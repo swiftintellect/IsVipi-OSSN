@@ -1,5 +1,5 @@
 ﻿<?php if ($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>
-
+<!-- do nothing -->
 <?php } else { ?>
 <div class="box box-widget" style="margin-top:-20px">
 	<form action="<?php echo ISVIPI_URL .'p/member' ?>" method="post">

@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic' && $operation !== 'edit_prof'){
+	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic' && $operation !== 'edit_prof' && $operation !== 'c_pwd'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -109,4 +109,44 @@
 		/** edit profile **/
 		$edit = new member($_SESSION['isv_user_id']);
 		$edit->edit_profile($userFields);
+	}
+	
+	/*** CHANGE PASSWORD **/
+	if ($operation === 'c_pwd'){
+		
+		//capture fields
+		$pwd = array (
+			'Current Password' => cleanPOST('c_pwd'),
+			'New Password' => cleanPOST('n_pwd'),
+			'Repeat New Password' => cleanPOST('rn_pwd')
+		);
+		
+		//check if any has not been supplied
+		foreach( $pwd as $field => $value){
+			if(!isSupplied($value)){
+				 $_SESSION['isv_error'] = 'Please fill in '.$field.'!';
+				 header('location:'.$from_url.'');
+				 exit();
+			}
+		}
+		
+		//check if any is less than 8 characters long
+		foreach( $pwd as $field => $value){
+			if(strlen($value) < 8){
+				 $_SESSION['isv_error'] = ''.$field.' must be a minimum of 8 characters.';
+				 header('location:'.$from_url.'');
+				 exit();
+			}
+		}
+		
+		//check if new and repeat passwords match
+		if ($pwd['New Password'] !== $pwd['Repeat New Password']){
+				$_SESSION['isv_error'] = 'New Password and Repeat New Password do not match.';
+				header('location:'.$from_url.'');
+				exit();
+		}
+		
+		//change
+		$change_pwd = new member($_SESSION['isv_user_id']);
+		$change_pwd->change_pwd($pwd);
 	}
