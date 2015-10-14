@@ -3,7 +3,7 @@
         <!-- LOAD WALL -->
         <script>
 			function loadWall($user){
-				$('#tWall').load('<?php echo ISVIPI_URL .'wall/' ?>' +$user);
+				$('#tWall').load(site_url +'/wall/'+$user);
 			}
 		</script>
         
@@ -13,7 +13,7 @@
 				$('#FAction' + $feed).css('display','inline-block');
 				$.ajax({
 				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				  url: site_url+"/p/feeds/"+$type+"/"+$feed,
 				})
 				setTimeout(function(){
 					$('#FAction' + $feed).css('display','none');
@@ -29,7 +29,7 @@
 				$('#f_content' + $feed).fadeTo( "slow" , 0.4, function() {});
 				$.ajax({
 				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
+				  url: site_url+"/p/feeds/"+$type+"/"+$feed,
 				})
 				setTimeout(function(){
 					loadWall($owner);
@@ -44,7 +44,7 @@
 				$('#CAction' + $commentID).css('display','inline-block');
 				$.ajax({
 				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$commentID,
+				  url: site_url+"/p/feeds/"+$type+"/"+$commentID,
 				})
 				setTimeout(function(){
 					$('#CAction' + $commentID).css('display','none');
@@ -60,7 +60,7 @@
 				$('#comBox' + $comm_id).fadeTo( "slow" , 0.2, function() {});
 				$.ajax({
 				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$comm_id,
+				  url: site_url+"/p/feeds/"+$type+"/"+$comm_id,
 				})
 				setTimeout(function(){
 					$('#comBox' + $comm_id).fadeOut();
