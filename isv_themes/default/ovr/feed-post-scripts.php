@@ -1,7 +1,4 @@
-﻿      <!-- load this when a user is on the timeline feed -->
-	  <?php if (isset($PAGE[0]) && $PAGE[0] == 'home'){ ?>
-      
-      <!-- TEXT FEED -->
+﻿      <!-- TEXT FEED -->
       <script>
 		$('#text-update').ajaxForm({ 
 			dataType: 'json', 
@@ -81,71 +78,6 @@
         <!-- LOAD TIMELINE -->
         <script>
 			function loadTimeline(){
-				$('#tFeeds').load('<?php echo ISVIPI_URL .'feeds/' ?>');
+				$('#tFeeds').load(site_url +'/feeds');
 			}
 		</script>
-        
-        <!-- FEED ACTIONS (Like, Unlike, Delete) -->
-        <script>
-			function feedAction($feed,$type){
-				$('#FAction' + $feed).css('display','inline-block');
-				$.ajax({
-				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
-				})
-				setTimeout(function(){
-					$('#FAction' + $feed).css('display','none');
-					loadTimeline();
-					return false;
-				}, 2000);
-			}
-		</script>
-        
-        <!-- DELETE FEED -->
-        <script>
-			function deleteFeed($feed,$type){
-				$('#f_content' + $feed).fadeTo( "slow" , 0.4, function() {});
-				$.ajax({
-				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$feed,
-				})
-				setTimeout(function(){
-					loadTimeline();
-					return false;
-				}, 2000);
-			}
-		</script>
-        
-        <!-- COMMENT FEED ACTIONS (Like, Unlike) -->
-        <script>
-			function commentAction($commentID,$type){
-				$('#CAction' + $commentID).css('display','inline-block');
-				$.ajax({
-				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$commentID,
-				})
-				setTimeout(function(){
-					$('#CAction' + $commentID).css('display','none');
-					loadTimeline();
-					return false;
-				}, 2000);
-			}
-		</script>
-        
-        <!-- DELETE COMMENT -->
-        <script>
-			function deleteComment($comm_id,$type){
-				$('#comBox' + $comm_id).fadeTo( "slow" , 0.2, function() {});
-				$.ajax({
-				  type: "POST",
-				  url: <?php echo ISVIPI_URL ?>+"/p/feeds/"+$type+"/"+$comm_id,
-				})
-				setTimeout(function(){
-					$('#comBox' + $comm_id).fadeOut();
-					//loadTimeline();
-					return false;
-				}, 2000);
-			}
-		</script>
-
-        <?php } ?>

@@ -1,13 +1,11 @@
-﻿                  <?php if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
-				  	
+﻿				  <?php if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
 					/** get feed properties (likes, comments, if liked) **/
 				  	$feedProperties = new getFeedProperties($f['feed_id']);
-					
 					/** get share properties **/
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
 				  ?>
-                <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">
+                <div class="box box-widget f_styled" id="f_content<?php echo $f['feed_id'] ?>">
                 <div class='box-header with-border'>
                   <div class='user-block'>
                   <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
@@ -33,11 +31,12 @@
                     <span class='description' style="display:block">&nbsp; <i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
                   </div><!-- /.user-block -->
                   <div class='box-tools'>
+                  <?php if ($f['feed_user'] == $_SESSION['isv_user_id']){?>
                   <ul class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="fa fa-chevron-down"></span>
                     </a>
-                    <?php if ($f['feed_user'] == $_SESSION['isv_user_id']){?>
+                    
                     <ul class="dropdown-menu">
                       <li>
                       	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>, 'delete');">Delete</a>
@@ -78,9 +77,9 @@
                   <?php } ?>
                   <!-- Social sharing buttons -->
                   <?php if(!$feedProperties->hasLiked()) {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>, 'unlike');">Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'unlike');">Unlike</a>
                   <?php } ?>
                   <a href="javascript:void(0)" class="feed-action" data-toggle="modal" data-target="#share<?php echo $f['feed_id'] ?>"><i class='fa fa-share'></i> Share</a>
                   
@@ -141,7 +140,6 @@
                 <?php } ?>
               </div><!-- /.box -->
               <!-- end of timeline feed -->
-              <br/>
               
               <!-- COMMENT -->
               <script>
@@ -198,7 +196,8 @@
                     </div>
                   </div>
                 </div>
-
+                <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-action-scripts.php') ?>
               <?php } ?>
+              
               
 

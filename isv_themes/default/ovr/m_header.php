@@ -1,9 +1,7 @@
 ﻿<body class="hold-transition skin-blue sidebar-mini" style="margin-top:-20px;">
-    <div class="wrapper">
-
+<div class="wrapper">
       <!-- Main Header -->
       <header class="main-header">
-
         <!-- Logo -->
         <a href="<?php echo ISVIPI_URL .'home/' ?>" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->

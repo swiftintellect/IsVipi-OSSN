@@ -20,14 +20,6 @@ body {
   position: static;
   overflow: hidden;
 }
-.wrapper:before,
-.wrapper:after {
-  content: " ";
-  display: table;
-}
-.wrapper:after {
-  clear: both;
-}
 .layout-boxed .wrapper {
   max-width: 1250px;
   margin: 0 auto;
@@ -45,10 +37,6 @@ body {
 .content-wrapper,
 .right-side,
 .main-footer {
-  -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
   margin-left: 230px;
   z-index: 820;
   margin-top:-20px;
@@ -1682,20 +1670,6 @@ a:focus {
 .overlay-wrapper .overlay.dark {
   background: rgba(0, 0, 0, 0.5);
 }
-.box-header:before,
-.box-body:before,
-.box-footer:before,
-.box-header:after,
-.box-body:after,
-.box-footer:after {
-  content: " ";
-  display: table;
-}
-.box-header:after,
-.box-body:after,
-.box-footer:after {
-  clear: both;
-}
 .box-header {
   color: #444;
   display: block;
@@ -1809,14 +1783,6 @@ a:focus {
 .box-comments .box-comment {
   padding: 8px 0;
   border-bottom: 1px solid #eee;
-}
-.box-comments .box-comment:before,
-.box-comments .box-comment:after {
-  content: " ";
-  display: table;
-}
-.box-comments .box-comment:after {
-  clear: both;
 }
 .box-comments .box-comment:last-of-type {
   border-bottom: 0;
@@ -2465,8 +2431,13 @@ a:focus {
   border-radius: 3px;
 }
 #tFeeds {
-	margin:0;
-	padding:0;
+	margin:0 !important;
+	padding:0 !important;
+}
+.f_styled {
+	padding:0 !important;
+	margin:0 !important;
+	margin-bottom:10px !important;
 }
 .nav-tabs-custom > .nav-tabs {
   margin: 0;
@@ -5008,4 +4979,21 @@ table.text-center th {
 }
 .nav-tabs-custom .nav .active a{
 	color:#525252 !important;
+}
+
+.form-group .privacy label {
+    float: left;
+    text-align: left;
+    font-weight: normal;
+	margin-left:20px;
+}
+
+.form-group .privacy select {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+	padding:1px !important;
+	height:22px;
+	margin-left:10px;
+	margin-top:-5px;
 }

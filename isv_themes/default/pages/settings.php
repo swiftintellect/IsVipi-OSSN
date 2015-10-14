@@ -19,18 +19,31 @@
       	<div class="box-body">
         	<div class="row">
                 <div class="col-md-12">
-                	<form>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Show my timeline feeds to friends only
-                      </label>
+                	<form action="<?php echo ISVIPI_URL .'p/member' ?>" method="post">
+                     <div class="form-group row">
+                     	<div class="privacy">
+                      	<label>Show my timeline feeds to 
+                      		<select class="form-control" name="feeds_privacy">
+                        		<option>nobody</option>
+                        		<option>friends only</option>
+                        		<option>everyone</option>
+                      		</select>
+                     	</label>
+                        </div>
                     </div>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Show my phone number in my profile
-                      </label>
+                    <div class="form-group row">
+                     	<div class="privacy">
+                      	<label>Show my phone number to 
+                      		<select class="form-control" name="phone_privacy">
+                        		<option>nobody</option>
+                        		<option>friends only</option>
+                        		<option>everyone</option>
+                      		</select>
+                     	</label>
+                        </div>
                     </div>
                     <div class="box-tools pull-left">
+                    	<input type="hidden" name="isv_op" value="privacy" />
                         <button type="submit" class="btn btn-success btn-flat">Save</button>
                     </div><!-- /.box-tools -->
                     </form>

@@ -6,9 +6,6 @@
 # directory browsing
 Options All -Indexes
 
-# enable our custom language file
-Addhandler application/x-httpd-php .html .php .isvl
-
 # IF YOU GET a 500 Internal Server Error delete all code below
 #enable PHP error logging
 php_flag  log_errors on

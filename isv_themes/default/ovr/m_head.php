@@ -18,6 +18,7 @@
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/formsubmit/form.submit.min.js'?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.js'?>"></script>
+    <script> var site_url = '<?php echo $isv_siteDetails['s_url'] ?>'; </script>
     
     <link rel="shortcut icon" href="<?php echo ISVIPI_STYLE_URL .'site/imgs/'.$isv_siteSettings['favicon']?>">
 
@@ -28,4 +29,3 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  

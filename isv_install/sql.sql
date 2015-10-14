@@ -56,6 +56,20 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_settings`
+--
+CREATE TABLE IF NOT EXISTS `user_settings` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `feeds` int(1) NOT NULL DEFAULT 2,
+  `phone` int(1) NOT NULL DEFAULT 2,
+  `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_validations`
 --
 CREATE TABLE IF NOT EXISTS `user_validations` (

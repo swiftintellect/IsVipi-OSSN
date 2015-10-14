@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic' && $operation !== 'edit_prof' && $operation !== 'c_pwd'){
+	 if ($operation !== 'prof_pic' && $operation !== 'cover_pic' && $operation !== 'edit_prof' && $operation !== 'c_pwd' && $operation !== 'privacy'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -149,4 +149,25 @@
 		//change
 		$change_pwd = new member($_SESSION['isv_user_id']);
 		$change_pwd->change_pwd($pwd);
+	}
+	
+	/*** PRIVACY SETTINGS **/
+	if ($operation === 'privacy'){
+		
+		//capture fields
+		$privacySett = array (
+			'Feeds' => cleanPOST('feeds_privacy'),
+			'Phone' => cleanPOST('phone_privacy'),
+		);
+		
+		//check if any has not been supplied
+		foreach( $privacySett as $field => $value){
+			if(!isSupplied($value)){
+				 $_SESSION['isv_error'] = 'Please select a privacy setting for '.$field.' field.';
+				 header('location:'.$from_url.'');
+				 exit();
+			}
+		}
+		
+		//assign our post variables to their values
 	}

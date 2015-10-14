@@ -1,7 +1,6 @@
 ﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
-
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
@@ -9,7 +8,7 @@
         <!-- timeline feed-->
         	<section class="col-lg-6 timeline-feed">
 				<div class="box box-solid" style="margin:0; padding:0">
-                    <div class="nav-tabs-custom">
+                    <div class="nav-tabs-custom" style="margin:0; padding:0">
                         <ul class="nav nav-tabs">
                           <li class="active"><a href="#update-timeline" data-toggle="tab"><i class="fa fa-pencil"></i> 
                           <span class="updt-status">Update Status</span></a></li>
@@ -49,8 +48,8 @@
                     </div>
                     
                 </div>
-                <?php require_once(ISVIPI_ACT_THEME .'ovr/scripts.php') ?>
-                <div class="" id="tFeeds">
+                <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-post-scripts.php') ?>
+                <div id="tFeeds">
 					<script>
 						loadTimeline();
 					</script>
