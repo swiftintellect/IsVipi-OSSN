@@ -19,6 +19,7 @@ class getMembers {
 	
 	private $limit;
 	private $me;
+	private $order_by;
 	
 	public function __construct (){
 		$this->me = $_SESSION['isv_user_id'];
@@ -30,17 +31,31 @@ class getMembers {
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users WHERE status=?"); 
 		$stmt->bind_param('i', $status);
 		$stmt->execute();  
-		$stmt->bind_result($this->m_total_members); 
+		$stmt->bind_result($total_members); 
 		$stmt->fetch();
 		$stmt->close();
 		
-		return $this->m_total_members;
+		return $total_members;
 	}
 	
-	public function allMembers($status){
+	public function allMembers($status,$oderBY,$limit){
 		global $isv_db;
 		
-		$this->limit = 50;
+		$this->limit = $limit;
+		
+		if($this->limit == 'all'){
+			$this->limit = $this->totalMembers($status);
+		}
+		
+		$this->order_by = $oderBY;
+		
+		if($this->order_by == 'latest'){
+			$this->order_by = 'DESC';
+		} else if($this->order_by == 'oldest'){
+			$this->order_by = 'ASC';
+		} else {
+			$this->order_by = 'DESC';
+		}
 
 		$stmt = $isv_db->prepare ("
 			SELECT 
@@ -56,7 +71,7 @@ class getMembers {
 			JOIN users u2 ON u1.id <> u2.id 
 			LEFT JOIN friends f ON u1.id = f.user1 AND u2.id = f.user2 
 			LEFT JOIN user_profile p ON u1.id = p.user_id 
-			WHERE f.user2 IS NULL AND (u2.id = ? OR u1.id = ?) AND u1.id != ? GROUP BY u1.id
+			WHERE f.user2 IS NULL AND (u2.id = ? OR u1.id = ?) AND u1.id != ? GROUP BY u1.id ORDER BY u1.id $this->order_by LIMIT $this->limit
 		"); 
 		$stmt->bind_param('iii',$this->me,$this->me,$this->me);
 		$stmt->execute(); 

@@ -20,6 +20,21 @@
 	require_once(ISVIPI_CLASSES_BASE .'global/getMembers_cls.php');
 	require_once(ISVIPI_CLASSES_BASE .'forms/friends_cls.php'); 
 	$m = new getMembers();
-	$m_info = $m->allMembers(1 /* load only active users */);
+	
+	// we define our order by (latest or oldest)
+	if (isset($PAGE[1]) && ($PAGE[1] == 'latest' || $PAGE[1] == 'oldest')){
+		$oderBY = cleanGET($PAGE[1]);
+	} else {
+		$oderBY = 'latest';
+	}
+	
+	//we define how many members to load
+	if (isset($PAGE[2]) && ($PAGE[2] == 25 || $PAGE[2] == 50 || $PAGE[2] == 100 || $PAGE[2] == 'all')){
+		$limit = cleanGET($PAGE[2]);
+	} else {
+		$limit = 25;
+	}
+	$m_info = $m->allMembers(1,$oderBY,$limit);
+	
 	
  	include_once ISVIPI_ACT_THEME.'members.php'; 
