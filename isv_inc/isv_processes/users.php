@@ -18,9 +18,7 @@
 	 ******************************************************/ 
 	 
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
-		$_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
-		notFound404Err();
-		exit();
+		$from_url = ISVIPI_URL;
 	 }
 	 $from_url = $_SERVER['HTTP_REFERER'];
 	 /** check if our hidden field is present */

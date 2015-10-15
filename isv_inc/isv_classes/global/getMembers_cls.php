@@ -71,13 +71,13 @@ class getMembers {
 			JOIN users u2 ON u1.id <> u2.id 
 			LEFT JOIN friends f ON u1.id = f.user1 AND u2.id = f.user2 
 			LEFT JOIN user_profile p ON u1.id = p.user_id 
-			WHERE f.user2 IS NULL AND (u2.id = ? OR u1.id = ?) AND u1.id != ? GROUP BY u1.id ORDER BY u1.id $this->order_by LIMIT $this->limit
+			WHERE f.user2 IS NULL AND (u2.id = ? OR u1.id = ?) AND u1.id != ? AND u1.status = ? GROUP BY u1.id ORDER BY u1.id $this->order_by LIMIT $this->limit
 		"); 
-		$stmt->bind_param('iii',$this->me,$this->me,$this->me);
+		$stmt->bind_param('iiii',$this->me,$this->me,$this->me,$status);
 		$stmt->execute(); 
 		$stmt->store_result(); 
 		$stmt->bind_result($this->m_id,$this->m_username,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic,$var); 
-		
+		$all_count = $stmt->num_rows();
 			while($stmt->fetch()){
 				$this->m_info[] = array(
 					'm_id' => $this->m_id,
@@ -86,6 +86,7 @@ class getMembers {
 					'm_gender' => $this->m_gender,
 					'm_dob' => $this->m_dob,
 					'm_profile_pic' => $this->m_profile_pic,
+					'm_all_count' => $all_count,
 				);
 			}
 		return $this->m_info;
