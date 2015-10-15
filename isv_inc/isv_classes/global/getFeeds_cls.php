@@ -329,3 +329,78 @@ class getShares {
 	}
 	
 }
+
+class single_feed {
+	public $feedTotal;
+	public $user_id;
+	public $limit;
+	public $page;
+	public $start;
+	public $nextP;
+	
+	//from feeds table
+	public $feedID;
+	public $feedUser;
+	public $feedText;
+	public $feedSharedText;
+	public $feedImg;
+	public $old_feed_id;
+	public $feedTime;
+	public $friend_id;
+	
+	//from users table
+	public $f_username;
+	
+	//from user profiles table
+	public $f_fullname;
+	public $f_profilePIC;
+	
+	public $feed;
+	
+	public function __contstruct(){}
+	
+	public function feed_id($feed_id){
+		global $isv_db,$feed;
+		
+		$this->user_id = $_SESSION['isv_user_id'];
+
+		$singleFeed = $isv_db->prepare ("SELECT 
+			f.id,
+			f.user_id,
+			f.text_feed,
+			f.shared_feed,
+			f.img_feed,
+			f.old_feed_id,
+			f.time,
+			u.username,
+			p.fullname,
+			p.profile_pic
+			FROM feeds f
+			JOIN users u ON u.id = f.user_id
+			JOIN user_profile p ON p.user_id = u.id
+			WHERE f.id=?
+		"); 
+		
+		$singleFeed->bind_param('i', $feed_id);
+		$singleFeed->execute(); 
+		$singleFeed->store_result(); 
+		$resultCount =  $singleFeed->num_rows();
+		$singleFeed->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
+		$singleFeed->fetch();
+		$singleFeed->close();
+				$this->feed = array(
+					'feed_id' => $this->feedID,
+					'feed_user' => $this->feedUser,
+					'feed_text' => $this->feedText,
+					'feed_shared_text' => $this->feedSharedText,
+					'feed_image' => $this->feedImg,
+					'old_feed_id' => $this->old_feed_id,
+					'feed_time' => $this->feedTime,
+					'feed_username' => $this->f_username,
+					'feed_fullname' => $this->f_fullname,
+					'feed_profilePIC' => $this->f_profilePIC
+				);
+		return $this->feed;
+	} 
+
+}

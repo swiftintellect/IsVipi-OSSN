@@ -1,13 +1,12 @@
-﻿                  <?php if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
-				  	
+﻿				  <?php if (is_array($f) && !empty(array_filter($f))){
+
 					/** get feed properties (likes, comments, if liked) **/
 				  	$feedProperties = new getFeedProperties($f['feed_id']);
-					
 					/** get share properties **/
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
 				  ?>
-                <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">
+                <div class="box box-widget f_styled" id="f_content<?php echo $f['feed_id'] ?>">
                 <div class='box-header with-border'>
                   <div class='user-block'>
                   <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
@@ -38,9 +37,10 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <span class="fa fa-chevron-down"></span>
                     </a>
+                    
                     <ul class="dropdown-menu">
                       <li>
-                      	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>,'delete',<?php echo $f['feed_user'] ?>);">Delete</a>
+                      	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>, 'delete', <?php echo $f['feed_id'] ?>);">Delete</a>
                       </li>
                     </ul>
                    </ul>
@@ -78,9 +78,9 @@
                   <?php } ?>
                   <!-- Social sharing buttons -->
                   <?php if(!$feedProperties->hasLiked()) {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'like',<?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'like',<?php echo $f['feed_id'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'unlike',<?php echo $f['feed_user'] ?>);">Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'unlike',<?php echo $f['feed_id'] ?>);">Unlike</a>
                   <?php } ?>
                   <a href="javascript:void(0)" class="feed-action" data-toggle="modal" data-target="#share<?php echo $f['feed_id'] ?>"><i class='fa fa-share'></i> Share</a>
                   
@@ -124,14 +124,14 @@
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
                  <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>,'comm_like',<?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like', <?php echo $f['feed_id'] ?>);"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>,'comm_unlike',<?php echo $f['feed_user'] ?>);"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_unlike', <?php echo $f['feed_id'] ?>);"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
                   <?php } ?>
                   
                   <!-- only the owner of the comment or the owner of the post can delete a comment -->
                   <?php if ($c['comm_user_id'] === $_SESSION['isv_user_id']){?>
-                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>,'comm_del',<?php echo $f['feed_user'] ?>);"> Delete</a>
+                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, 'comm_del',<?php echo $f['feed_id'] ?>);"> Delete</a>
                    <?php } ?>
                    <div class="comm_like_count"><?php echo $getComments->totalCommentLikes($c['comm_id']) ?></div>
                   <div id="CAction<?php echo $c['comm_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -141,7 +141,6 @@
                 <?php } ?>
               </div><!-- /.box -->
               <!-- end of timeline feed -->
-              <br/>
               
               <!-- COMMENT -->
               <script>
@@ -152,7 +151,7 @@
                             $('#comment<?php echo $f['feed_id'] ?>').resetForm();
                             $('#comment<?php echo $f['feed_id'] ?>').clearForm();
                             $('#FActionComment<?php echo $f['feed_id'] ?>').css('display','none');
-                            loadWall(<?php echo $f['feed_user'] ?>);
+                            loadFeed(<?php echo $f['feed_id'] ?>);
                         }, 2000);
                     }); 
                 });
@@ -198,5 +197,11 @@
                     </div>
                   </div>
                 </div>
-
+              <?php } else {?>
+              	<div class="col-md-12">
+               		<li class="list-group-item">This post could not be found. It may have been deleted.</li>
+                </div>
               <?php } ?>
+              
+              
+

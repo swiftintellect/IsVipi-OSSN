@@ -25,7 +25,7 @@
 								$shtxt = "<a href='".ISVIPI_URL."profile/".$sh['s_from_username']."'> ".$sh['s_from_fullname']."</a>'s";
 							}
 						?>
-                        <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="#" title="<?php echo $sh['s_from_fullname'] ?> update">post</a></span>
+                        <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($f['old_feed_id']) ?>" title="<?php echo $sh['s_from_fullname'] ?> update">post</a></span>
                         <?php } ?>
                     </div>
                     <span class='description' style="display:block">&nbsp; <i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>

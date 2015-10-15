@@ -19,8 +19,9 @@
 	 
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
 		$from_url = ISVIPI_URL;
+	 } else {
+	 	$from_url = $_SERVER['HTTP_REFERER'];
 	 }
-	 $from_url = $_SERVER['HTTP_REFERER'];
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
 		 $operation = cleanPOST('isv_op');
