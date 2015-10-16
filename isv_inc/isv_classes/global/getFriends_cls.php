@@ -39,6 +39,23 @@ class get_friends {
 		
 		$stmt->close();
 	}
+	
+	public function blocked_users($user1,$user2){
+		global $isv_db,$block_id,$block_user1,$block_user2;
+		
+		$stmt = $isv_db->prepare("SELECT id,user1,user2 FROM users_blocked WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)");
+		$stmt->bind_param('iiii',$user1,$user2,$user1,$user2);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($block_id,$block_user1,$block_user2);
+		$stmt->fetch();
+			if($stmt->num_rows() > 0){
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		$stmt->close();
+	}	
 		
 		
 }

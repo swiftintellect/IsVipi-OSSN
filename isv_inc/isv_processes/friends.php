@@ -52,7 +52,8 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'f_req' && $operation !== 'f_accept' && $operation !== 'f_ignore' && $operation !== 'f_remove'){
+	 if ($operation !== 'f_req' && $operation !== 'f_accept' && $operation !== 'f_ignore' 
+	 && $operation !== 'f_remove' && $operation !== 'f_block' && $operation !== 'f_unblock'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -130,6 +131,36 @@
 		/** ignore the friend request **/
 		$f_remove = new friends();
 		$f_remove->un_friend($friend_id);
+	}
+	
+	/*** RBLOCK USER **/
+	if ($operation === 'f_block'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION[''] = 'An error occurred. Please try again.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		$user_id = cleanGET($PAGE[3]);
+		
+		/** ignore the friend request **/
+		$block = new friends();
+		$block->block_user($user_id);
+	}
+	
+	/*** RBLOCK USER **/
+	if ($operation === 'f_unblock'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION[''] = 'An error occurred. Please try again.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		$user_id = cleanGET($PAGE[3]);
+		
+		/** ignore the friend request **/
+		$unblock = new friends();
+		$unblock->unblock_user($user_id);
 	}
 
 	

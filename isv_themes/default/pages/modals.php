@@ -101,4 +101,47 @@
 
 <?php } ?>
 
+<!-- Block User Modal-->
+<div class="modal fade" id="block" tabindex="-1" role="dialog" aria-labelledby="block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Block <?php echo $m_info['m_fullname']; ?></h4>
+      </div>
+      <div class="modal-body">
+		Are you sure you want to block <strong><?php echo $m_info['m_fullname']; ?></strong>. Once blocked:
+        <ul>
+        	<li>If you are friends, you will automatically be unfriended.</li>
+            <li>You will not be able to exchange messages</li>
+            <li>You will not be able to like, share or comment on each other's posts</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a href="<?php echo ISVIPI_URL.'p/friends/f_block/'.$m_info['m_user_id'] ?>" class="btn btn-primary">Yes, Block User</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Unfriend-->
+<div class="modal fade" id="unfriend" tabindex="-1" role="dialog" aria-labelledby="unfriend">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Unfriend <?php echo $m_info['m_fullname']; ?></h4>
+      </div>
+      <div class="modal-body">
+		Are you sure you want to unfriend <strong><?php echo $m_info['m_fullname']; ?></strong>.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$m_info['m_user_id'].'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $m_info['m_fullname']; ?></a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 

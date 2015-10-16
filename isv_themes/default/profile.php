@@ -41,11 +41,13 @@
                                   <b>Member Level</b> <a class="pull-right"><?php echo $m_info['m_level']; ?></a>
                                 </li>
                               </ul>
-            				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>
+                              
+            				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id'] && 
+							  !$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                              
                              <!--check if they are already friends -->
                               	<?php if($friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
-                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$m_info['m_user_id'].'/' ?>" class="btn btn-warning">Unfriend</a>
+                                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#unfriend">Unfriend</a>
                               <!-- if not friends, request exists and profile viewer is the sender -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $from_id === $_SESSION['isv_user_id']){?>
                                 <div class="row prof-fr-opt">
@@ -72,13 +74,25 @@
                                 <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning">Add Friend</a>
                                 <?php } ?>
                                   <a href="#" class="btn btn-success"><b>Message</b></a>
-                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_block/'.$m_info['m_user_id'].'/' ?>" class="btn btn-danger"><b>Block</b></a>
+                                  <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#block"><b>Block</b></a>
+                              <?php } ?>
+                              
+                              <!-- show a message if either of the users has blocked the other -->
+                              <?php if($friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id']) 
+							  && $block_user1 === $m_info['m_user_id']){?>
+                                    <li class="list-group-item bg-red">You were blocked by this user</li>
+                              <?php } else if($friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id']) 
+							  && $block_user1 === $_SESSION['isv_user_id']){?>
+                                    <li class="list-group-item">You blocked this user
+                                    	<a href="<?php echo ISVIPI_URL.'p/friends/f_unblock/'.$m_info['m_user_id'] ?>" class="btn btn-success btn-xs btn-flat"><b>Unblock</b></a>
+                                    </li>
                               <?php } ?>
                               
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
                           <!-- end::Profile Image -->
                           
+						  <?php if(!$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                           <!-- About Me Box -->
                           <div class="box box-primary">
                             <div class="box-header with-border">
@@ -116,9 +130,12 @@
                             </div><!-- /.box-body -->
                           </div><!-- /.box -->
                           <!-- end::About Me Box -->
+                          <?php } ?>
+                          
                     </div>
                     <!-- end::col-md-4-->
                     
+                    <?php if(!$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                     <!-- col-md-8 -->
                     <div class="col-md-8 prof-nav" id="profile-menu">
                     <div class="nav-tabs-custom">
@@ -163,6 +180,11 @@
                     </div>
                     </div>
                     <!-- end::col-md-8 -->
+                    <?php } else {?>
+                    <div class="col-md-8" style="padding:20px;">
+                    	<li class="list-group-item">You cannot view this page.</li>
+                    </div>
+					<?php } ?>
                     </div>
                 </div>
             <div class="clear"></div> 
