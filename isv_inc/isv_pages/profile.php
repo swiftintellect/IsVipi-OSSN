@@ -25,9 +25,11 @@
 	$username = cleanGET($PAGE[1]);
 
 	require_once(ISVIPI_CLASSES_BASE .'global/getMembers_cls.php');
-	require_once(ISVIPI_CLASSES_BASE .'forms/friends_cls.php'); 
+	require_once(ISVIPI_CLASSES_BASE .'global/getFriends_cls.php'); 
 	
 	$m = new getSingleMember();
 	$m_info = $m->members($username,'username');
+	
+	$friends = new get_friends();
 	
  	include_once ISVIPI_ACT_THEME.'profile.php'; 

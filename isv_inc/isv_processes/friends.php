@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'f_req' && $operation !== 'f_accept' && $operation !== 'f_ignore'){
+	 if ($operation !== 'f_req' && $operation !== 'f_accept' && $operation !== 'f_ignore' && $operation !== 'f_remove'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -115,6 +115,21 @@
 		/** ignore the friend request **/
 		$f_ignore = new friends();
 		$f_ignore->ignoreFriendReq($fr_req_id);
+	}
+	
+	/*** REMOVE FRIEND/UNFRIEND **/
+	if ($operation === 'f_remove'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION[''] = 'An error occurred. Please try again.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		$friend_id = cleanGET($PAGE[3]);
+		
+		/** ignore the friend request **/
+		$f_remove = new friends();
+		$f_remove->un_friend($friend_id);
 	}
 
 	

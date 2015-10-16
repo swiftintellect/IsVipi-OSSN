@@ -42,9 +42,37 @@
                                 </li>
                               </ul>
             				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>
-                              <a href="#" class="btn btn-primary"><b>Add Friend</b></a>
-                              <a href="#" class="btn btn-success"><b>Message</b></a>
-                              <a href="#" class="btn btn-danger"><b>Block</b></a>
+                             
+                             <!--check if they are already friends -->
+                              	<?php if($friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$m_info['m_user_id'].'/' ?>" class="btn btn-warning">Unfriend</a>
+                              <!-- if not friends, request exists and profile viewer is the sender -->
+								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $from_id === $_SESSION['isv_user_id']){?>
+                                <div class="row prof-fr-opt">
+                                  <button type="button" class="btn bg-navy btn-xs btn-flat disabled">Friend Request Pending</button>
+                                </div>
+                              
+                              <!-- if not friends, request exists and profile viewer is the recepient and not ignored -->
+								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 1){?>
+                                <div class="row prof-fr-opt">
+                                <span class="label label-default">Request Pending</span> 
+                                <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_ignore/'.$fr_rq_id ?>" class="btn btn-warning btn-xs btn-flat">Ignore</a> &nbsp;
+								</div>
+                                
+                             <!-- if not friends, request exists and profile viewer is the recepient and ignored -->
+								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 0){?>
+                                <div class="row prof-fr-opt">
+                                <span class="label label-default">You ignored this request</span> 
+                                <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+								</div>
+							
+                            <!-- not friends and no friend request exists -->
+								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning">Add Friend</a>
+                                <?php } ?>
+                                  <a href="#" class="btn btn-success"><b>Message</b></a>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_block/'.$m_info['m_user_id'].'/' ?>" class="btn btn-danger"><b>Block</b></a>
                               <?php } ?>
                               
                             </div><!-- /.box-body -->

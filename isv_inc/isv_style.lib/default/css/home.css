@@ -5002,3 +5002,9 @@ table.text-center th {
 	margin-left:10px;
 	margin-top:-5px;
 }
+.prof-fr-opt {
+	padding-left:15px;
+	margin-bottom:5px;
+	padding-bottom:5px;
+	border-bottom:dotted thin #F2F2F2
+}

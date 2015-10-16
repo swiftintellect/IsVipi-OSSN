@@ -103,6 +103,42 @@ class friends {
 		
 	}
 	
+	/******************************
+	____ REMOVE FRIEND  ____
+
+	******************************/
+	public function un_friend($friend_id){
+		global $isv_db;
+		
+		$this->from_uri = $_SERVER['HTTP_REFERER'];
+		
+		//check if they are friends
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=? AND user2=?"); 
+		$stmt->bind_param('ii', $this->me,$friend_id);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($totalCount < 1 ){
+			$_SESSION['isv_success'] = 'This user is not your friend so you cannot remove friend.';
+			header('location:'.$this->from_uri.'');
+			exit();
+		} else {
+			//if they are friend then we delete friendship
+			$stmt = $isv_db->prepare ("DELETE FROM friends WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)"); 
+			$stmt->bind_param('iiii', $this->me,$friend_id,$this->me,$friend_id);
+			$stmt->execute();  
+			$stmt->close();
+		}
+		
+		//return success
+		$_SESSION['isv_success'] = 'You have unfriended this user.';
+		header('location:'.$this->from_uri.'');
+		exit();
+		
+	}
+	
 	
 	/******************************
 	_______ HELPERS ________
