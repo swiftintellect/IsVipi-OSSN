@@ -63,7 +63,9 @@
 							  <?php echo age($mi['m_dob']) ?>)</h5>
                               <div class="widget-user-username" style="margin-top:-5px;">
                               
-                              	  <!-- check if request exists -->
+                              	  <!-- will show these options only if the two are not blocked from each other -->
+                                  <?php if(!$fr_rquest->blocked_users($_SESSION['isv_user_id'],$mi['m_id'])){?>
+                                  <!-- check if request exists -->
 								  <?php global $fr_id,$friendReq_status,$fr_from,$fr_to; ?>
                                   <!-- if friend request exists (sender point of view) -->
                               	  <?php if($fr_rquest->friendReqExists($mi['m_id']) && ($fr_from === $_SESSION['isv_user_id'])){?>
@@ -80,6 +82,12 @@
                                   <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$mi['m_id'] ?>" class="btn btn-primary btn-xs btn-flat">Send Friend Request</a> &nbsp;
                                   <?php } ?>
                                   <a href="<?php echo ISVIPI_URL.'profile/'.$mi['m_username'] ?>" class="btn btn-warning btn-xs btn-flat"><i class="fa fa-eye"></i> View Profile</a>
+                                  <?php } else if ($block_user1 === $_SESSION['isv_user_id']){?>
+                                  	<button type="button" class="btn bg-red btn-xs btn-flat disabled">You blocked this user</button>
+                                    <a href="<?php echo ISVIPI_URL.'p/friends/f_unblock/'.$mi['m_id'] ?>" class="btn btn-success btn-xs btn-flat"><b>Unblock</b></a>
+                                  <?php } else if ($block_user2 === $_SESSION['isv_user_id']){?>
+                                  	<button type="button" class="btn bg-red btn-xs btn-flat disabled">You were blocked by this user</button>
+                                  <?php } ?>
                               </div>
                             </div>
                           </div><!-- /.widget-user -->
