@@ -18,8 +18,10 @@
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getWall_cls.php'); 
+	require_once(ISVIPI_CLASSES_BASE .'global/getFriends_cls.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
 	$converter = new Encryption;
+	$friends = new get_friends();
 	
 	//get the user id
 	if(!isset($PAGE[1])){

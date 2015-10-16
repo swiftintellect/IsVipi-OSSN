@@ -1,5 +1,4 @@
-﻿                  <?php if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
-				  	
+﻿				 <?php if (is_array($feed)) foreach ($feed as $key => $f) {
 					/** get feed properties (likes, comments, if liked) **/
 				  	$feedProperties = new getFeedProperties($f['feed_id']);
 					
@@ -7,6 +6,11 @@
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
 				  ?>
+				   <?php if(
+                        ($_SESSION['isv_user_id'] === $f['feed_user']) /* if profile owner */||
+						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 2) /* if everyone */ ||
+						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 1 && $friends->are_friends($_SESSION['isv_user_id'],$f['feed_user']))
+                    ){ ?>
                 <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">
                 <div class='box-header with-border'>
                   <div class='user-block'>
@@ -199,4 +203,8 @@
                   </div>
                 </div>
 
+              <?php } else {?>
+               		<li class="list-group-item" style="margin-bottom:10px">The user has restricted access to this wall.</li>
               <?php } ?>
+			  <?php } ?>
+			  

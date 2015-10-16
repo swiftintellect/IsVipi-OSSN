@@ -58,16 +58,18 @@ class getFeeds {
 		f.time,
 		u.username,
 		p.fullname,
-		p.profile_pic
+		p.profile_pic,
+		st.feeds
 		FROM feeds f
 		JOIN users u ON u.id = f.user_id
 		JOIN user_profile p ON p.user_id = u.id
+		JOIN user_settings st ON p.user_id = st.user_id
 		WHERE f.user_id=? GROUP BY f.id ORDER BY f.id DESC LIMIT 0,?"); 
 		$sqlAllFeeds->bind_param('ii', $user,$this->limit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
-		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
+		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC,$feedSettings); 
 		
 			while($sqlAllFeeds->fetch()){
 				$this->feed[] = array(
@@ -80,7 +82,8 @@ class getFeeds {
 					'feed_time' => $this->feedTime,
 					'feed_username' => $this->f_username,
 					'feed_fullname' => $this->f_fullname,
-					'feed_profilePIC' => $this->f_profilePIC
+					'feed_profilePIC' => $this->f_profilePIC,
+					'feed_settings' => $feedSettings
 				);
 			}
 		return $this->feed;
