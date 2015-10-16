@@ -4750,6 +4750,15 @@ table.text-center th {
 		margin-bottom:0 !important;
 		padding-bottom:0 !important;
 	}
+	.members {
+		width:100% !important;
+		margin:0 !important;
+		padding:0 !important;
+	}
+	.widget-user-username {
+		font-size:15px !important;
+		margin-bottom:5px !important;
+	}
 
 }
 

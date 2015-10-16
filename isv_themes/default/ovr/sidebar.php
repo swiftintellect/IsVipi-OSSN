@@ -24,8 +24,8 @@
             <li>
             	<a href="#"><i class="fa fa-envelope-o"></i> <span>Messages</span></a>
             </li>
-            <li>
-            	<a href="#"><i class="fa fa-users"></i> <span>Friends</span></a>
+            <li <?php if ($PAGE['0'] === "friends"){?> class="active" <?php } ?>>
+            	<a href="<?php echo ISVIPI_URL .'friends/' ?>"><i class="fa fa-users"></i> <span>Friends</span></a>
             </li>
             <li <?php if ($PAGE['0'] === "members"){?> class="active" <?php } ?>>
             	<a href="<?php echo ISVIPI_URL .'members/' ?>"><i class="fa fa-search"></i> <span>Browse</span></a>
