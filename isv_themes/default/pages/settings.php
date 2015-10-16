@@ -24,9 +24,9 @@
                      	<div class="privacy">
                       	<label>Show my timeline feeds to 
                       		<select class="form-control" name="feeds_privacy">
-                        		<option>nobody</option>
-                        		<option>friends only</option>
-                        		<option>everyone</option>
+                        		<option <?php if($m_info['m_feed_settings'] === 0) echo 'selected'; ?>>nobody</option>
+                        		<option <?php if($m_info['m_feed_settings'] === 1) echo 'selected'; ?>>friends only</option>
+                        		<option <?php if($m_info['m_feed_settings'] === 2) echo 'selected'; ?>>everyone</option>
                       		</select>
                      	</label>
                         </div>
@@ -35,9 +35,9 @@
                      	<div class="privacy">
                       	<label>Show my phone number to 
                       		<select class="form-control" name="phone_privacy">
-                        		<option>nobody</option>
-                        		<option>friends only</option>
-                        		<option>everyone</option>
+                        		<option <?php if($m_info['m_phone_settings'] === 0) echo 'selected'; ?>>nobody</option>
+                        		<option <?php if($m_info['m_phone_settings'] === 1) echo 'selected'; ?>>friends only</option>
+                        		<option <?php if($m_info['m_phone_settings'] === 2) echo 'selected'; ?>>everyone</option>
                       		</select>
                      	</label>
                         </div>

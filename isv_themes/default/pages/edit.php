@@ -99,7 +99,8 @@
 	<div class="box-tools pull-right">
     	<input type="hidden" name="isv_op" value="edit_prof" />
     	<button type="submit" class="btn btn-success btn-flat">Save</button>
-    </div><!-- /.box-tools -->
+    	</div><!-- /.box-tools -->
+    <div class="clear"></div>
     
     
     </div>

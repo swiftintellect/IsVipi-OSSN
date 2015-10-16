@@ -169,5 +169,21 @@
 			}
 		}
 		
-		//assign our post variables to their values
+		
+		//check if they were not altered
+		if ($privacySett['Feeds'] !== "nobody" && $privacySett['Feeds'] !== "friends only" && $privacySett['Feeds'] !== "everyone"){
+			$_SESSION['isv_error'] = 'An error occured. It appears some values may have been changed illegally.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		if ($privacySett['Phone'] !== "nobody" && $privacySett['Phone'] !== "friends only" && $privacySett['Phone'] !== "everyone"){
+			$_SESSION['isv_error'] = 'An error occured. It appears some values may have been changed illegally.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		//update
+		$upd = new member($_SESSION['isv_user_id']);
+		$upd->update_privacy($privacySett);
 	}

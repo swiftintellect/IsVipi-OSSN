@@ -16,6 +16,10 @@ class member {
 	private $pwd;
 	private $new_pwd;
 	
+	//update privacy
+	private $feed_settings;
+	private $phone_settings;
+	
 	//image upload (both profile pic anc cover photo)
 	private $newName;
 	private $path;
@@ -45,13 +49,17 @@ class member {
 			p.profile_pic,
 			p.cover_photo,
 			p.hobbies,
-			p.relshp_status
+			p.relshp_status,
+			st.feeds,
+			st.phone
 			FROM users AS u
-			INNER JOIN user_profile AS p ON u.id = p.user_id WHERE u.id=?;");
+			LEFT JOIN user_profile AS p ON u.id = p.user_id 
+			LEFT JOIN user_settings AS st ON p.user_id = st.user_id 
+			WHERE u.id=?;");
 		$stmt->bind_param('i', $this->user_id);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($username,$email,$userStatus,$level,$regDate,$lastActvty,$fullName,$gender,$dob,$country,$city,$phone,$profilePic,$coverPhoto,$hobbies,$relshpStatus);
+		$stmt->bind_result($username,$email,$userStatus,$level,$regDate,$lastActvty,$fullName,$gender,$dob,$country,$city,$phone,$profilePic,$coverPhoto,$hobbies,$relshpStatus,$feedSettings,$phoneSettings);
 		$stmt->fetch();
 		$stmt->close();
 			return array(
@@ -70,7 +78,9 @@ class member {
 				'profile_pic' => $profilePic,
 				'cover_photo' => $coverPhoto,
 				'hobbies' => $hobbies,
-				'rel_status' => $relshpStatus
+				'rel_status' => $relshpStatus,
+				'm_feed_settings' => $feedSettings,
+				'm_phone_settings' => $phoneSettings
 			);
 	}
 	
@@ -297,6 +307,76 @@ class member {
 		$_SESSION['isv_success'] = 'Password changed.';
 		header('location:'.$from_url.'');
 		exit();
+	}
+	
+	public function update_privacy($settings){
+		global $isv_db;
+		
+		$from_url = $_SERVER['HTTP_REFERER'];
+		
+		$this->feed_settings = $settings['Feeds'];
+		$this->phone_settings = $settings['Phone'];
+		
+		/***************************
+			nobody = 0
+			friends only = 1
+			everyone = 2
+		***************************/
+		
+		//assign corresponding values
+		if($this->feed_settings == 'nobody'){
+			$this->feed_settings = 0;
+		} else if ($this->feed_settings == 'friends only'){
+			$this->feed_settings = 1;
+		} else if ($this->feed_settings == 'everyone'){
+			$this->feed_settings = 2;
+		}
+		
+		if($this->phone_settings == 'nobody'){
+			$this->phone_settings = 0;
+		} else if ($this->phone_settings == 'friends only'){
+			$this->phone_settings = 1;
+		} else if ($this->phone_settings == 'everyone'){
+			$this->phone_settings = 2;
+		}
+		
+		//check if this user has his/her settings db row
+		if($this->settings_row_exists($this->user_id)){
+			//update
+			$stmt = $isv_db->prepare("UPDATE user_settings SET feeds=?,phone=?,time=UTC_TIMESTAMP() WHERE user_id=?");
+			$stmt->bind_param('iii',$this->feed_settings,$this->phone_settings,$this->user_id);
+			$stmt->execute();
+			$stmt->close();
+			
+		} else {
+			//insert
+			$stmt = $isv_db->prepare("INSERT INTO user_settings (user_id,feeds,phone,time) VALUES (?,?,?,UTC_TIMESTAMP())");
+			$stmt->bind_param('iii',$this->user_id,$this->feed_settings,$this->phone_settings);
+			$stmt->execute();
+			$stmt->close();
+		}
+		
+		//return success
+		$_SESSION['isv_success'] = 'Privacy settings updated';
+		header('location:'.$from_url.'');
+		exit();
+	}
+	
+	private function settings_row_exists($user){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM user_settings WHERE user_id=?"); 
+		$stmt->bind_param('i', $user);
+		$stmt->execute();  
+		$stmt->bind_result($totalCount); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($totalCount > 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

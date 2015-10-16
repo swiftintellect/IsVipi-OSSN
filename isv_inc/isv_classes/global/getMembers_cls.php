@@ -144,15 +144,18 @@ class getSingleMember {
 				p.profile_pic,
 				p.cover_photo,
 				p.hobbies,
-				p.relshp_status 
+				p.relshp_status,
+				st.feeds,
+				st.phone 
 			FROM users u
 			LEFT JOIN user_profile p ON u.id = p.user_id 
+			LEFT JOIN user_settings AS st ON p.user_id = st.user_id
 			WHERE u.id=?
 		"); 
 		$stmt->bind_param('i',$this->m_id);
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($this->m_id,$this->m_username,$this->m_level,$this->m_reg_date,$this->p_id,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_country,$this->m_city,$this->m_phone,$this->m_profile_pic,$this->m_cover_photo,$this->m_hobbies,$this->m_relshp_status); 
+		$stmt->bind_result($this->m_id,$this->m_username,$this->m_level,$this->m_reg_date,$this->p_id,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_country,$this->m_city,$this->m_phone,$this->m_profile_pic,$this->m_cover_photo,$this->m_hobbies,$this->m_relshp_status,$feedSettings,$phoneSettings); 
 		$stmt->fetch();
 		$stmt->close();
 				$this->m_info = array(
@@ -171,6 +174,8 @@ class getSingleMember {
 					'm_cover_photo' => $this->m_cover_photo,
 					'm_hobbies' => $this->m_hobbies,
 					'm_rel_status' => $this->m_relshp_status,
+					'm_feed_settings' => $feedSettings,
+					'm_phone_settings' => $phoneSettings
 				);
 		return $this->m_info;
 	}

@@ -64,6 +64,12 @@
 								}?>
                                 <strong><i class="fa fa-file-text-o margin-r-5"></i> Personal Info</strong><br />
                             	<?php echo ucfirst($m_info['m_gender']) ?> (<?php echo age($m_info['m_dob']).$relStatus ?>)
+                             
+                             <?php if($_SESSION['isv_user_id'] == $m_info['m_user_id'] || $m_info['m_phone_settings'] === 2){?>
+                                 <hr style="margin:5px 0">
+                                 <strong>Phone</strong> <?php echo $m_info['m_phone'] ?>
+                             <?php } ?>
+                             
                             <hr style="margin:5px 0">
                               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
                               <?php 
