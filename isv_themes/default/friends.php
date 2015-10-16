@@ -59,11 +59,30 @@
                               <div class="widget-user-username" style="margin-top:-5px;">
                               
                                   <a href="<?php echo ISVIPI_URL.'profile/'.$mi['m_username'] ?>" class="btn btn-warning btn-xs btn-flat"><i class="fa fa-eye"></i> View Profile</a>
-                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$mi['m_id'].'/' ?>" class="btn btn-danger btn-xs btn-flat">Unfriend</a>
+                                  <a href="#" data-toggle="modal" data-target="#unfriend<?php echo $mi['m_id'] ?>" class="btn btn-danger btn-xs btn-flat">Unfriend</a>
                               </div>
                             </div>
                           </div><!-- /.widget-user -->
                         </div><!-- /.col -->
+                        <!-- Unfriend MODAL-->
+                        <div class="modal fade" id="unfriend<?php echo $mi['m_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="unfriend">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Unfriend <?php echo $mi['m_fullname']; ?></h4>
+                              </div>
+                              <div class="modal-body">
+                                Are you sure you want to unfriend <strong><?php echo $mi['m_fullname']; ?></strong>.
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$mi['m_id'].'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $mi['m_fullname']; ?></a>
+                              </div>
+                            </div><!-- /.modal-content -->
+                          </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
                         <?php } ?>
                         <?php } else {?>
                         <div class="col-md-12">
