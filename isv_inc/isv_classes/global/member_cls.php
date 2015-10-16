@@ -239,6 +239,9 @@ class member {
 		$this->relationship = $userFields['Relationship'];
 		$this->hobbies = $userFields['Hobbies'];
 		
+		$format = "d/m/Y";
+		$this->dob = $this->validateDate($this->dob, $format);
+		
 		//update our database
 		global $isv_db;
 		
@@ -377,6 +380,20 @@ class member {
 		} else {
 			return false;
 		}
+	}
+	
+	private function validateDate($date, $format){
+			$DoB = DateTime::createFromFormat($format, $date);
+			
+			if(!$DoB) {
+			 	$array['err'] = true;
+				$array['message'] = 'Your Date of Birth does not match the DD-MM-YYYY required format.';
+				echo json_encode($array);
+				exit();
+			} else {
+			    $date = DateTime::createFromFormat('j/m/Y', $date);
+				return $date->format('d-m-Y');
+			}
 	}
 	
 }
