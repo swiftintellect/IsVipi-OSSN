@@ -86,7 +86,7 @@ class getMembers {
 					'm_gender' => $this->m_gender,
 					'm_dob' => $this->m_dob,
 					'm_profile_pic' => $this->m_profile_pic,
-					'm_all_count' => $all_count,
+					'm_all_count' => $all_count
 				);
 			}
 		return $this->m_info;

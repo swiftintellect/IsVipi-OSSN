@@ -38,7 +38,7 @@
                 	<div class="row">
                     
                     	<!--load members if more than one -->
-                        <?php if($allMs = $m->totalMembers(1) > 1 ){?>
+                       
                     	<?php if(is_array($m_info)) foreach ($m_info as $key => $mi) {
 							//get friends properties (request pending, rejected and so on)
 							$fr_rquest = new friends();
@@ -92,7 +92,6 @@
                             </div>
                           </div><!-- /.widget-user -->
                         </div><!-- /.col -->
-                        <?php } ?>
                         <?php } else {?>
                         <div class="col-md-12">
                         	<li class="list-group-item">No active members found.</li>

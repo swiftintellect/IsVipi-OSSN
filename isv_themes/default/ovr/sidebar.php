@@ -15,9 +15,9 @@
               <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'] ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
             </div>
           </div>
-
+			<hr style="margin:10px 0 0 0;" />
           <!-- Sidebar Menu -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" style="margin-left:30px;">
             <li <?php if ($PAGE['0'] === "home"){?> class="active" <?php } ?>>
             	<a href="<?php echo ISVIPI_URL .'home/' ?>"><i class="fa fa-feed"></i> <span>News Feed</span></a>
             </li>

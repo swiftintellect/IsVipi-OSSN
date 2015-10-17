@@ -6,7 +6,7 @@
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
 				  ?>
                 <div class="box box-widget f_styled" id="f_content<?php echo $f['feed_id'] ?>">
-                <div class='box-header with-border'>
+                <div class='box-header'>
                   <div class='user-block'>
                   <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
                     <img class='img-square' src='<?php echo user_pic($f['feed_profilePIC']) ?>' alt='<?php echo $f['feed_fullname'] ?> photo update'>

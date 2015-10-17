@@ -29,8 +29,8 @@
                               <h3 class="profile-username text-center"><?php echo $m_info['m_fullname']; ?></h3>
                               
                               <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
-                              <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#profilePic"><b>Change Profile Pic</b></a>
-                              <a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/edit'?>" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+                              <a href="#" class="btn btn-warning btn-sm btn-block" data-toggle="modal" data-target="#profilePic"><b>Change Profile Pic</b></a>
+                              <a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/edit'?>" class="btn btn-primary btn-sm btn-block"><b>Edit Profile</b></a>
                               <?php } ?>
             
                               <ul class="list-group list-group-unbordered">
@@ -47,7 +47,7 @@
                              
                              <!--check if they are already friends -->
                               	<?php if($friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
-                                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#unfriend">Unfriend</a>
+                                  <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#unfriend">Unfriend</a>
                               <!-- if not friends, request exists and profile viewer is the sender -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $from_id === $_SESSION['isv_user_id']){?>
                                 <div class="row prof-fr-opt">
@@ -71,10 +71,10 @@
 							
                             <!-- not friends and no friend request exists -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning">Add Friend</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
                                 <?php } ?>
-                                  <a href="#" class="btn btn-success"><b>Message</b></a>
-                                  <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#block"><b>Block</b></a>
+                                  <a href="#" class="btn btn-success btn-sm"><b>Message</b></a>
+                                  <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#block"><b>Block</b></a>
                               <?php } ?>
                               
                               <!-- show a message if either of the users has blocked the other -->
