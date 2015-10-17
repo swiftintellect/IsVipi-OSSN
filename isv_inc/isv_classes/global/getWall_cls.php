@@ -26,17 +26,17 @@ class getFeeds {
 	
 	public $feed;
 	
-	public function __construct ($page){
+	public function __construct ($user){
 		$this->limit = 10;
 		$this->user_id = $_SESSION['isv_user_id'];
-		$this->feedTotal = $this->getTotalFeeds();
+		$this->feedTotal = $this->getTotalFeeds($user);
 	}
 	
-	private function getTotalFeeds(){
+	public function getTotalFeeds($user){
 		global $isv_db;
 		
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feeds WHERE user_id=?"); 
-		$stmt->bind_param('i', $this->user_id);
+		$stmt->bind_param('i', $user);
 		$stmt->execute();  
 		$stmt->bind_result($totalCount); 
 		$stmt->fetch();

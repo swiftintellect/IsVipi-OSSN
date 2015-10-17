@@ -38,9 +38,7 @@
                     
                     	<!--load members if more than one -->
                         <?php if($allMs = $m->totalFriends($_SESSION['isv_user_id']) > 0 ){?>
-                    	<?php if(is_array($m_info)) foreach ($m_info as $key => $mi) {
-							//get friends properties (request pending, rejected and so on)
-						?>
+                    	<?php if(is_array($m_info)) foreach ($m_info as $key => $mi) {?>
                     	<div class="col-md-6" style="margin-top:10px">
                           <!-- Widget: user widget style 1 -->
                           <div class="box box-widget widget-user-2">

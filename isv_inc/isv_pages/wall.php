@@ -29,13 +29,11 @@
 	}
 	
 	$user = $PAGE[1];
-	
 	//check if it is numeric
 	if(!is_numeric($user)){
 		exit();
 	}
-
-	$getFeeds = new getFeeds(2);
+	$getFeeds = new getFeeds($user);
 	$feed = $getFeeds->allFeeds($user);
 
  	include_once ISVIPI_ACT_THEME.'wall.php'; 

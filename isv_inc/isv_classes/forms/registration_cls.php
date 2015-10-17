@@ -108,6 +108,13 @@ class userRegistration {
 		$stmt->prepare("INSERT INTO user_profile (user_id,fullname,gender,dob,country) VALUES (?,?,?,?,?)");
 		$stmt->bind_param('issss',$userID,$this->name,$this->sex,$this->dob,$this->country);
 		$stmt->execute();
+		
+		//save detaile in user_settings table
+		$feeds = 1;
+		$phone = 1;
+		$stmt->prepare("INSERT INTO user_settings (user_id,feeds,phone,time) VALUES (?,?,?,UTC_TIMESTAMP())");
+		$stmt->bind_param('iii',$userID,$feeds,$phone);
+		$stmt->execute();
 		$stmt->close();
 		
 		//send activation email if this is enabled

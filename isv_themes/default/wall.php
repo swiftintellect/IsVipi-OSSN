@@ -6,10 +6,13 @@
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
 				  ?>
+                  
 				   <?php if(
                         ($_SESSION['isv_user_id'] === $f['feed_user']) /* if profile owner */||
 						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 2) /* if everyone */ ||
-						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 1 && $friends->are_friends($_SESSION['isv_user_id'],$f['feed_user']))
+						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 1 
+						&& $friends->are_friends($_SESSION['isv_user_id'],$f['feed_user'])) /* if only friends */
+						
                     ){ ?>
                 <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">
                 <div class='box-header with-border'>
@@ -207,4 +210,9 @@
                		<li class="list-group-item" style="margin-bottom:10px">The user has restricted access to this wall.</li>
               <?php } ?>
 			  <?php } ?>
+              <?php if($getFeeds->getTotalFeeds($user) < 1){?>
+              	<div class="col-md-12" style="margin-bottom:10px">
+                    <li class="list-group-item">No posts found.</li>
+                </div>
+              <?php } ?>
 			  

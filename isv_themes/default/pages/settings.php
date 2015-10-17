@@ -1,5 +1,7 @@
 ﻿<?php if ($_SESSION['isv_user_id'] !== $m_info['m_user_id']){?>
-<!-- do nothing -->
+	<div class="col-md-12">
+    	<li class="list-group-item">You are not allowed to view this page.</li>
+	</div>
 <?php } else { ?>
 <!-- box -->
 <div class="box box-widget" style="margin-top:-20px">
