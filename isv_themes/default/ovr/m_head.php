@@ -18,7 +18,17 @@
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/formsubmit/form.submit.min.js'?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.js'?>"></script>
+    <script src="<?php echo ISVIPI_STYLE_URL.'plugins/timer/jquery.timer.js'?>"></script>
     <script> var site_url = '<?php echo $isv_siteDetails['s_url'] ?>'; </script>
+    <script>
+	function load_user_notices(){
+		$("#notifications").timer({
+			delay: 3000, //20 sec 20000
+			repeat: true,
+			url: site_url +'/notices/'
+		});
+	}
+	</script>
     
     <link rel="shortcut icon" href="<?php echo ISVIPI_STYLE_URL .'site/imgs/'.$isv_siteSettings['favicon']?>">
 

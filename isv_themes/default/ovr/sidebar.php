@@ -10,7 +10,10 @@
             <img src="<?php echo user_pic($memberinfo['profile_pic']) ?>" class="img-square" alt="Profile Picture <?php echo $memberinfo['full_name'] ?>">
             </div>
             <div class="pull-left info">
-              <p><?php echo $memberinfo['full_name'] ?></p>
+              <p>
+			  	<?php echo $memberinfo['full_name'] ?>
+              </p>
+              
               <!-- Status -->
               <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'] ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
             </div>
@@ -29,6 +32,10 @@
             </li>
             <li <?php if ($PAGE['0'] === "members"){?> class="active" <?php } ?>>
             	<a href="<?php echo ISVIPI_URL .'members/' ?>"><i class="fa fa-search"></i> <span>Browse</span></a>
+            </li>
+            <hr style="margin:10px 0" />
+            <li class="logout">
+            	<a href="<?php echo ISVIPI_URL .'log_out' ?>"><i class="fa fa-sign-out"></i> Logout</a>
             </li>
           </ul><!-- /.sidebar-menu -->
         </section>

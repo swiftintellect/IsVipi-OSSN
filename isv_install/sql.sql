@@ -489,6 +489,7 @@ CREATE TABLE IF NOT EXISTS `feed_notices` (
   `feed_owner` bigint(20) NOT NULL,
   `feed_id` bigint(20) NOT NULL,
   `notice` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
   `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

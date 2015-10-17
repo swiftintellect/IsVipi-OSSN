@@ -289,3 +289,74 @@ function is_online($last_activity){
 		echo "<i class='fa fa-circle text-green offline-online'></i>";
 	}
 }
+
+function user_friends($user){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=?"); 
+	$stmt->bind_param('i', $user);
+	$stmt->execute();  
+	$stmt->bind_result($totalCount); 
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $totalCount;
+}
+
+function user_friend_requests_count($user){
+	global $isv_db;
+	
+	$unread = 1;
+	$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friend_requests WHERE to_id=? AND status=?"); 
+	$stmt->bind_param('ii', $user,$unread);
+	$stmt->execute();  
+	$stmt->bind_result($totalCount); 
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $totalCount;
+}
+
+function user_friend_req_notices($user){
+	global $isv_db;
+	
+	$unread = 1;
+	$stmt = $isv_db->prepare ("
+	SELECT 
+		fr.id,
+		fr.from_id,
+		fr.to_id,
+		fr.status,
+		fr.time,
+		u.username,
+		p.fullname,
+		p.profile_pic
+		FROM friend_requests fr 
+		LEFT JOIN users u ON fr.from_id = u.id
+		LEFT JOIN user_profile p ON p.user_id = u.id
+		WHERE fr.to_id=? AND fr.status=? LIMIT 5
+	
+	"); 
+	$stmt->bind_param('ii', $user,$unread);
+	$stmt->execute(); 
+	$result = $stmt->get_result();
+	$stmt->store_result(); 
+		while($resultArray[] = $result->fetch_assoc());
+	$stmt->close();
+	
+	return $resultArray;
+}
+
+function user_feed_notices_count($user){
+	global $isv_db;
+	
+	$unread = 1;
+	$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feed_notices WHERE feed_owner=? AND status=?"); 
+	$stmt->bind_param('ii', $user,$unread);
+	$stmt->execute();  
+	$stmt->bind_result($totalCount); 
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $totalCount;
+}
