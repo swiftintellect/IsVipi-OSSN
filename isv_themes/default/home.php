@@ -61,7 +61,7 @@
             
             
             <!-- announcements -->
-            <section class="col-lg-4 announcements">
+            <section class="col-lg-3 announcements">
             	<div class="box box-solid">
                     <div class="box-header">
                     
@@ -72,10 +72,10 @@
             </section>
             
             <!-- online friends -->
-            <section class="col-lg-2 friends-sidebar">
+            <section class="col-lg-3 friends-sidebar">
             	<div class="box box-solid">
                     <div class="box-header">
-                    
+                    	<?php require_once(ISVIPI_ACT_THEME .'pages/friends_sidebar.php') ?>
                     </div>
                     
                     

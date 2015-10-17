@@ -73,17 +73,19 @@ class get_friends {
 		$this->order_by = $oderBY;
 		
 		if($this->order_by == 'latest'){
-			$this->order_by = 'DESC';
+			$this->order_by = 'f.id DESC';
 		} else if($this->order_by == 'oldest'){
-			$this->order_by = 'ASC';
+			$this->order_by = 'f.id ASC';
+		} else if($this->order_by == 'online'){
+			$this->order_by = 'u.last_activity <= UTC_TIMESTAMP() - INTERVAL 10 MINUTE ASC, f.id DESC';
 		} else {
-			$this->order_by = 'DESC';
+			$this->order_by = 'f.id DESC';
 		}
-
 		$stmt = $isv_db->prepare ("
 			SELECT 
 				u.id,
 				u.username,
+				u.last_activity,
 				p.fullname,
 				p.gender,
 				p.dob,
@@ -91,21 +93,22 @@ class get_friends {
 			FROM users u
 			LEFT JOIN friends f ON u.id = f.user1 
 			LEFT JOIN user_profile p ON u.id = p.user_id 
-			WHERE f.user2=? ORDER BY f.id $this->order_by LIMIT $this->limit
+			WHERE f.user2=? ORDER BY $this->order_by LIMIT $this->limit
 		"); 
 		$stmt->bind_param('i',$user);
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($this->m_id,$this->m_username,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_profile_pic); 
+		$stmt->bind_result($m_id,$m_username,$m_last_activity,$m_fullname,$m_gender,$m_dob,$m_profile_pic); 
 		$all_count = $stmt->num_rows();
 			while($stmt->fetch()){
 				$this->friend_info[] = array(
-					'm_id' => $this->m_id,
-					'm_username' => $this->m_username,
-					'm_fullname' => $this->m_fullname,
-					'm_gender' => $this->m_gender,
-					'm_dob' => $this->m_dob,
-					'm_profile_pic' => $this->m_profile_pic,
+					'm_id' => $m_id,
+					'm_username' => $m_username,
+					'm_last_activity' => $m_last_activity,
+					'm_fullname' => $m_fullname,
+					'm_gender' => $m_gender,
+					'm_dob' => $m_dob,
+					'm_profile_pic' => $m_profile_pic,
 					'm_all_count' => $all_count,
 				);
 			}

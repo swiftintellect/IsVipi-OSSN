@@ -7,7 +7,7 @@
         <!-- Main content -->
         <section class="content">
         	<!-- user profile -->
-        	<section class="col-lg-10">
+        	<section class="col-lg-9">
 				<div class="box box-solid members">
                 	<div class="row">
                     
@@ -199,10 +199,10 @@
             <!--end::user profile -->
             
             <!-- online friends -->
-            <section class="col-lg-2 friends-sidebar">
+            <section class="col-lg-3 friends-sidebar">
             	<div class="box box-solid">
                     <div class="box-header">
-                    
+                    	<?php require_once(ISVIPI_ACT_THEME .'pages/friends_sidebar.php') ?>
                     </div>
                     
                     

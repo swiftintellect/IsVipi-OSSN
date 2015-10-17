@@ -265,3 +265,27 @@ function user_cover_pic($pic){
 		return ISVIPI_UPLOADS_URL . 'cover/'.$pic;
 	}
 }
+
+function is_online($last_activity){
+	$timeOffset = date('O');
+	$offSetSign = $timeOffset[0];
+
+	//convert offset to seconds
+	$timeOffset = $timeOffset * 60 * 60;
+	$timeOffset = $timeOffset / 100;
+	$time = strtotime($last_activity);
+	if ($offSetSign === '+'){
+		$time = (time() - $time) - $timeOffset; // we subtract if the offset is positive
+	} else {
+		$time = (time() - $time) + $timeOffset; // we add if offset is negative
+	}
+	
+	$time_offline = 10; //considered to be offline if inactive for 10 minutes
+	if($time > ($time_offline * 60)){
+		//is offline so show nothing
+		//echo "<i class='fa fa-circle text-red offline-online'></i>";
+	} else {
+		//is online
+		echo "<i class='fa fa-circle text-green offline-online'></i>";
+	}
+}
