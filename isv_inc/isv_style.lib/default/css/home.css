@@ -3259,6 +3259,16 @@ table.text-center th {
   .search-form, .announcements, .friends-sidebar {
 		display:none !important;
   }
+  .user_header_drop .dropdown-menu a{
+		color:#747474 !important;
+		padding-top:5px;
+	}
+	.user_header_drop .dropdown-menu a:hover {
+		color:#FFF !important;
+	}
+	.user_header_drop .dropdown-menu .divider {
+		background:#8A8A8A !important;
+	}
 }
 /*
  * Page: Invoice
@@ -4760,6 +4770,16 @@ table.text-center th {
 		font-size:15px !important;
 		margin-bottom:5px !important;
 	}
+	.user_header_drop .dropdown-menu a{
+		color:#747474 !important;
+		padding-top:5px;
+	}
+	.user_header_drop .dropdown-menu a:hover {
+		color:#FFF !important;
+	}
+	.user_header_drop .dropdown-menu .divider {
+		background:#8A8A8A !important;
+	}
 
 }
 
@@ -5100,4 +5120,8 @@ table.text-center th {
 .notice-holder a {
 	background-color:transparent !important;
 	color:#06F !important;
+}
+.user_header_drop {
+	margin-left:10px;
+	margin-top:5px;
 }

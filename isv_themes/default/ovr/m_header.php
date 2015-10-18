@@ -16,9 +16,9 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <form action="#" method="get" class="search-form">
+          <form action="#" method="post" class="search-form">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <input type="text" name="q" class="form-control" placeholder="enter name or username">
               <span class="input-group-btn">
                 <button type="submit" name="search" class="btn search-btn"><i class="fa fa-search"></i></button>
               </span>
@@ -27,13 +27,25 @@
           <!-- /.search form -->
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav" id="notifications">
+            <ul class="nav navbar-nav pull-left" id="notifications">
             	<!-- load header notices (friend requests,messages,global notifications) -->
                 <?php require_once(ISVIPI_ACT_THEME .'pages/notifications.php') ?>
                 <script>
                 	load_user_notices();
                 </script>
             </ul>
+            	<ul class="nav navbar-nav navbar-right user_header_drop">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i><span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/edit/' ?>">Edit Profile</a></li>
+                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/settings/' ?>">Account Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="<?php echo ISVIPI_URL .'log_out/' ?>">Logout</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+
           </div>
         </nav>
       </header>
