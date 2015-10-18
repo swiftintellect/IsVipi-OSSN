@@ -14,21 +14,18 @@
                     </div>
                 	<div class="row">
                     
-                   
-                       <ul class="list-group">
+                   <div class="col-md-12">
+                    <div class="box box-widget">
+                       <ul class="list-group" style="margin:5px">
                        <?php if(is_array($feed_notices) && !empty($feed_notices)) foreach ($feed_notices as $key => $feed_n) {?>
                           <li class="list-group-item">
                           	<div class="notice-holder">
-                            	<div class="pull-left">
                                    <a href="<?php echo ISVIPI_URL .'profile/'.$feed_n['username'] ?>" data-toggle="tooltip" title="<?php echo $feed_n['fullname'] ?>">
                                     <?php echo $feed_n['fullname'] ?>
                                    </a>
-                                    <strong><?php echo $feed_n['notice'] ?></strong> 
-                                    <a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($feed_n['feed_id']) ?>">post</a>
+                                    <strong><?php echo $feed_n['notice'] ?></strong>
+                                    <a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($feed_n['feed_id']) ?>" class="text-blue">post</a>
                                 	<div class="notification-time"><?php echo elapsedTime($feed_n['time']) ?></div>
-                                </div>
-                                
-                            <div class="clear"></div>
                             </div>
                           </li>
                         <?php } else { ?>
@@ -36,6 +33,8 @@
                         <?php } ?>
                         </ul>
                     
+                    </div>
+                    </div>
                     </div>
                 </div>
             <div class="clear"></div> 

@@ -5097,3 +5097,7 @@ table.text-center th {
 	margin-left:10px
 	
 }
+.notice-holder a {
+	background-color:transparent !important;
+	color:#06F !important;
+}
