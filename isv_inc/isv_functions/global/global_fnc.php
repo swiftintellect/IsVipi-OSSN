@@ -350,9 +350,25 @@ function user_friend_req_notices($user,$type,$limit){
 	"); 
 	$stmt->bind_param('i', $user);
 	$stmt->execute(); 
-	$result = $stmt->get_result();
-	$stmt->store_result(); 
-		while($resultArray[] = $result->fetch_assoc());
+	$stmt->store_result();
+	$stmt->bind_result($fr_id,$fr_from_id,$fr_to_id,$fr_status,$fr_time,$fr_username,$fr_fullname,$fr_profile_pic);
+	if($stmt->num_rows() > 0) {
+		while($stmt->fetch()){
+			$resultArray[] = array(
+					'id' => $fr_id,
+					'from_id' => $fr_from_id,
+					'to_id' => $fr_to_id,
+					'status' => $fr_status,
+					'time' => $fr_time,
+					'username' => $fr_username,
+					'fullname' => $fr_fullname,
+					'profile_pic' => $fr_profile_pic
+				);
+			
+		}
+	} else {
+		$resultArray[] = array();
+	}
 	$stmt->close();
 	
 	return $resultArray;
@@ -407,9 +423,27 @@ function user_feed_notices($user,$type,$limit){
 	"); 
 	$stmt->bind_param('i', $user);
 	$stmt->execute(); 
-	$result = $stmt->get_result();
 	$stmt->store_result(); 
-		while($resultArray[] = $result->fetch_assoc());
+	$stmt->bind_result($fn_id,$fn_user_id,$fn_feed_owner,$fn_feed_id,$fn_notice,$fn_status,$fn_time,$fn_username,$fn_fullname,$fn_profile_pic);
+	if($stmt->num_rows() > 0){
+		while($stmt->fetch()){
+			$resultArray[] = array(
+					'id' => $fn_id,
+					'user_id' => $fn_user_id,
+					'feed_owner' => $fn_feed_owner,
+					'feed_id' => $fn_feed_id,
+					'notice' => $fn_notice,
+					'status' => $fn_status,
+					'time' => $fn_time,
+					'username' => $fn_username,
+					'fullname' => $fn_fullname,
+					'profile_pic' => $fn_profile_pic
+				);
+		}
+	} else {
+		$resultArray[] = array();
+	}
+		//print_r($resultArray);exit();
 	$stmt->close();
 	
 	return $resultArray;
