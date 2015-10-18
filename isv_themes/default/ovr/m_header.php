@@ -16,10 +16,16 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <form action="#" method="post" class="search-form">
+          <?php if(isset($PAGE[0]) && $PAGE[0] === 'search' && isset($PAGE[1]) && !empty($PAGE[1])){
+			  $st = $PAGE[1];
+		  } else {
+			  $st = '';
+		  }?>
+          <form action="<?php echo ISVIPI_URL .'p/search/' ?>" method="post" class="search-form">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="enter name or username">
+              <input type="text" name="term" class="form-control" value="<?php echo $st ?>" placeholder="enter name or username" required>
               <span class="input-group-btn">
+              	<input type="hidden" name="isv_op" value="search" />
                 <button type="submit" name="search" class="btn search-btn"><i class="fa fa-search"></i></button>
               </span>
             </div>

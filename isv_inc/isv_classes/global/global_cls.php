@@ -24,7 +24,7 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadHeader(){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
 		require_once(ISVIPI_ACT_THEME . 'ovr/header.php');
 	}
 	
@@ -32,7 +32,7 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomHeader('g_header', 'm_header')*/ 
 	public function loadCustomHeader($guest,$logged){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
 		if (!isLoggedIn()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
