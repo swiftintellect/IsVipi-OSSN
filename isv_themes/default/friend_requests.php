@@ -10,11 +10,35 @@
         	<section class="col-lg-6">
 				<div class="box box-solid members">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Page Title</h3>
-                      <hr style="margin:5px 0"/>
+                      <h3 class="box-title">Friend Requests</h3>
                     </div>
                 	<div class="row">
                     
+                   
+                       <ul class="list-group">
+                       <?php if(is_array($f_notices) && !empty($f_notices)) foreach ($f_notices as $key => $fn) {?>
+                          <li class="list-group-item">
+                          	<div class="notice-holder">
+                            	<div class="pull-left">
+                                   <a href="<?php echo ISVIPI_URL .'profile/'.$fn['username'] ?>" data-toggle="tooltip" title="<?php echo $fn['fullname'] ?>">
+                                    <img src="<?php echo user_pic($fn['profile_pic']) ?>" class="img-square" alt="User Image">
+                                   </a>
+                                </div>
+                                <div class="accept-reject">
+                            	<strong>sent you a friend request</strong> &nbsp;
+                                    <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fn['id'].'/'.$fn['from_id'] ?>" class="btn bg-green btn-xs btn-flat">Accept</a>
+                                    <?php if($fn['status'] === 1){?>
+                                    <a href="<?php echo ISVIPI_URL.'p/friends/f_ignore/'.$fn['id'] ?>" class="btn bg-red btn-xs btn-flat">Ignore</a>
+                                    <?php } ?>
+                                </div>
+                                
+                            <div class="clear"></div>
+                            </div>
+                          </li>
+                        <?php } else { ?>
+                        	<li class="list-group-item">You do not have any friend requests.</li>
+                        <?php } ?>
+                        </ul>
                     
                     </div>
                 </div>

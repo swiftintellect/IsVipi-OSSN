@@ -10,11 +10,31 @@
         	<section class="col-lg-6">
 				<div class="box box-solid members">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Page Title</h3>
-                      <hr style="margin:5px 0"/>
+                      <h3 class="box-title">Feed/Post Notifications</h3>
                     </div>
                 	<div class="row">
                     
+                   
+                       <ul class="list-group">
+                       <?php if(is_array($feed_notices) && !empty($feed_notices)) foreach ($feed_notices as $key => $feed_n) {?>
+                          <li class="list-group-item">
+                          	<div class="notice-holder">
+                            	<div class="pull-left">
+                                   <a href="<?php echo ISVIPI_URL .'profile/'.$feed_n['username'] ?>" data-toggle="tooltip" title="<?php echo $feed_n['fullname'] ?>">
+                                    <?php echo $feed_n['fullname'] ?>
+                                   </a>
+                                    <strong><?php echo $feed_n['notice'] ?></strong> 
+                                    <a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($feed_n['feed_id']) ?>">post</a>
+                                	<div class="notification-time"><?php echo elapsedTime($feed_n['time']) ?></div>
+                                </div>
+                                
+                            <div class="clear"></div>
+                            </div>
+                          </li>
+                        <?php } else { ?>
+                        	<li class="list-group-item">You do not have any notifications.</li>
+                        <?php } ?>
+                        </ul>
                     
                     </div>
                 </div>

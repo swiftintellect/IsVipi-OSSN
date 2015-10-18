@@ -125,8 +125,10 @@ class feedActions {
 			
 			//notify feed owner
 			global $feed_user;
-			$this->notice = 'liked your';
-			$this->notifyFeedOwner($this->me,$feed_user,$this->feed_id,$this->notice);
+			if($feed_user !== $this->me){
+				$this->notice = 'liked your';
+				$this->notifyFeedOwner($this->me,$feed_user,$this->feed_id,$this->notice);
+			}
 		}
 	}
 	
@@ -175,8 +177,10 @@ class feedActions {
 		
 		//notify feed owner
 		global $feed_user;
-		$this->notice = 'commented on your';
-		$this->notifyFeedOwner($this->me,$feed_user,$this->feed_id,$this->notice);
+		if($feed_user !== $this->me){
+			$this->notice = 'commented on your';
+			$this->notifyFeedOwner($this->me,$feed_user,$this->feed_id,$this->notice);
+		}
 	}
 
 	/******************************
@@ -273,8 +277,10 @@ class feedActions {
 		$stmt->close();
 		
 		//notify feed owner
-		$this->notice = 'shared on your';
-		$this->notifyFeedOwner($_SESSION['isv_user_id'],$feed_user,$this->feed_id,$this->notice);
+		if($_SESSION['isv_user_id'] !== $feed_user){
+			$this->notice = 'shared your';
+			$this->notifyFeedOwner($_SESSION['isv_user_id'],$feed_user,$this->feed_id,$this->notice);
+		}
 		
 		//we return success
 		$_SESSION['isv_success'] = 'Status shared!';

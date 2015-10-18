@@ -18,8 +18,6 @@
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php');
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
 	$feed_id = $converter->decode($PAGE[1]);
 	
 	$loadFeed = new single_feed;

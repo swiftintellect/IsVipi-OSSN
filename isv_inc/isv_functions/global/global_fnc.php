@@ -317,10 +317,21 @@ function user_friend_requests_count($user){
 	return $totalCount;
 }
 
-function user_friend_req_notices($user){
+function user_friend_req_notices($user,$type,$limit){
 	global $isv_db;
 	
-	$unread = 1;
+	if($type === 'all'){
+		$query = '';
+	} else if($type === "active"){
+		$query = "AND fr.status=1";
+	}
+	
+	if($limit === 5){
+		$limit = 'LIMIT 5';
+	} else if($limit === 'all'){
+		$limit = '';
+	}
+	
 	$stmt = $isv_db->prepare ("
 	SELECT 
 		fr.id,
@@ -334,10 +345,10 @@ function user_friend_req_notices($user){
 		FROM friend_requests fr 
 		LEFT JOIN users u ON fr.from_id = u.id
 		LEFT JOIN user_profile p ON p.user_id = u.id
-		WHERE fr.to_id=? AND fr.status=? LIMIT 5
+		WHERE fr.to_id=? $query $limit
 	
 	"); 
-	$stmt->bind_param('ii', $user,$unread);
+	$stmt->bind_param('i', $user);
 	$stmt->execute(); 
 	$result = $stmt->get_result();
 	$stmt->store_result(); 
@@ -359,4 +370,67 @@ function user_feed_notices_count($user){
 	$stmt->close();
 		
 	return $totalCount;
+}
+
+function user_feed_notices($user,$type,$limit){
+	global $isv_db;
+	
+	if($type === 'all'){
+		$query = '';
+	} else if($type === "active"){
+		$query = "AND fn.status=1";
+	}
+	
+	if($limit === 5){
+		$limit = 'LIMIT 5';
+	} else if($limit === 'all'){
+		$limit = '';
+	}
+	
+	$stmt = $isv_db->prepare ("
+	SELECT 
+		fn.id,
+		fn.user_id,
+		fn.feed_owner,
+		fn.feed_id,
+		fn.notice,
+		fn.status,
+		fn.time,
+		u.username,
+		p.fullname,
+		p.profile_pic
+		FROM feed_notices fn 
+		LEFT JOIN users u ON fn.user_id = u.id
+		LEFT JOIN user_profile p ON p.user_id = u.id
+		WHERE fn.feed_owner=? $query ORDER BY fn.id DESC $limit
+	
+	"); 
+	$stmt->bind_param('i', $user);
+	$stmt->execute(); 
+	$result = $stmt->get_result();
+	$stmt->store_result(); 
+		while($resultArray[] = $result->fetch_assoc());
+	$stmt->close();
+	
+	return $resultArray;
+}
+
+function update_feed_as_read($feed_id){
+	global $isv_db;
+	
+	$read = 0;
+	$stmt = $isv_db->prepare ("UPDATE feed_notices SET status=? WHERE feed_id=?"); 
+	$stmt->bind_param('ii', $read,$feed_id);
+	$stmt->execute();  
+	$stmt->close();
+}
+
+function update_all_feeds_as_read($user){
+	global $isv_db;
+	
+	$read = 0;
+	$stmt = $isv_db->prepare ("UPDATE feed_notices SET status=? WHERE feed_owner=?"); 
+	$stmt->bind_param('ii', $read,$user);
+	$stmt->execute();  
+	$stmt->close();
 }

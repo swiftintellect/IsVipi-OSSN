@@ -6,7 +6,7 @@ class pageManager {
 	
 	/*** if your guest and logged in head page is the same, call loadHead() function */ 
 	public function loadHead(){
-		global $p,$s_m,$isv_siteSettings;
+		global $p,$s_m,$isv_siteSettings,$converter;
 		require_once(ISVIPI_ACT_THEME . 'ovr/head.php');
 	}
 	
@@ -14,7 +14,7 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomHead('myhead', 'memberhead')*/ 
 	public function loadCustomHead($guest,$logged){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
 		if (!isLoggedIn()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
@@ -24,7 +24,7 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadHeader(){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter;
 		require_once(ISVIPI_ACT_THEME . 'ovr/header.php');
 	}
 	
@@ -32,7 +32,7 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomHeader('g_header', 'm_header')*/ 
 	public function loadCustomHeader($guest,$logged){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter;
 		if (!isLoggedIn()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
@@ -42,13 +42,13 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadsideBar($sidebar){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE,$converter;
 		require_once(ISVIPI_ACT_THEME . 'ovr/'.$sidebar.'.php');
 	}
 	
 	/*** if your guest and logged in footer page is the same, call loadFooter() function */ 
 	public function loadFooter(){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
 		require_once(ISVIPI_ACT_THEME . 'ovr/footer.php');
 	}
 	
@@ -56,7 +56,7 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomFooter('isv_footer', 'isvipi_footer')*/ 
 	public function loadCustomFooter($guest,$logged){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
 		if (!isLoggedIn()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {

@@ -56,3 +56,6 @@
 	$siteInfo = new siteManager();
 	$isv_siteDetails = $siteInfo->getSiteInfo();
 	$isv_siteSettings = $siteInfo->getSiteSettings();
+	
+	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	$converter = new Encryption;

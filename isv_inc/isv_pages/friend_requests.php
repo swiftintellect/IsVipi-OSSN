@@ -17,11 +17,6 @@
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
-	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php');
 	
-	$loadFeed = new single_feed;
-	$f = $loadFeed->feed_id($PAGE[1]);
-	
-	//update any feed notices as read
-	update_feed_as_read($PAGE[1]);
- 	include_once ISVIPI_ACT_THEME.'post_id.php'; 
+	$f_notices = array_filter(user_friend_req_notices($_SESSION['isv_user_id'],'all','all'));
+ 	include_once ISVIPI_ACT_THEME.'friend_requests.php'; 

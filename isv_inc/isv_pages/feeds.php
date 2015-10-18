@@ -18,7 +18,5 @@
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php'); 
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
 	
  	include_once ISVIPI_ACT_THEME.'feeds.php'; 
