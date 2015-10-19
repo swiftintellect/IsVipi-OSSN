@@ -204,8 +204,6 @@
                     <div class="box-header">
                     	<?php require_once(ISVIPI_ACT_THEME .'pages/friends_sidebar.php') ?>
                     </div>
-                    
-                    
                 </div>
             </section>
 			

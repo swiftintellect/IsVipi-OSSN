@@ -23,10 +23,8 @@
             <section class="col-lg-3 announcements">
             	<div class="box box-solid">
                     <div class="box-header">
-                    
+                    	<?php require_once(ISVIPI_ACT_THEME .'pages/news.php') ?>
                     </div>
-                    
-                    
                 </div>
             </section>
             
@@ -36,8 +34,6 @@
                     <div class="box-header">
                     	<?php require_once(ISVIPI_ACT_THEME .'pages/friends_sidebar.php') ?>
                     </div>
-                    
-                    
                 </div>
             </section>
             
