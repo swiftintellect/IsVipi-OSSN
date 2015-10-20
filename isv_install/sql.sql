@@ -566,3 +566,21 @@ CREATE TABLE IF NOT EXISTS `users_blocked` (
   `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_pm`
+--
+
+CREATE TABLE IF NOT EXISTS `user_pm` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `from_id` bigint(20) NOT NULL,
+  `to_id` bigint(20) NOT NULL,
+  `message` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `read_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `sent_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `deleted_by` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

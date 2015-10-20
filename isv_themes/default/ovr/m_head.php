@@ -23,7 +23,7 @@
     <script>
 	function load_user_notices(){
 		$("#notifications").timer({
-			delay: 20000, //20 sec 20000
+			delay: 30000, //poll every 30 sec (30000)
 			repeat: true,
 			url: site_url +'/notices/'
 		});

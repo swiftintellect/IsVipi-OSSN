@@ -449,6 +449,79 @@ function user_feed_notices($user,$type,$limit){
 	return $resultArray;
 }
 
+function user_unread_message_count($user){
+	global $isv_db;
+	
+	$delBy = 0;
+	$stmt = $isv_db->prepare ("SELECT id FROM user_pm WHERE (to_id=?) AND (read_time = '' OR read_time IS NULL) AND (deleted_by=?) GROUP BY from_id"); 
+	$stmt->bind_param('ii', $user,$delBy);
+	$stmt->execute();  
+	$stmt->store_result();
+	$stmt->bind_result($id); 
+	$total = $stmt->num_rows();
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $total;
+}
+
+function unread_msgs_from($user){
+	global $isv_db;
+	
+	$delBy = 0;
+	$stmt = $isv_db->prepare ("SELECT id FROM user_pm WHERE (from_id=? AND to_id=?) AND (read_time = '' OR read_time IS NULL) AND (deleted_by=?)"); 
+	$stmt->bind_param('iii', $user,$_SESSION['isv_user_id'],$delBy);
+	$stmt->execute();  
+	$stmt->store_result();
+	$stmt->bind_result($id); 
+	$total = $stmt->num_rows();
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $total;
+}
+
+function user_unread_messages($user,$limit){
+	global $isv_db;
+	
+	$delBy = 0;
+	$stmt = $isv_db->prepare ("
+	SELECT 
+		pm.id,
+		pm.from_id,
+		pm.to_id,
+		u.username,
+		p.fullname
+		FROM user_pm pm 
+		LEFT JOIN users u ON pm.from_id = u.id
+		LEFT JOIN user_profile p ON p.user_id = pm.from_id
+		WHERE (pm.to_id=?) AND (pm.read_time = '' OR pm.read_time IS NULL) AND (pm.deleted_by=?) GROUP BY pm.from_id ORDER BY pm.id DESC LIMIT $limit
+	
+	"); 
+	$stmt->bind_param('ii', $user,$delBy);
+	$stmt->execute(); 
+	$stmt->store_result(); 
+	$stmt->bind_result($pm_id,$pm_from_id,$pm_to_id,$pm_username,$pm_fullname);
+	if($stmt->num_rows() > 0){
+		while($stmt->fetch()){
+			$resultArray[] = array(
+					'id' => $pm_id,
+					'from_id' => $pm_from_id,
+					'to_id' => $pm_to_id,
+					'username' => $pm_username,
+					'fullname' => $pm_fullname
+				);
+		}
+	} else {
+		$resultArray[] = array();
+	}
+	$stmt->close();
+	
+	//print_r($resultArray);exit();
+	return $resultArray;
+
+}
+
 function update_feed_as_read($feed_id){
 	global $isv_db;
 	

@@ -6,7 +6,14 @@
       <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
-        	<!-- user profile -->
+        	<?php if(!is_array(array_filter($m_info)) || empty(array_filter($m_info))){?>
+            	<section class="col-lg-9">
+                	<div class="box box-solid members">
+                    	No such member was found. You could try <a href="<?php echo ISVIPI_URL .'members/' ?>">browsing </a> through our member list to meet new people.	                	
+                        </div>
+            	</section>
+            <?php } else if (is_array($m_info) && !empty($m_info)){?>
+            <!-- user profile -->
         	<section class="col-lg-9">
 				<div class="box box-solid members">
                 	<div class="row">
@@ -73,7 +80,7 @@
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                                 <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
                                 <?php } ?>
-                                  <a href="#" class="btn btn-success btn-sm"><b>Message</b></a>
+                                  <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pm"><b>Message</b></a>
                                   <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#block"><b>Block</b></a>
                               <?php } ?>
                               
@@ -198,6 +205,10 @@
 			</section>
             <!--end::user profile -->
             
+            <!-- load our profile page related modals -->
+      		<?php require_once(ISVIPI_ACT_THEME .'pages/modals.php') ?>
+            <?php } ?>
+            
             <!-- online friends -->
             <section class="col-lg-3 friends-sidebar">
             	<div class="box box-solid">
@@ -216,7 +227,6 @@
         
       </div>
       <!-- /.content-wrapper -->
-      <!-- load our profile page related modals -->
-      <?php require_once(ISVIPI_ACT_THEME .'pages/modals.php') ?>
+      
       <!-- scripts section -->
 <?php $pageManager->loadCustomFooter('g_footer','m_footer'); ?>

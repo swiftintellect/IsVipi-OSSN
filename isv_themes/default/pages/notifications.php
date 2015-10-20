@@ -51,23 +51,34 @@
                 <!-- Menu toggle button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-comments notify-md"></i>
-                  <span class="label label-danger notify-md-label">2</span>
+                  <?php if(user_unread_message_count($_SESSION['isv_user_id']) > 0 ){?>
+                  	<span class="label label-danger notify-md-label">
+						<?php echo user_unread_message_count($_SESSION['isv_user_id']) ?>
+                    </span>
+                  <?php } ?>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
                     <!-- Inner Menu: contains the notifications -->
                     <ul class="menu">
                       <li><!-- start notification -->
-                        <a href="#">
-                          <i class="fa fa-envelope text-aqua"></i> new message from Jones
+                      <?php if(user_unread_message_count($_SESSION['isv_user_id']) > 0 ){?>
+                      <?php $n_msg = array_filter(user_unread_messages($_SESSION['isv_user_id'],5));
+							if(is_array($n_msg) && !empty($n_msg)) foreach ($n_msg as $key => $msg) {
+					  ?>
+                        <a href="<?php echo ISVIPI_URL .'messages/'.$msg['username'] ?>">
+                          <i class="fa fa-envelope text-aqua"></i> <?php echo $msg['fullname'] ?> has sent you a message
                         </a>
-                        <a href="#">
-                          <i class="fa fa-envelope text-aqua"></i> new message from Jones
-                        </a>
+                      <?php } ?>
+                      <?php } else {?>
+                      	<ul class="menu" style="padding:5px 10px">
+                            <li>You have no new messages</li>
+                        </ul>
+                      <?php } ?> 
                       </li><!-- end notification -->
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">View all</a></li>
+                  <li class="footer"><a href="<?php echo ISVIPI_URL .'messages/' ?>">View all</a></li>
                 </ul>
               </li>
               <!-- Tasks Menu -->

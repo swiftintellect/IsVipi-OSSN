@@ -4808,6 +4808,9 @@ table.text-center th {
 .friends-sidebar {
 	min-height:100px;
 }
+.chat_box {
+	min-height:200px;
+}
 .no-bottom-border {
 	border-left:none;
 	border-right:none;
@@ -5124,4 +5127,8 @@ table.text-center th {
 .user_header_drop {
 	margin-left:10px;
 	margin-top:5px;
+}
+.chat-img {
+	width:40px;
+	height: 40px;
 }
