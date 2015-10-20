@@ -541,3 +541,35 @@ function update_all_feeds_as_read($user){
 	$stmt->execute();  
 	$stmt->close();
 }
+
+function id_from_username($username){
+	global $isv_db,$user_id;
+	
+	$stmt = $isv_db->prepare ("SELECT id from users WHERE username=?"); 
+	$stmt->bind_param('s', $username);
+	$stmt->execute(); 
+	$stmt->store_result();
+	$stmt->bind_result($user_id);
+	$stmt->fetch(); 
+	
+		if($stmt->num_rows() > 0 ){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	$stmt->close();
+}
+
+function full_name_from_id($user_id){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare ("SELECT fullname from user_profile WHERE user_id=?"); 
+	$stmt->bind_param('i', $user_id);
+	$stmt->execute(); 
+	$stmt->store_result();
+	$stmt->bind_result($fullname);
+	$stmt->fetch(); 
+	$stmt->close();
+	
+	return $fullname;
+}

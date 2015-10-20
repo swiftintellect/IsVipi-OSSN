@@ -1,7 +1,6 @@
 ﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
-
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
@@ -14,22 +13,23 @@
                           <h3 class="box-title">Inbox</h3>
                         </div>
                         <script>
-							function load_chat_sidebar(){
-								$("#msg_users").load(site_url +'/chat_sidebar/<?php echo $username ?>');
+							function load_chat_sidebar($username){
+								$("#msg_users").load(site_url +'/chat_sidebar/' +$username);
 								$("#msg_users").timer({
 									delay: 30000, //poll every 30 sec (30000)
 									repeat: true,
-									url: site_url +'/chat_sidebar/'
+									url: site_url +'/chat_sidebar/' +$username
 								});
 							}
 						</script>
+                        
+
                         <div class="box-body no-padding" id="msg_users">
                             <script>
-								load_chat_sidebar();
+								load_chat_sidebar('<?php echo $user_name ?>');
 							</script>
                         </div><!-- /.box-body -->
                       </div><!-- /. box -->
-                      
                 </div>
             <div class="clear"></div> 
 			</section>
@@ -38,7 +38,7 @@
             
             <!-- chat -->
             <section class="col-lg-8">
-            	<?php if(empty($username) || $username === ''){ ?>
+            	<?php if(empty($user_name) || $user_name === ''){ ?>
 					<div class="box box-primary">
                         <div class="box-header with-border">
                         </div>
@@ -49,19 +49,47 @@
                         </div>
                     </div>
 				<?php } else { ?>
+                <script>
+					function load_chat($user){
+						$("#load_chat").load(site_url +'/chat/'+$user);
+						$("#load_chat").timer({
+							delay: 30000, //poll every 30 sec (30000)
+							repeat: true,
+							url: site_url +'/chat/'+$user
+						});
+					}
+				</script>
             	<div class="box box-primary" id="load_chat">
-                	<?php require_once(ISVIPI_ACT_THEME .'pages/chat.php') ?>
+                	<script>
+						load_chat('<?php echo $user_name ?>');
+					</script>
                 </div>
-                <div class="box-footer">
-                	<form action="#" method="post">
+                <?php
+					if(id_from_username($user_name))
+				?>
+                <div class="box-footer" style="margin-top:-20px;">
+                	<form action="<?php echo ISVIPI_URL .'p/messaging' ?>" method="post" id="addMessage">
                   		<div class="input-group">
-                       	<input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                       	<input type="text" name="msg" placeholder="Type Message ..." class="form-control">
                        		<span class="input-group-btn">
-                          	<button type="button" class="btn btn-warning btn-flat">Send</button>
+                            <input type="hidden" name="to" value="<?php echo $converter->encode($user_id) ?>" />
+                            <input type="hidden" name="isv_op" value="send_pm" />
+                          	<button type="submit" class="btn btn-warning btn-flat">Send</button>
                           	</span>
                     	</div>
                  	</form>
            		</div><!-- /.box-footer-->
+                      <script>
+						$('#addMessage').ajaxForm({ 
+							success: function() { 
+								setTimeout(function(){
+									$('#addMessage').clearForm();
+									load_chat('<?php echo $user_name ?>');
+								}, 3000);
+							 } 
+							});
+						</script>
+
                 <?php } ?>
             
             

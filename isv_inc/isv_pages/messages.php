@@ -20,9 +20,9 @@
 	
 	// we define our order by (latest or oldest)
 	if (isset($PAGE[1]) && !empty($PAGE[1])){
-		$username = cleanGET($PAGE[1]);
+		$user_name = cleanGET($PAGE[1]);
 	} else {
-		$username = '';
+		$user_name = '';
 	}
 	
  	include_once ISVIPI_ACT_THEME.'messages.php'; 
