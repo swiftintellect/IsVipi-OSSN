@@ -16,7 +16,7 @@
 	function load_chat_sidebar($username){
 		$("#msg_users").load(site_url +'/chat_sidebar/' +$username);
 		$("#msg_users").timer({
-			delay: 30000, //poll every 30 sec (30000)
+			delay: 20000, //poll every 30 sec (30000)
 			repeat: true,
 			url: site_url +'/chat_sidebar/' +$username
 		});
