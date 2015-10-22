@@ -65,7 +65,7 @@ function submitForm(){
 $last_id = "<?php echo $l_m_id ?>";
 $other_user = "<?php echo $other_user ?>";
 function check_msg_id(){
-	$.post( site_url +"p/messaging/", { isv_op: "last_msg_id", other_user: $other_user })
+	$.post( site_url +"/p/messaging/", { isv_op: "last_msg_id", other_user: $other_user })
 	  .done(function( data ) {
 		  if(data > $last_id){
 			  $last_id = data;
