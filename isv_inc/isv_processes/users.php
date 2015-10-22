@@ -16,7 +16,7 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
-	 
+	 $array = array();
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
 		$from_url = ISVIPI_URL;
 	 } else {

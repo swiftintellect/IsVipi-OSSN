@@ -55,7 +55,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'send_pm' && $operation !== 'cover_pic'){
+	 if ($operation !== 'send_pm' && $operation !== 'last_msg_id'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -66,6 +66,7 @@
 		
 		$message = cleanPOST('msg');
 		$message = str_replace("  ","",$message);
+		$message = preg_replace('/^[ \t]*[\r\n]+/m', '', $message);
 		
 		//check if message is supplied
 		if(!isset($message) || empty($message) || ctype_space($message)){
@@ -90,4 +91,22 @@
 		
 		$pm = new message();
 		$pm->send_message($message,$to_msg);	
+	}
+	
+	/*** CHECK LAST MESSAGE ID **/
+	if ($operation === 'last_msg_id'){
+		$other_user = cleanPOST('other_user');
+		//check is the user we are chatting with is set
+		if(!isset($other_user) || empty($other_user)){
+			exit();
+		}
+		
+		//instantiate our class
+		require_once(ISVIPI_CLASSES_BASE .'global/getMessages_cls.php'); 
+		$pm = new get_messages();
+		$id_from_db = $pm->last_msg_id($_SESSION['isv_user_id'],$other_user);
+		
+		echo $id_from_db;
+	
+		exit();
 	}

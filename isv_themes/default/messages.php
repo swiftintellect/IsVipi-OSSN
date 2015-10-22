@@ -1,6 +1,8 @@
 ﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
+<?php require_once(ISVIPI_ACT_THEME .'ovr/chat_scripts.php') ?>
+
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
@@ -12,17 +14,6 @@
                         <div class="box-header with-border">
                           <h3 class="box-title">Inbox</h3>
                         </div>
-                        <script>
-							function load_chat_sidebar($username){
-								$("#msg_users").load(site_url +'/chat_sidebar/' +$username);
-								$("#msg_users").timer({
-									delay: 30000, //poll every 30 sec (30000)
-									repeat: true,
-									url: site_url +'/chat_sidebar/' +$username
-								});
-							}
-						</script>
-                        
 
                         <div class="box-body no-padding" id="msg_users">
                             <script>
@@ -49,16 +40,7 @@
                         </div>
                     </div>
 				<?php } else { ?>
-                <script>
-					function load_chat($user){
-						$("#load_chat").load(site_url +'/chat/'+$user);
-						$("#load_chat").timer({
-							delay: 30000, //poll every 30 sec (30000)
-							repeat: true,
-							url: site_url +'/chat/'+$user
-						});
-					}
-				</script>
+                
             	<div class="box box-primary" id="load_chat">
                 	<script>
 						load_chat('<?php echo $user_name ?>');
@@ -70,26 +52,17 @@
                 <div class="box-footer" style="margin-top:-20px;">
                 	<form action="<?php echo ISVIPI_URL .'p/messaging' ?>" method="post" id="addMessage">
                   		<div class="input-group">
-                       	<input type="text" name="msg" placeholder="Type Message ..." class="form-control">
-                       		<span class="input-group-btn">
+                       	<textarea type="text" name="msg" id="msg-input" placeholder="Type Message ..." class="form-control" required></textarea>
+                       		<div class="input-group-btn">
                             <input type="hidden" name="to" value="<?php echo $converter->encode($user_id) ?>" />
                             <input type="hidden" name="isv_op" value="send_pm" />
-                          	<button type="submit" class="btn btn-warning btn-flat">Send</button>
-                          	</span>
+                          	<button type="submit" class="btn btn-warning btn-flat btnbg" id="sendMsgs" onClick="empty()">Send</button>
+                            <button type="button" class="btn btn-warning btn-flat btnbg" style="display:none" disabled="disabled" id="workingBtn">Working...</button>
+                          	</div>
                     	</div>
                  	</form>
            		</div><!-- /.box-footer-->
-                      <script>
-						$('#addMessage').ajaxForm({ 
-							success: function() { 
-								setTimeout(function(){
-									$('#addMessage').clearForm();
-									load_chat('<?php echo $user_name ?>');
-								}, 3000);
-							 } 
-							});
-						</script>
-
+                      
                 <?php } ?>
             
             

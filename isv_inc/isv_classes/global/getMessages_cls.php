@@ -7,7 +7,7 @@
 			global $isv_db;
 			
 			$delBy = 0;
-			$stmt = $isv_db->prepare ("SELECT id FROM user_pm WHERE (to_id=? OR from_id=?) AND (read_time = '' OR read_time IS NULL) AND (deleted_by=?) GROUP BY from_id"); 
+			$stmt = $isv_db->prepare ("SELECT id FROM user_pm WHERE (to_id=? OR from_id=?) AND (deleted_by=?) GROUP BY from_id"); 
 			$stmt->bind_param('iii', $user,$user,$delBy);
 			$stmt->execute();  
 			$stmt->store_result();
@@ -39,9 +39,9 @@
                                    THEN pm.to_id
                                    ELSE pm.from_id  
                                END)
-				WHERE (pm.to_id=$user OR pm.from_id =$user) AND (pm.read_time = '' OR pm.read_time IS NULL) AND (pm.deleted_by=?) 					
+				WHERE (pm.to_id=$user OR pm.from_id =$user) AND (pm.deleted_by=?) 					
 				GROUP   BY  u.username
-				ORDER BY pm.id DESC
+				ORDER BY read_time DESC, pm.id ASC
 			
 			"); 
 			$stmt->bind_param('i', $delBy);

@@ -1894,9 +1894,13 @@ a:focus {
 /* Chat widget (DEPRECATED - this will be removed in the next major release. Use Direct Chat instead)*/
 .chat {
   padding: 5px 20px 5px 10px;
+  height:65%;
+  overflow-y:scroll;
 }
 .chat .item {
   margin-bottom: 10px;
+  border-bottom:solid thin #FBFBFB;
+  padding:5px 0;
 }
 .chat .item:before,
 .chat .item:after {
@@ -1910,7 +1914,6 @@ a:focus {
   width: 40px;
   height: 40px;
   border: 2px solid transparent;
-  border-radius: 50%;
 }
 .chat .item > .online {
   border: 2px solid #00a65a;
@@ -5131,4 +5134,8 @@ table.text-center th {
 .chat-img {
 	width:40px;
 	height: 40px;
+}
+.btnbg {
+	height:54px;
+	margin-left:10px !important;
 }
