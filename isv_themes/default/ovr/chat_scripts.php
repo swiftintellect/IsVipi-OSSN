@@ -1,7 +1,11 @@
 ﻿<?php require_once(ISVIPI_CLASSES_BASE .'global/getMessages_cls.php'); 
+	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	$converter = new Encryption;
+	
 	$ch = new get_messages();
 	
 	if(id_from_username($user_name))
+	$l_m_id = '';
 	$l_m_id = $ch->last_msg_id($_SESSION['isv_user_id'],$user_id);
 	
 	$other_user = $user_id;
@@ -77,3 +81,22 @@ function check_msg_id(){
 	 });
 }
 </script>
+
+<!-- Block User Modal-->
+<div class="modal fade" id="delete_chat" tabindex="-1" role="dialog" aria-labelledby="delete_chat">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete Chat</h4>
+      </div>
+      <div class="modal-body">
+		Are you sure you want to delete this chat?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a href="<?php echo ISVIPI_URL.'p/messaging/delete/'.$converter->encode($other_user) ?>" class="btn btn-primary">Yes, Delete Chat</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

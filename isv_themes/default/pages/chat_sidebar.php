@@ -1,10 +1,9 @@
 ﻿<?php require_once(ISVIPI_CLASSES_BASE .'global/getMessages_cls.php'); 
 	$chats = new get_messages();
-	$total_chats = $chats->msg_count($_SESSION['isv_user_id']);
+	//$total_chats = $chats->msg_count($_SESSION['isv_user_id']);
 	$myChats = array_filter($chats->chat_users($_SESSION['isv_user_id']));
 ?>
 <ul class="nav nav-pills nav-stacked">
-	<?php if($total_chats > 0){?>
     <?php if(is_array($myChats) && !empty($myChats)) foreach ($myChats as $key => $chUser) {?>
 	
     
@@ -20,7 +19,6 @@
    	</li>
     
     
-    <?php } ?>
     <?php } else {?>
     	<li class="active" style="padding:10px">
         	No active chats found.

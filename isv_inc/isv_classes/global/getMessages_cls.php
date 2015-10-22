@@ -22,7 +22,8 @@
 		public function chat_users($user){
 			global $isv_db;
 			
-			$delBy = 0;
+			$both = 'both';
+			
 			$stmt = $isv_db->prepare ("
 			SELECT 
 				pm.id,
@@ -39,12 +40,19 @@
                                    THEN pm.to_id
                                    ELSE pm.from_id  
                                END)
-				WHERE (pm.to_id=$user OR pm.from_id =$user) AND (pm.deleted_by=?) 					
+				WHERE 
+					(to_id = $user AND deleted_by != (CASE WHEN deleted_by = $user THEN $user
+													   ELSE 'both'  
+												   END)
+					) OR 
+					(from_id = $user AND deleted_by != (CASE WHEN deleted_by = $user THEN $user
+													   ELSE 'both'  
+												   END)
+					)				
 				GROUP   BY  u.username
 				ORDER BY read_time DESC, pm.id ASC
 			
 			"); 
-			$stmt->bind_param('i', $delBy);
 			$stmt->execute(); 
 			$stmt->store_result(); 
 			$stmt->bind_result($pm_id,$pm_from_id,$pm_to_id,$pm_username,$pm_fullname);
@@ -89,7 +97,7 @@
 		public function all_messages($me,$other){
 			global $isv_db;
 			
-			$delBy = 0;
+			$notDel = 0;
 			$stmt = $isv_db->prepare ("
 			
 			SELECT 
@@ -102,14 +110,16 @@
 				u.username,
 				p.fullname,
 				p.profile_pic
-				FROM user_pm pm 
-				LEFT JOIN users u ON u.id = pm.from_id
-				LEFT JOIN user_profile p ON p.user_id = pm.from_id
-				WHERE (pm.to_id=? AND pm.from_id=?) OR (pm.from_id=? AND pm.to_id =?) AND (pm.deleted_by=?) 					
-				ORDER BY pm.id ASC
+			FROM user_pm pm 
+			JOIN users u ON u.id = pm.from_id
+			JOIN user_profile p ON p.user_id = pm.from_id
+			WHERE 
+				(pm.to_id=? AND pm.from_id=? AND (pm.deleted_by =? OR pm.deleted_by =?)) OR 
+				(pm.from_id=? AND pm.to_id=? AND (pm.deleted_by =? OR pm.deleted_by =?)) 					
+			ORDER BY pm.id ASC
 			
 			"); 
-			$stmt->bind_param('iiiii', $me,$other,$me,$other,$delBy);
+			$stmt->bind_param('iiisiiis', $me,$other,$other,$notDel,$me,$other,$other,$notDel);
 			$stmt->execute(); 
 			$stmt->store_result(); 
 			$stmt->bind_result($pm_id,$pm_from_id,$pm_to_id,$pm_msg,$pm_read_time,$pm_sent_time,$pm_username,$pm_fullname,$pm_profile_pic);

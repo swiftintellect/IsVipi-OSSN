@@ -53,7 +53,7 @@
 		echo "
 		<div class='box-header with-border'>
 			<div class='box-body'>
-				This chat does not exist.
+				No chat found. You can send this user a message by using the message box below.
 			</div>
 		</div>
 		";

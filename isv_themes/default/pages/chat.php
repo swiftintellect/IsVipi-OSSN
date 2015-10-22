@@ -1,3 +1,4 @@
+<?php if(is_array($msgs) && !empty($msgs)){?>
 <script>
 	$('.chat').scrollTop($('.chat')[0].scrollHeight);
 	setInterval(check_msg_id,15000 /* check if any data has changed every 15 seconds */);
@@ -8,14 +9,24 @@
 	<div class="box-tools pull-right">
     	<div class="mailbox-controls">
        		<div class="btn-group">
-           		<button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+           		<ul class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <span class="fa fa-chevron-down"></span>
+                    </a>
+                    
+                    <ul class="dropdown-menu">
+                      <li>
+                      	<a href="#" data-toggle="modal" data-target="#delete_chat">Delete</a>
+                      </li>
+                    </ul>
+                 </ul>
          	</div><!-- /.btn-group -->
      	</div>
  	</div>
 </div>
 
 <div class="box-body chat">
-<?php if(is_array($msgs) && !empty($msgs)) foreach ($msgs as $key => $chat) {?>
+<?php foreach ($msgs as $key => $chat) {?>
 <div class="item">
 	<img src="<?php echo user_pic($chat['profile_pic']) ?>" class="img-square">
  	<p class="message">
@@ -32,3 +43,10 @@
 <!-- /.item -->
 <?php } ?>
 </div>
+<?php } else {?>
+<div class="box-header with-border">
+	<div class="box-body">
+    No chat found. You can send this user a message by using the message box below.
+    </div>
+</div>
+<?php } ?>

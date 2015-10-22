@@ -55,7 +55,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'send_pm' && $operation !== 'last_msg_id'){
+	 if ($operation !== 'send_pm' && $operation !== 'last_msg_id' && $operation !== 'delete'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();
@@ -109,4 +109,21 @@
 		echo $id_from_db;
 	
 		exit();
+	}
+	
+	/*** ADD MESSAGE **/
+	if ($operation === 'delete'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			 $_SESSION['isv_error'] = 'An error occured. Please try again.';
+			 header('location:'.$from_url.'');
+			 exit();
+		}
+		
+		$other_user = cleanGET($PAGE[3]);
+		$other_user = $converter->decode($other_user);
+		
+		//instantiate out class
+		$del = new message();
+		$del->delete_chat($other_user);
+		
 	}
