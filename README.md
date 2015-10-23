@@ -31,4 +31,4 @@ Check out our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
 ==============================================
 <strong>ISSUES/BUGS</strong>
 
-For issues or bugs, you can visit our <a href="http://forum.isvipi.org" target="_blank">forum</a> or leave a bug report here.
+For issues or bugs, you can visit our <a href="http://forum.isvipi.org" target="_blank">forum</a> or leave a bug report <a href="https://github.com/IsVipiOfficial/IsVipi-OSSN/issues">here at github</a>.
