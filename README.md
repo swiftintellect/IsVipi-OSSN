@@ -5,7 +5,7 @@ Please note that previous versions (Version 1.XX) of IsVipi OSSN have been depre
 IsVipi OSSN is a free php/mysql based software that allows you to set up a social network, community, dating or membership site. Built on core php, it can also be used as an engine/foundation for almost anything that requires basic social networking features. You can find out more by <a href="http://isvipi.org" target="_blank">visiting our website</a>.
 
 ==============================================
-SYSTEM REQUIREMENTS
+<strong>SYSTEM REQUIREMENTS</strong>
 
 <li>PHP version 5.5 and above</li>
 <li>MySQL version 4.1 and above</li>
@@ -14,7 +14,7 @@ SYSTEM REQUIREMENTS
 <li>GD Library</li>
 
 ==============================================
-INSTALLATION
+<strong>INSTALLATION</strong>
 
 To install IsVipi OSSN: 
 <ul>
@@ -24,11 +24,11 @@ To install IsVipi OSSN:
 </ul>
 
 ==============================================
-DEMO
+<strong>DEMO</strong>
 
 Check out our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
 
 ==============================================
-ISSUES/BUGS
+<strong>ISSUES/BUGS</strong>
 
 For issues or bugs, you can visit our <a href="http://forum.isvipi.org" target="_blank">forum</a> or leave a bug report here.
