@@ -17,9 +17,9 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	******************************************************/ 
 
-	$db_host = "localhost";
-	$db_name = "test";
-	$db_user = "root";
+	$db_host = "";
+	$db_name = "";
+	$db_user = "";
 	$db_pass = "";
 
 	//Try to connect to the database
