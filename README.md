@@ -17,10 +17,12 @@ SYSTEM REQUIREMENTS
 ==============================================
 INSTALLATION
 
-To install this software, 
+To install IsVipi OSSN: 
+<ul>
 <li>Visit your site url (http://yoursite.com/ or http://yoursite.com/subfolder/) depending with where you uploaded the files</li>
 <li>Click Install</li>
 <li>Follow the step by step prompt</li>
+</ul>
 
 ==============================================
 DEMO
