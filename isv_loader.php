@@ -7,6 +7,7 @@
 	/*** load important files **/
 	require_once 'isv_inc/isv_db/db.php';
 	require_once 'isv_init.php';
+	require_once ISVIPI_CLASSES_BASE.'global/init_cls.php';
 	require_once ISVIPI_FUNCTIONS_BASE .'global/global_fnc.php';
 	require_once ISVIPI_CLASSES_BASE .'global/global_cls.php';
 	//require_once 'isv_lang/'. $isv_siteDetails['s_lang'] . '.isvl';

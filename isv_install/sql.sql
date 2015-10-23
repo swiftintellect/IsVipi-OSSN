@@ -2,16 +2,16 @@
 -- Table structure for table `s_info`
 --
 CREATE TABLE IF NOT EXISTS `s_info` (
-  `id` int(1) NOT NULL,
+  `id` int(1) NOT NULL DEFAULT 1,
   `s_url` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `s_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `s_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `s_lang` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `s_theme` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `s_lang` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
+  `s_theme` varchar(30) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default',
   `s_time_zone` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `s_enable_ssl` int(1) NOT NULL,
+  `s_enable_ssl` int(1) NOT NULL DEFAULT 0,
   `s_last_update_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `s_status` int(2) NOT NULL,
+  `s_status` int(2) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -582,5 +582,23 @@ CREATE TABLE IF NOT EXISTS `user_pm` (
   `read_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `sent_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `deleted_by` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `isv_admin`
+--
+CREATE TABLE IF NOT EXISTS `isv_admin` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `pwd` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
+  `level` int(1) NOT NULL DEFAULT 1,
+  `reg_date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `last_activity` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
