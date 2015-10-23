@@ -18,9 +18,8 @@ Take a look at our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
 ==============================================
 <strong>INSTALLATION</strong>
 
-To install IsVipi OSSN: 
 <ul>
-<li>Visit your site url (http://yoursite.com/ or http://yoursite.com/subfolder/) depending on where you uploaded the files</li>
+<li>Visit your site url (http://yoursite.com/ or http://yoursite.com/subfolder/)</li>
 <li>Click <strong>Install isVipi OSSN</strong></li>
 <li>Follow the step by step prompt</li>
 </ul>
