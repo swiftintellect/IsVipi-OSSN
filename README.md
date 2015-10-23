@@ -1,4 +1,4 @@
-About IsVipi OSSN
+About IsVipi OSSN V2.0 and above
 ===========================================
 Please note that previous versions (Version 1.XX) of IsVipi OSSN have been depreciated.
 
