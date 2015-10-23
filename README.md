@@ -6,13 +6,13 @@ IsVipi OSSN is a free php/mysql based software that allows you to set up a socia
 
 ==============================================
 <strong>SYSTEM REQUIREMENTS</strong>
-
+<ul>
 <li>PHP version 5.5 and above</li>
 <li>MySQL version 4.1 and above</li>
 <li>mod_rewrite</li>
 <li>Curl</li>
 <li>GD Library</li>
-
+</ul>
 ==============================================
 <strong>INSTALLATION</strong>
 
