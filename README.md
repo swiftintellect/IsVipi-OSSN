@@ -19,6 +19,16 @@ SYSTEM REQUIREMENTS
 <li>GD Library</li>
 
 ==============================================
+INSTALLATION
+
+<u>Self Installation</u>
+To install this software, simply visit your site url (where you have uploaded the files to) and you will be prompted to install.
+If you uploaded the files to the root of your server, visit http://yoursite.com/ and if in a subfolder, simply go to http://yoursite.com/subfolder/. Follow the step by step guide to installation.
+
+<u>Manual Installation</u>
+Instructions will be provided soon.
+
+==============================================
 DEMO
 
 Check out our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
