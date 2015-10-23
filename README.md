@@ -19,8 +19,8 @@ INSTALLATION
 
 To install IsVipi OSSN: 
 <ul>
-<li>Visit your site url (http://yoursite.com/ or http://yoursite.com/subfolder/) depending with where you uploaded the files</li>
-<li>Click Install</li>
+<li>Visit your site url (http://yoursite.com/ or http://yoursite.com/subfolder/) depending on where you uploaded the files</li>
+<li>Click <strong>Install isVipi OSSN</strong></li>
 <li>Follow the step by step prompt</li>
 </ul>
 
