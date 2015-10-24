@@ -9,6 +9,7 @@
     <meta name="description" content="IsVipi OSSN is a free and open source social networking, community, dating and membership software.">
     <meta name="keywords" content="free and open source, social network, community, dating, membership, software, script, php/mysql">
     <meta name="generator" content="IsVipi OSSN">
+    <link rel="icon" href="isv_inc/isv_style.lib/site/imgs/favicon.png" type="image/x-icon" />
 
     <title>IsVipi OSSN - Setup Prompt</title>
 
