@@ -242,6 +242,15 @@ class member {
 		$format = "d/m/Y";
 		$this->dob = $this->validateDate($this->dob, $format);
 		
+		//check if the date of birth meets minimum reg requirements
+		$min_age = 12;
+		
+		if(!validate_age($this->dob,$min_age)){
+			$_SESSION['isv_error'] = "Minimum age limit is $min_age years.";
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
 		//update our database
 		global $isv_db;
 		
@@ -383,9 +392,12 @@ class member {
 	}
 	
 	private function validateDate($date, $format){
+		$from_url = $_SERVER['HTTP_REFERER'];
 			$DoB = DateTime::createFromFormat($format, $date);
 			
 			if(!$DoB) {
+				$_SESSION['isv_error'] = "Your Date of Birth does not match the DD-MM-YYYY required format.";
+				header('location:'.$from_url.'');
 			 	$array['err'] = true;
 				$array['message'] = 'Your Date of Birth does not match the DD-MM-YYYY required format.';
 				echo json_encode($array);

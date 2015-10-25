@@ -611,3 +611,12 @@ function validate_age($dob,$min_age){
 		return FALSE;
 	}
 }
+
+function log_entry($entry,$ip){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare ("INSERT INTO isv_admin_logs (entry,ip,log_time) VALUES (?,?,UTC_TIMESTAMP())"); 
+	$stmt->bind_param('ss', $entry,$ip);
+	$stmt->execute();
+	$stmt->close();
+}
