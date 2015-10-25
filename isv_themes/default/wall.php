@@ -208,7 +208,7 @@
 
               <?php } else {?>
                		<li class="list-group-item" style="margin-bottom:10px">This user has restricted access to this wall.</li>
-              <?php } ?>
+              <?php exit();} ?>
 			  <?php } ?>
               <?php if($getFeeds->getTotalFeeds($user) < 1){?>
               	<div class="col-md-12" style="margin-bottom:10px">
