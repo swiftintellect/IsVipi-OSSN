@@ -93,6 +93,21 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_sessions`
+--
+CREATE TABLE IF NOT EXISTS `admin_sessions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `sess_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` bigint(20) NOT NULL NOT NULL,
+  `user_ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `last_activity` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --

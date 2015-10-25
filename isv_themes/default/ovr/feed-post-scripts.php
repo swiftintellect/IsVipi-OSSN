@@ -19,7 +19,7 @@
 					}
 					$('input[type="submit"]').prop('disabled', false);
 					$("#processing").hide();
-				}, 3000);
+				}, 500);
 			 } 
 			});
 		</script>
@@ -46,7 +46,7 @@
 					}
 					$('input[type="submit"]').prop('disabled', false);
 					$("#processing2").hide();
-				}, 3000);
+				}, 500);
 			 } 
 			});
 		</script>

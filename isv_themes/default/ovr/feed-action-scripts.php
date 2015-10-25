@@ -10,7 +10,7 @@
 					$('#FAction' + $feed).css('display','none');
 					loadTimeline();
 					return false;
-				}, 2000);
+				}, 500);
 			}
 		</script>
         
@@ -25,7 +25,7 @@
 				setTimeout(function(){
 					loadTimeline();
 					return false;
-				}, 2000);
+				}, 500);
 			}
 		</script>
         
@@ -41,7 +41,7 @@
 					$('#CAction' + $commentID).css('display','none');
 					loadTimeline();
 					return false;
-				}, 2000);
+				}, 500);
 			}
 		</script>
         
@@ -57,6 +57,6 @@
 					$('#comBox' + $comm_id).fadeOut();
 					//loadTimeline();
 					return false;
-				}, 2000);
+				}, 500);
 			}
 		</script>
