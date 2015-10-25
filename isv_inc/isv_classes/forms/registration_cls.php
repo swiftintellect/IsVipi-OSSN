@@ -87,6 +87,16 @@ class userRegistration {
 		$format = "d/m/Y";
 		$this->dob = $this->validateDate($this->dob, $format);
 		
+		//check if the date of birth meets minimum reg requirements
+		$min_age = 12;
+		
+		if(!validate_age($this->dob,$min_age)){
+			$array['err'] = true;
+			$array['message'] = "Minimum age limit is $min_age years.";
+			echo json_encode($array);
+			exit();
+		}
+		
 		//hash the password
 		$hashedPWD = password_hash($this->password, PASSWORD_DEFAULT);
 		

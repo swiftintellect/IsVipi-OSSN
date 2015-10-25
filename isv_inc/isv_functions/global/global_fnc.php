@@ -26,6 +26,11 @@ function siteTitle($p){
 	echo $page->siteTitle($p);
 }
 
+function adminTitle($p){
+	$page = new pageManager;
+	echo $page->adminTitle($p);
+}
+
 function footerCopyright(){
 	$page = new pageManager;
 	$loadCopyright = $page->footerText();
@@ -572,4 +577,37 @@ function full_name_from_id($user_id){
 	$stmt->close();
 	
 	return $fullname;
+}
+
+function get_user_ip(){
+	$ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
+function validate_age($dob,$min_age){
+    $dob = strtotime($dob);
+	$now = strtotime("now");
+	$age = $now - $dob; // age is in seconds
+	
+	$min_age = $min_age*3600*24*365.25;
+	
+	if($age >= $min_age){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
 }

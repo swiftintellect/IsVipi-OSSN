@@ -80,6 +80,20 @@ class pageManager {
 		}
 	}
 	
+	public function adminTitle($p){
+		$siteInfo = new siteManager();
+		$isv_siteDetails = $siteInfo->getSiteInfo();
+		if ($p === 'login'){
+			return 'Login - '.$isv_siteDetails['s_title']. ' Admin';
+		} else if (isset($p) && file_exists(ISVIPI_ADMIN_BASE .$p.'.php')){
+			$p = str_replace("_", " ", $p);
+			$p = ucwords($p);
+			return $p .' - '.$isv_siteDetails['s_title']. ' Admin';
+		} else { 
+			return '404 Error - '. $isv_siteDetails['s_title'];
+		}
+	}
+	
 	public function footerText(){
 		$siteInfo = new siteManager();
 		$isv_siteDetails = $siteInfo->getSiteInfo();

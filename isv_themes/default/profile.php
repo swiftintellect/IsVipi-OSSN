@@ -21,9 +21,11 @@
                     <!-- cover photo goes here -->
                     <div class="col-md-12 cover-photo">
                     	<img class="" src="<?php echo user_cover_pic($m_info['m_cover_photo']) ?>" alt="cover photo" style="width: 100%;max-height: 100%">
-                    <div class="change-cover-photo">
-                    	<a href="#" data-toggle="modal" data-target="#cover">Change Cover Photo</a>
-                    </div>
+                    <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
+                        <div class="change-cover-photo">
+                            <a href="#" data-toggle="modal" data-target="#cover">Change Cover Photo</a>
+                        </div>
+                    <?php } ?>
                     </div>
                     
                     <!-- end::cover photo -->

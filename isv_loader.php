@@ -62,12 +62,20 @@
 	$includeFile = ''.ISVIPI_PAGES_BASE.''.preg_replace('/[^\w]/','',$PAGE[0]).'.php';
 	
 	//We set our site url parameters
-	if ($PAGE[0] == 'cron'){
+	if ($PAGE[0] === 'cron'){
 		include_once ''.ISVIPI_CRON_BASE.'/'.preg_replace('/[^\w]/','',$PAGE[0]).'.php';
-	} else if ($PAGE[0] == 'p') {
+	} else if ($PAGE[0] === 'p') {
 		include_once ISVIPI_PROCESS_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
-	}  else if ($PAGE[0] == 'install') {
-		include_once '_install/'.preg_replace('/[^\w]/','',$PAGE[0]).'.php';
+	} else if ($PAGE[0] === 'aa') {
+		include_once ISVIPI_ADMIN_PROC_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
+	}  else if ($PAGE[0] === $isv_siteSettings['adminEnd']) {
+		if(!isset($PAGE[1])){
+			include_once ISVIPI_ADMIN_BASE.preg_replace('/[^\w]/','','login').'.php';
+		} else if(isset($PAGE[1]) && file_exists(ISVIPI_ADMIN_BASE.$PAGE[1]. '.php')){
+			include_once ISVIPI_ADMIN_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
+		} else {
+			notFound404Err();
+		}
 	} else if (is_file($includeFile)) {
 		include_once($includeFile);
 	} else notFound404Err();
