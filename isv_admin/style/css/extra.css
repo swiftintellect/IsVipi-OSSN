@@ -1,0 +1,39 @@
+.nav_title {
+	font-weight:800;
+	font-family:Verdana, Geneva, sans-serif;
+	padding-left:10px;
+	background:#06F;
+}
+.top_nav .nav_menu{
+	background:#06F;
+	color:#ffffff;
+}
+.top_nav .nav_menu a {
+	color:#FFF;
+}
+.admin_bar_menu {
+	margin-right:50px;
+}
+.admin_bar_menu a {
+	color:#FFF !important;
+}
+.admin_bar_menu span{
+	color:#FFF !important;
+}
+.dropdown-menu{
+	background:#09F !important;
+	color:#FFF !important;
+}
+.dropdown-toggle{
+	color:#FFF !important;
+}
+.dropdown-menu  a:hover {
+	color: #000 !important;
+	background-color: #E8F5FF;
+}
+.text_white {
+	color:#FFF;
+}
+.scroll-view {
+
+}

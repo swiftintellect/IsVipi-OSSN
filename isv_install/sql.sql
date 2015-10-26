@@ -613,7 +613,19 @@ CREATE TABLE IF NOT EXISTS `isv_admin` (
   `status` int(1) NOT NULL DEFAULT 0,
   `level` int(1) NOT NULL DEFAULT 1,
   `reg_date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_activity` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `isv_admin_logs`
+--
+CREATE TABLE IF NOT EXISTS `isv_admin_logs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `entry` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ip` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `log_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
