@@ -49,7 +49,7 @@
                 <div class='box-body'>
                   <!-- feed text -->
                   <?php if (isset($f['feed_text']) && !empty($f['feed_text'])){?>
-                  	<p style="padding-left:10px;"><?php echo $f['feed_text'] ?></p>
+                  	<p class="brkn" style="padding-left:10px;"><?php echo $f['feed_text'] ?></p>
                   <?php } ?>
                   
                   <!-- feed image -->
@@ -169,22 +169,42 @@
                           <div class="box box-widget" style="margin:0; border:none !important; padding:0">
                           	<div class="box-body">
                             <textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="Say something about this"  ></textarea>
+                              <!-- shared feed -->
+							  <?php if(isset($f['feed_shared_text']) && !empty($sh['s_id'])){?>
+                              <div class="sh-block2">
+                              <div class='user-block' style="margin-bottom:5px;">
+                                <span class='username2' style="display:block"><a href="#"><?php echo $sh['s_from_fullname'] ?></a></span>
+                              </div><!-- /.user-block -->
+                              
+                                <p><?php echo $f['feed_shared_text'] ?></p>
+                                                              
+                              <?php if (isset($f['feed_image']) && !empty($f['feed_image'])){?>
+                                <img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="image post">
+                              <?php }?>
+                              </div>
+                              <input type="hidden" name="f_id" value="<?php echo $sh['s_old_feed_id'] ?>" />
+                              <?php } else {?>
+                              
+                              
                               <!-- feed image -->
                               <?php if (isset($f['feed_image']) && !empty($f['feed_image'])){?>
                                 <img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="feed image">
                               <?php }?>
                               <!-- feed text -->
 							  <?php if (isset($f['feed_text']) && !empty($f['feed_text'])){?>
-                              	<div class='user-block' style="margin-bottom:5px;">
-                                <span class='username2' style="display:inline-block"><a href="#"><?php echo $f['feed_fullname'] ?></a></span>
-                                <span class='description2' style="display:inline-block"><i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
+                              <div class="sh-block">
+                              <div class='user-block' style="margin-bottom:5px;">
+                                <span class='username2' style="display:block"><a href="#"><?php echo $f['feed_fullname'] ?></a></span>
+                                <span class='description2 frmt'> <?php echo elapsedTime($f['feed_time']) ?></span>
                               </div><!-- /.user-block -->
-                                <p style="padding:10px; background:#F4F4F4"><?php echo $f['feed_text'] ?></p>
+                                <p class="brkn sh-fd"><?php echo $f['feed_text'] ?></p>
+                              </div>
+                              <?php } ?>
+                              <input type="hidden" name="f_id" value="<?php echo $f['feed_id'] ?>" />
                               <?php } ?>
                             
                             </div>  
                           </div>
-                          <input type="hidden" name="f_id" value="<?php echo $f['feed_id'] ?>" />
                     	  <input type="hidden" name="isv_op" value="share" />
                         
                       </div>

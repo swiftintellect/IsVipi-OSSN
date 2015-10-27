@@ -1797,6 +1797,8 @@ a:focus {
 .box-comments .comment-text {
   margin-left: 40px;
   color: #555;
+  word-wrap: break-word;
+  word-wrap: break-all;
 }
 .bordered-bottom {
 	margin-bottom:5px !important;
@@ -1924,6 +1926,8 @@ a:focus {
 .chat .item > .message {
   margin-left: 55px;
   margin-top: -40px;
+  word-wrap: break-word;
+  word-wrap: break-all;
 }
 .chat .item > .message > .name {
   display: block;
@@ -4936,6 +4940,8 @@ table.text-center th {
 	margin-bottom:5px !important;
 	margin-top:-5px;
 	margin-left:10px;
+	word-wrap: break-word;
+  word-wrap: break-all;
 }
 .sharedTtext {
 	color: #AEAEAE !important;
@@ -5138,4 +5144,26 @@ table.text-center th {
 .btnbg {
 	height:54px;
 	margin-left:10px !important;
+}
+.brkn {
+	word-wrap: break-word;
+  word-wrap: break-all;
+}
+.frmt {
+	display:block; 
+	font-size:13px;
+	line-height:20px;
+	color:#727272;
+}
+.sh-fd {
+	padding:10px;
+}
+.sh-block {
+	border-left:solid 2px #BCBCBC;
+}
+.sh-block2{
+	border-left:solid 2px #BCBCBC;
+}
+.sh-block2 p{
+	padding-left:10px;
 }
