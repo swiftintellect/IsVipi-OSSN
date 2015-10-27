@@ -1,155 +1,197 @@
+<?php require_once(ISVIPI_ADMIN_CLS_BASE .'stats.cls.php'); 
+	$stats = new site_stats();
+?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/head.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/header.php') ?>
         <!-- page content -->
             <div class="right_col" role="main">
+            
+            <!-- top tiles -->
+                <div class="row tile_count">
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">New Members</span>
+                            <div class="count"><?php echo $stats->user_count('all') ?></div>
+                            <span class="count_bottom">last 30 days</span>
+                        </div>
+                    </div>
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">Activated Accounts</span>
+                            <div class="count green"><?php echo $stats->user_count(1) ?></div>
+                            <span class="count_bottom">last 30 days</span>
+                        </div>
+                    </div>
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">Inactive Accounts</span>
+                            <div class="count red"><?php echo $stats->user_count(0) ?></div>
+                            <span class="count_bottom">last 30 days</span>
+                        </div>
+                    </div>
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">Suspended Accounts </span>
+                            <div class="count red"><?php echo $stats->user_count(2) ?></div>
+                            <span class="count_bottom">last 30 days</span>
+                        </div>
+                    </div>
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">Male Members</span>
+                            <div class="count"><?php echo $stats->member_types('male') ?></div>
+                            <span class="count_bottom">all time</span>
+                        </div>
+                    </div>
+                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+                        <div class="left"></div>
+                        <div class="right">
+                            <span class="count_top">Female Members</span>
+                            <div class="count"><?php echo $stats->member_types('female') ?></div>
+                            <span class="count_bottom">all time</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /top tiles -->
                 <div class="">
 
-                    <div class="row top_tiles">
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-caret-square-o-right"></i>
-                                </div>
-                                <div class="count">179</div>
-
-                                <h3>New Sign ups</h3>
-                                <p>Lorem ipsum psdea itgum rixt.</p>
+                    <div class="row">
+                      
+                      <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="x_panel tile fixed_height_320">
+                            <div class="x_title">
+                                <h2>Quick Links</h2>
+                                <div class="clearfix"></div>
                             </div>
-                        </div>
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-comments-o"></i>
-                                </div>
-                                <div class="count">179</div>
+                            <div class="x_content">
+                                <div class="dashboard-widget-content">
+                                    <ul class="quick-list">
+                                        <li><i class="fa fa-group"></i><a href="#">All Members</a>
+                                        </li>
+                                        <li><i class="fa fa-user-plus"></i><a href="#">Add Member</a>
+                                        </li>
+                                        <li><i class="fa fa-cogs"></i><a href="#">Site Settings</a> </li>
+                                        <li><i class="fa fa-envelope"></i><a href="#">Newsletter</a>
+                                        </li>
+                                        <li><i class="fa fa-user-secret"></i><a href="#">Administrators</a>
+                                        </li>
+                                        <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+                                        </li>
+                                    </ul>
 
-                                <h3>New Sign ups</h3>
-                                <p>Lorem ipsum psdea itgum rixt.</p>
-                            </div>
-                        </div>
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-sort-amount-desc"></i>
+                                    <div class="sidebar-widget">
+                                        <h4>Site Version</h4>
+                                        <p class="s_version"><?php echo ISV_VERSION ?></p>
+                                        <div class="goal-wrapper">
+                                            <span class="s_version_fl">up to date</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <?php if(install_folder_exists()){?>
+                                    <div class="bg-red sec-error">
+                                    	Please delete <strong>isv_install/</strong> folder and its content! This posses a security risk.
+                                    </div>
+                                    <?php } ?>
                                 </div>
-                                <div class="count">179</div>
-
-                                <h3>New Sign ups</h3>
-                                <p>Lorem ipsum psdea itgum rixt.</p>
-                            </div>
-                        </div>
-                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-check-square-o"></i>
-                                </div>
-                                <div class="count">179</div>
-
-                                <h3>New Sign ups</h3>
-                                <p>Lorem ipsum psdea itgum rixt.</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="row">
-                    	                    <div class="col-md-4 col-sm-4 col-xs-12">
+                    
+                      <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel tile fixed_height_320">
+                        <?php $feed = $stats->feed_stats(); 
+							  $feedpc = $feed['all_feeds'] / $feed['total'] * 100;
+							  $likespc = $feed['all_likes'] / $feed['total'] * 100;
+							  $commpc = $feed['all_comments'] / $feed['total'] * 100;
+							  $sharepc = $feed['all_shares'] / $feed['total'] * 100;
+							  $commlikespc = $feed['all_comm_likes'] / $feed['total'] * 100;
+						?>
                             <div class="x_title">
-                                <h2>App Versions</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                                <h2>Timeline Feeds Stats</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                                <h4>App Usage across versions</h4>
                                 <div class="widget_summary">
                                     <div class="w_left w_25">
-                                        <span>0.1.5.2</span>
+                                        <span>All Feeds</span>
                                     </div>
                                     <div class="w_center w_55">
                                         <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                                                <span class="sr-only">60% Complete</span>
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $feedpc ?>%;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="w_right w_20">
-                                        <span>123k</span>
+                                        <span><?php echo $feed['all_feeds'] ?></span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
 
                                 <div class="widget_summary">
                                     <div class="w_left w_25">
-                                        <span>0.1.5.3</span>
+                                        <span>Likes</span>
                                     </div>
                                     <div class="w_center w_55">
                                         <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                                                <span class="sr-only">60% Complete</span>
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $likespc ?>%;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="w_right w_20">
-                                        <span>53k</span>
+                                        <span><?php echo $feed['all_likes'] ?></span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="widget_summary">
                                     <div class="w_left w_25">
-                                        <span>0.1.5.4</span>
+                                        <span>Comments</span>
                                     </div>
                                     <div class="w_center w_55">
                                         <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                                                <span class="sr-only">60% Complete</span>
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $commpc ?>%;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="w_right w_20">
-                                        <span>23k</span>
+                                        <span><?php echo $feed['all_comments'] ?></span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="widget_summary">
                                     <div class="w_left w_25">
-                                        <span>0.1.5.5</span>
+                                        <span>Shares</span>
                                     </div>
                                     <div class="w_center w_55">
                                         <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                                                <span class="sr-only">60% Complete</span>
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $sharepc ?>%;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="w_right w_20">
-                                        <span>3k</span>
+                                        <span><?php echo $feed['all_shares'] ?></span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="widget_summary">
                                     <div class="w_left w_25">
-                                        <span>0.1.5.6</span>
+                                        <span>Comment Likes</span>
                                     </div>
                                     <div class="w_center w_55">
                                         <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                                                <span class="sr-only">60% Complete</span>
+                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $commlikespc ?>%;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="w_right w_20">
-                                        <span>1k</span>
+                                        <span><?php echo $feed['all_comm_likes'] ?></span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -163,40 +205,12 @@
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel tile fixed_height_320 overflow_hidden">
                             <div class="x_title">
-                                <h2>Device Usage</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
+                                <h2>Member Stats</h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
 
                                 <table class="" style="width:100%">
-                                    <tr>
-                                        <th style="width:37%;">
-                                            <p>Top 5</p>
-                                        </th>
-                                        <th>
-                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                                <p class="">Device</p>
-                                            </div>
-                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                                <p class="">Progress</p>
-                                            </div>
-                                        </th>
-                                    </tr>
                                     <tr>
                                         <td>
                                             <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
@@ -205,33 +219,28 @@
                                             <table class="tile_info">
                                                 <tr>
                                                     <td>
-                                                        <p><i class="fa fa-square blue"></i>IOS </p>
+                                                        <p><i class="fa fa-square blue"></i>Friend Requests </p>
                                                     </td>
-                                                    <td>30%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <p><i class="fa fa-square green"></i>Android </p>
+                                                        <p><i class="fa fa-square green"></i>Friends </p>
                                                     </td>
-                                                    <td>10%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <p><i class="fa fa-square purple"></i>Blackberry </p>
+                                                        <p><i class="fa fa-square purple"></i>Request Ignored </p>
                                                     </td>
-                                                    <td>20%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <p><i class="fa fa-square aero"></i>Symbian </p>
+                                                        <p><i class="fa fa-square red"></i>Blocked </p>
                                                     </td>
-                                                    <td>15%</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <p><i class="fa fa-square red"></i>Others </p>
+                                                        <p><i class="fa fa-square aero"></i>Messages </p>
                                                     </td>
-                                                    <td>30%</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -241,133 +250,44 @@
                         </div>
                     </div>
                     
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="x_panel tile fixed_height_320">
-                            <div class="x_title">
-                                <h2>Quick Settings</h2>
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <div class="dashboard-widget-content">
-                                    <ul class="quick-list">
-                                        <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
-                                        </li>
-                                        <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
-                                        </li>
-                                        <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                                        <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                        </li>
-                                        <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                                        <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                        </li>
-                                        <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
-                                        </li>
-                                    </ul>
 
-                                    <div class="sidebar-widget">
-                                        <h4>Profile Completion</h4>
-                                        <canvas width="150" height="80" id="foo" class="" style="width: 160px; height: 100px;"></canvas>
-                                        <div class="goal-wrapper">
-                                            <span class="gauge-value pull-left">$</span>
-                                            <span id="gauge-text" class="gauge-value pull-left">3,200</span>
-                                            <span id="goal-text" class="goal-value pull-right">$5,000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-
-
-                    
-                    </div>
-
+					
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Top Profiles <small>Sessions</small></h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Settings 1</a>
-                                                </li>
-                                                <li><a href="#">Settings 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    <h2>Latest from <a href="">IsVipi OSSN Blog</a></h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
+                                        </div>
                                         <div class="media-body">
                                             <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
+                                        </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
+                                            <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
-                                    </article>
-                                    <article class="media event">
-                                        <a class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </a>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
-                                    <article class="media event">
-                                        <a class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </a>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item Three Tittle</a>
+                                            <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
@@ -375,75 +295,40 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Top Profiles <small>Sessions</small></h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Settings 1</a>
-                                                </li>
-                                                <li><a href="#">Settings 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    <h2>Latest Members</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
+                                        </div>
                                         <div class="media-body">
                                             <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
+                                        </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
+                                            <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
                                     <article class="media event">
-                                        <a class="pull-left date">
+                                        <div class="pull-left date">
                                             <p class="month">April</p>
                                             <p class="day">23</p>
-                                        </a>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
-                                    </article>
-                                    <article class="media event">
-                                        <a class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </a>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item Two Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
-                                    <article class="media event">
-                                        <a class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </a>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item Three Tittle</a>
+                                            <a class="title" href="#">Item One Tittle</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
@@ -452,5 +337,32 @@
                         </div>
                     </div>
                   </div>
+        <?php $fr = $stats->friends_stats(); ?>
+        <script src="<?php echo ISVIPI_ADMIN_URL .'style/js/chartjs/chart.min.js' ?>"></script>
+		<script>
+        var doughnutData = [
+            {
+                value: <?php echo $fr['blocked'] ?>,
+                color: "#E74C3C"
+            },
+            {
+                value: <?php echo $fr['ignored'] ?>,
+                color: "#9B59B6"
+            },
+            {
+                value: <?php echo $fr['pm'] ?>,
+                color: "#BDC3C7"
+            },
+            {
+                value: <?php echo $fr['friends'] ?>,
+                color: "#26B99A"
+            },
+            {
+                value: <?php echo $fr['f_request'] ?>,
+                color: "#3498DB"
+            }
+    ];
+        var myDoughnut = new Chart(document.getElementById("canvas1").getContext("2d")).Doughnut(doughnutData);
+    </script>
 
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/footer.php') ?>

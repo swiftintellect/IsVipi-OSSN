@@ -92,7 +92,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Maintenance Mode">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                        <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>" data-toggle="tooltip" data-placement="top" title="Logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>

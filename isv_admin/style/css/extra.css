@@ -34,6 +34,17 @@
 .text_white {
 	color:#FFF;
 }
-.scroll-view {
-
+.s_version {
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:18px;
+	font-weight:800;
+}
+.s_version_fl {
+	text-align:center;
+}
+.sec-error {
+	width:100%;
+	padding:5px 10px;
+	display:inline-block;
 }

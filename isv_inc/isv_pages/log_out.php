@@ -16,24 +16,29 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
-	$_SESSION = array();
-	$currSession = session_id();
-	if (ini_get("session.use_cookies")) {
-		$params = session_get_cookie_params();
-		setcookie(session_name(), '', time() - 42000,
-			$params["path"], $params["domain"],
-			$params["secure"], $params["httponly"]
-		);
+	//first check if the user is logged in
+	if(isLoggedIn()){
+		$_SESSION = array();
+		$currSession = session_id();
+		if (ini_get("session.use_cookies")) {
+			$params = session_get_cookie_params();
+			setcookie(session_name(), '', time() - 42000,
+				$params["path"], $params["domain"],
+				$params["secure"], $params["httponly"]
+			);
+		}
+		//delete session from the database
+		$stmt = $isv_db->prepare("DELETE from sessions WHERE (sess_id=? OR user_id=?)");
+		$stmt->bind_param('si', $currSession, $_SESSION['isv_user_id']);
+		$stmt->execute();
+		$stmt->close();
+		
+		session_destroy();
+		
+		header('location:'.ISVIPI_URL.'');
+		exit();
+	} else {
+		notFound404Err();
 	}
-	//delete session from the database
-	$stmt = $isv_db->prepare("DELETE from sessions WHERE (sess_id=? OR user_id=?)");
-	$stmt->bind_param('si', $currSession, $_SESSION['isv_user_id']);
-	$stmt->execute();
-	$stmt->close();
-	
-	session_destroy();
-	
-	header('location:'.ISVIPI_URL.'');
-	exit();
 	
 ?>

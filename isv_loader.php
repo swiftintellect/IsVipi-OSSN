@@ -16,7 +16,7 @@
 	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR);
 	define ('ISVIPI_ACT_THEME_URL', ISVIPI_URL .'themes/' .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR);
 	define ('ISVIPI_ACT_ADMIN_URL', ISVIPI_URL .$isv_siteSettings['adminEnd'].'' .DIRECTORY_SEPARATOR);
-	define('VERSION', '2.0.0');
+	define('ISV_VERSION', '2.0.0');
 
 	/*** declare timezone **/
 	if($isv_siteSettings['defaultTzone'] === 1){

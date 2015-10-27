@@ -36,7 +36,6 @@ define('ISVIPI_THEMES', ISVIPI_ROOT . 'isv_themes' . DIRECTORY_SEPARATOR);
 define('ISVIPI_MOBILE_THEME_BASE', ISVIPI_THEMES . 'mobile' . DIRECTORY_SEPARATOR);
 define('ISVIPI_PLUGINS_BASE', ISVIPI_ROOT . 'isv_plugins' . DIRECTORY_SEPARATOR);
 define('ISVIPI_LANG_BASE', ISVIPI_ROOT . 'isv_lang' . DIRECTORY_SEPARATOR);
-define('ISVIPI_CRON_BASE', ISVIPI_INC_BASE . 'isv_cron' . DIRECTORY_SEPARATOR);
 
 //admin base
 define('ISVIPI_ADMIN_BASE', ISVIPI_ROOT . 'isv_admin' . DIRECTORY_SEPARATOR);
@@ -44,6 +43,8 @@ define('ISVIPI_ADMIN_INC_BASE', ISVIPI_ROOT . 'isv_inc/isv_admin' . DIRECTORY_SE
 define('ISVIPI_ADMIN_PROC_BASE', ISVIPI_ADMIN_INC_BASE . 'processes' . DIRECTORY_SEPARATOR);
 define('ISVIPI_ADMIN_CLS_BASE', ISVIPI_ADMIN_INC_BASE . 'classes' . DIRECTORY_SEPARATOR);
 
+//cron base
+define('ISVIPI_CRON_BASE', ISVIPI_INC_BASE . 'isv_cron' . DIRECTORY_SEPARATOR);
 
 // url paths
 define ('ISVIPI_URL', URL_ROOT);
@@ -51,7 +52,11 @@ define ('ISVIPI_FULL_HTTP_URL', $_SERVER['HTTP_HOST']);
 define ('ISVIPI_STYLE_URL', ISVIPI_URL . 'isv_inc/isv_style.lib' .DIRECTORY_SEPARATOR);
 define ('ISVIPI_UPLOADS_URL', ISVIPI_URL . 'isv_inc/isv_uploads' .DIRECTORY_SEPARATOR);
 
-define ('ISVIPI_ADMIN_URL', URL_ROOT.'isv_admin'. DIRECTORY_SEPARATOR);
+//local admin url
+define ('ISVIPI_ADMIN_URL', ISVIPI_URL.'isv_admin'. DIRECTORY_SEPARATOR);
+
+//cron job url
+define ('ISVIPI_CRON_URL', ISVIPI_URL . 'cron' .DIRECTORY_SEPARATOR);
 
 //Image thumbnail sizes
 define('ISVIPI_THUMBS', '150x150_');

@@ -57,11 +57,7 @@
 		  ){
 			  return true;
 		  } else {
-			  session_regenerate_id();
-			  $_SESSION['isv_adm_prelogin_url'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-			  $_SESSION['isv_error'] = "You must be logged in to view this page.";
-			  require_once(ISVIPI_ADMIN_BASE .'login.php');
-			  exit();
+			  return false;
 		  }
 	  }
 	  
@@ -84,8 +80,9 @@
 	  
 	  public function is_logged_in(){
 		  if(isset($_SESSION['isv_admin_id']) && !empty($_SESSION['isv_admin_id'])){
-			  global $isv_siteSettings;
-			 header('location:'.ISVIPI_URL.$isv_siteSettings['adminEnd'].'/dashboard/'); 
+			 return TRUE; 
+		  } else {
+			  return FALSE;
 		  }
 	  }
 	  
