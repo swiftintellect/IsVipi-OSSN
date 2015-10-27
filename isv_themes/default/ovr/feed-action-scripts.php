@@ -17,7 +17,9 @@
         <!-- DELETE FEED -->
         <script>
 			function deleteFeed($feed,$type){
-				$('#f_content' + $feed).fadeTo( "slow" , 0.4, function() {});
+				$('#f_content' + $feed).fadeTo( "slow" , 0.5, function() {});
+				$('#f_content' + $feed).css('background-color', '#FFF2F2');
+				
 				$.ajax({
 				  type: "POST",
 				  url: site_url+"/p/feeds/"+$type+"/"+$feed,
@@ -25,7 +27,7 @@
 				setTimeout(function(){
 					loadTimeline();
 					return false;
-				}, 500);
+				}, 1000);
 			}
 		</script>
         

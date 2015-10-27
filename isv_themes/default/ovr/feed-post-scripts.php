@@ -26,12 +26,26 @@
         
       <!-- IMAGE FEED -->
       <script>
+	  function isEmpty(){
+		var x;
+		x = document.getElementById("imgInp").value;
+			if (x == ""){ 
+				$('#errorLog').css('display','none');
+				$("#processing2").css('display','block');
+				alert("Please select an image to upload");
+				return;
+			} else {
+				$('#errorLog').css('display','none');
+				$("#processing2").css('display','block');
+				$("#uplPic").css('display','none');
+				$("#uplPic2").css('display','block');
+				uploadPic(); 
+			}
+	}
+	function uploadPic(){
 		$('#imgFeed').ajaxForm({ 
 			dataType: 'json', 
 			success: function(json) { 
-			$("#processing2").show();
-			$('#errorLog').css('display','none');
-			$('input[type="submit"]').prop('disabled', true);
 				setTimeout(function(){
 					if(json.err == true) {
 						$('#errorLog').css('display','block');
@@ -41,14 +55,16 @@
 						$('#imgFeed').clearForm();
 						$('#preview').css('display','none');
 						$('#preview2').css('display','block');
+						$("#uplPic").css('display','block');
+						$("#uplPic2").css('display','none');
 						//reload our timeline
 						loadTimeline();
 					}
-					$('input[type="submit"]').prop('disabled', false);
 					$("#processing2").hide();
 				}, 500);
 			 } 
 			});
+	}
 		</script>
         
         <!-- FEED IMAGE PREVIEW -->

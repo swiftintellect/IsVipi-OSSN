@@ -34,11 +34,12 @@
                                     <input type="file" class="upload" name="feedImg" id="imgInp"/>
                                 </div>
                                 <img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
-                                <img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/success.png' ?>" style="display:none"/>
+                                <img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/success.png' ?>"/>
                                 <input type="hidden" name="isv_op" value="img-feed" />
                                 <div class="clear"></div>
                                 <hr />
-                                <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" />
+                                <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic" onClick="isEmpty()" />
+                                <input type="button" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic2" disabled="disabled" style="display:none"/>
                                 <div class="feed-spinner" id="processing2" style="display:none"><i class="fa fa-spinner fa-pulse"></i></div>
                                 <div class="clear"></div>
                                 </form>
