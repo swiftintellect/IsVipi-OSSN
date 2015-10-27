@@ -16,7 +16,9 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
- 	global $PAGE,$p;
+ 	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+	$admin = new admin_security();
+	global $PAGE,$p;
 	if(!isset($PAGE[0]) || empty($PAGE[0])){
 		$p = '';
 	} else {
@@ -24,7 +26,7 @@
 	}
 	
 	//force sign in if the user is not signed in already
-	if (!isLoggedIn()){
+	if (!isLoggedIn() && !$admin->admin_logged_in()){
 		$linkTo = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$_SESSION['isv_pre_signIn_url'] = $linkTo;
 		$_SESSION['isv_error'] = 'You must be signed in to view this page.';
@@ -33,7 +35,7 @@
 	}
 	
 	//check if the user has status active
-	if (!isStatusActive()){
+	if (!isStatusActive() && !$admin->admin_logged_in()){
 		$_SESSION['isv_error'] = 'You account has either been inactivated or was never activated.';
 		
 		if(isset($_SESSION['isv_user_id'])){

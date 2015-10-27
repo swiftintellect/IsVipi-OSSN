@@ -82,7 +82,7 @@
                                         </li>
                                         <li><i class="fa fa-user-secret"></i><a href="#">Administrators</a>
                                         </li>
-                                        <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+                                        <li><i class="fa fa-sign-out"></i><a href="#">Logout</a>
                                         </li>
                                     </ul>
 
@@ -96,7 +96,7 @@
                                     
                                     <?php if(install_folder_exists()){?>
                                     <div class="bg-red sec-error">
-                                    	Please delete <strong>isv_install/</strong> folder and its content! This posses a security risk.
+                                    	Please delete <strong>isv_install/</strong> folder and its content! This poses a security risk.
                                     </div>
                                     <?php } ?>
                                 </div>
@@ -257,7 +257,7 @@
                         <div class="col-md-6">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Latest from <a href="">IsVipi OSSN Blog</a></h2>
+                                    <h2>Latest from <a href="http://isvipi.org" target="_blank">IsVipi OSSN Blog</a> (Coming Soon)</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
@@ -267,7 +267,7 @@
                                             <p class="day">23</p>
                                         </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
+                                            <a class="title" href="#">Blog Title</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
@@ -277,7 +277,7 @@
                                             <p class="day">23</p>
                                         </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
+                                            <a class="title" href="#">Blog Title</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
@@ -287,7 +287,7 @@
                                             <p class="day">23</p>
                                         </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
+                                            <a class="title" href="#">Blog Title</a>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                         </div>
                                     </article>
@@ -302,36 +302,31 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
+                                    <div class="col-md-12 col-sm-4 col-xs-12 animated fadeInDown">
+                                         <?php $members = array_filter($stats->get_latest_members(8));
+										 		if(is_array($members)) foreach ($members as $key => $mi) {
+										 ?> 
+                                            
+                                            <div class="profile_view sty-pr">
+                                                <div class="col-sm-12 styl-mb">
+                                                    <div class="adm-members">
+                                                        <img src="<?php echo user_pic($mi['profile_pic']) ?>" alt="" class="img-square">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-12 bottom text-center">
+                                                	<a href="<?php echo ISVIPI_URL .'profile/'.$mi['username'] ?>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="<?php echo $mi['fullname'] ?>" target="_blank"> 
+                                                    	View Profile 
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            
+                                            <?php } else {?>
+                                            <div class="profile_view sty-pr">
+                                            	<p>No members found.</p>
+                                            </div>
+                                            <?php } ?>
+                                            
                                         </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Item One Tittle</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
                                 </div>
                             </div>
                         </div>

@@ -52,7 +52,7 @@
                               </ul>
                               
             				  <?php if($_SESSION['isv_user_id'] !== $m_info['m_user_id'] && 
-							  !$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
+							  !$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$admin->admin_logged_in()){?>
                              
                              <!--check if they are already friends -->
                               	<?php if($friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
@@ -121,7 +121,8 @@
 						   	($_SESSION['isv_user_id'] === $m_info['m_user_id']) /* if owner */ ||
 							($_SESSION['isv_user_id'] !== $m_info['m_user_id'] && $m_info['m_phone_settings'] === 2) /* everyone */||
 							($_SESSION['isv_user_id'] !== $m_info['m_user_id'] && $m_info['m_phone_settings'] === 1 
-							&& $friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']))
+							&& $friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id'])) ||
+							$admin->admin_logged_in()
 
 						   ){?>
                                  <hr style="margin:5px 0">

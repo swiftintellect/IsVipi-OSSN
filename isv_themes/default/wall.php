@@ -11,7 +11,8 @@
                         ($_SESSION['isv_user_id'] === $f['feed_user']) /* if profile owner */||
 						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 2) /* if everyone */ ||
 						($_SESSION['isv_user_id'] !== $f['feed_user'] && $f['feed_settings'] === 1 
-						&& $friends->are_friends($_SESSION['isv_user_id'],$f['feed_user'])) /* if only friends */
+						&& $friends->are_friends($_SESSION['isv_user_id'],$f['feed_user'])) /* if only friends */ ||
+						$admin->admin_logged_in()
 						
                     ){ ?>
                 <div class="box box-widget" style="margin:0;" id="f_content<?php echo $f['feed_id'] ?>">

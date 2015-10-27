@@ -4849,12 +4849,12 @@ table.text-center th {
 	margin-top:10px;
 }
 #preview2 {
-	width:64px;
-	margin-left:1%;
-	float:left;
-	max-height:64px;
-	margin-top:10px;
-	display:none;
+	width: 64px;
+	margin-left: 1%;
+	float: left;
+	max-height: 64px;
+	margin-top: 10px;
+	display: none;
 }
 #preview2 img{
 	width:64px;
@@ -5170,4 +5170,21 @@ table.text-center th {
 }
 .sh-block2 p{
 	padding-left:10px;
+}
+.view-as-admin {
+	width:35%;
+	position:fixed;
+	right:0;
+	padding:10px;
+	background:#060;
+	border:solid thick #F00;
+	color:#FFF;
+	margin-top:50px;
+	z-index:99;
+}
+.view-as-admin a {
+	color:#FF0;
+}
+.view-as-admin a:hover {
+	text-decoration:underline;
 }

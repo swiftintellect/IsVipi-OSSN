@@ -138,4 +138,34 @@
 		  return $fr;
 		  
 	  }
+	  
+	  public function get_latest_members($limit){
+		  global $isv_db;
+		  
+		  $stmt = $isv_db->prepare ("
+			SELECT 
+				u.username,
+				p.fullname,
+				p.profile_pic 
+			FROM users u
+			LEFT JOIN user_profile p ON u.id = p.user_id 
+			ORDER BY u.id DESC LIMIT $limit
+		"); 
+		$stmt->execute(); 
+		$stmt->store_result(); 
+		$stmt->bind_result($username,$fullname,$ppic); 
+		$count = $stmt->num_rows();
+		$members = array();
+		while($stmt->fetch()){
+				$members[] = array(
+					'username' => $username,
+					'fullname' => $fullname,
+					'profile_pic' => $ppic,
+					'count' => $count,
+				);
+			}
+		$stmt->close();
+		  //print_r($members); exit();
+		  return $members;
+	  }
   }

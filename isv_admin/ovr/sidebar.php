@@ -63,7 +63,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Help/Support <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-header"></i> Help/Support <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li>
                                         	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Credit</a>

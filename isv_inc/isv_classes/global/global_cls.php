@@ -14,8 +14,11 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomHead('myhead', 'memberhead')*/ 
 	public function loadCustomHead($guest,$logged){
+		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+		$admin = new admin_security();
+		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
-		if (!isLoggedIn()){
+		if (!isLoggedIn() && !$admin->admin_logged_in()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
@@ -32,8 +35,11 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomHeader('g_header', 'm_header')*/ 
 	public function loadCustomHeader($guest,$logged){
+		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+		$admin = new admin_security();
+		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
-		if (!isLoggedIn()){
+		if (!isLoggedIn() && !$admin->admin_logged_in()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
@@ -56,8 +62,11 @@ class pageManager {
 	Please note that you will have to supply two variables indicating the names of these pages, 
 	guest and logged in that order. For example  loadCustomFooter('isv_footer', 'isvipi_footer')*/ 
 	public function loadCustomFooter($guest,$logged){
+		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+		$admin = new admin_security();
+		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
-		if (!isLoggedIn()){
+		if (!isLoggedIn() && !$admin->admin_logged_in()){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
