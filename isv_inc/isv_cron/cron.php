@@ -17,10 +17,5 @@
 	51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	******************************************************/ 
 
-	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
-	$track = new admin_security();
-	if($track->is_logged_in()){
-		require_once(ISVIPI_CRON_BASE .'admin.cron.php');
-	} else {
-		require_once(ISVIPI_CRON_BASE .'front.cron.php');
-	}
+	require_once(ISVIPI_CRON_BASE .'admin.cron.php');
+	require_once(ISVIPI_CRON_BASE .'front.cron.php');

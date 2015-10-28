@@ -20,4 +20,3 @@
 	require_once ISVIPI_CLASSES_BASE.'global/cron.cls.php';
 	$cron = new front_cron();
 	
-	echo "ready";

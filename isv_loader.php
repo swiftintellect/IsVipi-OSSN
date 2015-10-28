@@ -29,6 +29,11 @@
 		ini_set('display_errors', 0);
 	}
 	
+	/*** run cron job */
+	if($isv_siteSettings['sys_cron'] === 1){
+		require_once(ISVIPI_CRON_BASE .'cron.php');
+	}
+	
 	/*** check if the site is active or on maintenance mode */
 	$siteInfo->maintenanceMode();
 	
