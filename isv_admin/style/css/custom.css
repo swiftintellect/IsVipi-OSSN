@@ -242,6 +242,7 @@ body.nav-md .container.body .right_col {
     .right_col {
         padding: 10px !important;
     }
+	
 }
 
 @media (max-width: 1200px) {
@@ -482,6 +483,9 @@ table.no-margin .progress {
     .tile_stats_count .right span {
         font-size: 12px;
     }
+	.x_content {
+		overflow-x:scroll;
+	}
 }
 
 @media (min-width: 768px) {

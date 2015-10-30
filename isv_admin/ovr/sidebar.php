@@ -18,15 +18,17 @@
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                         <div class="menu_section">
-                            <ul class="nav side-menu">
-                            	<li class="active-sm">
+                            <ul class="nav side-menu active">
+                            	<li <?php if ($PAGE[1] === 'dashboard'){?> class="current-page" <?php } ?>>
                                 	<a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>"><i class="fa fa fa-home"></i> Home</a>
                                 </li>
-                                <li><a><i class="fa fa-users"></i> Members <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Members</a>
+                                <li <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new'){?> class="active" <?php } ?>>
+                                <a><i class="fa fa-users"></i> Members <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu nv">
+                                        <li <?php if ($PAGE[1] === 'members'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>">Members</a>
                                         </li>
-                                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Add New</a>
+                                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'add_new' ?>">Add New</a>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>

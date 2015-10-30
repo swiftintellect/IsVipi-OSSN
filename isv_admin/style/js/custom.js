@@ -65,6 +65,6 @@ $(function () {
 
 /** ******  tooltip  *********************** **/
 $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    /** ******  /tooltip  *********************** **/
+	$('[data-toggle="tooltip"]').tooltip()
+})
+/** ******  /tooltip  *********************** **/

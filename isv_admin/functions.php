@@ -6,3 +6,15 @@
 			return FALSE;
 		}
 	}
+	
+	function user_status($status){
+		if ($status === 0){
+			return "Inactive";
+		} else if($status === 1){
+			return "Active";
+		} else if($status === 2){
+			return "Suspended";
+		} else {
+			return "Unknown";
+		}
+	}
