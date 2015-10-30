@@ -18,10 +18,12 @@ class pageManager {
 		$admin = new admin_security();
 		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
-		if (!isLoggedIn() && !$admin->admin_logged_in()){
+		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+		} else if ($admin->admin_logged_in() && $p === 'index'){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
-			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		}
 	}
 	
@@ -39,10 +41,12 @@ class pageManager {
 		$admin = new admin_security();
 		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
-		if (!isLoggedIn() && !$admin->admin_logged_in()){
+		if (isLoggedIn() || ($admin->admin_logged_in() && $p !=='index')){
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+		} else if($admin->admin_logged_in() && $p === 'index'){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
-			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		}
 	}
 	
@@ -66,10 +70,12 @@ class pageManager {
 		$admin = new admin_security();
 		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter;
-		if (!isLoggedIn() && !$admin->admin_logged_in()){
+		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+		} else if ($admin->admin_logged_in() && $p === 'index'){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		} else {
-			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
+			require_once(ISVIPI_ACT_THEME . 'ovr/'.$guest.'.php');
 		}
 	}
 	

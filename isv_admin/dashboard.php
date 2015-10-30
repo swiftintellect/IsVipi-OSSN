@@ -90,7 +90,11 @@
                                         <h4>Site Version</h4>
                                         <p class="s_version"><?php echo ISV_VERSION ?></p>
                                         <div class="goal-wrapper">
+                                        	<?php if($isv_siteSettings['upd_avail'] === 1){ ?>
+                                            <a href="" class="btn btn-success btn-sm bt">update available</a>
+                                            <?php } else {?>
                                             <span class="s_version_fl">up to date</span>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     

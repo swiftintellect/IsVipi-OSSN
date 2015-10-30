@@ -46,10 +46,10 @@ class siteManager {
 	
 		public function getSiteSettings(){
 		global $isv_db;
-		$stmt = $isv_db->prepare("SELECT user_reg,user_validate,sys_cron,timezone,admin_end,logo_name,favicon,mobile,plugins,errors,newuser_notice FROM s_settings WHERE id=1");
+		$stmt = $isv_db->prepare("SELECT user_reg,user_validate,sys_cron,timezone,admin_end,logo_name,favicon,mobile,plugins,errors,newuser_notice,last_upd_check,upd_avail FROM s_settings WHERE id=1");
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($sett_userReg,$sett_userValid,$sett_sysCron,$sett_defTimeZone,$sett_adminEnd,$sett_logo,$sett_favicon,$sett_mobile,$sett_plugins,$sett_errors,$sett_newuserNotice);
+		$stmt->bind_result($sett_userReg,$sett_userValid,$sett_sysCron,$sett_defTimeZone,$sett_adminEnd,$sett_logo,$sett_favicon,$sett_mobile,$sett_plugins,$sett_errors,$sett_newuserNotice,$last_upd_check,$upd_avail);
 		$stmt->fetch();
 		$stmt->close( );
 		
@@ -65,6 +65,8 @@ class siteManager {
 			'enable_plugins' => $sett_plugins,
 			'hide_errors' => $sett_errors,
 			'notifyAdmin_newUser' => $sett_newuserNotice,
+			'last_upd_check' => $last_upd_check,
+			'upd_avail' => $upd_avail
 		);
 	}
 

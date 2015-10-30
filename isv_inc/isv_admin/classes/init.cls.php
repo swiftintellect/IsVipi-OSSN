@@ -78,14 +78,6 @@
 		  $stmt->close();
 	  }
 	  
-	  public function is_logged_in(){
-		  if(isset($_SESSION['isv_admin_id']) && !empty($_SESSION['isv_admin_id'])){
-			 return TRUE; 
-		  } else {
-			  return FALSE;
-		  }
-	  }
-	  
 	  private function ip_from_admin_id_sess($admin_id){
 		  global $isv_db,$admin_ip;
 		  $sess = session_id();
@@ -102,5 +94,33 @@
 				return FALSE;
 			}
 		  $stmt->close();
+	  }
+	  
+	  public function admin_details($admin_id){
+		  global $isv_db;
+		  
+		  $stmt = $isv_db->prepare("SELECT id,email,name,status,level,reg_date,ip FROM isv_admin WHERE id=?");
+		  $stmt->bind_param('i', $admin_id);
+		  $stmt->execute();
+		  $stmt->store_result();
+		  $stmt->bind_result($adm_id,$adm_email,$adm_name,$adm_status,$adm_level,$adm_regdate,$adm_ip);
+		  $stmt->fetch();
+		  $stmt->close();
+		  
+		  $d = array();
+		  $d = array(
+		  	'id' => $adm_id,
+			'email' => $adm_email,
+			'name' => $adm_name,
+			'status' => $adm_status,
+			'level' => $adm_level,
+			'reg_date' => $adm_regdate,
+			'ip' => $adm_ip
+		  
+		  );
+		  
+		  //print_r($d); exit();
+		  return $d;
+		  
 	  }
   }

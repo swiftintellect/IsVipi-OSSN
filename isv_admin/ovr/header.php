@@ -1,7 +1,6 @@
            <!-- top navigation -->
             <div class="top_nav">
-            	
-
+            	<?php $admin = $track->admin_details($_SESSION['isv_admin_id']); ?>
                 <div class="nav_menu">
                     <nav class="" role="navigation">
                         <div class="nav toggle">
@@ -11,7 +10,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="admin_bar_menu">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    John Doe
+                                    <?php echo $admin['name'] ?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">

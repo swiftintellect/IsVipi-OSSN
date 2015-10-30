@@ -10,7 +10,7 @@
 			$query = "WHERE status=$status AND ";  
 		  }
 		  
-		  $stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users $query reg_date < (UTC_TIMESTAMP - INTERVAL 30 DAY)"); 
+		  $stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users $query reg_date > (UTC_TIMESTAMP() - INTERVAL 1 MONTH)"); 
 		  $stmt->execute();  
 		  $stmt->bind_result($count); 
 		  $stmt->fetch();
@@ -168,4 +168,14 @@
 		  //print_r($members); exit();
 		  return $members;
 	  }
+	  
+	  
+  
+  
+  
+  
+  
+  
+  
+  
   }

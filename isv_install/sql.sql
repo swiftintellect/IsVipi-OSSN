@@ -403,6 +403,8 @@ CREATE TABLE IF NOT EXISTS `s_settings` (
   `plugins` int(1) NOT NULL,
   `errors` int(1) NOT NULL,
   `newuser_notice` int(1) NOT NULL,
+  `last_upd_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `upd_avail` int(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
