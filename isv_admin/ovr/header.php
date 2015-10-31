@@ -38,7 +38,7 @@
                 	<?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?>
                 </div>
             <?php } else if(isset($_SESSION['isv_error']) || !empty($_SESSION['isv_error'])){?>
-                <div class="alert alert-success succ-mod">
+                <div class="alert alert-success err-mod">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

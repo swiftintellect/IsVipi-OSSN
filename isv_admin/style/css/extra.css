@@ -124,3 +124,9 @@
 	z-index:99;
 	border:none !important;
 }
+.no-display {
+	display:none !important;
+}
+.block-display {
+	display:block !important;
+}

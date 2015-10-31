@@ -9,14 +9,14 @@
 	
 	function user_status($status){
 		if ($status === 0){
-			return "Inactive";
+			return "<span class='label label-default'>Inactive</span>";
 		} else if($status === 1){
-			return "Active";
+			return "<span class='label label-success'>Active</span>";
 		} else if($status === 2){
-			return "Suspended";
+			return "<span class='label label-warning'>Suspended</span>";
 		} else if($status === 9){
-			return "Sch. Deletion";
+			return "<span class='label label-danger'>Sch. Deletion</span>";
 		} else {
-			return "Unknown";
+			return "<span class='label label-primary'>Unknown</span>";
 		}
 	}

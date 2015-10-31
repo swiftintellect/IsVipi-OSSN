@@ -149,7 +149,7 @@
                         <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'edit/'.$mi['username'] ?>" class="btn btn-primary btn-sm2">Edit</a>
                         <?php if($mi['status'] === 2){?>
                         	<a href="#" class="btn btn-success btn-sm2" data-toggle="modal" data-target="#Unsuspend<?php echo $mi['id'] ?>">Unsuspend</a>
-                        <?php } else if ($mi['status'] !== 0){ ?>
+                        <?php } else if ($mi['status'] !== 0 && $mi['status'] !== 9){ ?>
                         	<a href="#" class="btn btn-warning btn-sm2" data-toggle="modal" data-target="#Suspend<?php echo $mi['id'] ?>">Suspend</a>
                         <?php } ?>
                         <?php if ($mi['status'] === 9){?>
@@ -262,9 +262,11 @@
     	</table>
         <?php if($t_count > 0 ){?>
             <input type="hidden" name="aop" id="op" value="mass-act" />
-            <input type="submit" class="btn btn-success btn-sm" name="submit" value="Activate Selected" onclick="activate();"/>
+            <input type="submit" class="btn btn-default btn-sm" name="submit" value="Activate Selected" onclick="activate();"/>
             <input type="submit" class="btn btn-warning btn-sm" name="submit" value="Suspend Selected" onclick="suspend();"/>
             <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Unsuspend Selected" onclick="unsuspend();"/>
+            <input type="submit" class="btn btn-danger btn-sm" name="submit" value="Delete Selected" onclick="m_delete();"/>
+            <input type="submit" class="btn btn-success btn-sm" name="submit" value="Undelete Selected" onclick="undelete();"/>
         </form>
         <?php } ?>
         <?php 
@@ -311,6 +313,14 @@ function suspend(){
 
 function unsuspend(){
 	document.getElementById("op").value = "mass-unsus";
+}
+
+function m_delete(){
+	document.getElementById("op").value = "mass-del";
+}
+
+function undelete(){
+	document.getElementById("op").value = "mass-undel";
 }
 </script>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/footer.php') ?>

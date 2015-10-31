@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus'){
+	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel'){
 		 $entry = "Someone interfered with admin member page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
@@ -157,19 +157,67 @@
 	
 	
 	if ($op === 'mass-act'){
-		echo "Mass Activate"; exit();
-		print_r($_POST['user_id']);
 		
+		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
+			$_SESSION['isv_error'] = 'Please select users to activate';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$users = cleanPOST('user_id');
+		
+		$member->mass_activate($users);
 	}
 	
 	if ($op === 'mass-sus'){
-		echo "Mass Suspend"; exit();
-		print_r($_POST['user_id']);
+		
+		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
+			$_SESSION['isv_error'] = 'Please select users to activate';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$users = cleanPOST('user_id');
+		
+		$member->mass_suspend($users);
 		
 	}
 	
 	if ($op === 'mass-unsus'){
-		echo "Mass Unsuspend"; exit();
-		print_r($_POST['user_id']);
+		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
+			$_SESSION['isv_error'] = 'Please select users to activate';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$users = cleanPOST('user_id');
+		
+		$member->mass_unsuspend($users);
+		
+	}
+	
+	if ($op === 'mass-del'){
+		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
+			$_SESSION['isv_error'] = 'Please select users to activate';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$users = cleanPOST('user_id');
+		
+		$member->mass_delete($users);
+		
+	}
+	
+	if ($op === 'mass-undel'){
+		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
+			$_SESSION['isv_error'] = 'Please select users to activate';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$users = cleanPOST('user_id');
+		
+		$member->mass_undelete($users);
 		
 	}
