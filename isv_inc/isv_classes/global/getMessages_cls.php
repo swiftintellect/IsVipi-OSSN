@@ -108,6 +108,7 @@
 				pm.read_time,
 				pm.sent_time,
 				u.username,
+				u.status,
 				p.fullname,
 				p.profile_pic
 			FROM user_pm pm 
@@ -122,7 +123,7 @@
 			$stmt->bind_param('iiisiiis', $me,$other,$other,$notDel,$me,$other,$other,$notDel);
 			$stmt->execute(); 
 			$stmt->store_result(); 
-			$stmt->bind_result($pm_id,$pm_from_id,$pm_to_id,$pm_msg,$pm_read_time,$pm_sent_time,$pm_username,$pm_fullname,$pm_profile_pic);
+			$stmt->bind_result($pm_id,$pm_from_id,$pm_to_id,$pm_msg,$pm_read_time,$pm_sent_time,$pm_username,$pm_status,$pm_fullname,$pm_profile_pic);
 			if($stmt->num_rows() > 0){
 				while($stmt->fetch()){
 					$resultArray[] = array(
@@ -133,6 +134,7 @@
 							'read_time' => $pm_read_time,
 							'sent_time' => $pm_sent_time,
 							'username' => $pm_username,
+							'user_status' => $pm_status,
 							'fullname' => $pm_fullname,
 							'profile_pic' => $pm_profile_pic
 						);

@@ -36,7 +36,7 @@
 	
 	//check if the user has status active
 	if (!isStatusActive() && !$admin->admin_logged_in()){
-		$_SESSION['isv_error'] = 'You account has either been inactivated or was never activated.';
+		$_SESSION['isv_error'] = 'Prohibitted! Possible reasons: Account Suspended or Scheduled for deletion. Please contact an admin for help.';
 		
 		if(isset($_SESSION['isv_user_id'])){
 			unset($_SESSION['isv_user_id']);

@@ -170,8 +170,7 @@ function notifyAdmin($name,$type,$sEmail,$sTitle){
 function emailOrUsername($value){
 	if(filter_var($value, FILTER_VALIDATE_EMAIL)) {
         return 'email';
-    }
-    else {
+    } else {
         return 'username';
     }
 }
@@ -619,4 +618,23 @@ function log_entry($entry,$ip){
 	$stmt->bind_param('ss', $entry,$ip);
 	$stmt->execute();
 	$stmt->close();
+}
+
+function sched_del_by_admin($user_id){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare ("SELECT scheduled_by from scheduled_del WHERE user_id=?"); 
+	$stmt->bind_param('i', $user_id);
+	$stmt->execute(); 
+	$stmt->store_result();
+	$stmt->bind_result($by);
+	$stmt->fetch(); 
+	$stmt->close();
+	
+	if($by === 0){
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+	
 }

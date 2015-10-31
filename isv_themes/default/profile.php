@@ -20,6 +20,17 @@
                     
                     <!-- cover photo goes here -->
                     <div class="col-md-12 cover-photo">
+                    
+                    <?php if($m_info['m_status'] === 2){?>
+                        <div class="prof_sus_notice">
+                            This user was suspended. You will not be able to exchange messages.
+                        </div>
+                    <?php } else if($m_info['m_status'] === 9){?>
+                    	<div class="prof_sus_notice">
+                            This user's account is scheduled for deletion. You will not be able to exchange messages.
+                        </div>
+                    <?php } ?>
+                    
                     	<img class="" src="<?php echo user_cover_pic($m_info['m_cover_photo']) ?>" alt="cover photo" style="width: 100%;max-height: 100%">
                     <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
                         <div class="change-cover-photo">
@@ -82,8 +93,12 @@
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                                 <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
                                 <?php } ?>
+                                <?php if($m_info['m_status'] === 2 || $m_info['m_status'] === 9){?> 
+                                	<span class="label label-info">Messaging Disabled</span>
+                                <?php } else { ?>
                                   <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#pm"><b>Message</b></a>
                                   <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#block"><b>Block</b></a>
+                                <?php } ?>
                               <?php } ?>
                               
                               <!-- show a message if either of the users has blocked the other -->

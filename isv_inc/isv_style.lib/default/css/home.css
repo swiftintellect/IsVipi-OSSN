@@ -5188,3 +5188,21 @@ table.text-center th {
 .view-as-admin a:hover {
 	text-decoration:underline;
 }
+.msg-err {
+	background:#900;
+	padding:5px 10px;
+	color:#FFF;
+	position:absolute;
+	bottom:0;
+	width:90%;
+	font-size:12px;
+}
+.prof_sus_notice {
+	background:#900;
+	padding:5px 10px;
+	color:#FFF;
+	position:absolute;
+	top:0;
+	width:100%;
+	font-size:14px;
+}

@@ -39,9 +39,21 @@
         	<small class="text-muted pull-left" style="display:block">Read <?php echo elapsedTime($chat['read_time']) ?></small>
         <?php } ?>
  	</p>
+    	
 </div>
 <!-- /.item -->
+<!-- if the user has been suspended or deleted his/her account -->
+<?php if($chat['user_status'] === 2){?>
+	<div class="msg-err">
+  		This user has been suspended. You will not be able to exchange any messages.
+  	</div>
+<?php } else if ($chat['user_status'] === 9){?>
+	<div class="msg-err">
+  		This user's account has been scheduled for deletion. You will therefore not be able to exchange any messages.
+  	</div>
 <?php } ?>
+<?php } ?>
+
 </div>
 <?php } else {?>
 <div class="box-header with-border">

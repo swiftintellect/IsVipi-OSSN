@@ -15,9 +15,24 @@ class signIn {
 		//check is user is active
 		global $userStatus,$email;
 		
+		//if inactivated
 		if ($userStatus === 0){
 			$_SESSION['act_email'] = $email;
 			$_SESSION['isv_error'] = 'Your account has not been activated. Please <a href="'.ISVIPI_URL.'p/users/resend_activation"><span style="color:#FFFF00">activate</span></a> your account to sign in.';
+			header('location:'.ISVIPI_URL.'');
+			exit();
+		}
+		
+		//if suspended
+		if ($userStatus === 2){
+			$_SESSION['isv_error'] = 'Your account was suspended. Please contact an admin for help.';
+			header('location:'.ISVIPI_URL.'');
+			exit();
+		}
+		
+		//if scheduled for deletion by an admin
+		if ($userStatus === 9 && sched_del_by_admin($userD['user_id'])){
+			$_SESSION['isv_error'] = 'Your account was scheduled for deletion. Please contact the admin if this is a mistake.';
 			header('location:'.ISVIPI_URL.'');
 			exit();
 		}
@@ -35,6 +50,7 @@ class signIn {
 			} else {
 				$redirectURL = ''.ISVIPI_URL.'home/';
 			}
+			
 			header('location:'.$redirectURL.'');
 			exit();
 		}

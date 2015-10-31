@@ -13,6 +13,8 @@ class get_members {
 			$query = "WHERE status = 0";
 		} else if ($condition === 'suspended'){
 			$query = "WHERE status = 2";
+		} else if($condition === 'pending_deletion'){
+			$query = "WHERE status = 9";
 		} else {
 			$query = "";
 		}
@@ -41,6 +43,8 @@ class get_members {
 			$query = "WHERE status = 0";
 		} else if ($q === 'suspended'){
 			$query = "WHERE status = 2";
+		} else if($q === 'pending_deletion'){
+			$query = "WHERE status = 9";
 		} else {
 			$query = "";
 		}

@@ -14,6 +14,8 @@
 			return "Active";
 		} else if($status === 2){
 			return "Suspended";
+		} else if($status === 9){
+			return "Sch. Deletion";
 		} else {
 			return "Unknown";
 		}

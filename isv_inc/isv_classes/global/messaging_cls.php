@@ -17,6 +17,17 @@ class message {
 			 exit();
 		}
 		
+		//check if the recipient exists
+		if($this->recipient_status($to_msg) === 2){
+			 $_SESSION['isv_error'] = "This user was suspended and therefore you cannot exchange messages.";
+			 header('location:'.$from_url.'');
+			 exit();
+		} else if ($this->recipient_status($to_msg) === 9){
+			 $_SESSION['isv_error'] = "This user was scheduled for deletion and therefore you cannot exchange messages.";
+			 header('location:'.$from_url.'');
+			 exit();
+		}
+		
 		//add to db
 		$stmt = $isv_db->prepare("INSERT INTO user_pm (from_id,to_id,message,sent_time) VALUES (?,?,?,UTC_TIMESTAMP())");
 		$stmt->bind_param('iis',$this->me,$to_msg,$message);
@@ -34,7 +45,8 @@ class message {
 		
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users_blocked WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)"); 
 		$stmt->bind_param('iiii', $me,$user,$user,$me);
-		$stmt->execute();  
+		$stmt->execute(); 
+		$stmt->store_result(); 
 		$stmt->bind_result($totalCount); 
 		$stmt->fetch();
 		$stmt->close();
@@ -44,6 +56,20 @@ class message {
 		} else {
 			return FALSE;
 		}
+	}
+	
+	private function recipient_status($to_msg){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("SELECT status FROM users WHERE id=?"); 
+		$stmt->bind_param('i', $to_msg);
+		$stmt->execute(); 
+		$stmt->store_result(); 
+		$stmt->bind_result($status); 
+		$stmt->fetch();
+		$stmt->close();
+		
+		return $status;
 	}
 	
 	public function delete_chat($other_user){
