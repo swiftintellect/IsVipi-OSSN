@@ -38,13 +38,13 @@ class get_members {
 		if($q === 'all'){
 			$query = "";
 		} else if($q === 'active'){
-			$query = "WHERE status = 1";
+			$query = "WHERE u.status = 1";
 		} else if($q === 'inactive'){
-			$query = "WHERE status = 0";
+			$query = "WHERE u.status = 0";
 		} else if ($q === 'suspended'){
-			$query = "WHERE status = 2";
+			$query = "WHERE u.status = 2";
 		} else if($q === 'pending_deletion'){
-			$query = "WHERE status = 9";
+			$query = "WHERE u.status = 9";
 		} else {
 			$query = "";
 		}
@@ -93,32 +93,103 @@ class get_members {
 		  //print_r($members); exit();
 		  return $members;
 	}
+	
+	public function search($pg,$order,$p_limit,$type,$term){
+		global $isv_db;
+		$limit = $p_limit;
+		
+		$page = $pg * $p_limit;
+		
+		//search type
+		if($type === "id"){
+			$t_q = "WHERE u.id = '$term'";
+		} else if($type === "username"){
+			$t_q = "WHERE u.username LIKE '%$term%'";
+		} else if($type === "email"){
+			$t_q = "WHERE u.email LIKE '%$term%'";
+		} else if ($type === "name"){
+			$t_q = "WHERE p.fullname LIKE '%$term%'";
+		}
+		
+		
+		//order by condition
+		if($order === 'latest'){
+			$order = 'DESC';
+		} else if($order === 'oldest'){
+			$order = 'ASC';
+		} else {
+			$order = 'DESC';
+		}
+		
+
+		$stmt = $isv_db->prepare ("
+			SELECT
+				u.id,
+				u.email,
+				u.status,
+				u.level, 
+				u.username,
+				p.fullname,
+				p.gender,
+				p.country
+			FROM users u
+			LEFT JOIN user_profile p ON u.id = p.user_id 
+			$t_q
+			ORDER BY u.id $order LIMIT $page,$limit
+		"); 
+		$stmt->execute(); 
+		$stmt->store_result(); 
+		$stmt->bind_result($id,$email,$status,$level,$username,$fullname,$gender,$country); 
+		$members = array();
+		while($stmt->fetch()){
+				$members[] = array(
+					'id' => $id,
+					'email' => $email,
+					'status' => $status,
+					'level' => $level,
+					'username' => $username,
+					'fullname' => $fullname,
+					'gender' => $gender,
+					'country' => $country,
+				);
+			}
+		$stmt->close();
+		  //print_r($members); exit();
+		  return $members;
+	}
+	
+	public function search_count($type,$term){
+		global $isv_db;
+		//search type
+		if($type === "id"){
+			$query = "WHERE u.id = '$term'";
+		} else if($type === "username"){
+			$query = "WHERE u.username LIKE '%$term%'";
+		} else if($type === "email"){
+			$query = "WHERE u.email LIKE '%$term%'";
+		} else if ($type === "name"){
+			$query = "WHERE p.fullname LIKE '%$term%'";
+		}
+		
+		$stmt = $isv_db->prepare ("
+		SELECT COUNT(*) 
+			FROM users u
+			JOIN user_profile p ON u.id = p.user_id 
+		$query
+		"); 
+		$stmt->execute();  
+		$stmt->bind_result($count); 
+		$stmt->fetch();
+		$stmt->close();
+
+		return $count;
+	}
+
 
 }
 
-class getSingleMember {
-	public $m_id;
-	public $m_username;
-	public $m_level;
-	public $m_reg_date;
-	public $m_fullname;
-	public $m_gender;
-	public $m_dob;
-	public $m_country;
-	public $m_city;
-	public $m_phone;
-	public $m_profile_pic;
-	public $m_cover_photo;
-	public $m_hobbies;
-	public $m_relshp_status;
-	public $m_info;
-	public $p_id;
-	
-	private $me;
-	
-	public function __construct (){
-		$this->me = $_SESSION['isv_user_id'];
-	}
+class get_single_member {
+	public function __construct (){}
 	
 	public function members($user,$type){
 		global $isv_db;

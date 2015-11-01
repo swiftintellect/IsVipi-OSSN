@@ -105,9 +105,9 @@
 	width:40%;
 	position:absolute;
 	right:0;
-	margin-right:10px;
+	margin-right:200px;
 	padding:10px;
-	margin-top:60px;
+	margin-top:5px;
 	z-index:99;
 	border:none !important;
 }
@@ -118,9 +118,9 @@
 	width:40%;
 	position:absolute;
 	right:0;
-	margin-right:10px;
+	margin-right:200px;
 	padding:10px;
-	margin-top:60px;
+	margin-top:5px;
 	z-index:99;
 	border:none !important;
 }
@@ -129,4 +129,17 @@
 }
 .block-display {
 	display:block !important;
+}
+.credits-page {
+	background:#FFF;
+	padding-top:10px;
+}
+.cred_title{
+	font-size:17px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-weight:700;
+	text-decoration:underline;
+}
+.clear {
+	clear:both !important;
 }

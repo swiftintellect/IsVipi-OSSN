@@ -22,6 +22,12 @@
 				}, 500);
 			 } 
 			});
+			var $myForm = $("#text-update");
+				$myForm.submit(function(){
+					$myForm.submit(function(){
+						return false;
+					});
+				});
 		</script>
         
       <!-- IMAGE FEED -->
@@ -65,6 +71,7 @@
 			 } 
 			});
 	}
+			
 		</script>
         
         <!-- FEED IMAGE PREVIEW -->

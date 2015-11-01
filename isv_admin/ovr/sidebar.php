@@ -25,7 +25,11 @@
                                 
                                 <li <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new'){?> class="active" <?php } ?>>
                                 <a><i class="fa fa-users"></i> Members <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu actived" style="display:none">
+                                    <ul class="nav child_menu no-display
+                                    <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new'){?> 
+									drop-it
+									<?php } ?>
+                                    ">
                                         <li <?php if ($PAGE[1] === 'members'){?> class="current-page" <?php } ?>>
                                         	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>">Members</a>
                                         </li>
@@ -34,8 +38,12 @@
                                 </li>
                                 <li <?php if ($PAGE[1] === 'blank' || $PAGE[1] === 'sett'){?> class="active current-page" <?php } ?>>
                                 <a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display:none">
-                                        <li>
+                                    <ul class="nav child_menu no-display 
+									<?php if ($PAGE[1] === 'blank' || $PAGE[1] === 'sett'){?> 
+									drop-it
+									<?php } ?>
+                                    ">
+                                        <li <?php if ($PAGE[1] === 'blank'){?> class="current-page" <?php } ?>>
                                         	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'blank' ?>">General</a>
                                         </li>
                                         <li>
@@ -47,7 +55,7 @@
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-envelope"></i> Mailing <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <ul class="nav child_menu no-display">
                                         <li>
                                         	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Newsletter</a>
                                         </li>
@@ -60,23 +68,28 @@
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-user-secret"></i> Administrators <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <ul class="nav child_menu no-display">
                                         <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">View All</a>
                                         </li>
                                         <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Add Admin</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-header"></i> Help/Support <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Credit</a>
+                                <li <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> class="active" <?php } ?>>
+                                <a><i class="fa fa-header"></i> Help/Support <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu no-display
+                                    <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> 
+									drop-it
+									<?php } ?>
+                                    ">
+                                        <li <?php if ($PAGE[1] === 'credits'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'credits/' ?>">Credits</a>
                                         </li>
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Report Bug</a>
+                                        <li <?php if ($PAGE[1] === 'report_bug'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'report_bug/' ?>">Report Bug</a>
                                         </li>
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Request Customization</a>
+                                        <li <?php if ($PAGE[1] === 'support'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'support/' ?>">Request Customization</a>
                                         </li>
                                     </ul>
                                 </li>

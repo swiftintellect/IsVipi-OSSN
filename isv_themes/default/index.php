@@ -79,6 +79,16 @@
 
 						</script>
                         
+                        <!-- prevent the form from submitting twice -->
+                        <script>
+						var $myForm = $("#regForm");
+						$myForm.submit(function(){
+							$myForm.submit(function(){
+								return false;
+							});
+						});
+						</script>
+                        
                         <!-- we submit the form -->
                         <script>
 							$('#regForm').ajaxForm({ 

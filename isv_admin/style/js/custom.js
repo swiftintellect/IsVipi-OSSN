@@ -23,25 +23,21 @@ $('#menu_toggle').click(function () {
         }
 });
 
-if($('#sidebar-menu ul li ul').hasClass( "actived" )){
-	$(this).attr('style','display: block !important');
-	$(this).slideDown();
-
-} else {
-	$('ul', this).slideUp();
+if($('#sidebar-menu ul li').hasClass("active" )){
+	$('#sidebar-menu ul li ul.drop-it').removeClass('no-display');
 }
 
 /**   left sidebar menu  dropdowns **/
 $('#sidebar-menu li').click(function () {
-	if ($(this).is('.active')){
-		$('ul', this).slideUp();
-		$('ul', this).css('display','none');
-		$(this).removeClass('active');
-	} else {
-		$('ul', this).slideDown();
-		$('ul', this).css('display','block');
-		$(this).addClass('active');
-	}
+	if ($(this).is('.active')) {
+			$('ul', this).addClass('no-display');
+            $('ul', this).slideUp();
+			$(this).removeClass('active');
+        } else {
+			$('ul', this).removeClass('no-display');
+            $('#sidebar-menu li ul').slideDown();
+            $(this).addClass('active');
+        }
 	
 });	
 

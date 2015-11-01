@@ -748,6 +748,7 @@ body.nav-md ul.nav.child_menu li:after {
 
 li.current-page {
     background: rgba(255, 255, 255, 0.05);
+	border-left: 5px solid #1ABB9C;
 }
 
 .nav.side-menu> li.active > a {

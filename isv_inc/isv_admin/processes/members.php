@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel'){
+	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel' && $op !== 'search'){
 		 $entry = "Someone interfered with admin member page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
@@ -219,5 +219,38 @@
 		$users = cleanPOST('user_id');
 		
 		$member->mass_undelete($users);
+		
+	}
+	
+	if ($op === 'search'){
+		if(!isset($_POST['type']) || empty($_POST['type'])){
+			$_SESSION['isv_error'] = 'Please select search type.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		if(!isset($_POST['user']) || empty($_POST['user'])){
+			$_SESSION['isv_error'] = 'Please enter user to search.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$type = cleanPOST('type');
+		$user = cleanPOST('user');
+		if($type === 'id' && !is_numeric($user)){
+			$_SESSION['isv_error'] = '<strong>Search by ID:</strong> Please enter a valid user id.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		if($type === 'email' && !filter_var($user, FILTER_VALIDATE_EMAIL)){
+			$_SESSION['isv_error'] = '<strong>Search by Email:</strong> Please enter correct email format.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		
+		
+		header('location:'.ISVIPI_ACT_ADMIN_URL.'search/'.$type.'/'.$converter->encode($user));
+		exit();
 		
 	}

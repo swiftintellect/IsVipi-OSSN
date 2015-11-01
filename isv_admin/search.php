@@ -1,53 +1,42 @@
-<?php require_once(ISVIPI_ADMIN_CLS_BASE .'get_members.cls.php'); 
-
+<?php 
+	require_once(ISVIPI_ADMIN_BASE .'ovr/head.php'); 
+	require_once(ISVIPI_ADMIN_CLS_BASE .'get_members.cls.php'); 
+	//capture search type
+	$type = cleanGET($PAGE[2]);
+	$term = cleanGET($PAGE[3]);
+	$term = $converter->decode($term);
+	
 	//number if users per page
 	$p_limit = 10;
 	
-	//member type
-	if (isset($PAGE[3]) && cleanGET($PAGE[3]) === 'all'){
-		$q = 'all';
-	} else if (isset($PAGE[3]) && cleanGET($PAGE[3]) === 'active'){
-		$q = 'active';
-	} else if (isset($PAGE[3]) && cleanGET($PAGE[3]) === 'inactive'){
-		$q = 'inactive';
-	} else if (isset($PAGE[3]) && cleanGET($PAGE[3]) === 'suspended'){
-		$q = 'suspended';
-	} else if(isset($PAGE[3]) && cleanGET($PAGE[3]) === 'pending_deletion'){
-		$q = 'pending_deletion';
-	} else {
-		$q = 'all';
-	}
-	
 	//instantiate our class
 	$members = new get_members();
-	$t_count = $members->total($q);
+	$t_count = $members->search_count($type,$term);
 	
 	//total number of pages
 	$last_page = (int) ($t_count / $p_limit);
 	
 	//pagination
-	if (!isset($PAGE[2]) || (isset($PAGE[2]) && $PAGE[2] === 1)){
+	if (!isset($PAGE[4]) || (isset($PAGE[4]) && $PAGE[4] === 1)){
 		$pg = 0;
-	} else if (isset($PAGE[2]) && $PAGE[2] < 0){
+	} else if (isset($PAGE[4]) && $PAGE[4] < 0){
 		$pg = 0;
-	} else if(isset($PAGE[2]) && is_numeric(cleanGET($PAGE[2])) && $PAGE[2] !==1) {
-		$pg = cleanGET($PAGE[2]);
+	} else if(isset($PAGE[4]) && is_numeric(cleanGET($PAGE[4])) && $PAGE[4] !==1) {
+		$pg = cleanGET($PAGE[4]);
 	} else {
 		$pg = 0;
 	}
 	
 	//order by
-	if(isset($PAGE[4]) && $PAGE[4] === 'latest'){
+	if(isset($PAGE[5]) && $PAGE[5] === 'latest'){
 		$order = 'latest';
-	} else if (isset($PAGE[4]) && $PAGE[4] === 'oldest'){
+	} else if (isset($PAGE[5]) && $PAGE[5] === 'oldest'){
 		$order = 'oldest';
 	} else {
 		$order = 'oldest';
 	}
 	
-	$get = $members->all($q,$pg,$order,$p_limit);
-	
-	require_once(ISVIPI_ADMIN_BASE .'ovr/head.php'); 
+	$get = $members->search($pg,$order,$p_limit,$type,$term);
 	require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php');
 	require_once(ISVIPI_ADMIN_BASE .'ovr/header.php'); 
 ?>
@@ -56,31 +45,17 @@
 <div class="right_col" role="main">
 	<div class="page-title">
     	<div class="title_left">
-        	<h3> <?php if(isset($q) && $q !=='pending_deletion'){ echo ucfirst($q);} else if ($q ==='pending_deletion') echo "Pending Deletion"; ?> Members (<?php echo $t_count ?>)<br/>
+        	<h3> Search for "<strong><?php echo $term ?></strong>" returned <strong><?php echo $t_count ?></strong> results<br/>
             
                 <div class="m-actions">
-                	<div class="dropdown inline-display">
-                      <button class="btn btn-primary  btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <?php if (isset($q) && $q !== 'pending_deletion'){ echo ucfirst($q);} else if ($q === 'pending_deletion') echo "Pending Deletion" ?>
-                        <span class="fa fa-chevron-down"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/all/'.$order ?>">All</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/active/'.$order ?>">Active</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/inactive/'.$order ?>">Inactive</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/suspended/'.$order ?>">Suspended</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/pending_deletion/'.$order ?>">Pending Deletion</a></li>
-                      </ul>
-                    </div>
-                    
                     <div class="dropdown inline-display">
                       <button class="btn btn-primary  btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <?php if(isset($order)) echo ucfirst($order); ?> first
                         <span class="fa fa-chevron-down"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/'.$q.'/latest/' ?>">Latest first</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/'.$q.'/oldest/'?>">Oldest first</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'search/'.$type.'/'.$converter->encode($term).'/'.$pg.'/latest/' ?>">Latest first</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'search/'.$type.'/'.$converter->encode($term).'/'.$pg.'/oldest/'?>">Oldest first</a></li>
                       </ul>
                     </div>
                 </div>
@@ -245,7 +220,7 @@
              
              <?php } else { ?>
              <tr>
-             	<td style="background:#FFF;">There are no <?php if (isset($q) && $q !== 'pending_deletion'){ echo ucfirst($q);} else if ($q === 'pending_deletion') echo "Pending Deletion" ?> members found.</td>
+             	<td style="background:#FFF;">No member matching your query was found.</td>
                 <td style="background:#FFF;"> -- </td>
                 <td style="background:#FFF;"> -- </td>
                 <td style="background:#FFF;"> -- </td>
@@ -278,12 +253,12 @@
         <nav>
           <ul class="pagination">
             <li <?php if ($pg == 0){?> class="disabled" <?php } ?>>
-              <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$prev.'/'.$q.'/'.$order ?>" aria-label="Previous">
+              <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'search/'.$type.'/'.$converter->encode($term).'/'.$pg.'/'.$prev ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo; prev</span>
               </a>
             </li>
             <li <?php if ($pg == $last_page){?> class="disabled" <?php } ?>>
-              <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$next.'/'.$q.'/'.$order ?>" aria-label="Next">
+              <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'search/'.$type.'/'.$converter->encode($term).'/'.$pg.'/'.$next ?>" aria-label="Next">
                 <span aria-hidden="true">&raquo; next</span>
               </a>
             </li>
