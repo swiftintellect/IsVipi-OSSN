@@ -23,7 +23,7 @@
                                 	<a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>"><i class="fa fa fa-home"></i> Home</a>
                                 </li>
                                 
-                                <li <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new'){?> class="active" <?php } ?>>
+                                <li <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new' || $PAGE[1] === 'edit' || $PAGE[1] === 'search'){?> class="active" <?php } ?>>
                                 <a><i class="fa fa-users"></i> Members <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu no-display
                                     <?php if ($PAGE[1] === 'members' || $PAGE[1] === 'add_new'){?> 

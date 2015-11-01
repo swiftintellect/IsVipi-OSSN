@@ -80,7 +80,7 @@
 		} else if(isset($PAGE[1]) && file_exists(ISVIPI_ADMIN_BASE.$PAGE[1]. '.php')){
 			include_once ISVIPI_ADMIN_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
 		} else {
-			notFound404Err();
+			admin404Err();
 		}
 	} else if (is_file($includeFile)) {
 		include_once($includeFile);

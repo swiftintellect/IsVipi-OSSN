@@ -65,11 +65,11 @@
                         <span class="fa fa-chevron-down"></span>
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/all/'.$order ?>">All</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/active/'.$order ?>">Active</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/inactive/'.$order ?>">Inactive</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/suspended/'.$order ?>">Suspended</a></li>
-                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/'.$pg.'/pending_deletion/'.$order ?>">Pending Deletion</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/0/all/'.$order ?>">All</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/0/active/'.$order ?>">Active</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/0/inactive/'.$order ?>">Inactive</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/0/suspended/'.$order ?>">Suspended</a></li>
+                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members/0/pending_deletion/'.$order ?>">Pending Deletion</a></li>
                       </ul>
                     </div>
                     

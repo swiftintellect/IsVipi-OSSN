@@ -20,6 +20,9 @@ function isSupplied($var){
 function notFound404Err(){
 	require_once(ISVIPI_PAGES_BASE .'404.php');
 }
+function admin404Err(){
+	require_once(ISVIPI_ADMIN_BASE .'404.php');
+}
 
 function siteTitle($p){
 	$page = new pageManager;
