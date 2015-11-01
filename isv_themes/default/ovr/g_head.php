@@ -14,11 +14,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/main.css' ?>" rel="stylesheet">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/responsive.css' ?>" rel="stylesheet">
-    <link href="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.css'?>" rel="stylesheet">
     
     <!-- jQuery -->
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
-    <script src="<?php echo ISVIPI_STYLE_URL.'plugins/datepicker/jquery.datetimepicker.js'?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/formsubmit/form.submit.min.js'?>"></script>
 
     <link rel="shortcut icon" href="<?php echo ISVIPI_STYLE_URL .'site/imgs/'.$isv_siteSettings['favicon']?>">

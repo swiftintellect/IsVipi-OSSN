@@ -219,6 +219,8 @@ class member {
 	}
 	
 	public function edit_profile($userFields){
+		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+		$track = new admin_security();
 		
 		$from_url = $_SERVER['HTTP_REFERER'];
 		
@@ -236,8 +238,8 @@ class member {
 		$this->phone = $userFields['Phone'];
 		$this->country = $userFields['Country'];
 		$this->city = $userFields['City'];
-		$this->relationship = $userFields['Relationship'];
-		$this->hobbies = $userFields['Hobbies'];
+		$this->relationship = @$userFields['Relationship'];
+		$this->hobbies = @$userFields['Hobbies'];
 		
 		$format = "d/m/Y";
 		$this->dob = $this->validateDate($this->dob, $format);
@@ -254,35 +256,53 @@ class member {
 		//update our database
 		global $isv_db;
 		
-		$stmt = $isv_db->prepare("UPDATE user_profile SET 
-			fullname=?,
-			gender =?,
-			dob=?,
-			country=?,
-			city=?,
-			phone=?,
-			hobbies=?,
-			relshp_status=?
-		
-		WHERE user_id=?");
-		$stmt->bind_param('ssssssssi',
-			$this->f_name,
-			$this->gender,
-			$this->dob,
-			$this->country,
-			$this->city,
-			$this->phone,
-			$this->hobbies,
-			$this->relationship,
-			$this->user_id
-		);
-		$stmt->execute();
-		$stmt->close();
-		
-		//return success
-		$_SESSION['isv_success'] = 'Profile updated!';
-		header('location:'.$from_url.'');
-		exit();
+		if($track->admin_logged_in()){
+			
+			$stmt = $isv_db->prepare("UPDATE user_profile SET 
+				fullname=?,
+				gender =?,
+				dob=?,
+				country=?,
+				city=?,
+				phone=?
+			WHERE user_id=?");
+			$stmt->bind_param('ssssssi',
+				$this->f_name,
+				$this->gender,
+				$this->dob,
+				$this->country,
+				$this->city,
+				$this->phone,
+				$this->user_id
+			);
+			$stmt->execute();
+			$stmt->close();
+		} else {
+			$stmt = $isv_db->prepare("UPDATE user_profile SET 
+				fullname=?,
+				gender =?,
+				dob=?,
+				country=?,
+				city=?,
+				phone=?,
+				hobbies=?,
+				relshp_status=?
+			
+			WHERE user_id=?");
+			$stmt->bind_param('ssssssssi',
+				$this->f_name,
+				$this->gender,
+				$this->dob,
+				$this->country,
+				$this->city,
+				$this->phone,
+				$this->hobbies,
+				$this->relationship,
+				$this->user_id
+			);
+			$stmt->execute();
+			$stmt->close();
+		}
 	}
 	
 	public function change_pwd($pwd){

@@ -94,11 +94,60 @@
 	
 	/*** EDIT PROFILE **/
 	if ($operation === 'edit_prof'){
-		/** capture our fields **/
+		
+		//check if our fields have been supplied
+		if(!isset($_POST['dd']) || empty($_POST['dd'])){
+			$_SESSION['isv_error'] = 'Please enter Day of Birth. This is required.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		if(!isset($_POST['mm']) || empty($_POST['mm'])){
+			$_SESSION['isv_error'] = 'Please enter Month of Birth. This is required.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		if(!isset($_POST['yyyy']) || empty($_POST['yyyy'])){
+			$_SESSION['isv_error'] = 'Please enter Year of Birth. This is required.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		if(!is_numeric($_POST['dd']) || !is_numeric($_POST['mm']) || !is_numeric($_POST['yyyy'])){
+			$_SESSION['isv_error'] = 'Invalid input for date of birth. Only numbers are allowed!';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$dd = cleanPOST('dd');
+		
+		//if day has only one character, we prepend 0
+		if(strlen($dd) < 2){
+			$dd = "0".$dd;
+		}
+		
+		//if month has only one character, we prepend 0
+		$mm = cleanPOST('mm');
+		if(strlen($mm) < 2){
+			$mm = "0".$mm;
+		}
+		$yyyy = cleanPOST('yyyy');
+		
+		//join and create our date
+		$d_array = array($dd,$mm,$yyyy);
+		$d_o_b = implode('/',$d_array);
+		
+		//check if the date is correct
+		//we then check if the date is correct
+		if(!properDate($d_o_b, 'd/m/Y')){
+			$_SESSION['isv_error'] = 'The Date of Birth you provided is incorrect.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		/** capture our other fields **/
 		$userFields = array (
 			'Full Name' => cleanPOST('fname'),
 			'Gender' => cleanPOST('gender'),
-			'Date of Birth' => cleanPOST('dob'),
+			'Date of Birth' => $d_o_b,
 			'Phone' => cleanPOST('phone'),
 			'Country' => cleanPOST('country'),
 			'City' => cleanPOST('city'),
@@ -109,6 +158,11 @@
 		/** edit profile **/
 		$edit = new member($_SESSION['isv_user_id']);
 		$edit->edit_profile($userFields);
+		
+		//return success
+		$_SESSION['isv_success'] = 'Profile updated!';
+		header('location:'.$from_url.'');
+		exit();
 	}
 	
 	/*** CHANGE PASSWORD **/

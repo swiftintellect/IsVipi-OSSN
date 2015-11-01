@@ -5206,3 +5206,18 @@ table.text-center th {
 	width:100%;
 	font-size:14px;
 }
+.prof-dob {
+	width:30% !important;
+	margin-right:5px;
+	display:inline-block;
+	padding:2px;
+}
+.prof-dob input{
+	padding:5px;
+}
+.input-group-addon {
+	padding:5px !important;
+	background:#09F !important;
+	color:#FFF;
+	
+}

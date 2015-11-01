@@ -638,3 +638,67 @@ function sched_del_by_admin($user_id){
 	}
 	
 }
+
+function explode_date($date, $separator){
+	$fields = array ( 'dd', 'mm', 'yyyy' );
+	$arr = array_combine ($fields, explode ($separator,$date) );
+	 return $arr;
+}
+
+function properDate($date, $format){
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
+}
+
+function select_day(){
+	echo "
+		<option>1</option>       
+		<option>2</option>       
+		<option>3</option>       
+		<option>4</option>       
+		<option>5</option>       
+		<option>6</option>       
+		<option>7</option>       
+		<option>8</option>       
+		<option>9</option>       
+		<option>10</option>       
+		<option>11</option>       
+		<option>12</option>       
+		<option>13</option>       
+		<option>14</option>       
+		<option>15</option>       
+		<option>16</option>       
+		<option>17</option>       
+		<option>18</option>       
+		<option>19</option>       
+		<option>20</option>       
+		<option>21</option>       
+		<option>22</option>       
+		<option>23</option>       
+		<option>24</option>       
+		<option>25</option>       
+		<option>26</option>       
+		<option>27</option>       
+		<option>28</option>       
+		<option>29</option>       
+		<option>30</option>       
+		<option>31</option>    
+	";
+}
+
+function select_month(){
+	echo "
+		<option value='01'>January</option>       
+		<option value='02'>February</option>       
+		<option value='03'>March</option>       
+		<option  value='04'>April</option>       
+		<option value='05'>May</option>       
+		<option value='06'>June</option>       
+		<option value='07'>July</option>       
+		<option value='08'>August</option>       
+		<option value='09'>September</option>       
+		<option value='10'>October</option>       
+		<option value='11'>November</option>       
+		<option value='12'>December</option>  
+	";
+}

@@ -48,8 +48,62 @@
 		//check if this option enabled
 		if ($isv_siteSettings['user_reg'] === 0){
 			$_SESSION['isv_error'] = "Site registration is disabled.";
-			notFound404Err();
+			header('location:'.ISVIPI_URL.'');
 			exit();
+		}
+		
+		//check if our date of birth fields have been supplied
+		if(!isset($_POST['dd']) || empty($_POST['dd'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Day of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		if(!isset($_POST['mm']) || empty($_POST['mm'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Month of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		if(!isset($_POST['yyyy']) || empty($_POST['yyyy'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Year of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		
+		if(!is_numeric($_POST['dd']) || !is_numeric($_POST['mm']) || !is_numeric($_POST['yyyy'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Invalid input for date of birth. Only numbers are allowed!';
+			 echo json_encode($array);
+			 exit();
+		}
+		
+		//format date of birth
+		$dd = cleanPOST('dd');
+		
+		//if day has only one character, we prepend 0
+		if(strlen($dd) < 2){
+			$dd = "0".$dd;
+		}
+		
+		//if month has only one character, we prepend 0
+		$mm = cleanPOST('mm');
+		if(strlen($mm) < 2){
+			$mm = "0".$mm;
+		}
+		$yyyy = cleanPOST('yyyy');
+		
+		//we join our date
+		$d_array = array($dd,$mm,$yyyy);
+		$d_o_b = implode('/',$d_array);
+		
+		//we then check if the date is correct
+		if(!properDate($d_o_b, 'd/m/Y')){
+			 $array['err'] = true;
+			 $array['message'] = 'The Date of Birth you provided is incorrect.';
+			 echo json_encode($array);
+			 exit();
 		}
 		
 		/** capture our variables **/
@@ -60,7 +114,7 @@
 			'Password' => cleanPOST('pwd'),
 			'Repeat Password' => cleanPOST('pwd2'),
 			'Country' => cleanPOST('country'),
-			'Date of Birth' => cleanPOST('dob'),
+			'Date of Birth' => $d_o_b,
 			'Gender' => cleanPOST('sex')
 		);
 		

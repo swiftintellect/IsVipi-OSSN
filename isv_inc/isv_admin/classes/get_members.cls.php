@@ -191,20 +191,15 @@ class get_members {
 class get_single_member {
 	public function __construct (){}
 	
-	public function members($user,$type){
+	public function member($user){
 		global $isv_db;
 		
-		//extract user id
-		if($type === 'id'){
-			$this->m_id = $user;
-		} else if($type === 'username'){
-			$this->m_id = $this->username_to_id($user);
-		}
-
 		$stmt = $isv_db->prepare ("
 			SELECT 
 				u.id,
 				u.username,
+				u.email,
+				u.status,
 				u.level,
 				u.reg_date,
 				p.id,
@@ -225,59 +220,37 @@ class get_single_member {
 			LEFT JOIN user_settings AS st ON p.user_id = st.user_id
 			WHERE u.id=?
 		"); 
-		$stmt->bind_param('i',$this->m_id);
+		$stmt->bind_param('i',$user);
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($this->m_id,$this->m_username,$this->m_level,$this->m_reg_date,$this->p_id,$this->m_fullname,$this->m_gender,$this->m_dob,$this->m_country,$this->m_city,$this->m_phone,$this->m_profile_pic,$this->m_cover_photo,$this->m_hobbies,$this->m_relshp_status,$feedSettings,$phoneSettings); 
+		$stmt->bind_result($m_id,$m_username,$m_email,$m_status,$m_level,$m_reg_date,$p_id,$m_fullname,$m_gender,$m_dob,$m_country,$m_city,$m_phone,$m_profile_pic,$m_cover_photo,$m_hobbies,$m_relshp_status,$feedSettings,$phoneSettings); 
 		$stmt->fetch();
 		$stmt->close();
-				$this->m_info = array(
-					'm_user_id' => $this->m_id,
-					'm_username' => $this->m_username,
-					'm_level' => $this->m_level,
-					'm_reg_date' => $this->m_reg_date,
-					'm_prof_id' => $this->p_id,
-					'm_fullname' => $this->m_fullname,
-					'm_gender' => $this->m_gender,
-					'm_dob' => $this->m_dob,
-					'm_country' => $this->m_country,
-					'm_city' => $this->m_city,
-					'm_phone' => $this->m_phone,
-					'm_profile_pic' => $this->m_profile_pic,
-					'm_cover_photo' => $this->m_cover_photo,
-					'm_hobbies' => $this->m_hobbies,
-					'm_rel_status' => $this->m_relshp_status,
-					'm_feed_settings' => $feedSettings,
-					'm_phone_settings' => $phoneSettings
+				$m_info = array(
+					'id' => $m_id,
+					'username' => $m_username,
+					'email' => $m_email,
+					'status' => $m_status,
+					'level' => $m_level,
+					'reg_date' => $m_reg_date,
+					'prof_id' => $p_id,
+					'fullname' => $m_fullname,
+					'gender' => $m_gender,
+					'dob' => $m_dob,
+					'country' => $m_country,
+					'city' => $m_city,
+					'phone' => $m_phone,
+					'profile_pic' => $m_profile_pic,
+					'cover_photo' => $m_cover_photo,
+					'hobbies' => $m_hobbies,
+					'rel_status' => $m_relshp_status,
+					'feed_settings' => $feedSettings,
+					'phone_settings' => $phoneSettings
 				);
-		return $this->m_info;
+				
+		//print_r($m_info); exit();
+		return $m_info;
 	}
 	
-	public function username_to_id($username){
-		global $isv_db;
-		
-		$stmt = $isv_db->prepare ("SELECT id from users WHERE username=?");
-		$stmt->bind_param('s',$username);
-		$stmt->execute(); 
-		$stmt->store_result(); 
-		$stmt->bind_result($id); 
-		$stmt->fetch();
-		$stmt->close();
-		
-		return $id;
-	}
-	
-	public function friendsTotal($user_id){
-		global $isv_db;
-		
-		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=?"); 
-		$stmt->bind_param('i', $user_id);
-		$stmt->execute();  
-		$stmt->bind_result($friendsCount); 
-		$stmt->fetch();
-		$stmt->close();
-		
-		return $friendsCount;
-	}
 
 }

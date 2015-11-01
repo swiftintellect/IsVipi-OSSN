@@ -38,7 +38,16 @@
                         <div class="row">
                         <div class="col-xs-6 col-md-6">
                         <label for="">Date of Birth</label>
-                        	<input class="form-control" id="datetimepicker" name="dob" placeholder="format dd/mm/yyyy*" type="text" />
+                        <div class="clear"></div>
+                        <select class="form-control prof-dob" name="dd">
+                        	<option selected="selected" value="" disabled>dd</option>
+                            <?php select_day() ?>
+                        </select>
+                        <select class="form-control prof-dob" name="mm">
+                        	<option selected="selected" value="" disabled>mm</option>
+                            <?php select_month() ?>
+                        </select>
+                        <input type="number" class="form-control prof-dob" name="yyyy" placeholder="yyyy"/>
                          </div>
                          <div class="col-xs-6 col-md-6">
                          <label for="">I am</label><br />
@@ -71,12 +80,6 @@
 								$('#error').css('display','none');
 								$("#dimmedDiv").show();
 							});
-							jQuery('#datetimepicker').datetimepicker({
-							  timepicker:false,
-							  format:'d/m/Y',
-							  yearStart:'1900',
-							});
-
 						</script>
                         
                         <!-- prevent the form from submitting twice -->
@@ -110,7 +113,7 @@
 									}
 									$("#dimmedDiv").hide();
 									$('input[type="submit"]').prop('disabled', false);
-								}, 3000);
+								}, 2000);
 							} 
 						});
 						</script>

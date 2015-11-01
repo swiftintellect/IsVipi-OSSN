@@ -2082,4 +2082,13 @@ shortcodes page css
 .white-gradient {
 	background:#ffffff;
 }
-
+.prof-dob {
+	width:30% !important;
+	display:inline-block;
+	padding:0 !important; 
+	padding-left:5px !important;
+}
+.prof-dob input {
+	padding:0 !important; 
+	padding-left:5px !important;
+}

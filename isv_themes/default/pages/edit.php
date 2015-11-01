@@ -42,8 +42,21 @@
                 
                 
                 <div class="col-md-6">
-                	<label for="date of birth">Date of Birth</label>
-                    <input type="text" class="form-control" id="datetimepicker" name="dob" value="<?php echo $m_info['m_dob'] ?>">
+                	<?php $dob = explode_date($m_info['m_dob'], '-'); ?>
+                	<label for="date of birth">Date of Birth (dd/mm/yyyy)</label>
+                    <div class="clear"></div>
+                    <div class="input-group prof-dob">
+                      <span class="input-group-addon">Day</span>
+                      <input type="text" class="form-control" name="dd" value="<?php echo $dob['dd'] ?>">
+                    </div>
+                    <div class="input-group prof-dob">
+                      <span class="input-group-addon">Month</span>
+                      <input type="text" class="form-control" name="mm" value="<?php echo $dob['mm'] ?>">
+                    </div>
+                    <div class="input-group prof-dob">
+                      <span class="input-group-addon">Year</span>
+                      <input type="text" class="form-control" name="yyyy" value="<?php echo $dob['yyyy'] ?>">
+                    </div>
                 </div>
                 <div class="col-md-6">
                 	<label for="phone number">Phone</label>
@@ -108,11 +121,4 @@
     </div>
     </form>
 </div>
-<script>
-jQuery('#datetimepicker').datetimepicker({
-	timepicker:false,
-	format:'d/m/Y',
-	yearStart:'1900',
-});
-</script>
 <?php } ?>
