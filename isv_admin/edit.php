@@ -123,19 +123,19 @@
                     	
                         <div class="input-group">
                           <span class="input-group-addon">Day</span>
-                          <input type="text" name="dd" class="form-control" value="<?php echo $dob['dd'] ?>" placeholder="dd">
+                          <input type="number" name="dd" class="form-control dob-inp" value="<?php echo $dob['dd'] ?>" placeholder="dd">
                         </div>
                  	</div>
                     <div class="col-md-3 col-sm-9 col-xs-12">
                     	<div class="input-group">
                           <span class="input-group-addon">Month</span>
-                          <input type="text" name="mm" class="form-control" value="<?php echo $dob['mm'] ?>" placeholder="mm">
+                          <input type="number" name="mm" class="form-control dob-inp" value="<?php echo $dob['mm'] ?>" placeholder="mm">
                         </div>
                  	</div>
                     <div class="col-md-3 col-sm-9 col-xs-12">
                     	<div class="input-group">
                           <span class="input-group-addon">Year</span>
-                          <input type="text" name="yyyy" class="form-control" value="<?php echo $dob['yyyy'] ?>" placeholder="yyyy">
+                          <input type="number" name="yyyy" class="form-control dob-inp" value="<?php echo $dob['yyyy'] ?>" placeholder="yyyy">
                         </div>
                  	</div>
               	</div>

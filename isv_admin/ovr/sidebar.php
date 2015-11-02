@@ -103,7 +103,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Settings">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Members">
+                        <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>" data-toggle="tooltip" data-placement="top" title="Members">
                             <span class="fa fa-users" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Maintenance Mode">

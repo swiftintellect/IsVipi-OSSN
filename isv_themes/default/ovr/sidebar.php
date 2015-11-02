@@ -16,7 +16,7 @@
               </p>
               
               <!-- Status -->
-              <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'] ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
+              <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/edit/' ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
             </div>
           </div>
 			<hr style="margin:10px 0 0 0;" />

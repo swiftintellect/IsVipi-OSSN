@@ -13,11 +13,11 @@
    	</div><!-- /.box-header -->
 	<div class='box-body'>
     
-    <div class="box box-primary ">
-    	<div class="box-header with-border">
+    <div class="box box-primary collapsed-box">
+    	<div class="box-header with-border" data-widget="collapse">
        	<h3 class="box-title">Personal Details</h3>
        		<div class="box-tools pull-right">
-           	<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+           	<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
            	</div><!-- /.box-tools -->
        	</div><!-- /.box-header -->
       	<div class="box-body">
@@ -40,10 +40,9 @@
                     </div>
                 </div><!-- /.col-lg-6 -->
                 
-                
                 <div class="col-md-6">
                 	<?php $dob = explode_date($m_info['m_dob'], '-'); ?>
-                	<label for="date of birth">Date of Birth (dd/mm/yyyy)</label>
+                	<label for="date of birth">Date of Birth</label>
                     <div class="clear"></div>
                     <div class="input-group prof-dob">
                       <span class="input-group-addon">Day</span>
@@ -55,7 +54,7 @@
                     </div>
                     <div class="input-group prof-dob">
                       <span class="input-group-addon">Year</span>
-                      <input type="text" class="form-control" name="yyyy" value="<?php echo $dob['yyyy'] ?>">
+                      <input type="number" class="form-control" name="yyyy" value="<?php echo $dob['yyyy'] ?>">
                     </div>
                 </div>
                 <div class="col-md-6">

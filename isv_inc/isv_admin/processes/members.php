@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel' && $op !== 'search'){
+	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel' && $op !== 'search' && $op !== 'new'){
 		 $entry = "Someone interfered with admin member page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
@@ -248,9 +248,116 @@
 		 	exit();
 		}
 		
-		
-		
 		header('location:'.ISVIPI_ACT_ADMIN_URL.'search/'.$type.'/'.$converter->encode($user));
 		exit();
 		
+	}
+	
+	if ($op === 'new'){
+		
+		//check if our date of birth fields have been supplied
+		if(!isset($_POST['dd']) || empty($_POST['dd'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Day of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		if(!isset($_POST['mm']) || empty($_POST['mm'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Month of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		if(!isset($_POST['yyyy']) || empty($_POST['yyyy'])){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter Year of Birth. This is required.';
+			 echo json_encode($array);
+			 exit();
+		}
+		
+		//if day has only one character, we prepend 0
+		$dd = cleanPOST('dd');
+		if(strlen($dd) < 2){
+			$dd = "0".$dd;
+		}
+		
+		//if month has only one character, we prepend 0
+		$mm = cleanPOST('mm');
+		if(strlen($mm) < 2){
+			$mm = "0".$mm;
+		}
+		$yyyy = cleanPOST('yyyy');
+		
+		//we join our date
+		$d_array = array($dd,$mm,$yyyy);
+		$d_o_b = implode('/',$d_array);
+		
+		//we then check if the date is correct
+		if(!properDate($d_o_b, 'd/m/Y')){
+			 $array['err'] = true;
+			 $array['message'] = 'The Date of Birth you provided is incorrect.';
+			 echo json_encode($array);
+			 exit();
+		}
+		
+		$req = array(
+			'Username' => cleanPOST('username'),
+			'Email' => cleanPOST('email'),
+			'Full Name' => cleanPOST('fullname'),
+			'Country' => cleanPOST('country'),
+			'DoB' => $d_o_b,
+			'Gender' => cleanPOST('gender'),
+			'Status' => cleanPOST('status')
+		
+		);
+		
+		//check if any of our other required fields are not present
+		foreach( $req as $field => $value){
+			if(!isSupplied($value)){
+				 $array['err'] = true;
+				 $array['message'] = 'Please fill in '.$field.'!';
+				 echo json_encode($array);
+				 exit();
+			}
+		}
+		
+		//capture auto generate password
+		if(isset($_POST['auto_pwd']) && !empty($_POST['auto_pwd'])){
+			$type = "auto";
+			$auto_pwd = cleanPOST('auto_pwd');
+		} else if((!isset($_POST['auto_pwd']) && empty($_POST['auto_pwd'])) && (isset($_POST['pwd']) && !empty($_POST['pwd']))){
+			$type = "manual";
+			$pwd = cleanPOST('pwd');
+		} else if((isset($_POST['auto_pwd']) && !empty($_POST['auto_pwd'])) && (isset($_POST['pwd']) && !empty($_POST['pwd']))){
+			$type = "auto";
+			$auto_pwd = cleanPOST('auto_pwd');
+		} else {
+			$array['err'] = true;
+			$array['message'] = 'Either check "Auto-generate Password" or enter a password.';
+			echo json_encode($array);
+			exit();
+		}
+		//capture the password field
+		if(!empty($pwd) && strlen($pwd) < 8){
+			$array['err'] = true;
+			$array['message'] = 'Password MUST be a minimum of 8 characters.';
+			echo json_encode($array);
+			exit();
+		} else if (!empty($auto_pwd) && $auto_pwd !== '1'){
+			$array['err'] = true;
+			$array['message'] = 'Auto-generate value supplied is incorrect.';
+			echo json_encode($array);
+			exit();
+		}
+		
+		//determine what parameter for password to pass
+		if($type === 'manual'){
+			$pwd2 = $pwd;
+		} else {
+			$pwd2 = $auto_pwd;
+		}
+		
+		//instantiate our class
+		$member->new_member($req,$type,$pwd2);
+
 	}

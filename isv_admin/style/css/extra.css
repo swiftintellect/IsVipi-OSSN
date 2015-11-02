@@ -158,5 +158,31 @@
 	padding:5px !important;
 	background:#09F;
 	color:#FFF;
+	font-size:12px;
+}
+.dob-inp {
+	padding:0 !important;
+	padding-left:5px !important;
+}
+.sucess-n {
+	width:100%;
+	padding:5px 10px;
+	background:#060;
+	color:#fff;
+	margin:5px 0;
+}
+
+.error-n {
+	width:100%;
+	padding:5px 10px;
+	background:#900;
+	color:#fff;
+	margin:5px 0;
+}
+.adding {
+	font-size:16px;
+	padding-top:7px;
+	margin-left:20px;
+	font-weight:900;
 }
 	

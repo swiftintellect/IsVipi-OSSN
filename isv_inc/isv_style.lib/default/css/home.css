@@ -5219,5 +5219,9 @@ table.text-center th {
 	padding:5px !important;
 	background:#09F !important;
 	color:#FFF;
-	
+}
+.separator {
+	clear:both;
+	border-bottom:dotted thin #E8E8E8;
+	margin:10px !important;
 }
