@@ -73,16 +73,16 @@
                             <div class="x_content">
                                 <div class="dashboard-widget-content">
                                     <ul class="quick-list">
-                                        <li><i class="fa fa-group"></i><a href="#">All Members</a>
+                                        <li><i class="fa fa-group"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>">All Members</a>
                                         </li>
-                                        <li><i class="fa fa-user-plus"></i><a href="#">Add Member</a>
+                                        <li><i class="fa fa-user-plus"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'add_new' ?>">Add Member</a>
                                         </li>
                                         <li><i class="fa fa-cogs"></i><a href="#">Site Settings</a> </li>
                                         <li><i class="fa fa-envelope"></i><a href="#">Newsletter</a>
                                         </li>
                                         <li><i class="fa fa-user-secret"></i><a href="#">Administrators</a>
                                         </li>
-                                        <li><i class="fa fa-sign-out"></i><a href="#">Logout</a>
+                                        <li><i class="fa fa-sign-out"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>">Logout</a>
                                         </li>
                                     </ul>
 
