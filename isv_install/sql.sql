@@ -428,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `s_meta` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `seo`
+-- Dumping data for table `s_meta`
 --
 
 INSERT INTO `s_meta` (`id`, `tags`, `description`) VALUES

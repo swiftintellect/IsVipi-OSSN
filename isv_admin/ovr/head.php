@@ -25,5 +25,6 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     <script src="<?php echo ISVIPI_ADMIN_URL .'style/js/jquery.min.js' ?>"></script>
+    <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
 
 </head>

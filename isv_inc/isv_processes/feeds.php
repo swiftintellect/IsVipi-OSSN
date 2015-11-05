@@ -87,6 +87,8 @@
 			$feed = "";
 		} else {
 			$feed = cleanPOST('feed');
+			$feed = str_replace("  ","",$feed);
+			$feed = nl2br($feed);
 		}
 		if (!is_uploaded_file($_FILES['feedImg']['tmp_name'])) {
 		   	 $array['err'] = true;

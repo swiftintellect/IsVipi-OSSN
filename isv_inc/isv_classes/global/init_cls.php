@@ -92,3 +92,4 @@ $isv_siteSettings = $siteInfo->getSiteSettings();
 
 /*** check if SSL active and enable */
 $enableSSL = $siteInfo->enableSSL();
+

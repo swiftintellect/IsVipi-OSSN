@@ -36,38 +36,35 @@
                                         <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'add_new' ?>">Add New</a>
                                     </ul>
                                 </li>
-                                <li <?php if ($PAGE[1] === 'blank' || $PAGE[1] === 'sett'){?> class="active current-page" <?php } ?>>
+                                <li <?php if ($PAGE[1] === 'general' || $PAGE[1] === 'seo'){?> class="active current-page" <?php } ?>>
                                 <a><i class="fa fa-cog"></i> Settings <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu no-display 
-									<?php if ($PAGE[1] === 'blank' || $PAGE[1] === 'sett'){?> 
+									<?php if ($PAGE[1] === 'general' || $PAGE[1] === 'seo'){?> 
 									drop-it
 									<?php } ?>
                                     ">
-                                        <li <?php if ($PAGE[1] === 'blank'){?> class="current-page" <?php } ?>>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'blank' ?>">General</a>
+                                        <li <?php if ($PAGE[1] === 'general'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'general' ?>">General</a>
                                         </li>
                                         <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Users</a>
-                                        </li>
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Appearance</a>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'seo' ?>">SEO</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-envelope"></i> Mailing <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu no-display">
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Newsletter</a>
-                                        </li>
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Email Member</a>
-                                        </li>
-                                        <li>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Sent Messages</a>
+                                <li <?php if ($PAGE[1] === 'emails' || $PAGE[1] === 'email_reports'){?> class="active" <?php } ?>>
+                                <a><i class="fa fa-envelope"></i> Mailing <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu no-display
+                                    <?php if ($PAGE[1] === 'emails' || $PAGE[1] === 'email_reports'){?> 
+									drop-it
+									<?php } ?>
+                                    ">
+                                        <li <?php if ($PAGE[1] === 'emails'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>">Send Emails</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-user-secret"></i> Administrators <span class="fa fa-chevron-down"></span></a>
+                                <li <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> class="active" <?php } ?>>
+                                <a><i class="fa fa-user-secret"></i> Administrators <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu no-display">
                                         <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">View All</a>
                                         </li>

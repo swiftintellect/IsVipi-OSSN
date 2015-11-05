@@ -34,8 +34,6 @@
 		require_once(ISVIPI_CRON_BASE .'cron.php');
 	}
 	
-	/*** check if the site is active or on maintenance mode */
-	$siteInfo->maintenanceMode();
 	
 	/*** DO NOT ALTER ANYTHING BELOW THIS LINE 
 	____________________________________________*/

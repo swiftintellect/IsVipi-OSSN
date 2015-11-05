@@ -154,6 +154,9 @@
 .min-edt-h {
 	min-height:300px !important;
 }
+.min-edt-h2 {
+	min-height:220px !important;
+}
 .input-group-addon {
 	padding:5px !important;
 	background:#09F;
@@ -185,4 +188,29 @@
 	margin-left:20px;
 	font-weight:900;
 }
-	
+.adm-uri {
+	color: #333;
+	margin-top: 3px;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+.adm-uri span {
+	color:#06F;
+}
+.seo-logo {
+	width:100%;
+	height:70px;
+	background:#09F;
+	margin-bottom:10px;
+}
+.seo-logo img, .seo-favicon img {
+	width:100%;
+	padding:1px;
+	height:100%;
+}
+.seo-favicon {
+	width:64px;
+	height:64px;
+	margin-bottom:10px;
+}
