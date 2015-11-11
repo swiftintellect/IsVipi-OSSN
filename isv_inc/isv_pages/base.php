@@ -40,4 +40,4 @@
 	$isv_siteSettings = $siteInfo->getSiteSettings();
 	
 	/*** check if the site is active or on maintenance mode */
-	//$siteInfo->maintenanceMode();
+	$siteInfo->maintenanceMode();

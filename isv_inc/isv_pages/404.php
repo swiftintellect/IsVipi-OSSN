@@ -23,6 +23,9 @@
 		$p = $PAGE[0];
 	}
 	
+	/*** check if the site is active or on maintenance mode */
+	$siteInfo->maintenanceMode();
+	
 	//if logged in, redirect to member page
 	if (isLoggedIn()){
 		header('location:'.ISVIPI_URL.'err_404/');

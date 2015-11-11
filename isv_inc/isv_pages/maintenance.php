@@ -16,5 +16,11 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
-	require_once(ISVIPI_PAGES_BASE .'base.php'); 
+	global $PAGE,$p;
+	if(!isset($PAGE[0]) || empty($PAGE[0])){
+		$p = '';
+	} else {
+		$p = $PAGE[0];
+	}
+	$pageManager = new pageManager();
  	include_once ISVIPI_ACT_THEME.'maintenance.php'; 

@@ -180,25 +180,27 @@
 		
 		//check if they have been supplied
 		if(!isset($m_mode) || empty($m_mode)){
-			$m_mode = 1;
+			$m_mode = 0;
 		}
+		
 		if(!isset($h_errors) || empty($h_errors)){
-			$h_errors = 1;
-		}
+			$h_errors = 0;
+		} 
+		
 		if(!isset($n_members) || empty($n_members)){
-			$n_members = 1;
+			$n_members = 0;
 		}
 		if(!isset($m_validate) || empty($m_validate)){
-			$m_validate = 1;
+			$m_validate = 0;
 		}
 		if(!isset($s_timezone) || empty($s_timezone)){
 			$s_timezone = 0;
 		}
 		if(!isset($cron) || empty($cron)){
-			$cron = 1;
+			$cron = 0;
 		}
 		if(!isset($admin_notify) || empty($admin_notify)){
-			$admin_notify = 1;
+			$admin_notify = 0;
 		}
 		
 		//update

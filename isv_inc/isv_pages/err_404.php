@@ -16,13 +16,16 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
-global $PAGE,$p;
+	global $PAGE,$p;
 	if(!isset($PAGE[0]) || empty($PAGE[0])){
 		$p = '';
 	} else {
 		$p = $PAGE[0];
 	}
 	
+	/*** check if the site is active or on maintenance mode */
+	$siteInfo->maintenanceMode();
+
 	//if logged in, redirect to member page
 	if (!isLoggedIn()){
 		$_SESSION['isv_error'] = '404 Error: The page you are looking for could not be found or you go not have permission to view it.';

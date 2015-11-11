@@ -63,30 +63,18 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> class="active" <?php } ?>>
-                                <a><i class="fa fa-user-secret"></i> Administrators <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu no-display">
-                                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">View All</a>
-                                        </li>
-                                        <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'' ?>">Add Admin</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> class="active" <?php } ?>>
+                                <li <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'support'){?> class="active" <?php } ?>>
                                 <a><i class="fa fa-header"></i> Help/Support <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu no-display
-                                    <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'report_bug' || $PAGE[1] === 'support'){?> 
+                                    <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'support'){?> 
 									drop-it
 									<?php } ?>
                                     ">
                                         <li <?php if ($PAGE[1] === 'credits'){?> class="current-page" <?php } ?>>
                                         	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'credits/' ?>">Credits</a>
                                         </li>
-                                        <li <?php if ($PAGE[1] === 'report_bug'){?> class="current-page" <?php } ?>>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'report_bug/' ?>">Report Bug</a>
-                                        </li>
                                         <li <?php if ($PAGE[1] === 'support'){?> class="current-page" <?php } ?>>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'support/' ?>">Request Customization</a>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'support/' ?>">Support/Customization</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -97,14 +85,14 @@
                     
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                        <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'general' ?>" data-toggle="tooltip" data-placement="top" title="Settings">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
                         <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>" data-toggle="tooltip" data-placement="top" title="Members">
                             <span class="fa fa-users" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Maintenance Mode">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>" data-toggle="tooltip" data-placement="top" title="Newsletters">
+                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                         </a>
                         <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>" data-toggle="tooltip" data-placement="top" title="Logout">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>

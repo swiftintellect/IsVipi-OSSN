@@ -78,9 +78,7 @@
                                         <li><i class="fa fa-user-plus"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'add_new' ?>">Add Member</a>
                                         </li>
                                         <li><i class="fa fa-cogs"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'general' ?>">General Settings</a> </li>
-                                        <li><i class="fa fa-envelope"></i><a href="#">Newsletter</a>
-                                        </li>
-                                        <li><i class="fa fa-user-secret"></i><a href="#">Administrators</a>
+                                        <li><i class="fa fa-envelope"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>">Newsletter</a>
                                         </li>
                                         <li><i class="fa fa-sign-out"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>">Logout</a>
                                         </li>

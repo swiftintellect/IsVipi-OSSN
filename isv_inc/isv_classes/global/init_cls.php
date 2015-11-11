@@ -72,7 +72,7 @@ class siteManager {
 
 	public function maintenanceMode(){
 		if ($this -> s_status === 0){
-			require_once(ISVIPI_PAGES_BASE .'maintenance.php');
+			header('location:'.ISVIPI_URL.'maintenance');
 			exit();
 		}
 	}

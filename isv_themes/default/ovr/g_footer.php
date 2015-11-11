@@ -4,6 +4,7 @@
                 <div class="col-sm-6">
                 	<?php footerCopyright() ?>
                 </div>
+                <?php if(isset($pages) && $page === 'footer_pages'){?>
                 <div class="col-sm-6">
                     <ul class="pull-right">
                         <li><a href="#">Home</a></li>
@@ -12,6 +13,7 @@
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </footer><!--/#footer-->

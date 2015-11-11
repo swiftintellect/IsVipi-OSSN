@@ -110,10 +110,10 @@
             <form class="edt-prf2" action="<?php echo ISVIPI_URL .'aa/s_general' ?>" method="POST">
             	<div class="form-group">
                     <div class="col-md-2 col-sm-9 col-xs-12">
-                        <input type="checkbox" value="0" name="status" <?php if($isv_siteDetails['s_status'] === 0) {?> checked <?php } ?>>
+                        <input type="checkbox" value="1" name="status" <?php if($isv_siteDetails['s_status'] === 1) {?> checked <?php } ?>>
                     </div>
                     <div class="col-md-10 col-sm-3 col-xs-12">
-                    	<label class="control-label">Maintenance Mode</label>
+                    	<label class="control-label">Site Active (uncheck to switch to Maintenance Mode)</label>
                     </div>
                 </div>
                 <div class="form-group">
