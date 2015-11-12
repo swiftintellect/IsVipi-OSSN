@@ -645,3 +645,19 @@ CREATE TABLE IF NOT EXISTS `scheduled_del` (
   `schedule_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `isv_news`
+--
+
+CREATE TABLE IF NOT EXISTS `isv_news` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `news` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) unsigned NOT NULL DEFAULT 1,
+  `pub_date` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+

@@ -19,6 +19,9 @@
 	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 	$track = new admin_security();
 	
+	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	$converter = new Encryption;
+	
 	global $isv_siteDetails;
 	
 	if(!$track->admin_logged_in()){

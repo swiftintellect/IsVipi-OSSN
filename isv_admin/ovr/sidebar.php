@@ -51,15 +51,18 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li <?php if ($PAGE[1] === 'emails' || $PAGE[1] === 'email_reports'){?> class="active" <?php } ?>>
-                                <a><i class="fa fa-envelope"></i> Mailing <span class="fa fa-chevron-down"></span></a>
+                                <li <?php if ($PAGE[1] === 'news' || $PAGE[1] === 'emails'){?> class="active" <?php } ?>>
+                                <a><i class="fa fa-envelope"></i> News & Mailing<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu no-display
-                                    <?php if ($PAGE[1] === 'emails' || $PAGE[1] === 'email_reports'){?> 
+                                    <?php if ($PAGE[1] === 'news' || $PAGE[1] === 'emails'){?> 
 									drop-it
 									<?php } ?>
                                     ">
+                                    	<li <?php if ($PAGE[1] === 'news'){?> class="current-page" <?php } ?>>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'news' ?>">News</a>
+                                        </li>
                                         <li <?php if ($PAGE[1] === 'emails'){?> class="current-page" <?php } ?>>
-                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>">Send Emails</a>
+                                        	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>">Mailing</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -104,12 +104,12 @@
 	color:#FFF;
 	width:40%;
 	position:absolute;
-	left:30%;
+	right:0;
 	top:0;
-	margin-top:56px;
-	z-index:99999;
+	margin-top:60px;
 	border:none !important;
 	font-size:15px;
+	padding:8px 10px;
 }
 
 .err-mod {
@@ -117,12 +117,12 @@
 	color:#FFF;
 	width:40%;
 	position:absolute;
-	left:30%;
+	right:0;
 	top:0;
-	margin-top:56px;
-	z-index:99999;
+	margin-top:60px;
 	border:none !important;
 	font-size:15px;
+	padding:8px 10px;
 }
 .no-display {
 	display:none !important;
