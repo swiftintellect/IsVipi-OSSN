@@ -37,7 +37,7 @@
 			$stmt->execute();  
 			$stmt->store_result();
 			$stmt->bind_result($id,$title,$news,$n_status,$pub_date); 
-			
+				$res = array();
 				while($stmt->fetch()){
 					$res[] = array(
 						'id' => $id,
@@ -51,5 +51,29 @@
 			
 			//print_r($res); exit();
 			return $res;
+		}
+		
+		public function single_item($news_id){
+			global $isv_db;
+			
+			$stmt = $isv_db->prepare ("
+				SELECT id,title,news,pub_date from isv_news WHERE id = $news_id
+			"); 
+			$stmt->execute();  
+			$stmt->store_result();
+			$stmt->bind_result($id,$title,$news,$pub_date); 
+			$stmt->fetch();
+			
+			$n_item = array();
+			$n_item = array(
+				'id' => $id,
+				'title' => $title,
+				'news' => $news,
+				'pub_date' => $pub_date
+			
+			);
+			
+			//print_r($n_item); exit();
+			return $n_item;
 		}
 	}

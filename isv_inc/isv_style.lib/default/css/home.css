@@ -5225,3 +5225,11 @@ table.text-center th {
 	border-bottom:dotted thin #E8E8E8;
 	margin:10px !important;
 }
+.news_item {
+	margin-top:10px;
+	width:100%;
+}
+.news_item_date {
+	color:#A0A0A0;
+	float:right !important;
+}
