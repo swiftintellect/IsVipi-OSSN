@@ -4,19 +4,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-7">
-                    <div class="skill">
-                        <h2>Meet new people...</h2>
-                        <hr>
+                    <div class="skill" style="margin-top:-25px">
 						<div class="well betterwell" id="home-call">
-
+							<img src="<?php echo ISVIPI_STYLE_URL . 'site/home_cover.jpg' ?>">
                         </div>
-                        <hr>
                     </div>
                 </div><!--/.col-sm-6-->
 				
                 <div class="col-sm-5 uppedmargin">
                 	<div id="dimmedDiv"></div>
-                    <div class="col-xs-12 well">
+                    <div class="col-xs-12 well signup-div">
                         <legend><i class="fa fa-user-plus"></i> Sign up!</legend>
                         <form action="<?php echo ISVIPI_URL .'p/users' ?>" method="post" class="form" role="form" id="regForm">
                         <div class="row">

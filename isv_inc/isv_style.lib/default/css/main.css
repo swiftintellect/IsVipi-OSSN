@@ -246,20 +246,14 @@ body > section {
 box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.68);
 }
 .betterwell {
-	background:#FBFBFB;
+	background:none !important;
+	padding:0;
+	border:none !important;
+	
 }
-#home-call li {
-	list-style:none;
-	border-bottom:dotted thin #CCC;
-	margin-bottom:5px;
-	margin-top:5px;
-}
-#home-call li i {
-	font-size:45px;
-	color:#00F;
-	padding:10px 30px;
-	border:solid thin #CCC;
-	background:#FFF;
+.betterwell img {
+	width:100%;
+	max-height:420px;
 }
 .progress-wrap{
   position: relative;
@@ -2091,4 +2085,14 @@ shortcodes page css
 .prof-dob input {
 	padding:0 !important; 
 	padding-left:5px !important;
+}
+.signup-div {
+background: #feffe8; /* Old browsers */
+background: -moz-linear-gradient(top,  #feffe8 0%, #d6dbbf 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #feffe8 0%,#d6dbbf 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #feffe8 0%,#d6dbbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=0 ); /* IE6-9 */
+-webkit-box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
+box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
 }
