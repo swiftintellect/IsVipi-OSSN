@@ -186,7 +186,6 @@
                         <td class="">-</td>
                         <td class="">-</td>
                         <td class="">-</td>
-                        <td class="">-</td>
                 	</tr>
                 <?php } ?>
                 </tbody>
