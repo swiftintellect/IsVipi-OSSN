@@ -30,10 +30,10 @@
                 <h3 class="cred_title">Custom Project</h3>
                 <p>Do you have a project that:</p>
                 <ul>
-                	<li>requires an expert opinion or advise on</li>
-                    <li>requires experienced web developers to work on</li>
+                	<li>requires an expert opinion or advise</li>
+                    <li>would like to hire experienced web developers to develop it</li>
                 </ul>
-                Look no further, contact are down there <i class="fa fa-hand-o-down"></i>
+                Look no further, find contact details below <i class="fa fa-hand-o-down"></i>
             </div>
         </div><!-- end::col-md-6 -->
         <div class="clearfix"></div>

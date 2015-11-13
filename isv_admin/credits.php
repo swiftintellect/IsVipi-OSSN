@@ -22,13 +22,13 @@
                 <h3 class="cred_title">Tester</h3>
                 <p>Martin (Norway)</p>
             </div>
-            <div class="x_panel">
+            <!--<div class="x_panel">
                 <h3 class="cred_title">Hosting</h3>
                 <p>We are grateful to <a href="">hoster</a> for allowing us to use their servers for free.</p>
             
             
 
-			</div>
+			</div>-->
         </div><!-- end::col-md-6 -->
         
         <div class="col-md-6 col-sm-6 col-xs-12"><!-- col-md-6 -->
