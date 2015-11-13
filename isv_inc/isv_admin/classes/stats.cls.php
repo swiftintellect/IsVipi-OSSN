@@ -169,13 +169,33 @@
 		  return $members;
 	  }
 	  
-	  
-  
-  
-  
-  
-  
-  
-  
+	  public function get_latest_feeds(){
+		    $rss = new DOMDocument();
+			$rss->load('http://forum.isvipi.org/index.php?action=.xml;type=rss');
+			$feed = array();
+			foreach ($rss->getElementsByTagName('item') as $node) {
+				$item = array ( 
+					'title' => $node->getElementsByTagName('title')->item(0)->nodeValue,
+					'desc' => $node->getElementsByTagName('description')->item(0)->nodeValue,
+					'guid' => $node->getElementsByTagName('guid')->item(0)->nodeValue,
+					'date' => $node->getElementsByTagName('pubDate')->item(0)->nodeValue,
+					);
+				array_push($feed, $item);
+			}
+			
+			return $feed;
+			/*$limit = 2;
+			for($x=0;$x<$limit;$x++) {
+				$title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
+				$link = $feed[$x]['guid'];
+				$description = $feed[$x]['desc'];
+				$descr = truncate_($description, 20);
+				$date = date('l F d, Y', strtotime($feed[$x]['date']));
+				echo '<small><em> Posted On '.$date.'</em></small></p>';
+				echo '<p><strong><a href="'.$link.'" title="'.$title.'" target="_blank">'.$title.'</a></strong><br />';
+				echo '<p>'.$descr.'</p>';
+			}*/
+		  
+	  }
   
   }

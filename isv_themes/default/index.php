@@ -3,7 +3,7 @@
     <section id="middle">
         <div class="container">
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-7" id="home-img">
                     <div class="skill" style="margin-top:-25px">
 						<div class="well betterwell" id="home-call">
 							<img src="<?php echo ISVIPI_STYLE_URL . 'site/home_cover.jpg' ?>">

@@ -259,40 +259,34 @@
                         <div class="col-md-6">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Latest from <a href="http://isvipi.org" target="_blank">IsVipi OSSN Blog</a> (Coming Soon)</h2>
+                                    <h2>Latest from <a href="//forum.isvipi.org" target="_blank">the community</a></h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
+                                	<?php $l_feeds = $stats->get_latest_feeds(); 
+										$limit = 3;
+										for($x=0;$x<$limit;$x++) {
+											$title = str_replace(' & ', ' &amp; ', $l_feeds[$x]['title']);
+											$link = $l_feeds[$x]['guid'];
+											$description = $l_feeds[$x]['desc'];
+											$descr = truncate_($description, 10);
+											$date = date('M/d/Y', strtotime($l_feeds[$x]['date']));
+											$n_d = explode('/',$date);
+									?>
                                     <article class="media event">
                                         <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
+                                            <p class="month"><?php echo $n_d[0] ?></p>
+                                            <p class="day"><?php echo $n_d[1] ?></p>
+                                            <p class="month"><?php echo $n_d[2] ?></p>
                                         </div>
                                         <div class="media-body">
-                                            <a class="title" href="#">Blog Title</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            <a class="title" href="#"><?php echo $title ?></a>
+                                            <p><?php echo $description ?></p>
                                         </div>
                                     </article>
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Blog Title</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month">April</p>
-                                            <p class="day">23</p>
-                                        </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#">Blog Title</a>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                    </article>
+                                    
+                                    <?php } ?>
+                                    
                                 </div>
                             </div>
                         </div>
