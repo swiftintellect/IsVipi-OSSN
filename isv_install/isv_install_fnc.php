@@ -59,9 +59,14 @@
 				return "<i class='fa fa-times failed'></i>";
 			}
 		} else {
-			global $error;
-			$error = true;
-			return "<i class='fa fa-times failed'></i>";
+			$mod_rewrite = getenv('HTTP_MOD_REWRITE') == 'On' ? true : false ;
+			if( $mod_rewrite ) {
+				return "<i class='fa fa-check passed'></i>";
+			} else {
+				global $error;
+				$error = true;
+				return "<i class='fa fa-times failed'></i>";
+			}
 		}
 	}
 	
