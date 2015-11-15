@@ -20,7 +20,7 @@
         	</div>
             <div class="x_panel">
                 <h3 class="cred_title">Tester</h3>
-                <p>Martin (Norway)</p>
+                <p>Martin Sundseth (Norway)</p>
             </div>
             <!--<div class="x_panel">
                 <h3 class="cred_title">Hosting</h3>

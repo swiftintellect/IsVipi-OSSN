@@ -50,8 +50,14 @@
 	}
 	
 	function mode_rewrite_installed(){
-		if(in_array('mod_rewrite', apache_get_modules())){
-			return "<i class='fa fa-check passed'></i>";
+		if (function_exists('apache_get_modules')) {
+			if(in_array('mod_rewrite', apache_get_modules())){
+				return "<i class='fa fa-check passed'></i>";
+			} else {
+				global $error;
+				$error = true;
+				return "<i class='fa fa-times failed'></i>";
+			}
 		} else {
 			global $error;
 			$error = true;
