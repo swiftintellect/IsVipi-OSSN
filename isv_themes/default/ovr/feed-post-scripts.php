@@ -32,24 +32,8 @@
         
       <!-- IMAGE FEED -->
       <script>
-	  function isEmpty(){
-		var x;
-		x = document.getElementById("imgInp").value;
-			if (x == ""){ 
-				$('#errorLog').css('display','none');
-				$("#processing2").css('display','block');
-				alert("Please select an image to upload");
-				return;
-			} else {
-				$('#errorLog').css('display','none');
-				$("#processing2").css('display','block');
-				$("#uplPic").css('display','none');
-				$("#uplPic2").css('display','block');
-				uploadPic(); 
-			}
-	}
-	function uploadPic(){
 		$('#imgFeed').ajaxForm({ 
+			beforeSubmit: validate,
 			dataType: 'json', 
 			success: function(json) { 
 				setTimeout(function(){
@@ -70,7 +54,14 @@
 				}, 500);
 			 } 
 			});
-	}
+			function validate(formData, jqForm, options) { 
+				var form = jqForm[0]; 
+				if (!form.feedImg.value) { 
+					alert('Please select an image to upload'); 
+					return false; 
+				} 
+				$("#processing2").show();
+			}
 			
 		</script>
         
