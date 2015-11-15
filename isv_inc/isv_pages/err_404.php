@@ -16,6 +16,9 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
+	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
+	$admin = new admin_security();
+
 	global $PAGE,$p;
 	if(!isset($PAGE[0]) || empty($PAGE[0])){
 		$p = '';
@@ -46,5 +49,8 @@
 	/** Page Manager **/
 	$pageManager = new pageManager();
 	$s_m = $pageManager->siteMeta();
+	
+	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	$converter = new Encryption;
 
  	include_once ISVIPI_ACT_THEME.'err_404.php'; 

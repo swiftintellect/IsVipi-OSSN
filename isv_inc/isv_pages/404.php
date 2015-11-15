@@ -23,9 +23,6 @@
 		$p = $PAGE[0];
 	}
 	
-	/*** check if the site is active or on maintenance mode */
-	$siteInfo->maintenanceMode();
-	
 	//if logged in, redirect to member page
 	if (isLoggedIn()){
 		header('location:'.ISVIPI_URL.'err_404/');
@@ -40,5 +37,8 @@
 	$siteInfo = new siteManager();
 	$isv_siteDetails = $siteInfo->getSiteInfo();
 	$isv_siteSettings = $siteInfo->getSiteSettings();
+	
+	/*** check if the site is active or on maintenance mode */
+	$siteInfo->maintenanceMode();
 
  	include_once ISVIPI_ACT_THEME.'404.php'; 
