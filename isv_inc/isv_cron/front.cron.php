@@ -20,3 +20,12 @@
 	require_once ISVIPI_CLASSES_BASE.'global/cron.cls.php';
 	$cron = new front_cron();
 	
+	//delete inactive sessions
+	$cron->del_inactive_sessions();
+	
+	//delete unvalidated entries
+	$cron->del_unvalidated_entries();
+	
+	//delete friend requests that have been ignored
+	$cron->del_ignored_frnd_reqs();
+	

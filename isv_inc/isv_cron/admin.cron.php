@@ -27,6 +27,8 @@
 	//delete all sessions inactive for 10 minutes
 	$cron->del_inactive_sessions();
 	
-	
 	//check for updates
 	$cron->isv_update_available();
+	
+	//delete all users who have been scheduled for deletion
+	$cron->del_users_scheduled();
