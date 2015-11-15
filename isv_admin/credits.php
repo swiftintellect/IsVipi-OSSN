@@ -5,7 +5,7 @@
 <div class="right_col" role="main">
 	<div class="page-title">
     	<div class="title_left">
-        	<h3>Credits </h3>
+        	<h3>Credits</h3>
         </div>
         <div class="title_right">
     

@@ -61,4 +61,5 @@ define ('ISVIPI_CRON_URL', ISVIPI_URL . 'cron' .DIRECTORY_SEPARATOR);
 //Image thumbnail sizes
 define('ISVIPI_THUMBS', '150x150_');
 define('ISVIPI_600', '600x600_');
+
 ?>
