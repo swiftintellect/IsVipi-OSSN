@@ -101,6 +101,4 @@
 				}
 				print '<optgroup>' . "\n";
 			}
-
-				
 	}
