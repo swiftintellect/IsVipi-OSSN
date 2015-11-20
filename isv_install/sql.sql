@@ -3,7 +3,7 @@
 --
 CREATE TABLE IF NOT EXISTS `s_info` (
   `id` int(1) NOT NULL DEFAULT 1,
-  `s_url` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `s_url` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `s_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `s_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `s_lang` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
