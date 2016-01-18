@@ -10,7 +10,7 @@
                 </div>
                 <hr />
                 <div class="row">
-                	<input type="hidden" name="isv_op" value="reset" />
+                	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('reset') ?>" />
                     <button class="btn btn-lg btn-success btn-block" type="submit">Reset Password</button>
             	</div>
             </form>

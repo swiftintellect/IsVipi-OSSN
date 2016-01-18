@@ -1,4 +1,4 @@
-    <footer id="footer" class="midnight-blue">
+    <footer id="footer" class="midnight-blue drop-shadow-top">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">

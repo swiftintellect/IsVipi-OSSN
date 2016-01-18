@@ -19,6 +19,24 @@
 		  return $count;
 	  }
 	  
+	  public function user_count_all($status){
+		  global $isv_db;
+		  
+		  if($status === 'all'){
+			$query = "";
+		  } else {
+			$query = "WHERE status=$status";  
+		  }
+		  
+		  $stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users $query"); 
+		  $stmt->execute();  
+		  $stmt->bind_result($count); 
+		  $stmt->fetch();
+		  $stmt->close();
+		  
+		  return $count;
+	  }
+	  
 	  public function member_types($type){
 		  global $isv_db;
 		  

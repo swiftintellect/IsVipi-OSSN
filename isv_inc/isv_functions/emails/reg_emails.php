@@ -1,5 +1,6 @@
 <?php
 	function sendValidationEmail($email,$fullName,$validCode,$sEmail,$sTitle,$sURL,$sLogo){
+		global $converter;
 		$to = $email;
 		$subject = "Account Activation";
 		$message = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -23,7 +24,7 @@
 		  <td bgcolor='#F4F4F4' style='padding: 10px;'>
 		   Dear ".$fullName.",<br />
 		   <p>Your account has been created. Please click the link below to activate your account and sign in.</p>
-							  <p> Link: ".$sURL."/p/users/validate/".$validCode."</p>
+							  <p> Link: ".$sURL."/p/users/".$converter->encode('validate')."/".$validCode."</p>
 							  <p> If for some reason you cannot click on the link above, copy and paste it in your browser.</p>
 		  </td>
 		 </tr>

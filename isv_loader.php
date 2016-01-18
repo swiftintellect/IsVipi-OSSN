@@ -11,6 +11,8 @@
 	require_once ISVIPI_CLASSES_BASE.'global/init_cls.php';
 	require_once ISVIPI_FUNCTIONS_BASE .'global/global_fnc.php';
 	require_once ISVIPI_CLASSES_BASE .'global/global_cls.php';
+	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	$converter = new Encryption;
 	
 	/*** Define some constants **/
 	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR);

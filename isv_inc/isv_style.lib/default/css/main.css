@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,300,800);
-
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:700);
 
 /*************************
 *******Typography******
@@ -220,16 +220,31 @@ body > section {
 
 .forgot-pwd {
 	color:#ffffff;
-	margin-left:15px;
+	margin-top:5px;
 	font-size:13px;
 	padding-bottom:10px !important;
+	display:block;
+}
+.semi-transparent-bg {
+	padding:20px;
+	margin-top:-40px;
+	background-color: rgba(255, 255, 255, 0.6);
+background: rgba(255, 255, 255, 0.6);
+color: rgba(255, 255, 255, 0.6);
 }
 
+.rounded-corners {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
 /*************************
 *******Home Page******
 **************************/
 #middle {
   background: #ffffff;
+  background:url(../images/bgimg.jpg);
+  background-size:cover;
 }
 
 .skill h2{
@@ -244,6 +259,21 @@ body > section {
 	-webkit-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.68);
 -moz-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.68);
 box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.68);
+}
+.drop-shadow-bottom {
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+}
+.drop-shadow-top {
+	-webkit-box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.53);
+-moz-box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.53);
+box-shadow: 0px -1px 5px 0px rgba(0,0,0,0.53);
+}
+.drop-shadow-light {
+	-webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
 }
 .betterwell {
 	background:none !important;
@@ -2064,14 +2094,7 @@ shortcodes page css
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
 }
 .blue-gradient {
-	background: #4096ee; /* Old browsers */
-	background: -moz-linear-gradient(top,  #4096ee 0%, #4096ee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4096ee), color-stop(100%,#4096ee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #4096ee 0%,#4096ee 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #4096ee 0%,#4096ee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4096ee', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+	background:#06F;
 }
 .white-gradient {
 	background:#ffffff;
@@ -2092,7 +2115,35 @@ background: -moz-linear-gradient(top,  #feffe8 0%, #d6dbbf 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #feffe8 0%,#d6dbbf 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom,  #feffe8 0%,#d6dbbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=0 ); /* IE6-9 */
--webkit-box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
--moz-box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
-box-shadow: 2px 2px 8px 1px rgba(0,0,0,0.75);
+}
+.font-black {
+	color:#333;
+}
+.home-h3 {
+	color:#787878;
+	font-size:40px;
+	font-weight:700;
+	line-height:45px;
+	font-family:Arial, Helvetica, sans-serif
+}
+.home-h3 span {
+	color:#09F;
+	font-family: 'Oleo Script', cursive;
+	text-shadow: rgb(224, 224, 224) 1px 1px 0px;	
+}
+.home-p {
+	color:#666;
+	font-size:20px;
+	padding:10px;
+	line-height:25px;
+	margin-top:10px;
+	font-weight:500;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	min-height:90px;
+}
+.font-white {
+	color:#FFF;
+}
+.betterwell .list-group {
+	font-size:15px;
 }

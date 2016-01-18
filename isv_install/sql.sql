@@ -598,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `user_pm` (
   `message` longtext COLLATE utf8_unicode_ci NOT NULL,
   `read_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `sent_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `deleted_by` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `deleted_by` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

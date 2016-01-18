@@ -12,7 +12,7 @@
                 </div>
                 <hr />
                 <div class="row">
-                	<input type="hidden" name="isv_op" value="change" />
+                	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('change') ?>" />
                     <button class="btn btn-lg btn-success btn-block" type="submit">Change Password</button>
             	</div>
             </form>

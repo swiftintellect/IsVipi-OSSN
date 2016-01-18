@@ -1,5 +1,6 @@
 <?php require_once(ISVIPI_ADMIN_CLS_BASE .'stats.cls.php'); 
 	$stats = new site_stats();
+	libxml_disable_entity_loader(false);
 ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/head.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
