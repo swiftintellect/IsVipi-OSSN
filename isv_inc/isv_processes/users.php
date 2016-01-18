@@ -37,6 +37,7 @@
 		 header('location:'.$from_url.'');
 		 exit();
 	}
+	require_once(ISVIPI_CLASSES_BASE .'forms/registration_cls.php');
 	
 	/** EMAIL ACCOUNT VALIDATION **/
 	if ($operation === 'validate'){
