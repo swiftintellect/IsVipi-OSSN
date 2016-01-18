@@ -18,7 +18,7 @@
                   			<div class="tab-pane active" id="update-timeline">
                             <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST" id="text-update">
                             	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="What's on your mind?"  required="required"></textarea>
-                            	<input type="hidden" name="isv_op" value="new-feed" />
+                            	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('new-feed') ?>" />
                                 
                                 <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" />
                                 <div class="feed-spinner" id="processing" style="display:none"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -35,7 +35,7 @@
                                 </div>
                                 <img id="preview" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
                                 <img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/success.png' ?>"/>
-                                <input type="hidden" name="isv_op" value="img-feed" />
+                                <input type="hidden" name="isv_op" value="<?php echo $converter->encode('img-feed') ?>" />
                                 <div class="clear"></div>
                                 <hr />
                                 <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic"/>

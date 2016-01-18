@@ -19,7 +19,4 @@
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php'); 
 	
-	/*foreach ($feed as $key => $f) {
-			echo $f['feed_id'];
-	}*/
  	include_once ISVIPI_ACT_THEME.'home.php'; 

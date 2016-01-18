@@ -17,8 +17,6 @@
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
 	
 	// capture our term
 	if (!isset($PAGE[1]) ||  empty($PAGE[1])){

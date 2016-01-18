@@ -17,8 +17,6 @@
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
 	 require_once(ISVIPI_CLASSES_BASE .'global/messaging_cls.php'); 
-	 require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	 $converter = new Encryption;
 	
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
 		$_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';

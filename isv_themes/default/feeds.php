@@ -39,7 +39,7 @@
                     
                     <ul class="dropdown-menu">
                       <li>
-                      	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>, 'delete');">Delete</a>
+                      	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>, '<?php echo $converter->encode('delete')?>');">Delete</a>
                       </li>
                     </ul>
                    </ul>
@@ -77,9 +77,9 @@
                   <?php } ?>
                   <!-- Social sharing buttons -->
                   <?php if(!$feedProperties->hasLiked()) {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'<?php echo $converter->encode('like') ?>');"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'unlike');">Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="feedAction(<?php echo $f['feed_id'] ?>,'<?php echo $converter->encode('unlike') ?>');">Unlike</a>
                   <?php } ?>
                   <a href="javascript:void(0)" class="feed-action" data-toggle="modal" data-target="#share<?php echo $f['feed_id'] ?>"><i class='fa fa-share'></i> Share</a>
                   
@@ -94,8 +94,8 @@
                       <input type="text" name="comment" class="form-control input-sm" placeholder="Press enter to post comment">
                     </div>
                     
-                    <input type="hidden" name="f_id" value="<?php echo $f['feed_id'] ?>" />
-                    <input type="hidden" name="isv_op" value="new-comment" />
+                    <input type="hidden" name="f_id" value="<?php echo $converter->encode($f['feed_id']) ?>" />
+                    <input type="hidden" name="isv_op" value="<?php echo $converter->encode('new-comment') ?>" />
                   </form>
                 </div><!-- /.box-footer -->
                 
@@ -123,14 +123,14 @@
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
                  <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_like');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_like') ?>');"><i class='fa fa-thumbs-o-up'></i> Like</a>
                   <?php } else {?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, 'comm_unlike');"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_unlike') ?>');"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
                   <?php } ?>
                   
                   <!-- only the owner of the comment or the owner of the post can delete a comment -->
                   <?php if ($c['comm_user_id'] === $_SESSION['isv_user_id']){?>
-                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, 'comm_del');"> Delete</a>
+                  <a href="javascript:void(0)" class="feed-action pull-right" onclick="deleteComment(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_del') ?>');"> Delete</a>
                    <?php } ?>
                    <div class="comm_like_count"><?php echo $getComments->totalCommentLikes($c['comm_id']) ?></div>
                   <div id="CAction<?php echo $c['comm_id'] ?>" class="processingFAction"><i class="fa fa-spinner fa-pulse"></i></div>
@@ -182,7 +182,7 @@
                                 <img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="image post">
                               <?php }?>
                               </div>
-                              <input type="hidden" name="f_id" value="<?php echo $sh['s_old_feed_id'] ?>" />
+                              <input type="hidden" name="f_id" value="<?php echo $converter->encode($sh['s_old_feed_id']) ?>" />
                               <?php } else {?>
                               
                               
@@ -200,12 +200,12 @@
                                 <p class="brkn sh-fd"><?php echo $f['feed_text'] ?></p>
                               </div>
                               <?php } ?>
-                              <input type="hidden" name="f_id" value="<?php echo $f['feed_id'] ?>" />
+                              <input type="hidden" name="f_id" value="<?php echo $converter->encode($f['feed_id']) ?>" />
                               <?php } ?>
                             
                             </div>  
                           </div>
-                    	  <input type="hidden" name="isv_op" value="share" />
+                    	  <input type="hidden" name="isv_op" value="<?php echo $converter->encode('share') ?>" />
                         
                       </div>
                       <div class="modal-footer">

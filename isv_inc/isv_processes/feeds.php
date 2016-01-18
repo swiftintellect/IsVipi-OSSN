@@ -42,9 +42,9 @@
 	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
-		 $operation = cleanPOST('isv_op');
+		 $operation = $converter->decode(cleanPOST('isv_op'));
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
-		 $operation = cleanGET($PAGE[2]);
+		 $operation = $converter->decode(cleanGET($PAGE[2]));
 	 } else {
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
@@ -161,7 +161,7 @@
 		$comment = str_replace("  ","",$comment);
 		$comment = nl2br($comment);
 		
-		$feed_id = cleanPOST('f_id');
+		$feed_id = $converter->decode(cleanPOST('f_id'));
 		
 		$addComment = new feedActions();
 		$addComment->addComment($comment,$feed_id);
@@ -218,7 +218,7 @@
 			exit();
 		}
 		
-		$feed_id = cleanPOST('f_id');	
+		$feed_id = $converter->decode(cleanPOST('f_id'));	
 		
 		/** share feed **/
 		$share = new feedActions();

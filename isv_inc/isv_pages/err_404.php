@@ -50,7 +50,4 @@
 	$pageManager = new pageManager();
 	$s_m = $pageManager->siteMeta();
 	
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
-
  	include_once ISVIPI_ACT_THEME.'err_404.php'; 
