@@ -14,7 +14,7 @@
 	<div class='box-body'>
     
     <div class="box box-primary collapsed-box">
-    	<div class="box-header with-border" data-widget="collapse">
+    	<div class="box-header with-border">
        	<h3 class="box-title">Personal Details</h3>
        		<div class="box-tools pull-right">
            	<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
@@ -66,7 +66,7 @@
   	</div><!-- /.box -->
     
     <div class="box box-success collapsed-box">
-    	<div class="box-header with-border" data-widget="collapse">
+    	<div class="box-header with-border">
        	<h3 class="box-title">Location Details</h3>
        		<div class="box-tools pull-right">
            	<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
@@ -89,7 +89,7 @@
   	</div><!-- /.box -->
     
         <div class="box box-warning collapsed-box">
-    	<div class="box-header with-border" data-widget="collapse">
+    	<div class="box-header with-border">
        	<h3 class="box-title">Other Details</h3>
        		<div class="box-tools pull-right">
            	<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
@@ -111,7 +111,7 @@
       	</div><!-- /.box-body -->
   	</div><!-- /.box -->
 	<div class="box-tools pull-right">
-    	<input type="hidden" name="isv_op" value="edit_prof" />
+    	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('edit_prof') ?>" />
     	<button type="submit" class="btn btn-success btn-flat">Save</button>
     	</div><!-- /.box-tools -->
     <div class="clear"></div>

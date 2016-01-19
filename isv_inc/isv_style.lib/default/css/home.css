@@ -449,6 +449,7 @@ a:focus {
   width: 100%;
   padding: 10px;
   overflow: hidden;
+  min-height:50px;
 }
 .user-panel:before,
 .user-panel:after {
@@ -477,7 +478,7 @@ a:focus {
   text-decoration: none;
   padding-right: 5px;
   margin-top: 3px;
-  font-size: 11px;
+  font-size: 12px;
 }
 .user-panel > .info > a > .fa,
 .user-panel > .info > a > .ion,
@@ -5245,4 +5246,7 @@ table.text-center th {
 .news_item_date {
 	color:#A0A0A0;
 	float:right !important;
+}
+.font-black {
+	color:#333;
 }

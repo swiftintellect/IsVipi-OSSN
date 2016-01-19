@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="box-tools pull-left">
-                    	<input type="hidden" name="isv_op" value="privacy" />
+                    	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('privacy') ?>" />
                         <button type="submit" class="btn btn-success btn-flat">Save</button>
                     </div><!-- /.box-tools -->
                     </form>
@@ -83,7 +83,7 @@
                     <input type="password" class="form-control" name="rn_pwd" required="required">
                 </div>
                 <div class="box-tools pull-left col-md-6"><br />
-                	<input type="hidden" name="isv_op" value="c_pwd" />
+                	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('c_pwd') ?>" />
                 	<button type="submit" class="btn btn-success btn-flat">Change Password</button>
                 </div><!-- /.box-tools -->
                 

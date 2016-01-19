@@ -15,7 +15,7 @@
 			  	<?php echo $memberinfo['full_name'] ?>
               </p>
               
-              <!-- Status -->
+              <!-- Edit Profile Link -->
               <a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/edit/' ?>"><i class="fa fa-pencil-square-o"></i> Edit Profile</a>
             </div>
           </div>
