@@ -114,6 +114,7 @@
         <ul>
         	<li>If you are friends, you will automatically be unfriended.</li>
             <li>You will not be able to exchange messages</li>
+            <li>Any pending friend request will be automatically deleted</li>
             <li>You will not be able to like, share or comment on each other's posts</li>
         </ul>
       </div>

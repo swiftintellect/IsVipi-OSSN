@@ -142,6 +142,12 @@ class friends {
 	public function block_user($user_id){
 		global $isv_db;
 		
+		//we first delete any friend request existing between them
+		$stmt = $isv_db->prepare ("DELETE FROM friend_requests WHERE (from_id=? AND to_id=?) OR (to_id=? AND from_id=?)"); 
+		$stmt->bind_param('iiii', $this->me,$user_id,$this->me,$user_id);
+		$stmt->execute();  
+		$stmt->close();
+		
 		//check if they are friends
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=? AND user2=?"); 
 		$stmt->bind_param('ii', $this->me,$user_id);

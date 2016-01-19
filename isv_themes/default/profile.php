@@ -78,20 +78,20 @@
 								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 1){?>
                                 <div class="row prof-fr-opt">
                                 <span class="label label-default">Request Pending</span> 
-                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
-                                  <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$fr_rq_id ?>" class="btn btn-warning btn-xs btn-flat">Ignore</a> &nbsp;
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$converter->encode($fr_rq_id).'/'.$converter->encode($from_id) ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$converter->encode($fr_rq_id) ?>" class="btn btn-warning btn-xs btn-flat">Ignore</a> &nbsp;
 								</div>
                                 
                              <!-- if not friends, request exists and profile viewer is the recepient and ignored -->
 								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 0){?>
                                 <div class="row prof-fr-opt">
                                 <span class="label label-default">You ignored this request</span> 
-                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$converter->encode($fr_rq_id).'/'.$converter->encode($from_id) ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
 								</div>
 							
                             <!-- not friends and no friend request exists -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_req').'/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_req').'/'.$converter->encode($m_info['m_user_id']) ?>" class="btn btn-warning btn-sm">Add Friend</a>
                                 <?php } ?>
                                 <?php if($m_info['m_status'] === 2 || $m_info['m_status'] === 9){?> 
                                 	<span class="label label-info">Messaging Disabled</span>
