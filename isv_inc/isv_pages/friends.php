@@ -36,5 +36,4 @@
 	}
 	$m_info = $m->all_friends($_SESSION['isv_user_id'],$oderBY,$limit);
 	
-	
  	include_once ISVIPI_ACT_THEME.'friends.php'; 

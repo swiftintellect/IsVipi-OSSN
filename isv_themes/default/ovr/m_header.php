@@ -26,7 +26,7 @@
             <div class="input-group">
               <input type="text" name="term" class="form-control" value="<?php echo $st ?>" placeholder="enter name or username" required>
               <span class="input-group-btn">
-              	<input type="hidden" name="isv_op" value="search" />
+              	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('search') ?>" />
                 <button type="submit" name="search" class="btn search-btn"><i class="fa fa-search"></i></button>
               </span>
             </div>

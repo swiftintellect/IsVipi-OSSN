@@ -12,7 +12,7 @@
                 <div class="row">
                     <input type="password" class="form-control" name="pwd" placeholder="Password">
                 </div>
-                    <input type="hidden" name="isv_op" value="signin" />
+                    <input type="hidden" name="isv_op" value="<?php echo $converter->encode('signin') ?>" />
                 <hr />
                 <div class="row">
                     <button class="btn btn-lg btn-success btn-block" type="submit">Sign In</button>

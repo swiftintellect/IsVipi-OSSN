@@ -18,8 +18,16 @@
 	 ******************************************************/
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	
+	//check if there is any chat
+	require_once(ISVIPI_CLASSES_BASE .'global/getMessages_cls.php');
+	$chat_heads = new get_messages();
+	$chat_user = $chat_heads->any_chat_available($_SESSION['isv_user_id']);
+	
 	// we define our order by (latest or oldest)
-	if (isset($PAGE[1]) && !empty($PAGE[1])){
+	if(!isset($PAGE[1]) && !empty($chat_user)){
+		header("location:".ISVIPI_URL."messages/$chat_user");
+		exit();
+	} else if (isset($PAGE[1]) && !empty($PAGE[1])){
 		$user_name = cleanGET($PAGE[1]);
 	} else {
 		$user_name = '';

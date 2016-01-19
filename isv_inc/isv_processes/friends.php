@@ -42,21 +42,19 @@
 	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
-		 $operation = cleanPOST('isv_op');
+		 $operation = $converter->decode(cleanPOST('isv_op'));
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
-		 $operation = cleanGET($PAGE[2]);
+		 $operation = $converter->decode(cleanGET($PAGE[2]));
 	 } else {
-		 $array['err'] = true;
-		 $array['message'] = 'Action not Allowed!';
-		 echo json_encode($array);
+		 $_SESSION['isv_error'] = 'Action not Allowed!';
+		 header('location:'.$from_url.'');
 		 exit();
 	 }
 	 
 	 if ($operation !== 'f_req' && $operation !== 'f_accept' && $operation !== 'f_ignore' 
-	 && $operation !== 'f_remove' && $operation !== 'f_block' && $operation !== 'f_unblock'){
-		 $array['err'] = true;
-		 $array['message'] = 'Action not Allowed!';
-		 echo json_encode($array);
+	 && $operation !== 'f_remove' && $operation !== 'f_block' && $operation !== 'f_unblock' && $operation !== 'f_delete'){
+		 $_SESSION['isv_error'] = 'Action not Allowed!';
+		 header('location:'.$from_url.'');
 		 exit();
 	}
 	require_once(ISVIPI_CLASSES_BASE .'forms/friends_cls.php');
@@ -69,7 +67,7 @@
 			exit();
 		}
 		
-		$user_to_id = cleanGET($PAGE[3]);
+		$user_to_id = $converter->decode(cleanGET($PAGE[3]));
 		
 		//strip non numeric characters
 		$user_to_id = preg_replace('/[^0-9,.]+/i', '', $user_to_id);
@@ -88,8 +86,8 @@
 			exit();
 		}
 		
-		$fr_req_id = cleanGET($PAGE[3]);
-		$userSent = cleanGET($PAGE[4]);
+		$fr_req_id = $converter->decode(cleanGET($PAGE[3]));
+		$userSent = $converter->decode(cleanGET($PAGE[4]));
 		
 		//strip non numeric characters
 		$fr_req_id = preg_replace('/[^0-9,.]+/i', '', $fr_req_id);
@@ -108,7 +106,7 @@
 			exit();
 		}
 		
-		$fr_req_id = cleanGET($PAGE[3]);
+		$fr_req_id = $converter->decode(cleanGET($PAGE[3]));
 		
 		//strip non numeric characters
 		$fr_req_id = preg_replace('/[^0-9,.]+/i', '', $fr_req_id);
@@ -126,14 +124,14 @@
 			exit();
 		}
 		
-		$friend_id = cleanGET($PAGE[3]);
+		$friend_id = $converter->decode(cleanGET($PAGE[3]));
 		
-		/** ignore the friend request **/
+		/** unfriend the user **/
 		$f_remove = new friends();
 		$f_remove->un_friend($friend_id);
 	}
 	
-	/*** RBLOCK USER **/
+	/*** BLOCK USER **/
 	if ($operation === 'f_block'){
 		if(!isset($PAGE[3]) || empty($PAGE[3])){
 			$_SESSION[''] = 'An error occurred. Please try again.';
@@ -141,14 +139,14 @@
 			exit();
 		}
 		
-		$user_id = cleanGET($PAGE[3]);
+		$user_id = $converter->decode(cleanGET($PAGE[3]));
 		
-		/** ignore the friend request **/
+		/** block this user **/
 		$block = new friends();
 		$block->block_user($user_id);
 	}
 	
-	/*** RBLOCK USER **/
+	/*** UNBLOCK USER **/
 	if ($operation === 'f_unblock'){
 		if(!isset($PAGE[3]) || empty($PAGE[3])){
 			$_SESSION[''] = 'An error occurred. Please try again.';
@@ -156,11 +154,25 @@
 			exit();
 		}
 		
-		$user_id = cleanGET($PAGE[3]);
+		$user_id = $converter->decode(cleanGET($PAGE[3]));
 		
-		/** ignore the friend request **/
+		/** unblock this user **/
 		$unblock = new friends();
 		$unblock->unblock_user($user_id);
 	}
-
+	
+	/*** DELETE FRIEND REQUEST **/
+	if ($operation === 'f_delete'){
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION[''] = 'An error occurred. Please try again.';
+			header('location:'.$from_url.'');
+			exit();
+		}
+		
+		$fr_id = $converter->decode(cleanGET($PAGE[3]));
+		
+		/** delete friend request **/
+		$del_fr = new friends();
+		$del_fr->delete_friend_request($fr_id);
+	}
 	

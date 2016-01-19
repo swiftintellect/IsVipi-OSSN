@@ -14,7 +14,7 @@
            	<input type="file" class="upload" name="p_pic" id="imgInp1"/>
       	</div>
        	<img id="preview1" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
-       	<input type="hidden" name="isv_op" value="prof_pic" />
+       	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('prof_pic') ?>" />
       	<div class="clear"></div>
       </div>
       <div class="modal-footer">
@@ -45,7 +45,7 @@
            	<input type="file" class="upload" name="cover" id="imgInp2"/>
       	</div>
        	<img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
-       	<input type="hidden" name="isv_op" value="cover_pic" />
+       	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('cover_pic') ?>" />
       	<div class="clear"></div>
       </div>
       <div class="modal-footer">
@@ -119,7 +119,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a href="<?php echo ISVIPI_URL.'p/friends/f_block/'.$m_info['m_user_id'] ?>" class="btn btn-primary">Yes, Block User</a>
+        <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_block').'/'.$converter->encode($m_info['m_user_id']) ?>" class="btn btn-primary">Yes, Block User</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -138,7 +138,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$m_info['m_user_id'].'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $m_info['m_fullname']; ?></a>
+        <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_remove').'/'.$converter->encode($m_info['m_user_id']).'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $m_info['m_fullname']; ?></a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -161,7 +161,7 @@
       </div>
       <div class="modal-footer">
       	<input type="hidden" name="to" value="<?php echo $converter->encode($m_info['m_user_id']) ?>" />
-        <input type="hidden" name="isv_op" value="send_pm" />
+        <input type="hidden" name="isv_op" value="<?php echo $converter->encode('send_pm') ?>" />
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Send Message</button>
       </div>

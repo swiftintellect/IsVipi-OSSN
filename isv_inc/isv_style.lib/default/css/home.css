@@ -1894,6 +1894,19 @@ a:focus {
   margin: 0 5px;
 }
 /* Chat widget (DEPRECATED - this will be removed in the next major release. Use Direct Chat instead)*/
+
+/* Scrollbar */ 
+
+.chat::-webkit-scrollbar{width: 10px;}
+
+.chat::-webkit-scrollbar-thumb{background-color:rgb(7, 141, 224); border-radius: 0;}
+.chat::-webkit-scrollbar-thumb:hover{background-color:rgb(21, 132, 212);}
+
+.chat::-webkit-scrollbar-track{background-color:rgb(237, 237, 237);}
+
+
+/* End Scrollbar */
+
 .chat {
   padding: 5px 20px 5px 10px;
   height:65%;

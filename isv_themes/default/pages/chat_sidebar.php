@@ -10,7 +10,7 @@
     <li <?php if(isset($PAGE[1]) && $PAGE[1] == $chUser['username'] ){echo "class='active'"; } ?>>
 		<a href="<?php echo ISVIPI_URL. 'messages/'.$chUser['username'] ?>">
 		<i class="fa fa-comments"></i> 
-    	<?php echo  $chUser['fullname'] ?>
+    	<?php echo $chUser['fullname'] ?>
         
         <?php if(unread_msgs_from($chUser['from_id']) > 0 ){?>
         	<span class="label label-success pull-right"><?php echo unread_msgs_from($chUser['from_id']) ?></span>

@@ -55,7 +55,7 @@
                        	<textarea type="text" name="msg" id="msg-input" placeholder="Type Message ..." class="form-control" required></textarea>
                        		<div class="input-group-btn">
                             <input type="hidden" name="to" value="<?php echo $converter->encode($user_id) ?>" />
-                            <input type="hidden" name="isv_op" value="send_pm" />
+                            <input type="hidden" name="isv_op" value="<?php echo $converter->encode('send_pm') ?>" />
                           	<button type="submit" class="btn btn-warning btn-flat btnbg" id="sendMsgs" onClick="empty()">Send</button>
                             <button type="button" class="btn btn-warning btn-flat btnbg" style="display:none" disabled="disabled" id="workingBtn">Working...</button>
                           	</div>

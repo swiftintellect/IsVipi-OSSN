@@ -49,8 +49,8 @@
 													   ELSE 'both'  
 												   END)
 					)				
-				GROUP   BY  u.username
-				ORDER BY read_time DESC, pm.id ASC
+				GROUP BY u.username
+				ORDER BY pm.id DESC
 			
 			"); 
 			$stmt->execute(); 
@@ -173,5 +173,25 @@
 				}
 		}
 		
+		public function any_chat_available($user){
+			global $isv_db;
+			
+			$stmt = $isv_db->prepare ("
+			SELECT u.username
+				FROM users u
+				LEFT JOIN user_pm pm ON u.id = (CASE WHEN pm.from_id=$user 
+                                   THEN pm.to_id
+                                   ELSE pm.from_id  
+                               END)
+			WHERE (pm.from_id=? OR pm.to_id=?) ORDER BY u.id ASC LIMIT 1
+			"); 
+			$stmt->bind_param('ii', $user,$user);
+			$stmt->execute();
+			$stmt->store_result();
+			$stmt->bind_result($username); 
+			$stmt->fetch();
+			
+			return $username;
+		}
 		
 	}

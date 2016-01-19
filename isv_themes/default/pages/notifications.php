@@ -27,8 +27,8 @@
                           <!-- Message title and timestamp -->
 							<div class="accept-reject">
                             	<strong>friend request</strong> &nbsp;
-                            	<a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fn['id'].'/'.$fn['from_id'] ?>" class="btn bg-green btn-xs btn-flat">Accept</a>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_ignore/'.$fn['id'] ?>" class="btn bg-red btn-xs btn-flat">Ignore</a>
+                            	<a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$converter->encode($fn['id']).'/'.$converter->encode($fn['from_id']) ?>" class="btn bg-green btn-xs btn-flat">Accept</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$converter->encode($fn['id']) ?>" class="btn bg-red btn-xs btn-flat">Ignore</a>
                             </div>
                         </div>
                       </li><!-- end message -->

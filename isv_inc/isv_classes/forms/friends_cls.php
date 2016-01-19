@@ -5,6 +5,7 @@ class friends {
 	private $from_uri;
 	
 	public function __construct(){
+		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		$this->me = $_SESSION['isv_user_id'];
 	}
 	
@@ -13,7 +14,6 @@ class friends {
 
 	******************************/
 	public function sendFriendReq($to){
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		global $isv_db;
 		
 		$this->to_req = $to;
@@ -51,7 +51,6 @@ class friends {
 
 	******************************/
 	public function ignoreFriendReq($f_rquest_id){
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		global $isv_db;
 		
 		//update our db
@@ -71,7 +70,6 @@ class friends {
 
 	******************************/
 	public function acceptFriendReq($fr_req_id,$user_sent){
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		global $isv_db;
 		
 		//enter new details to the friends table
@@ -110,8 +108,6 @@ class friends {
 	public function un_friend($friend_id){
 		global $isv_db;
 		
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
-		
 		//check if they are friends
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=? AND user2=?"); 
 		$stmt->bind_param('ii', $this->me,$friend_id);
@@ -145,8 +141,6 @@ class friends {
 	******************************/
 	public function block_user($user_id){
 		global $isv_db;
-		
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		
 		//check if they are friends
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM friends WHERE user1=? AND user2=?"); 
@@ -201,8 +195,6 @@ class friends {
 	******************************/
 	public function unblock_user($user_id){
 		global $isv_db;
-		
-		$this->from_uri = $_SERVER['HTTP_REFERER'];
 		
 		//check if a block exists between the two users
 		if(!$this->blocked_users($this->me,$user_id)){
@@ -261,5 +253,20 @@ class friends {
 				return FALSE;
 			}
 		$stmt->close();
+	}
+	
+	public function delete_friend_request($fr_id){
+		global $isv_db;
+		
+		//remove the friend request
+		$stmt = $isv_db->prepare ("DELETE FROM friend_requests WHERE id=?"); 
+		$stmt->bind_param('i', $fr_id);
+		$stmt->execute();  
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Friend request deleted.';
+		header('location:'.$this->from_uri.'');
+		exit();
 	}
 }

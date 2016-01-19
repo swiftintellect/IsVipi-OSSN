@@ -71,27 +71,27 @@
                               <!-- if not friends, request exists and profile viewer is the sender -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $from_id === $_SESSION['isv_user_id']){?>
                                 <div class="row prof-fr-opt">
-                                  <button type="button" class="btn bg-navy btn-xs btn-flat disabled">Friend Request Pending</button>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_delete').'/'.$converter->encode($fr_rq_id).'/' ?>" class="btn btn-danger btn-xs btn-flat">Delete Friend Request</a>
                                 </div>
                               
                               <!-- if not friends, request exists and profile viewer is the recepient and not ignored -->
 								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 1){?>
                                 <div class="row prof-fr-opt">
                                 <span class="label label-default">Request Pending</span> 
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
-                                  <a href="<?php echo ISVIPI_URL.'p/friends/f_ignore/'.$fr_rq_id ?>" class="btn btn-warning btn-xs btn-flat">Ignore</a> &nbsp;
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+                                  <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$fr_rq_id ?>" class="btn btn-warning btn-xs btn-flat">Ignore</a> &nbsp;
 								</div>
                                 
                              <!-- if not friends, request exists and profile viewer is the recepient and ignored -->
 								<?php } else if (!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && $friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id']) && $to_id === $_SESSION['isv_user_id'] && $req_status === 0){?>
                                 <div class="row prof-fr-opt">
                                 <span class="label label-default">You ignored this request</span> 
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_accept/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$fr_rq_id.'/'.$from_id ?>" class="btn btn-success btn-xs btn-flat">Accept</a>
 								</div>
 							
                             <!-- not friends and no friend request exists -->
 								<?php } else if(!$friends->are_friends($_SESSION['isv_user_id'],$m_info['m_user_id']) && !$friends->fr_request_exists($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_req/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_req').'/'.$m_info['m_user_id'] ?>" class="btn btn-warning btn-sm">Add Friend</a>
                                 <?php } ?>
                                 <?php if($m_info['m_status'] === 2 || $m_info['m_status'] === 9){?> 
                                 	<span class="label label-info">Messaging Disabled</span>
@@ -108,7 +108,8 @@
                               <?php } else if($friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id']) 
 							  && $block_user1 === $_SESSION['isv_user_id']){?>
                                     <li class="list-group-item">You blocked this user
-                                    	<a href="<?php echo ISVIPI_URL.'p/friends/f_unblock/'.$m_info['m_user_id'] ?>" class="btn btn-success btn-xs btn-flat"><b>Unblock</b></a>
+                                    <hr style="margin:5px 0" />
+                                    	<a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_unblock').'/'.$converter->encode($m_info['m_user_id']) ?>" class="btn btn-success btn-xs btn-flat btn-block"><b>Unblock</b></a>
                                     </li>
                               <?php } ?>
                               
@@ -119,6 +120,7 @@
                     </div>
                     <!-- end::col-md-4-->
                     
+                    <!-- if you have blocked this user then the profile menu will be hidden from them -->
                     <?php if(!$friends->blocked_users($_SESSION['isv_user_id'],$m_info['m_user_id'])){?>
                     <!-- col-md-8 -->
                     <div class="col-md-8 prof-nav" id="profile-menu">

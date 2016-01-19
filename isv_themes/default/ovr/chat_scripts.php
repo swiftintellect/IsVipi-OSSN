@@ -95,7 +95,7 @@ function check_msg_id(){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <a href="<?php echo ISVIPI_URL.'p/messaging/delete/'.$converter->encode($other_user) ?>" class="btn btn-primary">Yes, Delete Chat</a>
+        <a href="<?php echo ISVIPI_URL.'p/messaging/'.$converter->encode('delete').'/'.$converter->encode($other_user) ?>" class="btn btn-primary">Yes, Delete Chat</a>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

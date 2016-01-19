@@ -75,7 +75,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/f_remove/'.$mi['m_id'].'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $mi['m_fullname']; ?></a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_remove').'/'.$converter->encode($mi['m_id']).'/' ?>" class="btn btn-primary">Yes, Unfriend <?php echo $mi['m_fullname']; ?></a>
                               </div>
                             </div><!-- /.modal-content -->
                           </div><!-- /.modal-dialog -->

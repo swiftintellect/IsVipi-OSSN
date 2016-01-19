@@ -43,9 +43,9 @@
 	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
-		 $operation = cleanPOST('isv_op');
+		 $operation = $converter->decode(cleanPOST('isv_op'));
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
-		 $operation = cleanGET($PAGE[2]);
+		 $operation = $converter->decode(cleanGET($PAGE[2]));
 	 } else {
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
