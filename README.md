@@ -1,10 +1,8 @@
-About IsVipi OSSN V2.0 and above
+We are Fundraising
 ===========================================
-Please note that previous versions (Version 1.XX) of IsVipi OSSN have been depreciated.
+We would like to extend our services for free to non-profit organizations by helping them set up online communities. In this regard therefore, we have set up a fundraising campaign to help us achieve this fete. Please take a moment and look at our campaign and help us advance our cause.
 
-IsVipi OSSN is a free php/mysql based software that allows you to set up a social network, community, dating or membership site. Built on core php, it can also be used as an engine/foundation for almost anything that requires basic social networking features. You can find out more by <a href="http://isvipi.org" target="_blank">visiting our website</a>.
-
-Take a look at our <a href="http://demo.isvipi.org" target="_blank">DEMO</a>
+<a href='https://pledgie.com/campaigns/30963'><img alt='Click here to lend your support to: IsVipi OSSN - Support for non-profits and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30963.png?skin_name=chrome' border='0' ></a>
 
 ==============================================
 <strong>SYSTEM REQUIREMENTS</strong>
