@@ -7,10 +7,10 @@ We would like to extend our services for free to non-profit organizations by hel
 ==============================================
 <strong>USEFUL LINKS</strong>
 
-Demo - http://demo.isvipi.org
-Documentation - http://isvipi.org/docs/
-Forum - http://forum.isvipi.org/
-Customization/Support - http://isvipi.org/support/
+<p>Demo - http://demo.isvipi.org</p>
+<p>Documentation - http://isvipi.org/docs/</p>
+<p>Forum - http://forum.isvipi.org/</p>
+<p>Customization/Support - http://isvipi.org/support/</p>
 
 ==============================================
 <strong>SYSTEM REQUIREMENTS</strong>
