@@ -1,8 +1,16 @@
 We are Fundraising
 ===========================================
-We would like to extend our services for free to non-profit organizations by helping them set up online communities. In this regard therefore, we have set up a fundraising campaign to help us achieve this fete. Please take a moment and look at our campaign and help us advance our cause.
+We would like to extend our services for free to non-profit organizations by helping them set up online communities. In this regard therefore, we have set up a fundraising campaign to help us achieve this fete. Please take a moment and look at our campaign and help us advance this cause.
 
 <a href='https://pledgie.com/campaigns/30963'><img alt='Click here to lend your support to: IsVipi OSSN - Support for non-profits and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30963.png?skin_name=chrome' border='0' ></a>
+
+==============================================
+<strong>USEFUL LINKS</strong>
+
+Demo - http://demo.isvipi.org
+Documentation - http://isvipi.org/docs/
+Forum - http://forum.isvipi.org/
+Customization/Support - http://isvipi.org/support/
 
 ==============================================
 <strong>SYSTEM REQUIREMENTS</strong>
