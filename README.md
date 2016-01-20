@@ -8,6 +8,7 @@ We would like to extend our services for free to non-profit organizations by hel
 <strong>USEFUL LINKS</strong>
 
 <p>Demo - http://demo.isvipi.org</p>
+<p>Download (Stable) - http://isvipi.org/download/</p>
 <p>Documentation - http://isvipi.org/docs/</p>
 <p>Forum - http://forum.isvipi.org/</p>
 <p>Customization/Support - http://isvipi.org/support/</p>
