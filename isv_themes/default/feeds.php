@@ -164,7 +164,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Share this Status</h4>
                       </div>
-                      <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST">
+                      <form action="<?php echo ISVIPI_URL .'p/share' ?>" method="POST">
                       <div class="modal-body">
                           <div class="box box-widget" style="margin:0; border:none !important; padding:0">
                           	<div class="box-body">
