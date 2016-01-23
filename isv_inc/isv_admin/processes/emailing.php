@@ -52,7 +52,7 @@
 	 }
 	 
 	 if ($op !== 's_email' && $op !== 'm_email'){
-		 $entry = "Someone interfered with admin member page.";
+		 $entry = "Someone interfered with admin emails page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
 		 
@@ -61,8 +61,8 @@
 		 exit();
 	}
 	
-	//require our email.cls file
-	require_once(ISVIPI_FUNCTIONS_BASE .'emails/emails.cls.php');
+	//require our emails class file
+	require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
 	$send = new emails();
 	
 	if ($op === 's_email'){
@@ -112,13 +112,13 @@
 		$stmt->close();
 		
 		if(!isset($fullname) || empty($fullname)){
-			$name = "";
+			$name = "guest";
 		} else {
 			$name = $fullname;
 		}
 		
 		//send email
-		$send->custom_email($email,$subject,$name,$message);
+		$send->send_email($email,$name,$subject,$message);
 		
 		//return success
 		$_SESSION['isv_success'] = 'Your email has been sent';
@@ -126,7 +126,7 @@
 		exit();
 	}
 	
-	if($op === 'm_email'){
+	if($op === 'm_emaily'){
 		require_once(ISVIPI_ADMIN_CLS_BASE .'get_members.cls.php');
 		$members = new get_members();
 	

@@ -5,6 +5,9 @@
 	define('ISV_ENCR_KEY', 'grQw57V4iJ3PgnBX'); //Encryption Key
 	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR); //current theme
 	define('ISV_DEFAULT_TZ', 'Atlantic/St_Helena'); //Default Timezone
+	define('ISV_SITE_TITLE', $isv_siteDetails['s_title']); //Default Timezone
+	define('ISV_DEFAULT_EMAIL_FROM', $isv_siteDetails['s_email']); //Default Timezone
+	
 	
 	/*** DEFINE URL PARAMETERS ***/
 	define ('ISVIPI_ACT_THEME_URL', ISVIPI_URL .'themes/' .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR); //theme url
@@ -29,7 +32,7 @@
 	}
 	
 	/*** ALLOW USER REGISTRATION ***/
-	if ($isv_siteSettings['user_reg'] === 0){
+	if ($isv_siteSettings['user_reg'] == 0){
 		define('ALLOW_USER_REG', false);
 	} else {
 		define('ALLOW_USER_REG', true);

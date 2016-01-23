@@ -111,11 +111,11 @@
                       <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="x_panel tile fixed_height_320">
                         <?php $feed = $stats->feed_stats(); 
-							  $feedpc = $feed['all_feeds'] / $feed['total'] * 100;
-							  $likespc = $feed['all_likes'] / $feed['total'] * 100;
-							  $commpc = $feed['all_comments'] / $feed['total'] * 100;
-							  $sharepc = $feed['all_shares'] / $feed['total'] * 100;
-							  $commlikespc = $feed['all_comm_likes'] / $feed['total'] * 100;
+							  $feedpc = @($feed['all_feeds'] / $feed['total'] * 100);
+							  $likespc = @($feed['all_likes'] / $feed['total'] * 100);
+							  $commpc = @($feed['all_comments'] / $feed['total'] * 100);
+							  $sharepc = @($feed['all_shares'] / $feed['total'] * 100);
+							  $commlikespc = @($feed['all_comm_likes'] / $feed['total'] * 100);
 						?>
                             <div class="x_title">
                                 <h2>Timeline Feeds Stats</h2>

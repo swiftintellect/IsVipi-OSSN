@@ -47,9 +47,10 @@
 		$array = array();
 		
 		//check if admin has allowed new user registration
-		if (ALLOW_USER_REG){
-			$_SESSION['isv_error'] = "Site registration is disabled.";
-			header('location:'.ISVIPI_URL.'');
+		if (!ALLOW_USER_REG){
+			$array['err'] = true;
+			$array['message'] = 'Site registration is disabled.';
+			echo json_encode($array);
 			exit();
 		}
 		
