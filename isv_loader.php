@@ -8,33 +8,14 @@
 	/*** load important files **/
 	require_once 'isv_inc/isv_db/db.php';
 	require_once 'isv_init.php';
-	require_once ISVIPI_CLASSES_BASE.'global/init_cls.php';
-	require_once ISVIPI_FUNCTIONS_BASE .'global/global_fnc.php';
-	require_once ISVIPI_CLASSES_BASE .'global/global_cls.php';
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
+	require_once ISVIPI_CLASSES_BASE . 'global/init_cls.php';
+	require_once ISVIPI_FUNCTIONS_BASE . 'global/global_fnc.php';
+	require_once ISVIPI_CLASSES_BASE . 'global/global_cls.php';
+	require_once(ISVIPI_CLASSES_BASE . 'utilities/encrypt_decrypt.php');
+	require_once ISVIPI_ROOT . 'isv_settings.php'; 
+	
+	/*** initialize important classes ***/
 	$converter = new Encryption;
-	
-	/*** Define some constants **/
-	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR);
-	define ('ISVIPI_ACT_THEME_URL', ISVIPI_URL .'themes/' .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR);
-	define ('ISVIPI_ACT_ADMIN_URL', ISVIPI_URL .$isv_siteSettings['adminEnd'].'' .DIRECTORY_SEPARATOR);
-	define('ISV_VERSION', '2.0.0');
-
-	/*** declare timezone **/
-	if($isv_siteSettings['defaultTzone'] === 1){
-		date_default_timezone_set ($isv_siteDetails['s_time_zone']);
-	}
-	
-	/*** hide php errors if admin has enabled this option */
-	if($isv_siteSettings['hide_errors'] === 1){
-		error_reporting(0);
-		ini_set('display_errors', 0);
-	}
-	
-	/*** run cron job */
-	if($isv_siteSettings['sys_cron'] === 1){
-		require_once(ISVIPI_CRON_BASE .'cron.php');
-	}
 	
 	
 	/*** DO NOT ALTER ANYTHING BELOW THIS LINE 

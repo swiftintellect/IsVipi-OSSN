@@ -40,6 +40,7 @@
 		 header('location:'.ISVIPI_URL.'sign_in');
 		 exit();
 	 }
+	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['isv_op']) && !empty($_POST['isv_op'])){
 		 $operation = $converter->decode(cleanPOST('isv_op'));

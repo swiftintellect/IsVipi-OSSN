@@ -58,8 +58,4 @@ define ('ISVIPI_ADMIN_URL', ISVIPI_URL.'isv_admin'. DIRECTORY_SEPARATOR);
 //cron job url
 define ('ISVIPI_CRON_URL', ISVIPI_URL . 'cron' .DIRECTORY_SEPARATOR);
 
-//Image thumbnail sizes
-define('ISVIPI_THUMBS', '150x150_');
-define('ISVIPI_600', '600x600_');
-
 ?>

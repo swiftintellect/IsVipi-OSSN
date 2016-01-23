@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like' && $operation !== 'comm_unlike' && $operation !== 'share' && $operation !== 'delete' && $operation !== 'comm_del'){
+	 if ($operation !== 'new-feed' && $operation !== 'img-feed' && $operation !== 'like' && $operation !== 'unlike' && $operation !== 'new-comment' && $operation !== 'comm_like' && $operation !== 'comm_unlike' && $operation !== 'delete' && $operation !== 'comm_del'){
 		 $array['err'] = true;
 		 $array['message'] = 'Action not Allowed!';
 		 echo json_encode($array);
@@ -121,7 +121,7 @@
 		//strip non numeric characters
 		$feedID = preg_replace('/[^0-9,.]+/i', '', $feedID);
 		
-		/** add our feed like **/
+		/** feed like **/
 		$addNewLike = new feedActions();
 		$addNewLike->like($feedID);
 		
@@ -163,12 +163,13 @@
 		
 		$feed_id = $converter->decode(cleanPOST('f_id'));
 		
+		//add comment
 		$addComment = new feedActions();
 		$addComment->addComment($comment,$feed_id);
 	
 	}
 	
-	/*** COMMENT ON FEED **/
+	/*** LIKE FEED COMMENT**/
 	if ($operation === 'comm_like'){
 		if(!isset($PAGE[3]) || empty($PAGE[3])){
 			//do nothing
@@ -180,12 +181,12 @@
 		//strip non numeric characters
 		$commentID = preg_replace('/[^0-9,.]+/i', '', $commentID);
 		
-		/** add our feed like **/
+		/** like feed comment **/
 		$addNewCommentLike = new feedActions();
 		$addNewCommentLike->commentLike($commentID);
 	}
 	
-	/*** COMMENT ON FEED **/
+	/*** UNLIKE FEED COMMENT **/
 	if ($operation === 'comm_unlike'){
 		if(!isset($PAGE[3]) || empty($PAGE[3])){
 			//do nothing
@@ -201,28 +202,6 @@
 		$unLikeComment = new feedActions();
 		$unLikeComment->unlikeComment($commID);
 		
-	}
-	
-	
-	/*** SHARE **/
-	if ($operation === 'share'){
-		if (!isset($_POST['feed']) && empty($_POST['feed'])){
-			$feed = "";
-		} else {
-			$feed = cleanPOST('feed');
-		}
-		
-		if (!isset($_POST['f_id']) && empty($_POST['f_id'])){
-			$_SESSION['isv_error'] = 'An error occurred. Please try again.';
-			header('location:'.ISVIPI_URL.'home/');
-			exit();
-		}
-		
-		$feed_id = $converter->decode(cleanPOST('f_id'));	
-		
-		/** share feed **/
-		$share = new feedActions();
-		$share->shareFeed($feed, $feed_id);
 	}
 	
 	/*** DELETE FEED **/

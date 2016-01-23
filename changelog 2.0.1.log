@@ -1,3 +1,4 @@
 Modified the homepage
 User can now delete a friend request
 Encrypted important form variables as well as GET parameters for enhanced security
+Encryption key size reduced to 16 -> https://www.random.org/strings/?num=1&len=16&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new

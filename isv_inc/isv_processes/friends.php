@@ -175,4 +175,3 @@
 		$del_fr = new friends();
 		$del_fr->delete_friend_request($fr_id);
 	}
-	

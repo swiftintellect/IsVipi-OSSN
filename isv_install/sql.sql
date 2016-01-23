@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `s_info` (
   `s_time_zone` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `s_enable_ssl` int(1) NOT NULL DEFAULT 0,
   `s_last_update_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `s_status` int(2) NOT NULL DEFAULT 1,
+  `s_status` int(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

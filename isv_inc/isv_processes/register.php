@@ -45,8 +45,9 @@
 	/*** REGISTRATION **/
 	if ($operation === 'registration'){
 		$array = array();
-		//check if this option enabled
-		if ($isv_siteSettings['user_reg'] === 0){
+		
+		//check if admin has allowed new user registration
+		if (ALLOW_USER_REG){
 			$_SESSION['isv_error'] = "Site registration is disabled.";
 			header('location:'.ISVIPI_URL.'');
 			exit();
@@ -118,6 +119,7 @@
 			'Gender' => cleanPOST('sex')
 		);
 		
+		//register new user
 		$registerUser = new userRegistration($userFields);
 	}
 	

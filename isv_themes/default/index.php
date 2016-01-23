@@ -71,12 +71,12 @@
                         </div>
                         <div class="alert error nodisplay" id="error"></div>
                         <div class="alert success nodisplay" id="success"></div>
-                        <?php if($isv_siteSettings['user_reg'] === 1){?>
+                        <?php if(ALLOW_USER_REG){?>
                         <input type="hidden" name="isv_op" value="<?php echo $converter->encode('registration') ?>" />
                         <button class="btn btn-lg btn-success btn-block" type="submit" id="submit">Sign up</button>
                         <?php } else {?>
                         <div class="alert well alert-danger">
-                        	Registration is disabled or is by invitation only.
+                        	Registration is currently disabled or is by invitation only.
                         </div>
                         <?php } ?>
                         </form>

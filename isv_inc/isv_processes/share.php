@@ -16,20 +16,18 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
-	 require_once(ISVIPI_CLASSES_BASE .'global/messaging_cls.php'); 
-	
+	 
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
 		$_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		notFound404Err();
 		exit();
 	 }
-	 
 	 $from_url = $_SERVER['HTTP_REFERER'];
 	 
 	 /** check if he is a logged in user **/
 	 if(!isLoggedIn()){
 		 $_SESSION['isv_error'] = "You must be logged in to complete this action.";
-		 header('location:'.ISVIPI_URL.'sign_in');
+		 header('location:'.$from_url.'');
 		 exit();
 	 }
 	 
@@ -48,80 +46,37 @@
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
 		 $operation = $converter->decode(cleanGET($PAGE[2]));
 	 } else {
-		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
+		 $_SESSION['isv_error'] = 'Action not Allowed!';
 		 header('location:'.$from_url.'');
 		 exit();
 	 }
 	 
-	 if ($operation !== 'send_pm' && $operation !== 'last_msg_id' && $operation !== 'delete'){
-		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
+	 if ($operation !== 'share'){
+		 $_SESSION['isv_error'] = 'Action not Allowed!';
 		 header('location:'.$from_url.'');
 		 exit();
 	}
 	
-	/*** ADD MESSAGE **/
-	if ($operation === 'send_pm'){
-		
-		$message = cleanPOST('msg');
-		$message = str_replace("  ","",$message);
-		$message = preg_replace('/^[ \t]*[\r\n]+/m', '', $message);
-		
-		//check if message is supplied
-		if(!isset($message) || empty($message) || ctype_space($message)){
-			$_SESSION['isv_error'] = 'You cannot send a blank message';
-			 header('location:'.$from_url.'');
-			 exit();
-		}
-		
-		$message = nl2br($message);
-		
-		//check if the user to is supplied
-		if(!isset($_POST['to']) || empty($_POST['to'])){
-			$_SESSION['isv_error'] = 'Message recipient not specified.';
-			 header('location:'.$from_url.'');
-			 exit();
-		}
-		
-		$to = cleanPOST('to');
-		$to_msg = $converter->decode($to);
-		
-		//instantiate our message class	
-		
-		$pm = new message();
-		$pm->send_message($message,$to_msg);	
-	}
+	require_once(ISVIPI_CLASSES_BASE .'forms/feeds_cls.php');
 	
-	/*** CHECK LAST MESSAGE ID **/
-	if ($operation === 'last_msg_id'){
-		$other_user = cleanPOST('other_user');
-		//check is the user we are chatting with is set
-		if(!isset($other_user) || empty($other_user)){
+	/*** SHARE **/
+	if ($operation === 'share'){
+		if (!isset($_POST['feed']) && empty($_POST['feed'])){
+			$feed = "";
+		} else {
+			$feed = cleanPOST('feed');
+		}
+		
+		if (!isset($_POST['f_id']) && empty($_POST['f_id'])){
+			$_SESSION['isv_error'] = 'An error occurred. Please try again.';
+			header('location:'.ISVIPI_URL.'home/');
 			exit();
 		}
 		
-		//instantiate our class
-		require_once(ISVIPI_CLASSES_BASE .'global/getMessages_cls.php'); 
-		$pm = new get_messages();
-		$id_from_db = $pm->last_msg_id($_SESSION['isv_user_id'],$other_user);
+		$feed_id = $converter->decode(cleanPOST('f_id'));	
 		
-		echo $id_from_db;
-	
-		exit();
+		/** share feed **/
+		$share = new feedActions();
+		$share->shareFeed($feed, $feed_id);
 	}
 	
-	/*** DELETE MESSAGE(S) **/
-	if ($operation === 'delete'){
-		if(!isset($PAGE[3]) || empty($PAGE[3])){
-			 $_SESSION['isv_error'] = 'An error occured. Please try again.';
-			 header('location:'.$from_url.'');
-			 exit();
-		}
-		
-		$other_user = cleanGET($PAGE[3]);
-		$other_user = $converter->decode($other_user);
-		
-		//instantiate out class
-		$del = new message();
-		$del->delete_chat($other_user);
-		
-	}

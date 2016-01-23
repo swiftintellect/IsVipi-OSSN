@@ -113,7 +113,7 @@
                         <input type="checkbox" value="1" name="status" <?php if($isv_siteDetails['s_status'] === 1) {?> checked <?php } ?>>
                     </div>
                     <div class="col-md-10 col-sm-3 col-xs-12">
-                    	<label class="control-label">Site Active (uncheck to switch to Maintenance Mode)</label>
+                    	<label class="control-label">Maintenance Mode (your site will switch to Maintenance Mode)</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -121,7 +121,7 @@
                         <input type="checkbox" value="1" name="errors" <?php if($isv_siteSettings['hide_errors'] === 1) {?> checked <?php } ?>>
                     </div>
                     <div class="col-md-10 col-sm-3 col-xs-12">
-                    	<label class="control-label">Hide PHP errors</label>
+                    	<label class="control-label">Hide PHP errors <span class="green">(Recommended)</span> </label>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -149,7 +149,7 @@
                         <input type="checkbox" value="1" name="timezone" <?php if($isv_siteSettings['defaultTzone'] === 1) {?> checked <?php } ?>>
                     </div>
                     <div class="col-md-10 col-sm-3 col-xs-12">
-                    	<label class="control-label">Use server timezone</label>
+                    	<label class="control-label">Use default site timezone, <?php echo ISV_DEFAULT_TZ ?>. <span class="green">(Recommended)</span></label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -157,7 +157,8 @@
                         <input type="checkbox" value="1" name="cronjob" <?php if($isv_siteSettings['sys_cron'] === 1) {?> checked <?php } ?>>
                     </div>
                     <div class="col-md-10 col-sm-3 col-xs-12">
-                    	<label class="control-label">Run system cronjob</label>
+                    	<label class="control-label">Run system cronjob 
+                        (<a href="http://isvipi.org/docs/#cronjobs" target="_blank"><span class="blue">learn more</span></a>)</label>
                     </div>
                 </div>
                 <div class="clearfix"></div>

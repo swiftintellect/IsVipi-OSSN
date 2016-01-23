@@ -71,7 +71,7 @@ class siteManager {
 	}
 
 	public function maintenanceMode(){
-		if ($this -> s_status === 0){
+		if ($this -> s_status === 1){
 			header('location:'.ISVIPI_URL.'maintenance');
 			exit();
 		}

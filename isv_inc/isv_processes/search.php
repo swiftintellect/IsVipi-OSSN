@@ -52,7 +52,7 @@
 		 exit();
 	 }
 	 
-	 if ($operation !== 'search' && $operation !== 'cover_pic'){
+	 if ($operation !== 'search'){
 		 $_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		 header('location:'.$from_url.'');
 		 exit();

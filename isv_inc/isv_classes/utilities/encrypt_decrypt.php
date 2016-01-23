@@ -1,6 +1,6 @@
 <?php
 class Encryption {
-    var $skey = "UW1uxYMeUX6XHlOoN3cU"; // change this
+    var $skey = ISV_ENCR_KEY; // change this
     public  function safe_b64encode($string) {
         $data = base64_encode($string);
         $data = str_replace(array('+','/','='),array('-','_',''),$data);
