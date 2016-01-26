@@ -253,7 +253,7 @@
 		}
 		
 		public function new_member($req,$type,$pwd2){
-			global $isv_db;
+			global $isv_db,$converter;
 			
 			$siteInfo = new siteManager();
 			$s_s = $siteInfo->getSiteSettings();
@@ -356,7 +356,7 @@
 						<strong>Password:</strong> ".$pwd2save."
 					</p>
 					<p>Before you can log in, you will have to validate your email. Please click the link below to validate your email.</p>
-					<p>Validation Link: ".$s_d['s_url']."/p/users/validate/$act_code</p>
+					<p>Validation Link: ".$s_d['s_url']."/p/users/".$converter->encode('validate')."/$act_code</p>
 				";
 				$status = 0;
 			} else {
