@@ -14,6 +14,7 @@
 	define ('ISVIPI_ACT_ADMIN_URL', ISVIPI_URL .$isv_siteSettings['adminEnd'].'' .DIRECTORY_SEPARATOR); //admin url
 	
 	/*** TIMEZONE SETTINGS ***/
+	global $isv_siteSettings,$isv_siteDetails;
 	if($isv_siteSettings['defaultTzone'] === 1){
 		date_default_timezone_set (ISV_DEFAULT_TZ);
 	} else {
