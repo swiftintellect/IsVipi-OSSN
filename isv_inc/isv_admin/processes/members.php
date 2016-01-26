@@ -51,7 +51,7 @@
 		 exit();
 	 }
 	 
-	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel' && $op !== 'search' && $op !== 'new'){
+	 if ($op !== 'act' && $op !== 'sus' && $op !== 'unsus' && $op !== 'del' && $op !== 'undel' && $op !== 'mass-act' && $op !== 'mass-sus' && $op !== 'mass-unsus' && $op !== 'mass-del' && $op !== 'mass-undel' && $op !== 'search' && $op !== 'new' && $op !== 'delnow'){
 		 $entry = "Someone interfered with admin member page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
@@ -360,4 +360,9 @@
 		//instantiate our class
 		$member->new_member($req,$type,$pwd2);
 
+	}
+	
+	if ($op === 'delnow'){
+		echo "ready";
+		
 	}

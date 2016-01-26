@@ -133,6 +133,7 @@
                         <?php } else { ?>
                         <a href="#" class="btn btn-danger btn-sm2" data-toggle="modal" data-target="#Delete<?php echo $mi['id'] ?>">Delete</a>
                         <?php } ?>
+                        <a href="#" class="btn btn-danger btn-sm2" data-toggle="modal" data-target="#DeleteNow<?php echo $mi['id'] ?>">Delete Now!</a>
                     </td>
          		</tr>
            <!-- Activate Member -->
@@ -215,6 +216,34 @@
                 </div>
               </div>
             </div>
+            
+            <!-- Delete Member NOW -->
+            <div class="modal fade" id="DeleteNow<?php echo $mi['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="activate">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header modal-h">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Delete <?php echo $mi['fullname'] ?> NOW!  </h4>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete <strong><?php echo $mi['fullname'] ?></strong> NOW? Once this has been done: 
+                    <hr style="margin:10px 0" />
+                    <ul>
+                        <li>This user will be deleted immediately without having to wait for the 14 days grace period.</li> 
+                        <li>All their site activities will be deleted immediately.</li>
+                    </ul>
+                    <hr style="margin:10px 0" />
+                    <p>We strongly recommend that you use "Schedule Deletion" which allows the user 14 days to reclaim his/her account. If you however want it deleted immediately, please procees.</p>
+                    <p style="font-weight:600; background:#09F; color:#FFF; padding:10px">NOTE: Depending on the user's activites on the site, deletion could take a while.</p>
+                  </div>
+                  <div class="modal-footer modal-h">
+                    <a href="#" class="btn btn-default" data-dismiss="modal" style="margin-top:5px;">Cancel</a>
+                    <a href="<?php echo ISVIPI_URL .'aa/members/'.$converter->encode('delnow').'/'.$converter->encode($mi['id']) ?>" class="btn btn-primary">Yes, Delete Member</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
              <?php } ?>
              
@@ -241,8 +270,8 @@
             <input type="submit" class="btn btn-default btn-sm" name="submit" value="Activate Selected" onclick="activate();"/>
             <input type="submit" class="btn btn-warning btn-sm" name="submit" value="Suspend Selected" onclick="suspend();"/>
             <input type="submit" class="btn btn-primary btn-sm" name="submit" value="Unsuspend Selected" onclick="unsuspend();"/>
-            <input type="submit" class="btn btn-danger btn-sm" name="submit" value="Delete Selected" onclick="m_delete();"/>
-            <input type="submit" class="btn btn-success btn-sm" name="submit" value="Undelete Selected" onclick="undelete();"/>
+            <input type="submit" class="btn btn-danger btn-sm" name="submit" value="Schedule Deletion for Selected" onclick="m_delete();"/>
+            <input type="submit" class="btn btn-success btn-sm" name="submit" value="Remove Scheduled Deletion for Selected" onclick="undelete();"/>
         </form>
         <?php } ?>
         <?php 
