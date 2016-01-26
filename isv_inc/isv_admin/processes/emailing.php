@@ -126,7 +126,7 @@
 		exit();
 	}
 	
-	if($op === 'm_emaily'){
+	if($op === 'm_email'){
 		require_once(ISVIPI_ADMIN_CLS_BASE .'get_members.cls.php');
 		$members = new get_members();
 	
@@ -195,15 +195,13 @@
 		while($stmt->fetch()){
 			$m_load[] = array(
 				'email' => $email,
-				'fullname' => $fullname
+				'name' => $fullname
 			);
 		}
 		$stmt->close();
 		
 		//send our mail
-		foreach ($m_load as $key => $mi) {
-			$send->custom_email($mi['email'],$subject,$mi['fullname'],$message);
-		}
+		$send->send_mass_mail($m_load,$subject,$message);
 		
 		//return success
 		$_SESSION['isv_success'] = 'Mass messages sent successfully.';
