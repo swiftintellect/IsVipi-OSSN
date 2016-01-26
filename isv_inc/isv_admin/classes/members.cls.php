@@ -328,7 +328,7 @@
 			if($req['Status'] === 'activated'){
 				$message = "
 					<p>A new account has been created for you at ".$s_d['s_title'].". Your account credentials are as follow:</p>
-					<p>
+					<p style='line-height:22px; margin-left:50px'>
 						<strong>Email:</strong> ".$req['Email']."<br/>
 						<strong>Username:</strong> ".$req['Username']."<br/>
 						<strong>Password:</strong> ".$pwd2save."
@@ -350,19 +350,19 @@
 								
 				$message = "
 					<p>A new account has been created for you at ".$s_d['s_title'].". Your account credentials are as follows:</p>
-					<p>
+					<p style='line-height:22px; margin-left:50px'>
 						<strong>Email:</strong> ".$req['Email']."<br/>
 						<strong>Username:</strong> ".$req['Username']."<br/>
 						<strong>Password:</strong> ".$pwd2save."
 					</p>
-					<p>Before you can log in, you need to validate your email. Please click the link below to validate your email.</p>
+					<p>Before you can log in, you will have to validate your email. Please click the link below to validate your email.</p>
 					<p>Validation Link: ".$s_d['s_url']."/p/users/validate/$act_code</p>
 				";
 				$status = 0;
 			} else {
 				$message = "
 					<p>A new account has been created for you at ".$s_d['s_title'].". Your account credentials are as follow:</p>
-					<p>
+					<p style='line-height:22px; margin-left:50px'>
 						<strong>Email:</strong> ".$req['Email']."<br/>
 						<strong>Username:</strong> ".$req['Username']."<br/>
 						<strong>Password:</strong> ".$pwd2save."
@@ -398,11 +398,13 @@
 			$stmt->execute();
 			$stmt->close();
 			
-			/* include our email functions file */
-			require_once(ISVIPI_FUNCTIONS_BASE .'emails/reg_emails.php');
+			/* include our email class file */
+			require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+			$send = new emails();
 			
 			//send email
-			sendCustom($req['Email'],$req['Full Name'],$message,$s_d['s_email'],$s_d['s_title'],$s_d['s_url'],$s_s['logo']);
+			$subject = "New Account Created";
+			$send->send_email($req['Email'],$req['Full Name'],$subject,$message);
 			
 			$array['err'] = false;
 			$array['message'] = "New member has been created successfully";

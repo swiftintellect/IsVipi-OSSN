@@ -2,3 +2,10 @@ Modified the homepage
 User can now delete a friend request
 Encrypted important form variables as well as GET parameters for enhanced security
 Encryption key size reduced to 16 -> https://www.random.org/strings/?num=1&len=16&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new
+
+Can now delete a member instantly without having to schedule
+You can now choose to send an email notification to members whose account has been scheduled for deletion
+You can now choose to send an email notification to members whose account has been removed from scheduled deletion
+You can now choose to send an email notification to a suspended account
+You can now choose to send an email notification to a unsuspended account
+You can now choose to send an email notification to an activated account

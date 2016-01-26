@@ -61,7 +61,7 @@
 		 exit();
 	}
 	
-	//require our admin.cls file
+	//require our members.cls file
 	require_once(ISVIPI_ADMIN_CLS_BASE .'members.cls.php');
 	$member = new member();
 	
