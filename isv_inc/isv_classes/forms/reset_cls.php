@@ -89,15 +89,24 @@ class resetPassword {
 				}
 		}
 		
-		/* include our email functions file */
-		require_once(ISVIPI_FUNCTIONS_BASE .'emails/resetPWD_email.php');
+		/* include our email class file */
+		require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+	    $send = new emails();
 		
 		// send our email
 		$siteInfo = new siteManager();
 		$isv_siteSettings = $siteInfo->getSiteSettings();
 		$isv_siteDetails = $siteInfo->getSiteInfo();
 		
-		sendResetPWDEmail($this->email,$newCode,$isv_siteDetails['s_email'],$isv_siteDetails['s_title'],$isv_siteDetails['s_url'],$isv_siteSettings['logo']);
+		$name = "User";
+		$subject = "Password Reset";
+		$message = "<p>A password reset request was made at ".$isv_siteDetails['s_title'].". Please click the link below to proceed and change your password.</p>
+			<p> Link: ".$isv_siteDetails['s_url']."/reset/".$newCode."</p>
+			<p> If for some reason you cannot click on the link above, copy and paste it in your browser.</p>
+			--------------------------------------------
+			<p> If you are not the one who initiated this request, please ignore this email.</p>
+		";
+		$send->send_email($this->email,$name,$subject,$message);
 		
 		//redirect with a success message
 		$_SESSION['isv_success'] = 'An email with your password reset link has been sent to '.$this->email.'. Follow instructions in the email to change your password.';
