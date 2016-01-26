@@ -172,7 +172,7 @@
 	if ($op === 'mass-sus'){
 		
 		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
-			$_SESSION['isv_error'] = 'Please select users to activate';
+			$_SESSION['isv_error'] = 'Please select users to suspend';
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
@@ -185,7 +185,7 @@
 	
 	if ($op === 'mass-unsus'){
 		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
-			$_SESSION['isv_error'] = 'Please select users to activate';
+			$_SESSION['isv_error'] = 'Please select users to unsuspend';
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
@@ -198,7 +198,7 @@
 	
 	if ($op === 'mass-del'){
 		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
-			$_SESSION['isv_error'] = 'Please select users to activate';
+			$_SESSION['isv_error'] = 'Please select users to delete';
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
@@ -211,7 +211,7 @@
 	
 	if ($op === 'mass-undel'){
 		if(!isset($_POST['user_id']) || empty($_POST['user_id'])){
-			$_SESSION['isv_error'] = 'Please select users to activate';
+			$_SESSION['isv_error'] = 'Please select users to undelete';
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}

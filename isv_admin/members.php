@@ -169,8 +169,9 @@
                     <h4 class="modal-title" id="myModalLabel">Activate <?php echo $mi['fullname'] ?> </h4>
                   </div>
                   <div class="modal-body">
-                    Are you sure you want to activate <strong><?php echo $mi['fullname'] ?></strong>?
+                    	Are you sure you want to activate <strong><?php echo $mi['fullname'] ?></strong>?
                   </div>
+                  <div class="clear"></div>
                   <div class="modal-footer modal-h">
                     <a href="#" class="btn btn-default" data-dismiss="modal" style="margin-top:5px;">Cancel</a>
                     <a href="<?php echo ISVIPI_URL .'aa/members/'.$converter->encode('act').'/'.$converter->encode($mi['id']) ?>" class="btn btn-primary">Yes, Activate Member</a>

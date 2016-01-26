@@ -14,6 +14,34 @@
 			$stmt->execute();
 			$stmt->close();
 			
+			//notify user if settings allow it
+			if(ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION){
+				//include our email class
+				require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+				$send = new emails();
+				
+				//retrieve email fields
+				$stmt = $isv_db->prepare("
+					SELECT 
+						u.email,
+						p.fullname
+					FROM users u
+					LEFT JOIN user_profile p ON u.id = p.user_id 
+					WHERE u.id = ?
+				");
+				$stmt->bind_param('i',$m_id);
+				$stmt->execute(); 
+				$stmt->store_result(); 
+				$stmt->bind_result($email,$fullname); 
+				$stmt->fetch();
+				$stmt->close();
+				
+				//set email parameters
+				$subject = "Account Activated";
+				$message = "This is an automated email to inform you that your account has been activated.";
+				$send->send_email($email,$fullname,$subject,$message);
+			}
+			
 			//redirect the user back with a success message
 			 $_SESSION['isv_success'] = 'This member has been activated.';
 			 header('location:'.$from_url.'');
@@ -31,6 +59,34 @@
 			$stmt->execute();
 			$stmt->close();
 			
+			//notify user if settings allow it
+			if(ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED){
+				//include our email class
+				require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+				$send = new emails();
+				
+				//retrieve email fields
+				$stmt = $isv_db->prepare("
+					SELECT 
+						u.email,
+						p.fullname
+					FROM users u
+					LEFT JOIN user_profile p ON u.id = p.user_id 
+					WHERE u.id = ?
+				");
+				$stmt->bind_param('i',$m_id);
+				$stmt->execute(); 
+				$stmt->store_result(); 
+				$stmt->bind_result($email,$fullname); 
+				$stmt->fetch();
+				$stmt->close();
+				
+				//set email parameters
+				$subject = "Account Suspended";
+				$message = "This is an automated email to inform you that your account has been suspended. For more information about this suspension, please contact us.";
+				$send->send_email($email,$fullname,$subject,$message);
+			}
+			
 			//redirect the user back with a success message
 			 $_SESSION['isv_success'] = 'This member has been suspended.';
 			 header('location:'.$from_url.'');
@@ -47,6 +103,34 @@
 			$stmt->bind_param('i',$m_id);
 			$stmt->execute();
 			$stmt->close();
+			
+			//notify user if settings allow it
+			if(ISV_EMAIL_NOTIFY_ACCOUNT_UNSUSPENDED){
+				//include our email class
+				require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+				$send = new emails();
+				
+				//retrieve email fields
+				$stmt = $isv_db->prepare("
+					SELECT 
+						u.email,
+						p.fullname
+					FROM users u
+					LEFT JOIN user_profile p ON u.id = p.user_id 
+					WHERE u.id = ?
+				");
+				$stmt->bind_param('i',$m_id);
+				$stmt->execute(); 
+				$stmt->store_result(); 
+				$stmt->bind_result($email,$fullname); 
+				$stmt->fetch();
+				$stmt->close();
+				
+				//set email parameters
+				$subject = "Account Unsuspended";
+				$message = "This is an automated email to inform you that your account has been unsuspended. We apologise for any inconvenience caused.";
+				$send->send_email($email,$fullname,$subject,$message);
+			}
 			
 			//redirect the user back with a success message
 			 $_SESSION['isv_success'] = 'This member has been unsuspended.';
@@ -76,6 +160,38 @@
 			$stmt->execute();
 			$stmt->close();
 			
+			//notify user if settings allow it
+			if(ISV_EMAIL_NOTIFY_ACCOUNT_DELETION){
+				//include our email class
+				require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+				$send = new emails();
+				
+				//retrieve email fields
+				$stmt = $isv_db->prepare("
+					SELECT 
+						u.email,
+						p.fullname
+					FROM users u
+					LEFT JOIN user_profile p ON u.id = p.user_id 
+					WHERE u.id = ?
+				");
+				$stmt->bind_param('i',$m_id);
+				$stmt->execute(); 
+				$stmt->store_result(); 
+				$stmt->bind_result($email,$fullname); 
+				$stmt->fetch();
+				$stmt->close();
+				
+				//set email parameters
+				$subject = "Account Scheduled for Deletion";
+				$message = "
+				<p>This is an automated email to inform you that your account has been scheduled for deletion. This means that you can no longer gain access to your account. The deletion period is 14 days within which you can contact us and have this decision reversed.</p>
+				<p>If we will not receive any word from you in the next 14 days, your account, together with all its activities (timeline feeds, photos, messages, friends e.t.c), will be deleted forever.</p>
+				";
+				$send->send_email($email,$fullname,$subject,$message);
+			}
+			
+			
 			//redirect the user back with a success message
 			 $_SESSION['isv_success'] = 'This member has been scheduled for deletion.';
 			 header('location:'.$from_url.'');
@@ -98,6 +214,37 @@
 			$stmt->bind_param('i',$m_id);
 			$stmt->execute();
 			$stmt->close();
+			
+			//notify user if settings allow it
+			if(ISV_EMAIL_NOTIFY_ACCOUNT_UNDELETION){
+				//include our email class
+				require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+				$send = new emails();
+				
+				//retrieve email fields
+				$stmt = $isv_db->prepare("
+					SELECT 
+						u.email,
+						p.fullname
+					FROM users u
+					LEFT JOIN user_profile p ON u.id = p.user_id 
+					WHERE u.id = ?
+				");
+				$stmt->bind_param('i',$m_id);
+				$stmt->execute(); 
+				$stmt->store_result(); 
+				$stmt->bind_result($email,$fullname); 
+				$stmt->fetch();
+				$stmt->close();
+				
+				//set email parameters
+				$subject = "Account Deletion Stopped";
+				$message = "
+				<p>This is an automated email to inform you that your account will no longer be deleted. We apologise for any inconvenience caused.</p>
+				
+				";
+				$send->send_email($email,$fullname,$subject,$message);
+			}
 			
 			//redirect the user back with a success message
 			 $_SESSION['isv_success'] = 'This member has been removed from scheduled deletion.';
@@ -122,6 +269,34 @@
 				$stmt->bind_param('i',$id);
 				$stmt->execute();
 				$stmt->close();
+				
+				//notify user if settings allow it
+				if(ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION){
+					//include our email class
+					require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+					$send = new emails();
+					
+					//retrieve email fields
+					$stmt = $isv_db->prepare("
+						SELECT 
+							u.email,
+							p.fullname
+						FROM users u
+						LEFT JOIN user_profile p ON u.id = p.user_id 
+						WHERE u.id = ?
+					");
+					$stmt->bind_param('i',$id);
+					$stmt->execute(); 
+					$stmt->store_result(); 
+					$stmt->bind_result($email,$fullname); 
+					$stmt->fetch();
+					$stmt->close();
+					
+					//set email parameters
+					$subject = "Account Activated";
+					$message = "This is an automated email to inform you that your account has been activated.";
+					$send->send_email($email,$fullname,$subject,$message);
+				}
 			}
 			
 			//redirect the user back with a success message
@@ -148,6 +323,34 @@
 				$stmt->bind_param('i',$id);
 				$stmt->execute();
 				$stmt->close();
+				
+				//notify user if settings allow it
+				if(ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED){
+					//include our email class
+					require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+					$send = new emails();
+					
+					//retrieve email fields
+					$stmt = $isv_db->prepare("
+						SELECT 
+							u.email,
+							p.fullname
+						FROM users u
+						LEFT JOIN user_profile p ON u.id = p.user_id 
+						WHERE u.id = ?
+					");
+					$stmt->bind_param('i',$id);
+					$stmt->execute(); 
+					$stmt->store_result(); 
+					$stmt->bind_result($email,$fullname); 
+					$stmt->fetch();
+					$stmt->close();
+					
+					//set email parameters
+					$subject = "Account Suspended";
+					$message = "This is an automated email to inform you that your account has been suspended. For more information about this suspension, please contact us.";
+					$send->send_email($email,$fullname,$subject,$message);
+				}
 			}
 			
 			//redirect the user back with a success message
@@ -174,6 +377,34 @@
 				$stmt->bind_param('i',$id);
 				$stmt->execute();
 				$stmt->close();
+				
+				//notify user if settings allow it
+				if(ISV_EMAIL_NOTIFY_ACCOUNT_UNSUSPENDED){
+					//include our email class
+					require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+					$send = new emails();
+					
+					//retrieve email fields
+					$stmt = $isv_db->prepare("
+						SELECT 
+							u.email,
+							p.fullname
+						FROM users u
+						LEFT JOIN user_profile p ON u.id = p.user_id 
+						WHERE u.id = ?
+					");
+					$stmt->bind_param('i',$id);
+					$stmt->execute(); 
+					$stmt->store_result(); 
+					$stmt->bind_result($email,$fullname); 
+					$stmt->fetch();
+					$stmt->close();
+					
+					//set email parameters
+					$subject = "Account Unsuspended";
+					$message = "This is an automated email to inform you that your account has been unsuspended. We apologise for any inconvenience caused.";
+					$send->send_email($email,$fullname,$subject,$message);
+				}
 			}
 			
 			//redirect the user back with a success message
@@ -211,6 +442,37 @@
 				$stmt->bind_param('i',$id);
 				$stmt->execute();
 				$stmt->close();
+				
+				//notify user if settings allow it
+				if(ISV_EMAIL_NOTIFY_ACCOUNT_DELETION){
+					//include our email class
+					require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+					$send = new emails();
+					
+					//retrieve email fields
+					$stmt = $isv_db->prepare("
+						SELECT 
+							u.email,
+							p.fullname
+						FROM users u
+						LEFT JOIN user_profile p ON u.id = p.user_id 
+						WHERE u.id = ?
+					");
+					$stmt->bind_param('i',$id);
+					$stmt->execute(); 
+					$stmt->store_result(); 
+					$stmt->bind_result($email,$fullname); 
+					$stmt->fetch();
+					$stmt->close();
+					
+					//set email parameters
+					$subject = "Account Scheduled for Deletion";
+					$message = "
+					<p>This is an automated email to inform you that your account has been scheduled for deletion. This means that you can no longer gain access to your account. The deletion period is 14 days within which you can contact us and have this decision reversed.</p>
+					<p>If we will not receive any word from you in the next 14 days, your account, together with all its activities (timeline feeds, photos, messages, friends e.t.c), will be deleted forever.</p>
+					";
+					$send->send_email($email,$fullname,$subject,$message);
+				}
 			}
 			
 			//redirect the user back with a success message
@@ -243,6 +505,37 @@
 				$stmt->bind_param('i',$id);
 				$stmt->execute();
 				$stmt->close();
+				
+				//notify user if settings allow it
+				if(ISV_EMAIL_NOTIFY_ACCOUNT_UNDELETION){
+					//include our email class
+					require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+					$send = new emails();
+					
+					//retrieve email fields
+					$stmt = $isv_db->prepare("
+						SELECT 
+							u.email,
+							p.fullname
+						FROM users u
+						LEFT JOIN user_profile p ON u.id = p.user_id 
+						WHERE u.id = ?
+					");
+					$stmt->bind_param('i',$id);
+					$stmt->execute(); 
+					$stmt->store_result(); 
+					$stmt->bind_result($email,$fullname); 
+					$stmt->fetch();
+					$stmt->close();
+					
+					//set email parameters
+					$subject = "Account Deletion Stopped";
+					$message = "
+					<p>This is an automated email to inform you that your account will no longer be deleted. We apologise for any inconvenience caused.</p>
+					
+					";
+					$send->send_email($email,$fullname,$subject,$message);
+				}
 			}
 			
 			//redirect the user back with a success message

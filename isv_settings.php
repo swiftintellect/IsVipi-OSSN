@@ -7,6 +7,11 @@
 	define('ISV_DEFAULT_TZ', 'Atlantic/St_Helena'); //Default Timezone
 	define('ISV_SITE_TITLE', $isv_siteDetails['s_title']); //Default Timezone
 	define('ISV_DEFAULT_EMAIL_FROM', $isv_siteDetails['s_email']); //Default Timezone
+	define('ISV_EMAIL_NOTIFY_ACCOUNT_DELETION', true); //set true to notify member when his/her account is scheduled for deletion
+	define('ISV_EMAIL_NOTIFY_ACCOUNT_UNDELETION', true); //set true to notify member that his/her account will not be deleted.
+	define('ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED', true); //set true to notify member when his/her account is suspended
+	define('ISV_EMAIL_NOTIFY_ACCOUNT_UNSUSPENDED', true); //set true to notify member when his/her account is unsuspended
+	define('ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION', true); //set true to notify member when his/her account has been activated
 	
 	
 	/*** DEFINE URL PARAMETERS ***/
