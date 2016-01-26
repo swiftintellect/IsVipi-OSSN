@@ -68,9 +68,6 @@ class emails {
 		//Set the subject line
 		$mail->Subject = $subject;
 		
-		//Message
-		$mail->msgHTML($this->create_html_msg($to_name,$msg));
-		
 		//Replace the plain text body with one created manually
 		$mail->AltBody = $msg;
 		
