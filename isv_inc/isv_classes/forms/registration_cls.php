@@ -10,6 +10,7 @@ class userRegistration {
 	private $sex;
 	
 	public function __construct($userFields){
+		global $converter;
 		//check if supplied/empty
 		foreach( $userFields as $field => $value){
 			if(!isSupplied($value)){
@@ -137,14 +138,31 @@ class userRegistration {
 			/* generate our validation code */
 			$validCode = $this->getValidationCode($hashedPWD);
 			
-			/* include our email functions file */
-			require_once(ISVIPI_FUNCTIONS_BASE .'emails/reg_emails.php');
+			/* include our email class file */
+			require_once ISVIPI_CLASSES_BASE . 'emails/emails_cls.php';
+			$send = new emails();
 			
 			/*send the email */
-			sendValidationEmail($this->email,$this->name,$validCode,$isv_siteDetails['s_email'],$isv_siteDetails['s_title'],$isv_siteDetails['s_url'],$isv_siteSettings['logo']);
+			//email message
+			$message = "<p>Your account has been created. Please click the link below to activate your account and sign in.</p>
+			<p> Link: ".$isv_siteDetails['s_url']."/p/users/".$converter->encode('validate')."/".$validCode."</p>
+			<p> If for some reason you cannot click on the link above, copy and paste it in your browser.</p>
+			";
+			$subject = "Validate new Account";
+			$send->send_email($this->email,$this->name,$subject,$message);
 			
+			//onsite message
 			$msg = 'Account created. We have sent an email with an activation code to '.$this->email.'. Follow instructions in the email to activate your account.';
 		} else {
+			$subject = "Welcome to ".$isv_siteDetails['s_title'];
+			
+			//email message
+			$message = "<p>This is our official email to welcome you to My SITE. We hope that you will enjoy our services while having fun creating new connections and networks. </p>
+			<p>Follow this link to sign in to your new account ".$isv_siteDetails['s_url']."</p>
+";
+			$send->send_email($this->email,$this->name,$subject,$message);
+			
+			//onsite message
 			$msg = 'Account created. You can now login.';
 		}
 		
@@ -226,6 +244,17 @@ class userValidation {
 		$stmt->bind_param('is',$newStatus,$exstEmail);
 		$stmt->execute();
 		
+		//retrieve user id and log in the user
+		$stmt = $isv_db->prepare("SELECT id FROM users WHERE email=?");
+		$stmt->bind_param('s',$exstEmail);
+		$stmt->execute();
+		$stmt->store_result();
+		$stmt->bind_result($userID);
+		$stmt->fetch();
+		
+		//set session
+		$_SESSION['isv_user_id'] = $userID;
+		
 		//delete code
 		$stmt->prepare("DELETE from user_validations where code=?");
 		$stmt->bind_param('s',$this->code);
@@ -233,8 +262,8 @@ class userValidation {
 		$stmt->close();
 		
 		//redirect to index page with success message
-			$_SESSION['isv_success'] = 'Account Activated. Please sign in to proceed.';
-			header('location:'.ISVIPI_URL.'');
+			$_SESSION['isv_success'] = 'Your account has been activated.';
+			header('location:'.ISVIPI_URL.'home');
 			exit();
 	}
 	
