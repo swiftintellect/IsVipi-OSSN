@@ -14,8 +14,10 @@
 						$('#errorLog').css('display','none');
 						$('#text-update').clearForm();
 						$('#text-update').resetForm();
+						$('.liveurl-loader').hide();
 						//reload our timeline
 						loadTimeline();
+						$finished = true;
 					}
 					$('input[type="submit"]').prop('disabled', false);
 					$("#processing").hide();

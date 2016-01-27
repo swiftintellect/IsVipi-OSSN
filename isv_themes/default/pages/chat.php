@@ -34,7 +34,7 @@
         	<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo elapsedTime($chat['sent_time']) ?></small>
          	<?php echo $chat['fullname'] ?>
       	</a>
-        <?php echo $chat['message'] ?><br />
+        <?php echo clickable_links($chat['message']) ?><br />
         <?php if(($chat['from_id'] === $_SESSION['isv_user_id']) && !empty($chat['read_time'])){?>
         	<small class="text-muted pull-left" style="display:block">Read <?php echo elapsedTime($chat['read_time']) ?></small>
         <?php } ?>

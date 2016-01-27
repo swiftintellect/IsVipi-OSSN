@@ -8,3 +8,5 @@ You can now choose to send an email notification to members whose account has be
 You can now choose to send an email notification to a suspended account
 You can now choose to send an email notification to a unsuspended account
 You can now choose to send an email notification to an activated account
+Added link preview on the timeline feed
+Added clickable links to the timeline feed and chat

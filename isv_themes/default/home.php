@@ -5,6 +5,7 @@
       <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
+
         <!-- timeline feed-->
         	<section class="col-lg-6 timeline-feed">
 				<div class="box box-solid" style="margin:0; padding:0">
@@ -17,7 +18,7 @@
                      	<div class="tab-content">
                   			<div class="tab-pane active" id="update-timeline">
                             <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST" id="text-update">
-                            	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="What's on your mind?"  required="required"></textarea>
+                            	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="What's on your mind?" ></textarea>
                             	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('new-feed') ?>" />
                                 
                                 <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" />
@@ -47,6 +48,38 @@
                           <div class="alert alert-danger alert-dismissable errorLog" id="errorLog" style="display:none;"></div> 
                         </div>
                     </div>
+                    
+                    <!-- link preview -->
+                    <div class="liveurl-loader" style="margin:20px !important;"></div>
+                    <div style="clear:both; height:10px;"></div>
+                    <div class="liveurl">
+                    	<div class="close" title="Close"></div>
+                        <div class="inner">
+                            <div class="image"> </div>
+                            <div class="details">
+                                <div class="info">
+                                    <div class="title"> </div>
+                                    <div class="description"> </div> 
+                                    <div class="url"> </div>
+                                </div>
+                                
+                                <div class="thumbnail">
+                                    <div class="pictures">
+                                        <div class="controls">
+                                            <div class="prev button inactive"></div>
+                                            <div class="next button inactive"></div>
+                                            <div class="count">
+                                                <span class="current">0</span><span> of </span><span class="max">0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                <!-- end::link preview -->
+
                     
                 </div>
                 <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-post-scripts.php') ?>
@@ -83,6 +116,7 @@
             </section>
         </section>
         <!-- /.content -->
+        
         
       </div>
       <!-- /.content-wrapper -->

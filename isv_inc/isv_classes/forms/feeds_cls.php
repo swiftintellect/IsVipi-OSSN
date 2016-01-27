@@ -6,13 +6,15 @@ class feeds {
 	private $feedType;
 	private $size;
 	private $newName;
+	private $attachment;
 	
 	public $feedArray;
 	
 	
-	public function __construct($feed,$type){
+	public function __construct($feed,$type,$attachement){
 		$this->feedArray = $feed;
 		$this->feedType = $type;
+		$this->attachment = $attachement;
 		$this->size = '1000000';
 		$maxSize = $this->size / 1000000;
 		
@@ -86,8 +88,8 @@ class feeds {
 		} else {
 			$newName = $this->newName.'.jpg';
 		}
-			$stmt = $isv_db->prepare("INSERT INTO feeds (user_id,text_feed,img_feed,time) VALUES (?,?,?,UTC_TIMESTAMP())");
-			$stmt->bind_param('iss',$_SESSION['isv_user_id'], $this->feedText,$newName);
+			$stmt = $isv_db->prepare("INSERT INTO feeds (user_id,text_feed,img_feed,att_title,att_description,att_link,att_video,att_image,time) VALUES (?,?,?,?,?,?,?,?,UTC_TIMESTAMP())");
+			$stmt->bind_param('isssssss',$_SESSION['isv_user_id'], $this->feedText,$newName,strip_tags($this->attachment['title']),strip_tags($this->attachment['description']),strip_tags($this->attachment['link']),strip_tags($this->attachment['video']),strip_tags($this->attachment['image']));
 			$stmt->execute();
 			$stmt->close();
 	}

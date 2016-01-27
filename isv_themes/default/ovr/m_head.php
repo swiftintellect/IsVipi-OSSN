@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home.css' ?>" rel="stylesheet">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home-blue.css' ?>" rel="stylesheet">
-    
+    <?php 
+		//load only on feeds page
+		if($PAGE[0] == "home" || $PAGE[0] == "feeds"){
+	
+	?>
+        <link rel="stylesheet" href="<?php echo ISVIPI_STYLE_URL . 'plugins/link-preview/liveurl.css' ?>"/>
+    <?php } ?>
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/formsubmit/form.submit.min.js'?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL.'plugins/timer/jquery.timer.js'?>"></script>

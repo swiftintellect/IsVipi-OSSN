@@ -49,7 +49,7 @@
                 <div class='box-body'>
                   <!-- feed text -->
                   <?php if (isset($f['feed_text']) && !empty($f['feed_text'])){?>
-                  	<p class="brkn" style="padding-left:10px;"><?php echo $f['feed_text'] ?></p>
+                  	<p class="brkn" style="padding-left:10px;"><?php echo clickable_links($f['feed_text']) ?></p>
                   <?php } ?>
                   
                   <!-- feed image -->
@@ -63,12 +63,13 @@
                   <?php if(isset($f['feed_shared_text']) && !empty($sh['s_id'])){?>
                   <div class="sh-feed">
                   
-                  	<p><?php echo $f['feed_shared_text'] ?></p>
+                  	<p><?php echo clickable_links($f['feed_shared_text']) ?></p>
                   
                   <?php if (isset($f['feed_image']) && !empty($f['feed_image'])){?>
                   	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="image post">
                   <?php }?>
                   </div>
+                  
                   <?php } ?>
                   
                   <!--show social counter if at least one of them is provided -->
@@ -119,7 +120,7 @@
                       </a>
                         <span class='text-muted pull-right'><?php echo elapsedTime($c['comm_time']) ?></span>
                       </span><!-- /.username -->
-                      <?php echo $c['comment'] ?>
+                      <?php echo clickable_links($c['comment']) ?>
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
                  <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
@@ -218,6 +219,8 @@
                 </div>
                 <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-action-scripts.php') ?>
               <?php } ?>
+              
+              
               
               
 

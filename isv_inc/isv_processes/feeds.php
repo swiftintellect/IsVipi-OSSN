@@ -62,11 +62,33 @@
 	
 	/*** NEW TEXT FEED **/
 	if ($operation === 'new-feed'){
-		if (!isset($_POST['feed']) || empty($_POST['feed'])){
+		//capture our command to include or not to include the attachment
+		$command = cleanPOST('no_include');
+		
+		if ((!isset($_POST['feed']) || empty($_POST['feed'])) && (!empty($command))){
 			 $array['err'] = true;
 			 $array['message'] = 'You cannot submit an empty feed.';
 			 echo json_encode($array);
 			 exit();
+		}
+		
+		//check if there is an attachment and whether we can attach it to the feed
+		if(empty($command)){
+			$attachement = array(
+					'title' => cleanPOST('app_title'),
+					'description' => cleanPOST('app_descr'),
+					'link' => cleanPOST('app_link'),
+					'video' => cleanPOST('app_video'),
+					'image' => cleanPOST('app_image')
+				);
+		} else {
+				$attachement = array(
+				 	'title' => '',
+					'description' => '',
+					'link' => '',
+					'video' => '',
+					'image' => ''
+				);
 		}
 		
 		/** clean our variable and format it accordingly **/
@@ -75,7 +97,7 @@
 		$newFeed = nl2br($newFeed);
 		
 		/** add our feed **/
-		new feeds($newFeed,'text');
+		new feeds($newFeed,'text',$attachement);
 		
 	}
 	

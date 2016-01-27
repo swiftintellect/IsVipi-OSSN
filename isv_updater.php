@@ -1,0 +1,3 @@
+//SQL to create new fields in feeds table (att_link, att_title, att_description, att_video, att_image)
+
+ALTER TABLE `feeds` ADD `att_link` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `old_feed_id`, ADD `att_title` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `att_link`, ADD `att_description` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `att_title`, ADD `att_video` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `att_description`, ADD `att_image` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL AFTER `att_video`;
