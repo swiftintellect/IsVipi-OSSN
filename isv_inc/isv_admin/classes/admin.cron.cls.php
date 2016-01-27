@@ -77,7 +77,7 @@
 		  
 	  }
 	  
-	  private function del_user_feeds($uid){
+	  public function del_user_feeds($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE f, fl, fc, fcl, fs, fn
@@ -94,7 +94,7 @@
 			$stmt->close();
 	  }
 	  
-	  private function del_friendships($uid){
+	  public function del_friendships($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE FROM friends WHERE (user1=? OR user2=?) 
@@ -104,7 +104,7 @@
 			$stmt->close();
 	  }
 	  
-	  private function del_friend_req($uid){
+	  public function del_friend_req($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE FROM friend_requests WHERE (from_id=? OR to_id=?) 
@@ -114,7 +114,7 @@
 			$stmt->close();
 	  }
 	  
-	  private function del_friend_req_alerts($uid){
+	  public function del_friend_req_alerts($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE FROM friend_req_alerts WHERE (from_id=? OR to_id=?) 
@@ -124,7 +124,7 @@
 			$stmt->close();
 	  }
 	  
-	  private function del_user_msgs($uid){
+	  public function del_user_msgs($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE FROM user_pm WHERE (from_id=? OR to_id=?) 
@@ -134,7 +134,7 @@
 			$stmt->close();
 	  }
 	  
-	  private function del_user_details($uid){
+	  public function del_user_details($uid){
 		  global $isv_db;
 		  $stmt = $isv_db->prepare ("
 				DELETE u, ub, up, us, sd

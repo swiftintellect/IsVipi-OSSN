@@ -363,6 +363,47 @@
 	}
 	
 	if ($op === 'delnow'){
-		echo "ready";
+		
+		//capture our user id
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION['isv_error'] = 'An error occured. User id was not supplied.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$m_id = $converter->decode($PAGE[3]);
+		
+		if(!is_numeric($m_id)){
+			$_SESSION['isv_error'] = 'The supplied user id is incorrect. Please try again.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		//require our class file
+		require_once(ISVIPI_ADMIN_CLS_BASE .'admin.cron.cls.php');
+		$del = new admin_cron();
+		
+		//delete user feeds (feeds,comments,likes,shares etc)
+		$del->del_user_feeds($m_id);
+				 				 
+		//delete user friends
+		$del->del_friendships($m_id);
+				 
+		//delete friend requests
+		$del->del_friend_req($m_id);
+				 
+		//delete friend request alerts
+		$del->del_friend_req_alerts($m_id);
+				 
+		//delete user messages (user_pm)
+		$del->del_user_msgs($m_id);
+				 
+		//delete user details (user,user_profile,user_settings,users_blocked, scheduled_del)
+		$del->del_user_details($m_id);
+		
+		//return success
+		$_SESSION['isv_success'] = "This member has been deleted.";
+		header('location:'.$from_url.'');
+		exit();
 		
 	}
