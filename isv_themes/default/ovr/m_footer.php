@@ -44,12 +44,15 @@
 						$( "#text-update" ).submit(function( event ) {
 						  	close_preview();
 							$('#text-update').append("<input type='hidden' name='no_include' value=''/>");
+							$('#text-update').append("<input type='hidden' name='app_video' value=''/>");
+							$('#text-update').append("<input type='hidden' name='app_image' value=''/>");
 						});
                         output.find('.close').one('click', function(){
                             close_preview();
 							
 							//notify server not to include embedded hidden fields
 							$('#text-update').append("<input type='hidden' name='no_include' value='no'/>");
+							
                         });
                         
                         output.show('fast');
