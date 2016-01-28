@@ -246,8 +246,8 @@ class feedActions {
 		}
 		
 		//get the feed details
-		global $isv_db,$feed_user,$feedTxT,$feedIMG;
-		
+		global $isv_db,$feed_user,$feedTxT,$feedIMG,$att_link,$att_title,$att_description,$att_video,$att_image;
+
 		//duplicate image if exists
 		if (!empty($feedIMG)){
 			$path = ISVIPI_UPLOADS_BASE .'feeds/';
@@ -261,8 +261,8 @@ class feedActions {
 		}
 		
 		//add feed
-		$stmt = $isv_db->prepare("INSERT INTO feeds (user_id,text_feed,shared_feed,img_feed,old_feed_id,time) VALUES (?,?,?,?,?,UTC_TIMESTAMP())");
-		$stmt->bind_param('isssi',$_SESSION['isv_user_id'],$this->user_feed,$feedTxT,$newName,$this->feed_id);
+		$stmt = $isv_db->prepare("INSERT INTO feeds (user_id,text_feed,shared_feed,img_feed,old_feed_id,att_link,att_title,att_description,att_video,att_image,time) VALUES (?,?,?,?,?,?,?,?,?,?,UTC_TIMESTAMP())");
+		$stmt->bind_param('isssisssss',$_SESSION['isv_user_id'],$this->user_feed,$feedTxT,$newName,$this->feed_id,$att_link,$att_title,$att_description,$att_video,$att_image);
 		$stmt->execute();
 		
 		//get the new feed id
@@ -359,13 +359,13 @@ class feedActions {
 	
 	******************************/
 	public function feedExists($feedID){
-		global $isv_db,$feed_user,$feedTxT,$feedIMG;
-		
-		$stmt = $isv_db->prepare("SELECT user_id,text_feed,img_feed FROM feeds WHERE id=?");
+		global $isv_db,$feed_user,$feedTxT,$feedIMG,$att_link,$att_title,$att_description,$att_video,$att_image;
+
+		$stmt = $isv_db->prepare("SELECT user_id,text_feed,img_feed,att_link,att_title,att_description,att_video,att_image FROM feeds WHERE id=?");
 		$stmt->bind_param('i',$feedID);
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($feed_user,$feedTxT,$feedIMG);
+		$stmt->bind_result($feed_user,$feedTxT,$feedIMG,$att_link,$att_title,$att_description,$att_video,$att_image);
 		$stmt->fetch();
 			if($stmt->num_rows() > 0){
 				return TRUE;

@@ -1,4 +1,5 @@
-﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
+﻿
+<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
       <!-- Content Wrapper. Contains page content -->

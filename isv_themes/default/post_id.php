@@ -58,6 +58,44 @@
                   	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="<?php echo $f['feed_fullname'] ?> image post">
                   <?php }?>
                   
+                  <!-- post attachement if is not video-->
+                  <?php if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (empty($f['att_video']))){?>
+                  	<div class="col-md-12">
+                    	<div class="attachment-block clearfix">
+                            <img class="attachment-img" src="<?php echo $f['att_image'] ?>" alt="attachment image">
+                            <div class="attachment-pushed">
+                              <h4 class="attachment-heading">
+                              	<a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
+                              </h4>
+                              <div class="attachment-text">
+                                <?php echo truncate_($f['att_description'], 10) ?>
+                              </div><!-- /.attachment-text -->
+                              <div class="attachment-link">
+                                <a href="<?php echo $f['att_link'] ?>" target="_blank">
+									<?php echo $f['att_link'] ?>
+                                </a>
+                              </div><!-- /.attachment-link -->
+                            </div><!-- /.attachment-pushed -->
+                          </div><!-- /.attachment-block -->
+                    
+                    </div>
+                    <!--if it is a video -->
+                  <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
+                  <div class="att_video">
+                  	<embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="100%"></embed>
+                    <div class="clear"></div>
+                    <div class="title">
+                        <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
+                  	</div>
+                    <div class="description">
+                    	<?php echo truncate_($f['att_description'], 10) ?>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <?php } ?>
+                  <!-- end::post attachement -->
+                  
                   <hr style="margin:5px 0"/>
                   
                   <!-- shared feed -->
@@ -182,6 +220,45 @@
                               </div><!-- /.user-block -->
                                 <p style="padding:10px; background:#F4F4F4"><?php echo $f['feed_text'] ?></p>
                               <?php } ?>
+                              
+                              <!-- post attachement if is not video-->
+							  <?php if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (empty($f['att_video']))){?>
+                                <div class="col-md-12">
+                                    <div class="attachment-block clearfix">
+                                        <img class="attachment-img" src="<?php echo $f['att_image'] ?>" alt="attachment image">
+                                        <div class="attachment-pushed">
+                                          <h4 class="attachment-heading">
+                                            <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
+                                          </h4>
+                                          <div class="attachment-text">
+                                            <?php echo truncate_($f['att_description'], 10) ?>
+                                          </div><!-- /.attachment-text -->
+                                          <div class="attachment-link">
+                                            <a href="<?php echo $f['att_link'] ?>" target="_blank">
+                                                <?php echo $f['att_link'] ?>
+                                            </a>
+                                          </div><!-- /.attachment-link -->
+                                        </div><!-- /.attachment-pushed -->
+                                      </div><!-- /.attachment-block -->
+                                
+                                </div>
+                                <!--if it is a video -->
+                              <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
+                              <div class="att_video">
+                                <embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="100%"></embed>
+                                <div class="clear"></div>
+                                <div class="title">
+                                    <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
+                                </div>
+                                <div class="description">
+                                    <?php echo truncate_($f['att_description'], 10) ?>
+                                </div>
+                                <div class="clear"></div>
+                              </div>
+                              
+                              <?php } ?>
+                              <!-- end::post attachement -->
+                              <div class="clear"></div>
                             
                             </div>  
                           </div>

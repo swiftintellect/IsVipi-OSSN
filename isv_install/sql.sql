@@ -447,6 +447,11 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   `shared_feed` longtext COLLATE utf8_unicode_ci NOT NULL,
   `img_feed` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
   `old_feed_id` bigint(20) NOT NULL,
+  `att_link` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `att_title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `att_description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `att_video` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `att_image` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

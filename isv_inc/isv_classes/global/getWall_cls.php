@@ -56,6 +56,11 @@ class getFeeds {
 		f.img_feed,
 		f.old_feed_id,
 		f.time,
+		f.att_link,
+		f.att_title,
+		f.att_description,
+		f.att_video,
+		f.att_image,
 		u.username,
 		p.fullname,
 		p.profile_pic,
@@ -69,7 +74,7 @@ class getFeeds {
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
-		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$this->f_username,$this->f_fullname,$this->f_profilePIC,$feedSettings); 
+		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$attlink,$atttitle,$attdescription,$attvideo,$attimage,$this->f_username,$this->f_fullname,$this->f_profilePIC,$feedSettings); 
 		
 			while($sqlAllFeeds->fetch()){
 				$this->feed[] = array(
@@ -80,6 +85,11 @@ class getFeeds {
 					'feed_image' => $this->feedImg,
 					'old_feed_id' => $this->old_feed_id,
 					'feed_time' => $this->feedTime,
+					'att_link' => $attlink,
+					'att_title' => $atttitle,
+					'att_description' => $attdescription,
+					'att_video' => $attvideo,
+					'att_image' => $attimage,
 					'feed_username' => $this->f_username,
 					'feed_fullname' => $this->f_fullname,
 					'feed_profilePIC' => $this->f_profilePIC,
