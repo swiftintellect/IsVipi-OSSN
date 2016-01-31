@@ -93,7 +93,8 @@
         
         <!-- LOAD TIMELINE -->
         <script>
-			function loadTimeline(){
-				$('#tFeeds').load(site_url +'/feeds');
+			function loadTimeline($feeds_to_load){
+				//console.log($feeds_to_load);
+				$('#tFeeds').load(site_url +'/feeds/'+$feeds_to_load);
 			}
 		</script>

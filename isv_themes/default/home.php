@@ -2,6 +2,7 @@
 <?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
+	<?php require_once(ISVIPI_ACT_THEME .'ovr/feed-post-scripts.php') ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Main content -->
@@ -83,10 +84,10 @@
 
                     
                 </div>
-                <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-post-scripts.php') ?>
+                
                 <div id="tFeeds">
 					<script>
-						loadTimeline();
+						loadTimeline(<?php echo ISV_FEEDS_TO_LOAD ?>);
 					</script>
 				</div>
 					

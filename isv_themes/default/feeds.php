@@ -1,11 +1,14 @@
-﻿				  <?php if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
+﻿				  <?php 
+				  	if (is_array($feed)) foreach ($feed as $key => $f) { $last_id = $f['feed_id'];
 					/** get feed properties (likes, comments, if liked) **/
 				  	$feedProperties = new getFeedProperties($f['feed_id']);
 					/** get share properties **/
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
+					
 				  ?>
-                <div class="box box-widget f_styled" id="f_content<?php echo $f['feed_id'] ?>">
+                <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-action-scripts.php') ?>
+                <div class="box box-widget f_styled">
                 <div class='box-header'>
                   <div class='user-block'>
                   <a href="<?php echo ISVIPI_URL .'profile/'.$f['feed_username'] ?>" title="<?php echo $f['feed_fullname'] ?>">
@@ -81,7 +84,7 @@
                     <!--if it is a video -->
                   <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                   <div class="att_video">
-                  	<embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="100%"></embed>
+                  	<embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="50%"></embed>
                     <div class="clear"></div>
                     <div class="title">
                         <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
@@ -180,6 +183,7 @@
                 <?php } ?>
                 <?php } ?>
               </div><!-- /.box -->
+              
               <!-- end of timeline feed -->
               
               <!-- COMMENT -->
@@ -297,8 +301,15 @@
                     </div>
                   </div>
                 </div>
-                <?php require_once(ISVIPI_ACT_THEME .'ovr/feed-action-scripts.php') ?>
+                
+                
+              <?php } else {?>
+              	<li class="list-group-item">There are no Timeline Feeds to show </li>
               <?php } ?>
+              <div class="load_more" id="load_more" style="display:none"></div>
+              <div class="list-group-item" id="no_more_feeds" style="display:none">No more feeds</div>
+              
+              
               
               
               

@@ -11,3 +11,5 @@ You can now choose to send an email notification to an activated account
 Added link preview on the timeline feed
 Added clickable links to the timeline feed and chat
 Added embed videos
+Added infinite scroll for timeline feed
+Fixed the styling issue with the first timeline feed

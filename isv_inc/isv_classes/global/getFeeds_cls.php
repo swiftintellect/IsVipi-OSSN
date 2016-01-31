@@ -26,13 +26,12 @@ class getFeeds {
 	
 	public $feed;
 	
-	public function __construct ($page){
-		$this->limit = 10;
+	public function __construct (){
 		$this->user_id = $_SESSION['isv_user_id'];
 		$this->feedTotal = $this->getTotalFeeds();
 	}
 	
-	private function getTotalFeeds(){
+	public function getTotalFeeds(){
 		global $isv_db;
 		
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM feeds WHERE user_id=?"); 
@@ -45,7 +44,7 @@ class getFeeds {
 		return $totalCount;
 	}
 	
-	public function allFeeds(){
+	public function allFeeds($fLimit){
 		global $isv_db,$feed;
 
 		$sqlAllFeeds = $isv_db->prepare ("SELECT 
@@ -70,7 +69,7 @@ class getFeeds {
 		JOIN users u ON u.id = f.user_id
 		JOIN user_profile p ON p.user_id = u.id
 		WHERE f.user_id=? OR (fr.user1=? OR fr.user2=?) GROUP BY f.id ORDER BY f.id DESC LIMIT 0,?"); 
-		$sqlAllFeeds->bind_param('iiii', $this->user_id,$this->user_id,$this->user_id,$this->limit);
+		$sqlAllFeeds->bind_param('iiii', $this->user_id,$this->user_id,$this->user_id,$fLimit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
@@ -99,8 +98,6 @@ class getFeeds {
 	} 
 
 }
-$getFeeds = new getFeeds(2/* dont mind this */);
-$feed = $getFeeds->allFeeds();
 
 class getFeedProperties {
 	private $f_id;

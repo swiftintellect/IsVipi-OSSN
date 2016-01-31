@@ -176,6 +176,32 @@
 				
 				
           </script>
+          
+          <!-- function to load more feeds -->
+          <script>
+		  	$(window).bind('scroll', function() {
+				if($(window).scrollTop() >= $('#tFeeds').offset().top + $('#tFeeds').outerHeight() - window.innerHeight) {
+					
+					//if we have reached the bottom of the div we show the loading more animation
+					if(end_reached == "no"){
+						document.getElementById("load_more").style.display = "block";
+						
+						setTimeout(function(){
+						
+							//calculate our next number of feeds to load
+							var newload = feed_limit + feeds_to_load;
+	
+								loadTimeline(newload);
+								document.getElementById("load_more").style.display = "none";
+						}, 2500);
+					} else {
+						document.getElementById("no_more_feeds").style.display = "block";
+						document.getElementById("load_more").style.display = "none";
+					}
+					
+				}
+			});
+		  </script>
 	
     <?php } ?>
     <script>

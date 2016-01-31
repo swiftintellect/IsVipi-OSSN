@@ -19,4 +19,36 @@
 	require_once(ISVIPI_PAGES_BASE .'m_base.php'); 
 	require_once(ISVIPI_CLASSES_BASE .'global/getFeeds_cls.php'); 
 	
+	//instantiate our class	
+	$getFeeds = new getFeeds();
+	
+	//get total number of feeds
+	$fTotal = $getFeeds->getTotalFeeds();
+	
+	//set feed limit
+	if(isset($PAGE[1]) && is_numeric($PAGE[1])){
+		$fLimit = cleanGET($PAGE[1]);
+	} else {
+		$fLimit = "5";
+	}
+
+	//get all fields by this user
+	$feed = $getFeeds->allFeeds($fLimit);
+	
+	//determine end of the feeds
+	if($fLimit >= $fTotal){
+		$end = 'yes';
+	} else {
+		$end = 'no';
+	}
+		
+?>
+	<script>
+		var total_f = Number("<?php echo $fTotal ?>");
+		var feeds_to_load = Number("<?php echo ISV_FEEDS_TO_LOAD ?>");
+		var feed_limit = Number("<?php echo $fLimit ?>");
+		var end_reached = "<?php echo $end ?>";
+		//console.log(feeds_to_load);
+	</script>
+<?php
  	include_once ISVIPI_ACT_THEME.'feeds.php'; 

@@ -12,6 +12,7 @@
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED', true); //set true to notify member when his/her account is suspended
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_UNSUSPENDED', true); //set true to notify member when his/her account is unsuspended
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION', true); //set true to notify member when his/her account has been activated
+	define('ISV_FEEDS_TO_LOAD', 15); //set the default number of feeds to load.
 	
 	
 	/*** DEFINE URL PARAMETERS ***/
