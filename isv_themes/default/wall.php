@@ -1,7 +1,7 @@
-﻿				 <?php if (is_array($feed)) foreach ($feed as $key => $f) {
+﻿				 <?php 
+				 	if (is_array($feed)) foreach ($feed as $key => $f) {
 					/** get feed properties (likes, comments, if liked) **/
 				  	$feedProperties = new getFeedProperties($f['feed_id']);
-					
 					/** get share properties **/
 					$fSharePropeties = new getShares($f['feed_id']);
 					$sh = $fSharePropeties->isSharedFeed($f['old_feed_id']);
@@ -90,7 +90,7 @@
                     <!--if it is a video -->
                   <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                   <div class="att_video">
-                  	<embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="100%"></embed>
+                  	<embed type="application/x-shockwave-flash"  src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" allowfullscreen="true" width="100%" height="75%"></embed>
                     <div class="clear"></div>
                     <div class="title">
                         <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
@@ -274,7 +274,7 @@
                                 <!--if it is a video -->
                               <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                               <div class="att_video">
-                                <embed src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" width="100%" height="100%"></embed>
+                                <embed type="application/x-shockwave-flash" src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" allowfullscreen="true" scale="aspect" controller="true" width="100%" height="75%"></embed>
                                 <div class="clear"></div>
                                 <div class="title">
                                     <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
@@ -315,4 +315,7 @@
                     <li class="list-group-item">No posts found.</li>
                 </div>
               <?php } ?>
+              <div class="load_more" id="load_more" style="display:none"></div>
+              <div class="list-group-item" id="no_more_feeds" style="display:none">No more feeds</div>
+              <div class="clear" style="margin-bottom:10px;"></div>
 			  

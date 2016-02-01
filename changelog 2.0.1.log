@@ -12,4 +12,5 @@ Added link preview on the timeline feed
 Added clickable links to the timeline feed and chat
 Added embed videos
 Added infinite scroll for timeline feed
+Added infinite scroll to the user wall
 Fixed the styling issue with the first timeline feed

@@ -84,7 +84,7 @@
                     <!--if it is a video -->
                   <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                   <div class="att_video">
-                  	<embed src="<?php echo $f['att_video'] ?>" type="application/x-shockwave-flash" allowscriptaccess="always" width="100%" height="50%"></embed>
+                  	<embed type="application/x-shockwave-flash" src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" allowfullscreen="true" scale="aspect" controller="true" width="100%" height="75%"></embed>
                     <div class="clear"></div>
                     <div class="title">
                         <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
@@ -167,7 +167,7 @@
                     </div><!-- /.comment-text -->
                   </div><!-- /.box-comment -->
                  <?php if (!$getComments->hasLikedComment($c['comm_id'])){?>
-                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_like') ?>');"><i class='fa fa-thumbs-o-up'></i> Like</a>
+                  <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_like') ?>');">Like</a>
                   <?php } else {?>
                   <a href="javascript:void(0)" class="feed-action" onclick="commentAction(<?php echo $c['comm_id'] ?>, '<?php echo $converter->encode('comm_unlike') ?>');"><i class='fa fa-thumbs-o-up'></i> Unlike</a>
                   <?php } ?>
@@ -271,7 +271,7 @@
                                 <!--if it is a video -->
                               <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                               <div class="att_video">
-                                <embed src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" width="100%" height="100%"></embed>
+                                <embed type="application/x-shockwave-flash" src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" allowfullscreen="true" scale="aspect" controller="true" width="100%" height="75%"></embed>
                                 <div class="clear"></div>
                                 <div class="title">
                                     <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>

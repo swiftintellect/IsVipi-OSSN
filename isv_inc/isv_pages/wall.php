@@ -31,7 +31,37 @@
 	if(!is_numeric($user)){
 		exit();
 	}
+	
+	//instantiate our class
 	$getFeeds = new getFeeds($user);
-	$feed = $getFeeds->allFeeds($user);
+	
+	//get total feeds
+	$fTotal = $getFeeds->getTotalFeeds($user);
+	
+	//set feed limit
+	if(isset($PAGE[2]) && is_numeric($PAGE[2])){
+		$fLimit = cleanGET($PAGE[2]);
+	} else {
+		$fLimit = "5";
+	}
+
+	//determine end of the feeds
+	if($fLimit >= $fTotal){
+		$end = 'yes';
+	} else {
+		$end = 'no';
+	}
+	
+	//retrieve all wall feeds
+	$feed = $getFeeds->allFeeds($user,$fLimit);
+?>
+	<script>
+		var total_f = Number("<?php echo $fTotal ?>");
+		var feeds_to_load = Number("<?php echo ISV_FEEDS_TO_LOAD ?>");
+		var feed_limit = Number("<?php echo $fLimit ?>");
+		var end_reached = "<?php echo $end ?>";
+		//console.log(feeds_to_load);
+	</script>
+<?php
 
  	include_once ISVIPI_ACT_THEME.'wall.php'; 

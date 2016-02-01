@@ -10,7 +10,7 @@
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/app.min.js' ?>"></script>
     <?php 
 		//load only on feeds page
-		if($PAGE[0] == "home" || $PAGE[0] == "feeds"){
+		if($PAGE[0] == "home" || $PAGE[0] == "feeds" ){
 	
 	?>
 		<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/link-preview/jquery.liveurl.js' ?>"></script>

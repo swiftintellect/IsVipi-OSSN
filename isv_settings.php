@@ -6,7 +6,7 @@
 	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR); //current theme
 	define('ISV_DEFAULT_TZ', 'Atlantic/St_Helena'); //Default Timezone
 	define('ISV_SITE_TITLE', $isv_siteDetails['s_title']); //Default Timezone
-	define('ISV_DEFAULT_EMAIL_FROM', $isv_siteDetails['s_email']); //Default Timezone
+	define('ISV_DEFAULT_EMAIL_FROM', $isv_siteDetails['s_email']); //Default sender email
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_DELETION', true); //set true to notify member when his/her account is scheduled for deletion
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_UNDELETION', true); //set true to notify member that his/her account will not be deleted.
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED', true); //set true to notify member when his/her account is suspended

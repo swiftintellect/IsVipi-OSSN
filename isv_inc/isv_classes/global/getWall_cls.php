@@ -45,7 +45,7 @@ class getFeeds {
 		return $totalCount;
 	}
 	
-	public function allFeeds($user){
+	public function allFeeds($user,$fLimit){
 		global $isv_db,$feed;
 
 		$sqlAllFeeds = $isv_db->prepare ("SELECT 
@@ -70,7 +70,7 @@ class getFeeds {
 		JOIN user_profile p ON p.user_id = u.id
 		JOIN user_settings st ON p.user_id = st.user_id
 		WHERE f.user_id=? GROUP BY f.id ORDER BY f.id DESC LIMIT 0,?"); 
-		$sqlAllFeeds->bind_param('ii', $user,$this->limit);
+		$sqlAllFeeds->bind_param('ii', $user,$fLimit);
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();

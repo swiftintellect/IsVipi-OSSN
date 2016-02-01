@@ -12,7 +12,9 @@
             </div>
             <div class="pull-left info">
               <p>
-			  	<?php echo $memberinfo['full_name'] ?>
+			  	<a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/feeds/' ?>">
+					<span style="color:#09F"><?php echo $memberinfo['full_name'] ?></span>
+                </a>
               </p>
               
               <!-- Edit Profile Link -->

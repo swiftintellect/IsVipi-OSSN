@@ -2,8 +2,8 @@
 	  <?php if (isset($PAGE[0]) && $PAGE[0] == 'profile'){ ?>
         <!-- LOAD WALL -->
         <script>
-			function loadWall($user){
-				$('#tWall').load(site_url +'/wall/'+$user);
+			function loadWall($user,feeds_to_load){
+				$('#tWall').load(site_url +'/wall/'+$user+'/'+feeds_to_load);
 			}
 		</script>
         

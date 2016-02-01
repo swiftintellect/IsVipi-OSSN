@@ -147,9 +147,35 @@
                     <?php if (!isset($PAGE[2]) || (isset($PAGE[2]) && ($PAGE[2] === 'feeds'))){
                     	require_once(ISVIPI_ACT_THEME .'ovr/profile_scripts.php') 
 					?>
+					<script>
+                    	loadWall('<?php echo $m_info['m_user_id'] ?>','<?php echo ISV_FEEDS_TO_LOAD ?>');
+                    </script>
+                    <!-- function to load more feeds -->
                     <script>
-						loadWall(<?php echo $m_info['m_user_id'] ?>);
-					</script>
+                            $(window).bind('scroll', function() {
+                                if($(window).scrollTop() >= $('#tWall').offset().top + $('#tWall').outerHeight() - window.innerHeight) {
+                                    
+                                    //if we have reached the bottom of the div we show the loading more animation
+                                    if(end_reached == "no"){
+                                        document.getElementById("load_more").style.display = "block";
+                                        
+                                        setTimeout(function(){
+                                        
+                                            //calculate our next number of feeds to load
+                                            var newload = feed_limit + feeds_to_load;
+                    
+                                                loadWall('<?php echo $m_info['m_user_id'] ?>',newload);
+                                                document.getElementById("load_more").style.display = "none";
+                                        }, 2500);
+                                    } else {
+                                        document.getElementById("no_more_feeds").style.display = "block";
+                                        document.getElementById("load_more").style.display = "none";
+                                    }
+                                    
+                                }
+                            });
+                          </script>
+
 					<?php } else if (isset($PAGE[2]) && $PAGE[2] === 'edit' && ($m_info['m_user_id'] === $_SESSION['isv_user_id'])) {
 						require_once(ISVIPI_ACT_THEME .'pages/edit.php');
 					} else if(isset($PAGE[2]) && $PAGE[2] === 'about'){
@@ -162,9 +188,11 @@
 					} else { 
 						require_once(ISVIPI_ACT_THEME .'ovr/profile_scripts.php');
 					?>
-                    <script>
-						loadWall(<?php echo $m_info['m_user_id'] ?>);
-					</script>
+                    <div id="tFeeds">
+						<script>
+                            loadWall('<?php echo $m_info['m_user_id'] ?>','<?php echo ISV_FEEDS_TO_LOAD ?>');
+                        </script>
+                    </div>
                     <?php } ?>
                     
                     
