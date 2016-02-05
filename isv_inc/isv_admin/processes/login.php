@@ -30,7 +30,7 @@
 	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['aop']) && !empty($_POST['aop'])){
-		 $op = cleanPOST('aop');
+		 $op = $converter->decode(cleanPOST('aop'));
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
 		 $op = cleanGET($PAGE[2]);
 	 } else {

@@ -51,6 +51,7 @@ define ('ISVIPI_URL', URL_ROOT);
 define ('ISVIPI_FULL_HTTP_URL', $_SERVER['HTTP_HOST']);
 define ('ISVIPI_STYLE_URL', ISVIPI_URL . 'isv_inc/isv_style.lib' .DIRECTORY_SEPARATOR);
 define ('ISVIPI_UPLOADS_URL', ISVIPI_URL . 'isv_inc/isv_uploads' .DIRECTORY_SEPARATOR);
+define ('ISVIPI_THEMES_URL', ISVIPI_URL . 'isv_themes' .DIRECTORY_SEPARATOR);
 
 //local admin url
 define ('ISVIPI_ADMIN_URL', ISVIPI_URL.'isv_admin'. DIRECTORY_SEPARATOR);

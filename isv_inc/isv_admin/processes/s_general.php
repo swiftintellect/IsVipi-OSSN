@@ -19,9 +19,6 @@
 	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 	$track = new admin_security();
 	
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
-	
 	if(!$track->admin_logged_in()){
 		$entry = "A non-admin tried to access isv_admin/processes/s_general.php file.";
 		$ip = get_user_ip();
@@ -42,7 +39,7 @@
 	 
 	 /** check if our hidden field is present */
 	 if (isset($_POST['aop']) && !empty($_POST['aop'])){
-		 $op = cleanPOST('aop');
+		 $op = $converter->decode(cleanPOST('aop'));
 	 } else if(isset($PAGE[2]) && !empty($PAGE[2])){
 		 $op = $converter->decode($PAGE[2]);
 	 } else {
@@ -51,7 +48,7 @@
 		 exit();
 	 }
 	 
-	 if ($op !== 'gen' && $op !== 'c_theme' && $op !== 'security' && $op !== 's_settings' && $op !== 'key_w' && $op !== 'm_descr' && $op !== 'logo' && $op !== 'favicon'){
+	 if ($op !== 'gen' && $op !== 'c_theme' && $op !== 'security' && $op !== 's_settings' && $op !== 'key_w' && $op !== 'm_descr' && $op !== 'logo' && $op !== 'favicon' && $op !== 'theme_del' && $op !== 'enc_key' && $op !== 'm_settings' && $op !== 'feed_s'){
 		 $entry = "Someone interfered with admin member page.";
 		 $ip = get_user_ip();
 		 log_entry($entry,$ip);
@@ -108,15 +105,16 @@
 	}
 	
 	if ($op === 'c_theme'){
-		$theme = cleanPOST('theme');
 		
 		//check if a theme name has been supplied
-		if(!isset($theme) || empty($theme)){
-			$_SESSION['isv_error'] = 'Please enter a theme name';
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION['isv_error'] = 'No theme has been detected. Please try again.';
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
 		
+		$theme = $converter->decode(cleanGET($PAGE[3]));
+
 		//update
 		global $isv_db;
 		$stmt = $isv_db->prepare("UPDATE s_info SET s_theme = ? WHERE id=1");
@@ -129,6 +127,44 @@
 		header('location:'.$from_url.'');
 		exit();
 		
+	}
+	
+	if ($op === 'theme_del'){
+		//check if a theme name has been supplied
+		if(!isset($PAGE[3]) || empty($PAGE[3])){
+			$_SESSION['isv_error'] = 'No theme has been detected. Please try again.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		$theme = $converter->decode(cleanGET($PAGE[3]));
+		$path = "isv_themes/";
+		
+		//check if theme exists
+		if(!is_dir($path.$theme)){
+			$_SESSION['isv_error'] = 'The theme was not found and therefore nothing was deleted.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		//delete it
+		$dir = $path.$theme;
+		$it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+		$files = new RecursiveIteratorIterator($it,
+					 RecursiveIteratorIterator::CHILD_FIRST);
+		foreach($files as $file) {
+			if ($file->isDir()){
+				rmdir($file->getRealPath());
+			} else {
+				unlink($file->getRealPath());
+			}
+		}
+		rmdir($dir);
+		
+		//return success
+		$_SESSION['isv_success'] = "Theme $theme has been deleted successfully";
+		header('location:'.$from_url.'');
+		exit();
 	}
 	
 	if ($op === 'security'){
@@ -172,11 +208,8 @@
 		//capture our variables
 		$m_mode = cleanPOST('status');
 		$h_errors = cleanPOST('errors');
-		$n_members = cleanPOST('reg');
-		$m_validate = cleanPOST('validate');
 		$s_timezone = cleanPOST('timezone');
 		$cron = cleanPOST('cronjob');
-		$admin_notify = cleanPOST('notify_admin');
 		
 		//check if they have been supplied
 		if(!isset($m_mode) || empty($m_mode)){
@@ -187,20 +220,11 @@
 			$h_errors = 0;
 		} 
 		
-		if(!isset($n_members) || empty($n_members)){
-			$n_members = 0;
-		}
-		if(!isset($m_validate) || empty($m_validate)){
-			$m_validate = 0;
-		}
 		if(!isset($s_timezone) || empty($s_timezone)){
 			$s_timezone = 0;
 		}
 		if(!isset($cron) || empty($cron)){
 			$cron = 0;
-		}
-		if(!isset($admin_notify) || empty($admin_notify)){
-			$admin_notify = 0;
 		}
 		
 		//update
@@ -209,13 +233,74 @@
 		$stmt->execute();
 		$stmt->close();
 		
-		$stmt = $isv_db->prepare("UPDATE s_settings SET user_reg=?,user_validate=?,sys_cron=?,timezone=?,errors=?,newuser_notice=? WHERE id=1");
-		$stmt->bind_param('iiiiii',$n_members,$m_validate,$cron,$s_timezone,$h_errors,$admin_notify);
+		$stmt = $isv_db->prepare("UPDATE s_settings SET sys_cron=?,timezone=?,errors=? WHERE id=1");
+		$stmt->bind_param('iii',$cron,$s_timezone,$h_errors);
 		$stmt->execute();
 		$stmt->close();
 		
 		//return success
 		$_SESSION['isv_success'] = 'Site status settings saved successfully';
+		header('location:'.$from_url.'');
+		exit();
+	}
+	
+	if ($op === 'm_settings'){
+		
+		//capture our variables
+		$reg = cleanPOST('reg');
+		$validate = cleanPOST('validate');
+		$notify_admin = cleanPOST('notify_admin');
+		$notify_acc_del = cleanPOST('notify_acc_del');
+		$notify_acc_undel = cleanPOST('notify_acc_undel');
+		$notify_acc_sus = cleanPOST('notify_acc_sus');
+		$notify_acc_unsus = cleanPOST('notify_acc_unsus');
+		$notify_acc_act = cleanPOST('notify_acc_act');
+		
+		//check if they have been supplied
+		if(empty($reg)){
+			$reg = 0;
+		}
+		if(empty($validate)){
+			$validate = 0;
+		}
+		if(empty($notify_admin)){
+			$notify_admin = 0;
+		}
+		if(empty($notify_acc_del)){
+			$notify_acc_del = 0;
+		}
+		if(empty($notify_acc_undel)){
+			$notify_acc_undel = 0;
+		}
+		if(empty($notify_acc_sus)){
+			$notify_acc_sus = 0;
+		}
+		if(empty($notify_acc_unsus)){
+			$notify_acc_unsus = 0;
+		}
+		if(empty($notify_acc_act)){
+			$notify_acc_act = 0;
+		}
+		
+		
+		//update
+		$stmt = $isv_db->prepare("UPDATE m_settings SET 
+				allow_registration = ?,
+				must_validate = ?,
+				notify_acc_deletion = ?,
+				notify_acc_undeletion = ?,
+				notify_acc_suspension = ?,
+				notify_acc_unsuspension = ?,
+				notify_acc_activation = ?,
+				notify_admin_newuser = ? 
+			WHERE id=1
+		");
+		$stmt->bind_param('iiiiiiii',$reg,$validate,$notify_acc_del,$notify_acc_undel,$notify_acc_sus,$notify_acc_unsus,$notify_acc_act,$notify_admin);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Member settings updated successfully';
 		header('location:'.$from_url.'');
 		exit();
 	}
@@ -408,6 +493,60 @@
 		
 		//return success
 		$_SESSION['isv_success'] = 'Favicon changed successfully';
+		header('location:'.$from_url.'');
+		exit();
+		
+	}
+	
+	if ($op === 'enc_key'){
+		//capture our encryption key
+		$key = cleanPOST('key');
+		
+		//check if is has been submitted
+		if(empty($key)){
+			$_SESSION['isv_error'] = 'Please generate and enter an encryption key.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		//update our db
+		$stmt = $isv_db->prepare("UPDATE s_settings SET encry_key=? WHERE id=1");
+		$stmt->bind_param('s',$key);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Encryption key updated';
+		header('location:'.$from_url.'');
+		exit();
+	}
+	
+	if ($op === 'feed_s'){
+		//capture our variables
+		$feed_number = cleanPOST('feeds_no');
+		
+		//check if our variables have been supplied
+		if(empty($feed_number)){
+			$_SESSION['isv_error'] = 'Please enter the default number of news feeds to load.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
+		//check if it is a number
+		if(!is_numeric($feed_number)){
+			$_SESSION['isv_error'] = 'Wrong input for number of feeds. You MUST only enter a number.';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+
+		//save
+		$stmt = $isv_db->prepare("UPDATE f_settings SET number_feeds = ? WHERE id=1");
+		$stmt->bind_param('i',$feed_number);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$_SESSION['isv_success'] = 'Feed settings updated.';
 		header('location:'.$from_url.'');
 		exit();
 		

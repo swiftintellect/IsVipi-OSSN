@@ -1,360 +1,287 @@
 <?php require_once(ISVIPI_ADMIN_CLS_BASE .'stats.cls.php'); 
 	$stats = new site_stats();
 	libxml_disable_entity_loader(false);
+	
+	require_once(ISVIPI_CLASSES_BASE .'global/get_news_cls.php');
+	$news = new news();
+	$news_count = $news->get_news_count('all');
+	$all_news = $news->get_all_news_stats_page('all',3);
 ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/head.php') ?>
-<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/header.php') ?>
-        <!-- page content -->
-            <div class="right_col" role="main">
-            
-            <!-- top tiles -->
-                <div class="row tile_count">
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">New Members</span>
-                            <div class="count"><?php echo $stats->user_count('all') ?></div>
-                            <span class="count_bottom">last 30 days</span>
-                        </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">Activated Accounts</span>
-                            <div class="count green"><?php echo $stats->user_count(1) ?></div>
-                            <span class="count_bottom">last 30 days</span>
-                        </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">Inactive Accounts</span>
-                            <div class="count red"><?php echo $stats->user_count(0) ?></div>
-                            <span class="count_bottom">last 30 days</span>
-                        </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">Suspended Accounts </span>
-                            <div class="count red"><?php echo $stats->user_count(2) ?></div>
-                            <span class="count_bottom">last 30 days</span>
-                        </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">Male Members</span>
-                            <div class="count"><?php echo $stats->member_types('male') ?></div>
-                            <span class="count_bottom">all time</span>
-                        </div>
-                    </div>
-                    <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
-                        <div class="left"></div>
-                        <div class="right">
-                            <span class="count_top">Female Members</span>
-                            <div class="count"><?php echo $stats->member_types('female') ?></div>
-                            <span class="count_bottom">all time</span>
-                        </div>
-                    </div>
+<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+          </h1>
+          <ol class="breadcrumb">
+            <li>
+            	<a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>">
+                	<i class="fa fa-dashboard"></i> Dashboard
+                </a>
+            </li>
+          </ol>
+        </section>
 
+        <!-- Main content -->
+        <section class="content">
+        	<!-- Info boxes -->
+              <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">New Members</span>
+                      <span class="info-box-number"><?php echo number_format($stats->user_count('all')) ?></span>
+                      <span class="">Last 30 Days</span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div><!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-check-square-o"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Validated Accounts</span>
+                      <span class="info-box-number"><?php echo number_format($stats->user_count(1)) ?></span>
+                      <span class="">Last 30 Days</span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div><!-- /.col -->
+    
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-orange"><i class="fa fa-times-circle"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Unvalidated Accounts</span>
+                      <span class="info-box-number"><?php echo number_format($stats->user_count(0)) ?></span>
+                      <span class="">Last 30 Days</span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div><!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-thumbs-down"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Suspended Accounts</span>
+                      <span class="info-box-number"><?php echo number_format($stats->user_count(2)) ?></span>
+                      <span class="">Last 30 Days</span>
+                    </div><!-- /.info-box-content -->
+                  </div><!-- /.info-box -->
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+              <!-- end::Info boxes -->
+              
+              
+              <div class="row" style="background:#D2D2D2; padding:10px 0; margin-bottom:5px;">
+              	<!-- specific member stats -->
+              	<div class="col-md-4">
+                	<div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">All Members</span>
+                          <span class="info-box-number"><?php echo number_format($stats->user_count_all('all')) ?></span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                          </div>
+                          <span class="progress-description">
+                            Registered
+                          </span>
+                        </div><!-- /.info-box-content -->
+                      </div><!-- /.info-box -->
+                      <div class="info-box bg-blue">
+                        <span class="info-box-icon"><i class="fa fa-male"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Male Members</span>
+                          <span class="info-box-number"><?php echo number_format($stats->member_types('male')) ?></span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                          </div>
+                          <span class="progress-description">
+                            Registered
+                          </span>
+                        </div><!-- /.info-box-content -->
+                      </div><!-- /.info-box -->
+                      <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-female"></i></span>
+                        <div class="info-box-content">
+                          <span class="info-box-text">Female Members</span>
+                          <span class="info-box-number"><?php echo number_format($stats->member_types('female')) ?></span>
+                          <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                          </div>
+                          <span class="progress-description">
+                            Registered
+                          </span>
+                        </div><!-- /.info-box-content -->
+                      </div><!-- /.info-box -->
                 </div>
-                <!-- /top tiles -->
-                <div class="">
-
-                    <div class="row">
-                      
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="x_panel tile fixed_height_320">
-                            <div class="x_title">
-                                <h2>Quick Links</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <div class="dashboard-widget-content">
-                                    <ul class="quick-list">
-                                        <li><i class="fa fa-group"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>">All Members</a>
-                                        </li>
-                                        <li><i class="fa fa-user-plus"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'add_new' ?>">Add Member</a>
-                                        </li>
-                                        <li><i class="fa fa-cogs"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'general' ?>">General Settings</a> </li>
-                                        <li><i class="fa fa-envelope"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'emails' ?>">Newsletter</a>
-                                        </li>
-                                        <li><i class="fa fa-sign-out"></i><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>">Logout</a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="sidebar-widget">
-                                        <h4>Site Version</h4>
-                                        <p class="s_version"><?php echo ISV_VERSION ?></p>
-                                        <div class="goal-wrapper">
-                                        	<?php if($isv_siteSettings['upd_avail'] === 1){ ?>
-                                            <a href="" class="btn btn-success btn-sm bt">update available</a>
-                                            <?php } else {?>
-                                            <span class="s_version_fl">up to date</span>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                    
-                                    <?php if(install_folder_exists()){?>
-                                    <div class="bg-red sec-error">
-                                    	Please delete <strong>isv_install/</strong> folder and its content! This poses a security risk.
-                                    </div>
-                                    <?php } ?>
-                                </div>
-                            </div>
+                
+                <!-- feed stats -->
+                <?php $feed = $stats->feed_stats(); ?>
+                <div class="col-md-4">
+                	<div class="box box-default">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Feed Stats</h3>
+                          <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                          </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                          <div class="row">
+                            <div class="col-md-8">
+                              <div class="chart-responsive">
+                                <canvas id="pieChart" height="150"></canvas>
+                              </div><!-- ./chart-responsive -->
+                            </div><!-- /.col -->
+                            <div class="col-md-4">
+                              <ul class="chart-legend clearfix">
+                                <li><i class="fa fa-circle-o text-red"></i> Feeds</li>
+                                <li><i class="fa fa-circle-o text-green"></i> Likes</li>
+                                <li><i class="fa fa-circle-o text-yellow"></i> Comments</li>
+                                <li><i class="fa fa-circle-o text-aqua"></i> Shares</li>
+                                <li><i class="fa fa-circle-o text-light-blue"></i> Comment Likes</li>
+                              </ul>
+                            </div><!-- /.col -->
+                          </div><!-- /.row -->
+                        </div><!-- /.box-body -->
+                        <div class="box-footer no-padding">
+                          <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Total Timeline Activity <span class="pull-right text-red"> <?php echo number_format($feed['total']) ?> activities</span> </a></li>
+                            <li><a href="#"></a></li>
+                          </ul>
+                        </div><!-- /.footer -->
+                      </div><!-- /.box -->
+              	</div>
+                <!-- end: feed stats -->
+                
+                <!-- news and announcements -->
+                  <div class="col-md-4">
+                   	<div class="box box-primary">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">News & Announcements</h3>
+                          <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                          </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                          <ul class="products-list product-list-in-box">
+                          <?php if($news_count > 0){?>
+							<?php if(is_array($all_news)) foreach ($all_news as $key => $n) {
+                                if($n['status'] == '0'){
+                                    $status = '<span class="label label-danger"><i class="fa fa-times"></i></span>';
+                                } else {
+                                    $status = '<span class="label label-success"><i class="fa fa-check"></i></span>';
+                                }
+                            ?>
+                            <li class="item">
+                               <?php echo $n['title'] ?> <span class="label pull-right"><?php echo $status ?></span>
+                                <span class="product-description">
+                                 	<?php echo truncate_($n['news'],10) ?>
+                                </span>
+                            </li><!-- /.item -->
+                            <?php } ?>
+                			<?php } else { ?>
+                            	<li class="list-group-item">No news/announcement published</li>
+                            <?php } ?>
+                            
+                            
+                          </ul>
                         </div>
+                        <div class="box-footer text-center">
+                          <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'news' ?>" class="uppercase">View All News Items</a>
+                        </div><!-- /.box-footer -->
+                      </div>
                     </div>
+                  <!-- end: news & announcements -->
                     
-                    
-                      <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="x_panel tile fixed_height_320">
-                        <?php $feed = $stats->feed_stats(); 
-							  $feedpc = @($feed['all_feeds'] / $feed['total'] * 100);
-							  $likespc = @($feed['all_likes'] / $feed['total'] * 100);
-							  $commpc = @($feed['all_comments'] / $feed['total'] * 100);
-							  $sharepc = @($feed['all_shares'] / $feed['total'] * 100);
-							  $commlikespc = @($feed['all_comm_likes'] / $feed['total'] * 100);
-						?>
-                            <div class="x_title">
-                                <h2>Timeline Feeds Stats</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
-                                <div class="widget_summary">
-                                    <div class="w_left w_25">
-                                        <span>All Feeds</span>
-                                    </div>
-                                    <div class="w_center w_55">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $feedpc ?>%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w_right w_20">
-                                        <span><?php echo $feed['all_feeds'] ?></span>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+              </div>
+              <!-- end:: row -->
+              
+              <!-- latest members & rss feed -->
+              <div class="row">
+              
+              	<!-- latest members -->
+              	<div class="col-md-6">
+                  <!-- USERS LIST -->
+                  <div class="box box-danger">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Latest Members</h3>
+                      <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                      <ul class="users-list clearfix">
+                      <?php $members = array_filter($stats->get_latest_members(8));
+							if(is_array($members)) foreach ($members as $key => $mi) {
+					  ?> 
+                        
+                        <li>
+                          <img src="<?php echo user_pic($mi['profile_pic']) ?>" width="80px" alt="<?php echo $mi['fullname'] ?>">
+                          <a class="users-list-name" href="<?php echo ISVIPI_URL .'profile/'.$mi['username'] ?>" target="_blank">
+						  	<?php echo $mi['fullname'] ?>
+                          </a>
+                          <span class="users-list-date">Today</span>
+                        </li>
+                      <?php } else {?>
+                      	<li class="list-group-item">No members found.</li>
+                      <?php } ?>
 
-                                <div class="widget_summary">
-                                    <div class="w_left w_25">
-                                        <span>Likes</span>
-                                    </div>
-                                    <div class="w_center w_55">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $likespc ?>%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w_right w_20">
-                                        <span><?php echo $feed['all_likes'] ?></span>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="widget_summary">
-                                    <div class="w_left w_25">
-                                        <span>Comments</span>
-                                    </div>
-                                    <div class="w_center w_55">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $commpc ?>%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w_right w_20">
-                                        <span><?php echo $feed['all_comments'] ?></span>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="widget_summary">
-                                    <div class="w_left w_25">
-                                        <span>Shares</span>
-                                    </div>
-                                    <div class="w_center w_55">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $sharepc ?>%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w_right w_20">
-                                        <span><?php echo $feed['all_shares'] ?></span>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="widget_summary">
-                                    <div class="w_left w_25">
-                                        <span>Comment Likes</span>
-                                    </div>
-                                    <div class="w_center w_55">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $commlikespc ?>%;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="w_right w_20">
-                                        <span><?php echo $feed['all_comm_likes'] ?></span>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                      </ul><!-- /.users-list -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer text-center">
+                      <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'members' ?>" class="uppercase">
+                      	View All Users
+                      </a>
+                    </div><!-- /.box-footer -->
+                  </div><!--/.box -->
+                </div><!-- /.col -->
+                <!-- end: latest members -->
+                
+                <!-- latest rss feeds -->
+                <div class="col-md-6">
+                	<!-- Chat box -->
+              <div class="box box-success">
+                <div class="box-header">
+                  <i class="fa fa-comments-o"></i>
+                  <h3 class="box-title">Latest from <a href="//forum.isvipi.org" target="_blank">the community</a></h3>
+                </div>
+                <div class="box-body chat" id="chat-box">
+                
+                	<?php $l_feeds = $stats->get_latest_feeds(); 
+						$limit = 4;
+						for($x=0;$x<$limit;$x++) {
+							$title = str_replace(' & ', ' &amp; ', $l_feeds[$x]['title']);
+							$link = $l_feeds[$x]['guid'];
+							$description = $l_feeds[$x]['desc'];
+							$descr = truncate_($description, 20);
+							$date = date('M/d/Y', strtotime($l_feeds[$x]['date']));
+					?>
+                  <!-- community item -->
+                  <div class="item">
+                    <p class="message" style="margin-top:2px;">
+                      <a href="<?php echo $link ?>" class="name" target="_blank">
+                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo $date ?></small>
+                        <?php echo $title ?>
+                      </a>
+                      <?php echo $descr ?>
+                    </p>
+                  </div><!-- /.item -->
+                  <!-- chat item -->
+                  <?php } ?>
+                  
+                </div><!-- /.chat -->
+              </div><!-- /.box (chat box) -->
+                
+                </div>
+                <!-- end:: rss feeds -->
 
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="x_panel tile fixed_height_320 overflow_hidden">
-                            <div class="x_title">
-                                <h2>Member Stats</h2>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="x_content">
+              </div>
 
-                                <table class="" style="width:100%">
-                                    <tr>
-                                        <td>
-                                            <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                                        </td>
-                                        <td>
-                                            <table class="tile_info">
-                                                <tr>
-                                                    <td>
-                                                        <p><i class="fa fa-square blue"></i>Friend Requests </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p><i class="fa fa-square green"></i>Friends </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p><i class="fa fa-square purple"></i>Request Ignored </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p><i class="fa fa-square red"></i>Blocked </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <p><i class="fa fa-square aero"></i>Messages </p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    
 
-                    </div>
-					
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Latest from <a href="//forum.isvipi.org" target="_blank">the community</a></h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                	<?php $l_feeds = $stats->get_latest_feeds(); 
-										$limit = 3;
-										for($x=0;$x<$limit;$x++) {
-											$title = str_replace(' & ', ' &amp; ', $l_feeds[$x]['title']);
-											$link = $l_feeds[$x]['guid'];
-											$description = $l_feeds[$x]['desc'];
-											$descr = truncate_($description, 10);
-											$date = date('M/d/Y', strtotime($l_feeds[$x]['date']));
-											$n_d = explode('/',$date);
-									?>
-                                    <article class="media event">
-                                        <div class="pull-left date">
-                                            <p class="month"><?php echo $n_d[0] ?></p>
-                                            <p class="day"><?php echo $n_d[1] ?></p>
-                                            <p class="month"><?php echo $n_d[2] ?></p>
-                                        </div>
-                                        <div class="media-body">
-                                            <a class="title" href="#"><?php echo $title ?></a>
-                                            <p><?php echo $description ?></p>
-                                        </div>
-                                    </article>
-                                    
-                                    <?php } ?>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Latest Members</h2>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-                                    <div class="col-md-12 col-sm-4 col-xs-12 animated fadeInDown">
-                                         <?php $members = array_filter($stats->get_latest_members(8));
-										 		if(is_array($members)) foreach ($members as $key => $mi) {
-										 ?> 
-                                            
-                                            <div class="profile_view sty-pr">
-                                                <div class="col-sm-12 styl-mb">
-                                                    <div class="adm-members">
-                                                        <img src="<?php echo user_pic($mi['profile_pic']) ?>" alt="" class="img-square">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-12 bottom text-center">
-                                                	<a href="<?php echo ISVIPI_URL .'profile/'.$mi['username'] ?>" class="btn btn-primary btn-xs" data-toggle="tooltip" title="<?php echo $mi['fullname'] ?>" target="_blank"> 
-                                                    	View Profile 
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            
-                                            <?php } else {?>
-                                            <div class="profile_view sty-pr">
-                                            	<p>No members found.</p>
-                                            </div>
-                                            <?php } ?>
-                                            
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-        <?php $fr = $stats->friends_stats(); ?>
-        <script src="<?php echo ISVIPI_ADMIN_URL .'style/js/chartjs/chart.min.js' ?>"></script>
-		<script>
-        var doughnutData = [
-            {
-                value: <?php echo $fr['blocked'] ?>,
-                color: "#E74C3C"
-            },
-            {
-                value: <?php echo $fr['ignored'] ?>,
-                color: "#9B59B6"
-            },
-            {
-                value: <?php echo $fr['pm'] ?>,
-                color: "#BDC3C7"
-            },
-            {
-                value: <?php echo $fr['friends'] ?>,
-                color: "#26B99A"
-            },
-            {
-                value: <?php echo $fr['f_request'] ?>,
-                color: "#3498DB"
-            }
-    ];
-        var myDoughnut = new Chart(document.getElementById("canvas1").getContext("2d")).Doughnut(doughnutData);
-    </script>
-
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/footer.php') ?>

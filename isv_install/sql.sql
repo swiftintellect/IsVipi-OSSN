@@ -393,16 +393,15 @@ INSERT INTO `countries` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `ph
 CREATE TABLE IF NOT EXISTS `s_settings` (
   `id` int(1) NOT NULL,
   `user_reg` int(1) NOT NULL,
-  `user_validate` int(1) NOT NULL,
   `sys_cron` int(1) NOT NULL,
   `timezone` int(1) NOT NULL,
   `admin_end` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `encry_key` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
   `logo_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `favicon` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `mobile` int(1) NOT NULL,
   `plugins` int(1) NOT NULL,
   `errors` int(1) NOT NULL,
-  `newuser_notice` int(1) NOT NULL,
   `last_upd_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `upd_avail` int(1) NOT NULL,
   PRIMARY KEY (`id`)
@@ -412,7 +411,7 @@ CREATE TABLE IF NOT EXISTS `s_settings` (
 -- Dumping data for table `s_settings`
 --
 
-INSERT INTO `s_settings` (`id`, `user_reg`, `user_validate`, `sys_cron`, `timezone`, `admin_end`, `logo_name`, `favicon`, `mobile`, `plugins`, `errors`, `newuser_notice`) VALUES ('1', '1', '1', '1', '1', 'admin', 'logo.png', 'favicon.png', '0', '0', '0', '1');
+INSERT INTO `s_settings` (`id`, `user_reg`, `user_validate`, `sys_cron`, `timezone`, `admin_end`, `encry_key`, `logo_name`, `favicon`, `mobile`, `plugins`, `errors`, `newuser_notice`) VALUES ('1', '1', '1', '1', '1', 'admin', 'grQw57V4iJ3PgnBX', 'logo.png', 'favicon.png', '0', '0', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -433,6 +432,52 @@ CREATE TABLE IF NOT EXISTS `s_meta` (
 
 INSERT INTO `s_meta` (`id`, `tags`, `description`) VALUES
 (1, 'social network,community,friendship,meet new people,interact', 'This is a social nework where people meet, interact, create new friends and explore the social life');
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `m_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `m_settings` (
+  `id` int(1) NOT NULL,
+  `allow_registration` tinyint(1) NOT NULL DEFAULT 1,
+  `must_validate` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_acc_deletion` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_acc_undeletion` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_acc_suspension` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_acc_unsuspension` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_acc_activation` tinyint(1) NOT NULL DEFAULT 1,
+  `notify_admin_newuser` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `m_settings`
+--
+
+INSERT INTO `m_settings` (`id`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `f_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `f_settings` (
+  `id` int(1) NOT NULL,
+  `number_feeds` int(3) NOT NULL DEFAULT 20,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `f_settings`
+--
+
+INSERT INTO `f_settings` (`id`) VALUES
+(1);
 
 -- --------------------------------------------------------
 

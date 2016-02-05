@@ -14,3 +14,5 @@ Added embed videos
 Added infinite scroll for timeline feed
 Added infinite scroll to the user wall
 Fixed the styling issue with the first timeline feed
+New Admin Template
+Replaced wysiwyg with ckEditor

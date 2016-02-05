@@ -1,8 +1,8 @@
 <?php 
+	global $converter;
 	require_once(ISVIPI_ADMIN_BASE .'functions.php');
 	require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
-	require_once(ISVIPI_CLASSES_BASE .'utilities/encrypt_decrypt.php'); 
-	$converter = new Encryption;
+	
 	$track = new admin_security();
 	if(!$track->admin_logged_in()){
 		

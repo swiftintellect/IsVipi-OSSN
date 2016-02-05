@@ -133,7 +133,8 @@ class userRegistration {
 		$isv_siteSettings = $siteInfo->getSiteSettings();
 		$isv_siteDetails = $siteInfo->getSiteInfo();
 		
-		if($isv_siteSettings['user_validate'] === 1){
+		//if the user must validate new account
+		if(MUST_VALIDATE){
 			
 			/* generate our validation code */
 			$validCode = $this->getValidationCode($hashedPWD);
@@ -167,7 +168,7 @@ class userRegistration {
 		}
 		
 		//notify admin if this is enabled
-		if($isv_siteSettings['notifyAdmin_newUser'] ===1){
+		if(NOTIFY_ADMIN_NEW_USER){
 			notifyAdmin($this->name,'New User',$isv_siteDetails['s_email'],$isv_siteDetails['s_title']);
 		}
 		

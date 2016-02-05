@@ -1,53 +1,90 @@
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/head.php') ?>
-<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/header.php') ?>
-<!-- page content -->
-<div class="right_col" role="main">
-	<div class="page-title">
-    	<div class="title_left">
-        	<h3>Credits</h3>
-        </div>
-        <div class="title_right">
-    
-    	</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="row min-height"><!-- row -->
-    	<div class="col-md-6 col-sm-6 col-xs-12"><!-- col-md-6 -->
-        	<div class="x_panel">
-                <h3 class="cred_title">Founder & Project Manager</h3>
-                <p>Jones Baraza</p>
-        	</div>
-            <div class="x_panel">
-                <h3 class="cred_title">Tester</h3>
-                <p>Martin Sundseth (Norway)</p>
-            </div>
-            <!--<div class="x_panel">
-                <h3 class="cred_title">Hosting</h3>
-                <p>We are grateful to <a href="">hoster</a> for allowing us to use their servers for free.</p>
-            
-            
+<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Credits
+          </h1>
+          <ol class="breadcrumb">
+            <li>
+            	<a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>">
+                	<i class="fa fa-dashboard"></i> Dashboard
+                </a>
+            </li>
+            <li class="active">Credits</li>
+          </ol>
+        </section>
 
-			</div>-->
-        </div><!-- end::col-md-6 -->
-        
-        <div class="col-md-6 col-sm-6 col-xs-12"><!-- col-md-6 -->
-        	<div class="x_panel">
-                <h3 class="cred_title">Frameworks</h3>
-                <p>Bootstrap, FontAwesome, ionicframework, jQuery, AdminLTE, gentelella</p>
-            </div>
-            <div class="x_panel">
-                <h3 class="cred_title">Plugins</h3>
-                <p>tinymce, html5shiv, respond.min.js, jQuery Form Plugin (malsup), jquery.timer</p>
-			</div>
-        </div><!-- end::col-md-6 -->
-        <div class="clearfix"></div>
-        <hr />
-        <div class="col-md-6">
-        	<div class="x_panel">
-            	<h3 class="edit_prof_h3">Donate</h3>
-                <p>Is IsVipi OSSN doing a great job? Well, if you think it does, please consider making a donation. Your donations go a long way towards supporting the development of IsVipi OSSN.</p>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-bottom:20px">
+        <!-- Main content -->
+        <section class="content">
+			<div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Founder & Project Manager</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>Jones Baraza</p> 
+                  <a href="https://twitter.com/JonesWiz" class="btn btn-social-icon btn-twitter" title="follow me on twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                  <a href="https://ke.linkedin.com/in/jones-baraza-71b981104" class="btn btn-social-icon btn-linkedin" title="lets connect on LinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+              
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Tester</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  Martin Sundseth (Norway)
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+            
+            <div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Frameworks & Plugins</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                	<div class="col-md-12">
+                    	<li>Bootstrap</li> 
+                        <li>FontAwesome</li> 
+                        <li>jQuery</li>
+                        <li>jQuery Timer Plugin (Cyntax Technologies)</li>
+                    	<li>AdminLTE</li> 
+                        <li>LiveUrl (Stephan Fischer)</li> 
+                        <li>jQuery Form Plugin (Malsup)</li>
+                        <li>Chartt.js (Nick Downie)</li>
+                        <li>ckEditor</li>
+                    </div>
+                    
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+            <div class="clearfix"></div>
+            <div class="col-md-6">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Donate</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>If you think developers at IsVipi OSSN are doing a good job, consider saying thank you by making a donation to the project. Your donations go a long way towards motivating our developers. You can also choose to sponsor a version. To know more about sponsoring future versions, please <a href="http://isvipi.org/support/" target="_blank">drop us a line</a>.</p>
+                  <p>
+                  	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-bottom:20px">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="ZMWP83F3ACBBC">
                 <input type="hidden" name="on0" value="Donation Amount">
@@ -67,18 +104,34 @@
                 </div>
                 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
-
+                  </p>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
             </div>
-        </div>
-        
-        <div class="col-md-6">
-        	<div class="x_panel">
-            	<h3 class="edit_prof_h3">Contribute</h3>
-                <p>If you are a web developer and would like to help make IsVipi OSSN better, you can <a href="https://github.com/IsVipiOfficial/IsVipi-OSSN" target="_blank"><u>fork our project at github</u></a>.</p>
+            
+            <div class="col-md-6">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Contribute</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>If you are a web developer and would like to help make IsVipi OSSN better, you can fork our project at github.</p>
+                  <p>
+                  <iframe src="https://ghbtns.com/github-btn.html?user=IsVipiOfficial&repo=IsVipi-OSSN&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+                  
+                  <iframe src="https://ghbtns.com/github-btn.html?user=IsVipiOfficial&repo=IsVipi-OSSN&type=star&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+                  
+                  <iframe src="https://ghbtns.com/github-btn.html?user=IsVipiOfficial&repo=IsVipi-OSSN&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+                  </p>
+                  <p>You can also contribute by blogging about this software, creating How Tos, set up guidelines on different platforms, explainer videos and so on. We will be happy to create a backlink to your site. </p>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
             </div>
-        </div>
-        
-        
-	</div><!-- end::row -->
+            <div class="clearfix"></div>
 
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/footer.php') ?>

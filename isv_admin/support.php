@@ -1,53 +1,70 @@
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/head.php') ?>
-<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/header.php') ?>
-<!-- page content -->
-<div class="right_col" role="main">
-	<div class="page-title">
-    	<div class="title_left">
-        	<h3>Need Help With:</h3>
-        </div>
-        <div class="title_right">
-    
-    	</div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="row min-height"><!-- row -->
-    	<div class="col-md-6 col-sm-6 col-xs-12"><!-- col-md-6 -->
-        	<div class="x_panel">
-                <h3 class="cred_title">Customizations</h3>
-                <p>Would you like:</p>
-                <ul>
-                	<li>some changes made to the script</li>
-                    <li>some new features that are not currently available</li>
-                </ul>
-                Please contact us and we will be able to help.
-        	</div>
-        </div><!-- end::col-md-6 -->
-        
-        <div class="col-md-6 col-sm-6 col-xs-12"><!-- col-md-6 -->
-        	<div class="x_panel">
-                <h3 class="cred_title">Custom Project</h3>
-                <p>Do you have a project that:</p>
-                <ul>
-                	<li>requires an expert opinion or advise</li>
-                    <li>would like to hire experienced web developers to develop it</li>
-                </ul>
-                Look no further, find contact details below <i class="fa fa-hand-o-down"></i>
-            </div>
-        </div><!-- end::col-md-6 -->
-        <div class="clearfix"></div>
-        <hr />
-        <div class="col-md-8">
-        	<div class="x_panel">
-            	<h3 class="edit_prof_h3">Contact Us</h3>
-                <p>Skype: IsVipiOfficial</p>
-                <p>Email: support@isvipi.org</p>
-                <p>Facebook: <a href="https://www.facebook.com/isvipiOfficial/" target="_blank">https://www.facebook.com/isvipiOfficial/</a>
+<?php require_once(ISVIPI_ADMIN_BASE .'ovr/sidebar.php') ?>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Help/Support
+          </h1>
+          <ol class="breadcrumb">
+            <li>
+            	<a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>">
+                	<i class="fa fa-dashboard"></i> Dashboard
+                </a>
+            </li>
+            <li class="active">Help/Support</li>
+          </ol>
+        </section>
 
-            </div>
-        </div>
-        
-	</div><!-- end::row -->
+        <!-- Main content -->
+        <section class="content">
+        	<div class="col-md-6">
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Custom Project</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>If you have a custom web project that you would like help with, our team at IsVipi OSSN can help. We have a group of experienced web developers who can handle your project right from planning, development, testing and launch. </p> 
+                  <a href="//isvipi.org/support/" target="_blank" class="btn btn-warning btn-block">Talk to Us</a>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+              
+              <div class="box box-default">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Talk to Us</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>Skype: IsVipiOfficial</p> 
+                  <p>Facebook: https://www.facebook.com/isvipiOfficial/</p>
+                  <p>Email: support@isvipi.org</p>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+            
+            <div class="col-md-6">
+              <div class="box box-success">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Customization</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>If you would like a few changes made to the software, our team is available. Having built this software from scratch, we know every nook and cranny of the software and therefore are in the best position to make any type of changes you need. Whether it is a new theme/template, new functions or tweak a function to work in a particular way, please talk to us. </p> 
+                  <a href="//isvipi.org/support/" target="_blank" class="btn btn-success btn-block">Talk to Us</a>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
 
+		<div class="clearfix"></div>
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
 <?php require_once(ISVIPI_ADMIN_BASE .'ovr/footer.php') ?>

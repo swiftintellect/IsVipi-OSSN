@@ -1,47 +1,68 @@
-           <!-- top navigation -->
-            <div class="top_nav">
-            	<?php $admin = $track->admin_details($_SESSION['isv_admin_id']); ?>
-                <div class="nav_menu">
-                    <nav class="" role="navigation">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-                        
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="admin_bar_menu">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <?php echo $admin['name'] ?>
-                                    <span class=" fa fa-angle-down"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'admin_profile' ?>">  Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'support' ?>">Help</a>
-                                    </li>
-                                    <li><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                    </li>
-                                </ul>
-                            </li>
+<?php $admin = $track->admin_details($_SESSION['isv_admin_id']); ?>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
 
-                        </ul>
-                    </nav>
-                </div>
+      <!-- Main Header -->
+      <header class="main-header">
 
-            </div>
-            <!-- /top navigation -->
-            <?php if(isset($_SESSION['isv_success']) && !empty($_SESSION['isv_success'])){?>
-                <div class="alert alert-success succ-mod">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                	<?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?>
-                </div>
-            <?php } else if(isset($_SESSION['isv_error']) || !empty($_SESSION['isv_error'])){?>
-                <div class="alert alert-success err-mod">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                	<?php echo $_SESSION['isv_error']; unset($_SESSION['isv_error']); ?>
-                </div>
-            <?php } ?>
+        <!-- Logo -->
+        <a href="<?php echo ISVIPI_ACT_ADMIN_URL ?>" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><?php echo $isv_siteDetails['s_title'] ?></span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><?php echo $isv_siteDetails['s_title'] ?></span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->
+
+              <!-- User Account Menu -->
+              <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs"><?php echo $admin['name'] ?></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'admin_profile' ?>" class="btn btn-primary btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-left" style="margin-left:20px">
+                      <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'support' ?>" class="btn btn-warning btn-flat">Help</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>" class="btn btn-danger btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <div class="admin_alerts">
+      <?php if(isset($_SESSION['isv_success']) && !empty($_SESSION['isv_success'])){?>
+      	<div class="alert alert-success alert-dismissable">
+        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           	<h4> <i class="icon fa fa-check"></i> Alert!</h4>
+            	<?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?>
+       	</div>
+      <?php } else if(isset($_SESSION['isv_error']) || !empty($_SESSION['isv_error'])){?>
+      	<div class="alert alert-danger alert-dismissable">
+        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           	<h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            	<?php echo $_SESSION['isv_error']; unset($_SESSION['isv_error']); ?>
+      	</div>
+      <?php } ?>
+      </div>
+      
