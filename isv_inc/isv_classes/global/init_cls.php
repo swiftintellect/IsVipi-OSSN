@@ -1,5 +1,6 @@
 <?php
 class siteManager {
+	
 	private $s_status;
 	private $s_enable_ssl;
 
