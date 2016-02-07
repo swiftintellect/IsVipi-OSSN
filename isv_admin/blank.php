@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
+            Dashboard 
           </h1>
           <ol class="breadcrumb">
             <li>
