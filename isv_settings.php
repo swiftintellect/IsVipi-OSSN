@@ -13,7 +13,7 @@
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_SUSPENDED', !!$m_settings['notify_acc_suspension']); //email when suspended
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_UNSUSPENDED', !!$m_settings['notify_acc_unsuspension']); //email when unsuspended
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION', !!$m_settings['notify_acc_activation']); //email when activated
-	define('NOTIFY_ADMIN_NEW_USER', !!$m_settings['notify_acc_activation']); //notify admin new user registered
+	define('NOTIFY_ADMIN_NEW_USER', !!$m_settings['notify_admin_newuser']); //notify admin new user registered
 	define('ISV_FEEDS_TO_LOAD', $f_settings['number_feeds']); //set the default number of feeds to load.
 	
 	/*** DEFINE URL PARAMETERS ***/
