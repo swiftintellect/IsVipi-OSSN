@@ -124,4 +124,27 @@
       <!-- /.content-wrapper -->
       
       <!-- scripts section -->
+      <!-- FEED IMAGE PREVIEW -->
+        <script>
+			function readURL(input) {
+			var url = input.value;
+			var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+			if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+				var reader = new FileReader();
+		
+				reader.onload = function (e) {
+					$('#preview2').css('display','none');
+					$('#preview').css('display','block');
+					$('#preview').attr('src', e.target.result);
+				}
+		
+				reader.readAsDataURL(input.files[0]);
+			}else{
+				 //$('#preview').attr('src', 'http://localhost/isvipi/isv_inc/isv_style.lib/default/images/logo.png');
+			}
+		}
+		$("#imgInp").change(function(){
+			readURL(this);
+		});
+		</script>
 <?php $pageManager->loadCustomFooter('g_footer','m_footer'); ?>

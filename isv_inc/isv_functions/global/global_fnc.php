@@ -248,6 +248,8 @@ function elapsedTime2($dbTime){
 	
     $time = ($time<1)? 1 : $time;
     $tokens = array (
+        31536000 => 'y',
+        604800 => 'w',
         86400 => 'd',
         3600 => 'h',
         60 => 'm',

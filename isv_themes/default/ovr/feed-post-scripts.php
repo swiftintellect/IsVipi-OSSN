@@ -87,6 +87,7 @@
 			}
 		}
 		$("#imgInp").change(function(){
+			console.log('test');
 			readURL(this);
 		});
 		</script>
