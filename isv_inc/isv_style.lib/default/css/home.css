@@ -5117,26 +5117,32 @@ table.text-center th {
 	font-weight:900;
 }
 .friend_sidebar {
-	padding:5px;
-	background:#EFEFEF;
 	width:100%;
 	display:block;
 	margin-bottom:5px !important;
 }
+.friend_sidebar .list-group-item{
+	width: 100% !important;
+	margin: 2px 0;
+	padding: 5px 0;
+	border: none !important;
+	background: #F8F8F8;
+	padding: 5px;
+	color: #606060 !important;
+}
+.friend_sidebar .list-group-item i {
+	margin-top:3px;
+	margin-right:5px;
+	font-size:13px !important;
+}
 .friend_sidebar img {
 	width:50px;
 	height:40px;
-	float:left;
+	display:inline-block;
 }
 .username-sidebar-friend {
 	margin-left:10px;
-}
-.username-sidebar-friend:hover {
-	color:#06F !important;
-	background-color:transparent !important;
-}
-.sidebar_friends_spacer {
-	height:10px !important;
+	color:#000 !important;
 }
 .tooltip.top .tooltip-inner {
     background-color:#06F;
@@ -5284,4 +5290,19 @@ table.text-center th {
 	width:50%;
 	margin:10px auto;
 	min-height:30px;
+}
+.photo-alb {
+	width:46% !important;
+	height:150px !important;
+	display:inline-block !important;
+	margin-left:1%;
+	margin-top:10px;
+	margin-bottom:20px;
+}
+.photo-alb img {
+	height:100% !important;
+	width:100% !important;
+}
+.album_title {
+	padding:2px 5px;
 }

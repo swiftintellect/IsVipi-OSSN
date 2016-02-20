@@ -450,6 +450,8 @@ CREATE TABLE IF NOT EXISTS `m_settings` (
   `notify_acc_unsuspension` tinyint(1) NOT NULL DEFAULT 1,
   `notify_acc_activation` tinyint(1) NOT NULL DEFAULT 1,
   `notify_admin_newuser` tinyint(1) NOT NULL DEFAULT 1,
+  `max_albums` int(2) NOT NULL DEFAULT 5,
+  `max_photos_in_album` int(2) NOT NULL DEFAULT 10,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -711,3 +713,31 @@ CREATE TABLE IF NOT EXISTS `isv_news` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `photo_albums`
+--
+
+CREATE TABLE IF NOT EXISTS `photo_albums` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) NOT NULL,
+  `album` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `photos`
+--
+
+CREATE TABLE IF NOT EXISTS `photos` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `album_id` bigint(20) NOT NULL,
+  `photo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` int(1) NOT NULL,
+  `upload_date` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

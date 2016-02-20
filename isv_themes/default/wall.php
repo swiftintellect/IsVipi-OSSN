@@ -63,7 +63,9 @@
                   
                   <!-- feed image -->
                   <?php if (empty($sh['s_id']) && !empty($f['feed_image'])){?>
+                  <a href="#" data-featherlight="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>">
                   	<img class="img-responsive pad" src="<?php echo ISVIPI_UPLOADS_URL.'feeds/'.ISVIPI_600.$f['feed_image']?>" alt="<?php echo $f['feed_fullname'] ?> image post">
+                  </a>
                   <?php }?>
                   
                   <!-- post attachement if is not video-->
@@ -316,6 +318,9 @@
                 </div>
               <?php } ?>
               <div class="load_more" id="load_more" style="display:none"></div>
+              
+              <?php if($getFeeds->getTotalFeeds($user) > 1){?>
               <div class="list-group-item" id="no_more_feeds" style="display:none">No more feeds</div>
+              <?php } ?>
               <div class="clear" style="margin-bottom:10px;"></div>
 			  

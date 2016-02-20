@@ -45,7 +45,9 @@
                     	<!-- Profile Image -->
                           <div class="box profile-pic-box">
                             <div class="box-body box-profile">
+                            <a href="#" data-featherlight="<?php echo user_lightbox_pic($m_info['m_profile_pic']) ?>">
                               <img class="profile-user-img img-responsive square-circle" src="<?php echo user_pic($m_info['m_profile_pic']) ?>" alt="User profile picture">
+                            </a>
                               <h3 class="profile-username text-center"><?php echo $m_info['m_fullname']; ?></h3>
                               
                               <?php if($_SESSION['isv_user_id'] === $m_info['m_user_id']){?>
@@ -132,6 +134,9 @@
                           <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'about'){?>class="active"<?php } ?>>
                           	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/about'?>">About</a>
                           </li>
+                          <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'photos'){?>class="active"<?php } ?>>
+                          	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/photos'?>">Photos</a>
+                          </li>
                           <li <?php if (isset($PAGE[2]) && $PAGE[2] == 'friends'){?>class="active"<?php } ?>>
                           	<a href="<?php echo ISVIPI_URL. 'profile/' .$m_info['m_username'] . '/friends'?>">Friends</a>
                           </li>
@@ -180,7 +185,10 @@
 						require_once(ISVIPI_ACT_THEME .'pages/edit.php');
 					} else if(isset($PAGE[2]) && $PAGE[2] === 'about'){
 						require_once(ISVIPI_ACT_THEME .'pages/about.php');
-						
+					} else if(isset($PAGE[2]) && $PAGE[2] === 'photos' && !isset($PAGE[3])){
+						require_once(ISVIPI_ACT_THEME .'pages/photos.php');
+					} else if(isset($PAGE[2]) && $PAGE[2] === 'photos' && isset($PAGE[3])){
+						require_once(ISVIPI_ACT_THEME .'pages/all_photos.php');
 					} else if (isset($PAGE[2]) && $PAGE[2] === 'friends'){
 						require_once(ISVIPI_ACT_THEME .'pages/friends.php');
 					} else if (isset($PAGE[2]) && $PAGE[2] === 'settings' && ($m_info['m_user_id'] === $_SESSION['isv_user_id'])){

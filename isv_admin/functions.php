@@ -7,6 +7,14 @@
 		}
 	}
 	
+	function upgrade_file_exists(){
+		if(file_exists(ISVIPI_ROOT. 'isv_admin/update.php')){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+	
 	function user_status($status){
 		if ($status === 0){
 			return "<span class='label label-default'>Inactive</span>";
@@ -19,4 +27,14 @@
 		} else {
 			return "<span class='label label-primary'>Unknown</span>";
 		}
+	}
+	
+	function switch_system_status($value){
+		global $isv_db;
+		
+		$stmt = $isv_db->prepare ("UPDATE s_info SET s_status = ? WHERE id=1"); 
+		$stmt->bind_param('i', $value);
+		$stmt->execute();  
+		$stmt->close();
+		
 	}

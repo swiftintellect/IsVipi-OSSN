@@ -77,6 +77,34 @@
             <div class="col-md-6">
             	<div class="box box-warning">
                     <div class="box-header with-border">
+                      <h3 class="box-title">Vulnerable Files</h3>
+                      <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                      </div><!-- /.box-tools -->
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <dl>
+                        <dt>Installation folder</dt>
+                        <?php if(install_folder_exists()){?>
+                        	<dd class="bg-red" style="padding:2px 5px;"> Delete <strong>isv_install</strong> folder and all its content! </dd>
+                        <?php } else { ?>
+                        	<dd class="bg-green" style="padding:2px 5px;"> Everything looks okay here! </dd>
+                        <?php } ?>
+                      <hr style="margin:5px 0" />
+                        <dt>Update file</dt>
+                        <?php if(upgrade_file_exists()){?>
+                        	<dd class="bg-red" style="padding:2px 5px;"> Delete <strong>update.php</strong> file found in isv_admin folder </dd>
+                        <?php } else { ?>
+                        	<dd class="bg-green" style="padding:2px 5px;"> Everything looks okay here! </dd>
+                        <?php } ?>
+                      </dl>
+
+                      
+                    </div><!-- /.box-body -->
+               </div><!-- /.box -->
+               
+               <div class="box box-warning">
+                    <div class="box-header with-border">
                       <h3 class="box-title"><i class="fa fa-question-circle"></i></h3>
                       <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>

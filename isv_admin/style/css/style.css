@@ -4782,3 +4782,6 @@ table.text-center th {
 	margin:100px auto;
 	min-height:300px;
 }
+.isv-update {
+	padding:10px;
+}

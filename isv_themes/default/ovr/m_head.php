@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home.css' ?>" rel="stylesheet">
     <link href="<?php echo ISVIPI_STYLE_URL . 'default/css/home-blue.css' ?>" rel="stylesheet">
+    <?php if($p === "profile" || $p === "home" || $p === "post"){?>
+    	<link href="<?php echo ISVIPI_STYLE_URL . 'plugins/lightbox/featherlight.css' ?>" rel="stylesheet">
+        <?php if(isset($PAGE[2]) && $PAGE[2] ==="photos"){?>
+        	<link href="<?php echo ISVIPI_STYLE_URL . 'plugins/upload/css/jquery.filer.css' ?>" rel="stylesheet">
+            <link href="<?php echo ISVIPI_STYLE_URL . 'plugins/upload/css/themes/jquery.filer-dragdropbox-theme.css' ?>" rel="stylesheet">
+        <?php } ?>
+    <?php } ?>
     <?php 
 		//load only on feeds page
 		if($PAGE[0] == "home" || $PAGE[0] == "feeds"){

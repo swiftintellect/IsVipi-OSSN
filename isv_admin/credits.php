@@ -84,25 +84,25 @@
                 <div class="box-body">
                   <p>If you think developers at IsVipi OSSN are doing a good job, consider saying thank you by making a donation to the project. Your donations go a long way towards motivating our developers. You can also choose to sponsor a version. To know more about sponsoring future versions, please <a href="http://isvipi.org/support/" target="_blank">drop us a line</a>.</p>
                   <p>
-                  	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-bottom:20px">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="ZMWP83F3ACBBC">
-                <input type="hidden" name="on0" value="Donation Amount">
-                <div class="col-md-5">
-                <select name="os0" class="form-control">
-                    <option value="10">$10.00 USD</option>
-                    <option value="25">$25.00 USD</option>
-                    <option value="50">$50.00 USD</option>
-                    <option value="100">$100.00 USD</option>
-                    <option value="250">$250.00 USD</option>
-                    <option value="500">$500.00 USD</option>
-                    <option value="1000">$1,000.00 USD</option>
-                </select> 
-                </div>
-                <div class="col-md-7">
-                <input type="submit" class="btn btn-primary" name="submit" alt="PayPal - The safer, easier way to pay online!" value="Make a Donation">
-                </div>
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-bottom:20px">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="ZMWP83F3ACBBC">
+                    <input type="hidden" name="on0" value="Donation Amount">
+                    <div class="col-md-5">
+                    <select name="os0" class="form-control">
+                        <option value="10">$10.00 USD</option>
+                        <option value="25">$25.00 USD</option>
+                        <option value="50">$50.00 USD</option>
+                        <option value="100">$100.00 USD</option>
+                        <option value="250">$250.00 USD</option>
+                        <option value="500">$500.00 USD</option>
+                        <option value="1000">$1,000.00 USD</option>
+                    </select> 
+                    </div>
+                    <div class="col-md-7">
+                    <input type="submit" class="btn btn-primary" name="submit" alt="PayPal - The safer, easier way to pay online!" value="Make a Donation">
+                    </div>
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
                   </p>
                 </div><!-- /.box-body -->

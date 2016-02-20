@@ -126,6 +126,13 @@ class member {
 		    $newUpload->image_ratio_y = true;
 		    $newUpload->Process($this->path);
 			
+			$newUpload->file_new_name_body = ISVIPI_600.$this->newName;
+		    $newUpload->image_resize = true;
+		    $newUpload->image_convert = 'jpg';
+		    $newUpload->image_x = 600;
+		    $newUpload->image_ratio_y = true;
+		    $newUpload->Process($this->path);
+			
 		    if (!$newUpload->processed) {
 				 $_SESSION['isv_error'] = 'An error occurred: '.$newUpload->error.'';
 				 header('location:'.$from_url.'');

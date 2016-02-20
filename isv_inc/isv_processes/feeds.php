@@ -126,8 +126,16 @@
 			'image' => $image
 		);
 		
+		$attachement = array(
+				 	'title' => '',
+					'description' => '',
+					'link' => '',
+					'video' => '',
+					'image' => ''
+				);
+				
 		/** add our feed **/
-		new feeds($post,'img');
+		new feeds($post,'img',$attachement);
 	}
 	
 	/*** LIKE USER FEED **/

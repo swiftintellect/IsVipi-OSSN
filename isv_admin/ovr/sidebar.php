@@ -74,7 +74,12 @@
                 <li <?php if ($PAGE[1] == 'support'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL.'support' ?>">Help/Support</a></li>
               </ul>
             </li>
-            
+            <div class="clearfix"></div>
+            <li class="bg-black">
+            	<a href="<?php echo ISVIPI_ACT_ADMIN_URL .'log_out' ?>">
+                	<span><i class="fa fa-sign-out"></i> Sign Out</span>
+                </a>
+            </li>
             
             
           </ul><!-- /.sidebar-menu -->

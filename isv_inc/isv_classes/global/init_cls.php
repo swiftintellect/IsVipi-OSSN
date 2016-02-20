@@ -106,12 +106,14 @@ class siteManager {
 					notify_acc_suspension,
 					notify_acc_unsuspension,
 					notify_acc_activation,
-					notify_admin_newuser
+					notify_admin_newuser,
+					max_albums,
+					max_photos_in_album
 			FROM m_settings WHERE id=1
 		");
 		$stmt->execute();
 		$stmt->store_result();
-		$stmt->bind_result($m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8);
+		$stmt->bind_result($m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8,$m9,$m10);
 		$stmt->fetch();
 		$stmt->close( );
 		
@@ -123,7 +125,9 @@ class siteManager {
 			'notify_acc_suspension' => $m5,
 			'notify_acc_unsuspension' => $m6,
 			'notify_acc_activation' => $m7,
-			'notify_admin_newuser' => $m8
+			'notify_admin_newuser' => $m8,
+			'max_albums' => $m9,
+			'max_photos_in_album' => $m10
 		);
 		
 	}

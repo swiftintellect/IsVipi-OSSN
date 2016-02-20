@@ -171,4 +171,38 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<!-- upload photo album modal-->
+<div class="modal fade" id="photo_album" tabindex="-1" role="dialog" aria-labelledby="photo_album">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload Photo Album</h4>
+      </div>
+      <div class="modal-body">
+      <form action="<?php echo ISVIPI_URL .'p/photo_album' ?>" method="post" enctype="multipart/form-data" runat="server">
+      	<div class="alert alert-info" style="padding:10px">
+        	<li>Maximum photo size is 2MB</li>
+            <li>Maximum number of photos in an album is <?php echo MAX_PHOTOS_IN_ALBM ?></li>
+            <li>Allowed file types 'jpg', 'jpeg', 'png', 'gif'</li>
+            <li>Hold ctrl to select multiple pictures (max. 5 photos)</li>
+        </div>
+        <div style="clear:both"></div>
+            <label>Album Title</label>
+            <input name="title" type="text" id="title" class="form-control" placeholder="enter album title e.g. my new album"/>
+            <div style="clear:both"></div>
+            <hr style="margin:10px 0"/>
+            <input type="file" name="files[]" id="filer_input" multiple="multiple">
+        
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" name="aop" value="<?php echo $converter->encode('new_albm') ?>" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 

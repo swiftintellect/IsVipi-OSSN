@@ -91,14 +91,28 @@
             <div class="col-md-6">
             	<div class="box box-warning">
                     <div class="box-header with-border">
-                      <h3 class="box-title"><i class="fa fa-question-circle"></i></h3>
+                      <h3 class="box-title">Photo Album Settings</h3>
                       <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                    	<p>This section includes settings that affect all members on the site. </p>
-                      
+                    	<form role="form" action="<?php echo ISVIPI_URL .'aa/s_general' ?>" method="POST">
+                        	<div class="form-group">
+                              <label for="maximum photo albums">Maximum Photo Albums</label>
+                              <input type="number" name="max_photo_albms" class="form-control" value="<?php echo MAX_PHOTO_ALBMS ?>">
+                              <div class="text-blue">maximum number of photo albums each member can have (0-99)</div>
+                            </div>
+                            <div class="form-group">
+                              <label for="maximum photos in album">Maximum Photos in Album</label>
+                              <input type="number" name="max_photos_inalbm" class="form-control" value="<?php echo MAX_PHOTOS_IN_ALBM ?>">
+                              <div class="text-blue">maximum number of photos in each album (0-99)</div>
+                            </div>
+                          	<div class="box-footer">
+                                <input type="hidden" name="aop" value="<?php echo $converter->encode('s_photo_albms') ?>" />
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                      	</form>
                     </div><!-- /.box-body -->
                </div><!-- /.box -->
            </div>

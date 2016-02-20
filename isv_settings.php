@@ -15,6 +15,8 @@
 	define('ISV_EMAIL_NOTIFY_ACCOUNT_ACTIVATION', !!$m_settings['notify_acc_activation']); //email when activated
 	define('NOTIFY_ADMIN_NEW_USER', !!$m_settings['notify_admin_newuser']); //notify admin new user registered
 	define('ISV_FEEDS_TO_LOAD', $f_settings['number_feeds']); //set the default number of feeds to load.
+	define('MAX_PHOTO_ALBMS', $m_settings['max_albums']); //set maximum number of photo albums per memmber
+	define('MAX_PHOTOS_IN_ALBM', $m_settings['max_photos_in_album']); //set maximum number of photos in an album per memmber
 	
 	/*** DEFINE URL PARAMETERS ***/
 	define ('ISVIPI_ACT_THEME_URL', ISVIPI_URL .'themes/' .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR); //theme url

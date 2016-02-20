@@ -232,6 +232,35 @@ function elapsedTime($dbTime){
     }
 }
 
+function elapsedTime2($dbTime){
+	$timeOffset = date('O');
+	$offSetSign = $timeOffset[0];
+
+	//convert offset to seconds
+	$timeOffset = $timeOffset * 60 * 60;
+	$timeOffset = $timeOffset / 100;
+	$time = strtotime($dbTime);
+	if ($offSetSign === '+'){
+		$time = (time() - $time) - $timeOffset; // we subtract if the offset is positive
+	} else {
+		$time = (time() - $time) + $timeOffset; // we add if offset is negative
+	}
+	
+    $time = ($time<1)? 1 : $time;
+    $tokens = array (
+        86400 => 'd',
+        3600 => 'h',
+        60 => 'm',
+        1 => 's'
+    );
+
+    foreach ($tokens as $unit => $text) {
+        if ($time < $unit) continue;
+        $numberOfUnits = floor($time / $unit);
+        return $numberOfUnits.$text.(($numberOfUnits>1)?'':'');
+    }
+}
+
 function userGender($user_id){
 	global $isv_db,$userGender;
 	
@@ -290,7 +319,7 @@ function is_online($last_activity){
 	$time_offline = 10; //considered to be offline if inactive for 10 minutes
 	if($time > ($time_offline * 60)){
 		//is offline so show nothing
-		//echo "<i class='fa fa-circle text-red offline-online'></i>";
+		echo elapsedTime2($last_activity);
 	} else {
 		//is online
 		echo "<i class='fa fa-circle text-green offline-online'></i>";
@@ -717,4 +746,32 @@ function truncate_($text, $limit){
 
 function clickable_links($text){
     return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1" target="_blank">$1</a>', $text);
+}
+function user_lightbox_pic($pic){
+
+	if(empty($pic)){
+		return ISVIPI_STYLE_URL . 'site/user.jpg';
+	} else if (!empty($pic) && !file_exists(ISVIPI_UPLOADS_BASE . 'ppics/'.ISVIPI_600.$pic)){
+		return ISVIPI_STYLE_URL . 'site/user.jpg';
+	} else if (!empty($pic) && file_exists(ISVIPI_UPLOADS_BASE . 'ppics/'.ISVIPI_600.$pic)){
+		return ISVIPI_UPLOADS_URL . 'ppics/'.ISVIPI_600.$pic;
+	}
+}
+function load_default_photo($album_id){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare("SELECT photo from photos WHERE album_id=? LIMIT 1");
+	$stmt->bind_param('i', $album_id);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($photo);
+	$stmt->fetch();
+	$stmt->close();
+	
+	if(empty($photo)){
+		echo ISVIPI_STYLE_URL."site/".'noalbum.png';
+	} else {
+		echo ISVIPI_UPLOADS_URL."albums/".ISVIPI_600.$photo;
+	}
+
 }

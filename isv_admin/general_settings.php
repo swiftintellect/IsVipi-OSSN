@@ -22,6 +22,24 @@
         <section class="content">
         	<div class="col-md-6">
               <!-- general form elements -->
+              <div class="box <?php if($isv_siteSettings['upd_avail'] == 1){ ?>box-danger<?php } else { ?>box-success<?php } ?>">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Version <?php echo ISV_VERSION ?></h3>
+                </div><!-- /.box-header -->
+                <?php if($isv_siteSettings['upd_avail'] == 1){ ?>
+                	<p class="isv-update bg-red">
+                    	An update is available.<br />
+                        <a href="" class="btn btn-default btn-sm">Download Update</a>
+                    </p>
+                <?php } else { ?>
+					<p class="isv-update bg-green">
+                    	You are running the latest version
+                        <a href="<?php echo ISVIPI_URL .'aa/s_general/'.$converter->encode('updates') ?>" class="btn btn-warning btn-xs pull-right">Check for updates</a>
+                    </p>
+                <?php } ?>
+                <div class="clearfix"></div>
+              </div><!-- /.box -->
+              
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">General Settings</h3>
@@ -57,6 +75,7 @@
             </div>
             
             
+            
             <div class="col-md-6">
             	<div class="box box-warning">
                     <div class="box-header with-border">
@@ -68,7 +87,7 @@
                     <div class="box-body">
                     	<dl>
                         	<dt>Site URL</dt>
-                        	<dd>Site URL must be in the format http://yoursite.com without www.</dd>
+                        	<dd>Site URL must be in the format http://yoursite.com without www. and without "/" at the end</dd>
                             <hr style="margin:5px 0" />
                             <dt>Use Default Timezone</dt>
                         	<dd>Check this if correct time (feeds, alerts, chats) is not being displayed on the site.</dd>
