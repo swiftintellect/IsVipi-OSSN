@@ -28,8 +28,9 @@
                 </div><!-- /.box-header -->
                 <?php if($isv_siteSettings['upd_avail'] == 1){ ?>
                 	<p class="isv-update bg-red">
-                    	An update is available.<br />
-                        <a href="" class="btn btn-default btn-sm">Download Update</a>
+                    	An update is available. Please visit <a href="http://isvipi.org/" target="_blank"><span class="text-blue">IsVipi OSSN</span></a> for more details.
+                        <div class="clearfix"></div>
+                        <a href="<?php echo ISVIPI_URL .'aa/s_general/'.$converter->encode('updates') ?>" class="btn btn-warning btn-sm" style="margin-left:10px;">Check for updates</a>
                     </p>
                 <?php } else { ?>
 					<p class="isv-update bg-green">

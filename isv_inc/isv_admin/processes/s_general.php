@@ -556,16 +556,14 @@
 		global $isv_db,$isv_siteSettings;
 
 			//current stable version available for download
-			$curr_ = file_get_contents('http://isvipi.org/version/version.php');
-			
+			$latest = file_get_contents('http://isvipi.org/version/latest.php/');
+
 			//update the last time we checked for an update
 			$stmt = $isv_db->prepare("UPDATE s_settings SET last_upd_check = UTC_TIMESTAMP() WHERE id=1");
 			$stmt->execute();
 			$stmt->close();
 			
-			echo $curr_; exit();
-	
-			if($curr_ > ISV_VERSION) {
+			if($latest > ISV_VERSION) {
 				
 				//update available
 				$stmt = $isv_db->prepare("UPDATE s_settings SET upd_avail = 1 WHERE id=1");
@@ -575,7 +573,9 @@
 				$_SESSION['isv_success'] = 'An update is available, please update your site to the latest version.';
 				header('location:'.$from_url.'');
 				exit();
+				
 			} else {
+				
 				//update not available
 				$stmt = $isv_db->prepare("UPDATE s_settings SET upd_avail = 0 WHERE id=1");
 				$stmt->execute();
