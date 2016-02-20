@@ -48,7 +48,7 @@
 
         <div class="row">
             <div class="text-center" style="width:70%; margin:10px auto !important">
-                <p class="lead">You are one step away from updraging your IsVipi OSSN installation to version 1.2.1. Click the upgrade button below and wait for a few seconds as your system is upgraded.</p>
+                <p class="lead">You are one step away from updraging your IsVipi OSSN installation to version 2.0.1. Click the upgrade button below and wait for a few seconds as your system is upgraded.</p>
                 <p style="text-align:left; margin-left:15px;">
                 	<?php if(isset($_GET['update']) && $_GET['update'] == "update"){
 						

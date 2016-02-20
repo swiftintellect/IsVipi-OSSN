@@ -1,21 +1,21 @@
-<li>New homepage design/layout</li>
-                        <li>New Admin Template</li>
-                        <li>Switched to phpmailer for all site mail delivery</li>
-                        <li>User can now delete a friend request</li>
-                        <li>Important POST and GET variables are being encrypted</li>
-                        <li>Encryption key size reduced to 16 for compatibility with php 5.6 and above</li>
-                        <li>Instant member deletion by an admin</li>
-                        <li>Set email notification to be sent to members whose account has been scheduled for deletion</li>
-                        <li>Set email notification to be sent to members whose account has been removed from scheduled deletion</li>
-                        <li>Set email notification to be sent to a suspended account</li>
-                        <li>Set email notification to be sent to an unsuspended account</li>
-                        <li>Set email notification to be sent to an activated account</li>
-                        <li>Added link preview on the timeline feed</li>
-                        <li>Added clickable links to the timeline feed and private chat</li>
-                        <li>Added embed videos</li>
-                        <li>Added infinite scroll for timeline feed (beta)</li>
-                        <li>Added infinite scroll to the user wall (beta)</li>
-                        <li>Fixed the styling issue with the first timeline feed</li>
-                        <li>Replaced wysiwyg with ckEditor</li>
-<li>Added lightbox </li>
-<li>Added photo albums </li>
+New homepage design/layout
+New Admin Template
+Switched to phpmailer for all site mail delivery
+User can now delete a friend request
+Important POST and GET variables are being encrypted
+Encryption key size reduced to 16 for compatibility with php 5.6 and above
+Instant member deletion by an admin
+Set email notification to be sent to members whose account has been scheduled for deletion
+Set email notification to be sent to members whose account has been removed from scheduled deletion
+Set email notification to be sent to a suspended account
+Set email notification to be sent to an unsuspended account
+Set email notification to be sent to an activated account
+Added link preview on the timeline feed
+Added clickable links to the timeline feed and private chat
+Added embed videos
+Added infinite scroll for timeline feed (beta)
+Added infinite scroll to the user wall (beta)
+Fixed the styling issue with the first timeline feed
+Replaced wysiwyg with ckEditor
+Added lightbox
+Added photo albums
