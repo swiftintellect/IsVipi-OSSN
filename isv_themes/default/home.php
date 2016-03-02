@@ -22,8 +22,9 @@
                             <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST" id="text-update">
                             	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="What's on your mind?" ></textarea>
                             	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('new-feed') ?>" />
-                                
-                                <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" />
+                                <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-primary pull-right">Post</button>
+                                </div>
                                 <div class="feed-spinner" id="processing" style="display:none"><i class="fa fa-spinner fa-pulse"></i></div>
                                 <div class="clear"></div>
                             </form>
@@ -41,7 +42,9 @@
                                 <input type="hidden" name="isv_op" value="<?php echo $converter->encode('img-feed') ?>" />
                                 <div class="clear"></div>
                                 <hr />
-                                <input type="submit" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic"/>
+                                <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic">Post</button>
+                                </div>
                                 <input type="button" class="btn btn-sm btn-primary pull-right" value="Post" id="uplPic2" disabled="disabled" style="display:none"/>
                                 <div class="feed-spinner" id="processing2" style="display:none"><i class="fa fa-spinner fa-pulse"></i></div>
                                 <div class="clear"></div>

@@ -8,7 +8,7 @@
 	}
 	
 	function upgrade_file_exists(){
-		if(file_exists(ISVIPI_ROOT. 'isv_admin/update.php')){
+		if(file_exists(ISVIPI_ROOT. 'update')){
 			return TRUE;
 		} else {
 			return FALSE;

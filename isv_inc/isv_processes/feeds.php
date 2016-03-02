@@ -62,10 +62,16 @@
 	
 	/*** NEW TEXT FEED **/
 	if ($operation === 'new-feed'){
+		
+		/** clean our variable and format it accordingly **/
+		$newFeed = cleanPOST('feed');
+		$newFeed = str_replace("  ","",$newFeed);
+		$newFeed = nl2br($newFeed);
+		
 		//capture our command to include or not to include the attachment
 		$command = cleanPOST('no_include');
 		
-		if ((!isset($_POST['feed']) || empty($_POST['feed'])) && (!empty($command))){
+		if (empty($newFeed) && (!empty($command))){
 			 $array['err'] = true;
 			 $array['message'] = 'You cannot submit an empty feed.';
 			 echo json_encode($array);
@@ -91,10 +97,12 @@
 				);
 		}
 		
-		/** clean our variable and format it accordingly **/
-		$newFeed = cleanPOST('feed');
-		$newFeed = str_replace("  ","",$newFeed);
-		$newFeed = nl2br($newFeed);
+		if (empty($newFeed) && (empty(array_filter($attachement)))){
+			 $array['err'] = true;
+			 $array['message'] = 'Please enter some text to update.';
+			 echo json_encode($array);
+			 exit();
+		}
 		
 		/** add our feed **/
 		new feeds($newFeed,'text',$attachement);

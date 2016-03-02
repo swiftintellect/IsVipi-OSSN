@@ -23,7 +23,7 @@
 
 	){?>
    	<hr style="margin:5px 0">
-   	<strong>Phone</strong> <?php echo $m_info['m_phone'] ?>
+   	<strong><i class="fa fa-phone margin-r-5"></i>  Phone</strong> <?php echo $m_info['m_phone'] ?>
                            
 	<?php } ?>
  	<hr style="margin:5px 0">

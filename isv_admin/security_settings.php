@@ -93,7 +93,7 @@
                       <hr style="margin:5px 0" />
                         <dt>Update file</dt>
                         <?php if(upgrade_file_exists()){?>
-                        	<dd class="bg-red" style="padding:2px 5px;"> Delete <strong>update.php</strong> file found in isv_admin folder </dd>
+                        	<dd class="bg-red" style="padding:2px 5px;"> Delete <strong>update</strong> folder and all its content</dd>
                         <?php } else { ?>
                         	<dd class="bg-green" style="padding:2px 5px;"> Everything looks okay here! </dd>
                         <?php } ?>
@@ -113,7 +113,7 @@
                     <div class="box-body">
                     	<dl>
                         	<dt>Admin URL</dt>
-                        	<dd>This is the link to access our admin panel. Please make sure that you use a word that you can easily remember but will be hard to guess for someone else. By default, the word is <span class="text-green">admin</span> but it is strongly recommended that you change this. Also, <span class="text-red">isv_admin</span> is a reserved word so don't use it. It will result in errors.</dd>
+                        	<dd>This is the link to access our admin panel. Please make sure that you use a word that you can easily remember but will be hard to guess for someone else. By default, the word is <span class="text-green">admin</span> but it is strongly recommended that you change this. Also, <span class="text-red">isv_admin</span> is a reserved word so don't use it. It will result in errors. <strong>MUST BE A SINGLE WORD.</strong></dd>
                             <hr style="margin:8px 0" />
                             <dt>Encryption Key</dt>
                         	<dd>It is recommended that once you generate the encryption key (preferably just after installation), you do not change it again, unless it is absolutely necessary. This is because when account validation emails, for example, are sent out, they may contain an earlier key and if you change this often, many accounts will not be validated.</dd>

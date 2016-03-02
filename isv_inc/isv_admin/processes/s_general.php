@@ -172,6 +172,13 @@
 		$admin = cleanPOST('admin');
 		$ssl = cleanPOST('ssl');
 		
+		//check if admin name is a reserved word
+		if($admin == "isv_admin"){
+			$_SESSION['isv_error'] = 'The word chosen, '.$admin.', is a reserved word';
+		 	header('location:'.$from_url.'');
+		 	exit();
+		}
+		
 		//check if our variables have been supplied
 		if(!isset($admin) || empty($admin)){
 			$_SESSION['isv_error'] = 'Please enter admin back-end name';
@@ -198,7 +205,7 @@
 		
 		//return success
 		$_SESSION['isv_success'] = 'Security settings saved successfully';
-		header('location:'.ISVIPI_URL.$admin.'/general/');
+		header('location:'.ISVIPI_URL.$admin.'/security_settings/');
 		exit();
 		
 	}

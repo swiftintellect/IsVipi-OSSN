@@ -18,6 +18,7 @@
 						//reload our timeline
 						loadTimeline();
 						$finished = true;
+						$(':input').val('');
 					}
 					$('input[type="submit"]').prop('disabled', false);
 					$("#processing").hide();
