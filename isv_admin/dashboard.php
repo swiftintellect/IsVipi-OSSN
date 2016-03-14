@@ -191,7 +191,7 @@
                           </ul>
                         </div>
                         <div class="box-footer text-center">
-                          <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'news' ?>" class="uppercase">View All News Items</a>
+                          <a href="<?php echo ISVIPI_ACT_ADMIN_URL .'admin_news' ?>" class="uppercase">View All News Items</a>
                         </div><!-- /.box-footer -->
                       </div>
                     </div>

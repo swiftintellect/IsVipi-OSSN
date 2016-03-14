@@ -3,11 +3,11 @@ function cleanPOST($var){
 	$val = @$_POST[$var];
 	if (get_magic_quotes_gpc())
 		$val = stripslashes($val);
-	return $val;
+	return htmlspecialchars($val);
 }
 
 function cleanGET($var){
-		return stripslashes($var);
+		return stripslashes(htmlspecialchars($var));
 }
 
 function isSupplied($var){
