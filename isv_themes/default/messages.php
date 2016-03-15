@@ -8,7 +8,7 @@
         <!-- Main content -->
         <section class="content">
         	<!-- message list -->
-        	<section class="col-lg-4">
+        	<section class="col-lg-3">
 				<div class="box box-solid members">
                 	<div class="box box-solid">
                         <div class="box-header with-border">
@@ -28,7 +28,7 @@
 			
             
             <!-- chat -->
-            <section class="col-lg-8">
+            <section class="col-lg-6">
             	<?php if(empty($user_name) || $user_name === ''){ ?>
 					<div class="box box-primary">
                         <div class="box-header with-border">
@@ -68,6 +68,15 @@
             
             </section>
             <!-- end::chat -->
+            
+            <!-- announcements -->
+            <section class="col-lg-3 announcements">
+            	<div class="box box-solid">
+                    <div class="box-header">
+                    	<?php require_once(ISVIPI_ACT_THEME .'pages/news.php') ?>
+                    </div>
+                </div>
+            </section>
             
             <div class="clear"></div>
             </section>

@@ -4,8 +4,8 @@
 	setInterval(check_msg_id,15000 /* check if any data has changed every 15 seconds */);
 </script>
 
-<div class="box-header with-border">
-	<h3 class="box-title">Chat with <strong><?php echo $full_name ?></strong></h3>
+<div class="box-header with-border chat-header">
+	<h3 class="box-title"><strong><?php echo $full_name ?></strong></h3>
 	<div class="box-tools pull-right">
     	<div class="mailbox-controls">
        		<div class="btn-group">

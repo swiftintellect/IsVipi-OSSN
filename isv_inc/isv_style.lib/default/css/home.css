@@ -1898,12 +1898,12 @@ a:focus {
 
 /* Scrollbar */ 
 
-.chat::-webkit-scrollbar{width: 10px;}
+.chat::-webkit-scrollbar{width: 5px;}
 
-.chat::-webkit-scrollbar-thumb{background-color:rgb(7, 141, 224); border-radius: 0;}
+.chat::-webkit-scrollbar-thumb{background-color:rgb(7, 141, 224); border-radius: 20px;}
 .chat::-webkit-scrollbar-thumb:hover{background-color:rgb(21, 132, 212);}
 
-.chat::-webkit-scrollbar-track{background-color:rgb(237, 237, 237);}
+.chat::-webkit-scrollbar-track{background-color:#FFF;}
 
 
 /* End Scrollbar */
@@ -1912,6 +1912,12 @@ a:focus {
   padding: 5px 20px 5px 10px;
   height:65%;
   overflow-y:scroll;
+}
+.chat-header {
+	min-height:60px;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.34);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.34);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.34);
 }
 .chat .item {
   margin-bottom: 10px;
