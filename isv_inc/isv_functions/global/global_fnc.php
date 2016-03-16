@@ -777,3 +777,13 @@ function load_default_photo($album_id){
 	}
 
 }
+
+function hash_it($text){
+    $text= preg_replace("/\#(\w+)/", '&lt;a href="http://search.twitter.com/search?q=$1" target="_blank"&gt;#$1&lt;/a&gt;',$text); 
+    return $text;
+}
+
+function tag_it($text){
+    $text= preg_replace("/@(\w+)/", '&lt;a href="http://www.twitter.com/$1" target="_blank"&gt;@$1&lt;/a&gt;', $text); 
+    return $text;
+}
