@@ -609,7 +609,10 @@
 		}
 		
 		//update the database
-		
+		$stmt = $isv_db->prepare("UPDATE m_settings SET max_albums = ?, max_photos_in_album =? WHERE id=1");
+		$stmt->bind_param('ii',$max_albms,$max_photos);
+		$stmt->execute();
+		$stmt->close();
 		
 		//return success
 		$_SESSION['isv_success'] = 'Photo Album settings updated.';

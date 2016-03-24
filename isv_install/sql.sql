@@ -411,7 +411,7 @@ CREATE TABLE IF NOT EXISTS `s_settings` (
 -- Dumping data for table `s_settings`
 --
 
-INSERT INTO `s_settings` (`id`, `user_reg`, `user_validate`, `sys_cron`, `timezone`, `admin_end`, `encry_key`, `logo_name`, `favicon`, `mobile`, `plugins`, `errors`, `newuser_notice`) VALUES ('1', '1', '1', '1', '1', 'admin', 'grQw57V4iJ3PgnBX', 'logo.png', 'favicon.png', '0', '0', '1', '1');
+INSERT INTO `s_settings` (`id`, `user_reg`, `sys_cron`, `timezone`, `admin_end`, `encry_key`, `logo_name`, `favicon`, `mobile`, `plugins`, `errors`) VALUES ('1', '1', '1', '1', 'admin', 'grQw57V4iJ3PgnBX', 'logo.png', 'favicon.png', '0', '0', '1');
 
 -- --------------------------------------------------------
 
