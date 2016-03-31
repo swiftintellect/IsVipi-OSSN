@@ -14,6 +14,10 @@
 	require_once(ISVIPI_CLASSES_BASE . 'utilities/encrypt_decrypt.php');
 	require_once ISVIPI_ROOT . 'isv_settings.php'; 
 	
+	/*** Load Language ***/
+	require_once ISVIPI_CLASSES_BASE . 'global/lang.php';
+	$lang = new language(SITE_LANG);
+	
 	/*** initialize important classes ***/
 	$converter = new Encryption;
 	
