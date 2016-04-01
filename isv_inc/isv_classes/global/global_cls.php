@@ -112,7 +112,10 @@ class pageManager {
 	public function footerText(){
 		$siteInfo = new siteManager();
 		$isv_siteDetails = $siteInfo->getSiteInfo();
-		echo 'Copyright &copy; '.date('Y').' <a href="'.$isv_siteDetails['s_url'].'" title="'.$isv_siteDetails['s_title'].'">'.$isv_siteDetails['s_title'].'</a>. Powered by <a href="//isvipi.org" title="Open Source Social Networking Software" target="_blank">IsVipi OSSN</a>.';
+		require_once ISVIPI_CLASSES_BASE . 'global/lang.php';
+		$lang = new language(SITE_LANG);
+
+		echo $lang->translate('copyright', array(date('Y'),$isv_siteDetails['s_url'],$isv_siteDetails['s_title'],$isv_siteDetails['s_title']));
 	}
 	
 	public function trackSession(){

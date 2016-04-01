@@ -6,7 +6,7 @@
                 <div class="col-sm-7" id="home-img">
                     <div class="skill" style="margin-top:-25px">
 						<div class="betterwell" id="home-call">
-							<h3 class="home-h3">Welcome to <span><?php echo $isv_siteDetails['s_title'] ?></span></h3>
+							<h3 class="home-h3"><? echo $lang->translate('welcome_to', array($isv_siteDetails['s_title'])) ?></h3>
                             <hr />
                             <div class="col-md-12 home-p">
                             Meet new people that share in your interests, build your network of trusted friends and explore new avenues for interaction.
@@ -25,7 +25,7 @@
                 <div class="col-sm-5">
                 	<div id="dimmedDiv"></div>
                     <div class="col-xs-12 well signup-div drop-shadow-light">
-                        <legend><i class="fa fa-user-plus"></i> Sign up!</legend>
+                        <legend><i class="fa fa-user-plus"></i> <?php echo $lang->translate('title_sign_up') ?></legend>
                         <form action="<?php echo ISVIPI_URL .'p/register' ?>" method="post" class="form" role="form" id="regForm">
                         <div class="row">
                             <div class="col-xs-6 col-md-6">
@@ -73,7 +73,7 @@
                         <div class="alert success nodisplay" id="success"></div>
                         <?php if(ALLOW_USER_REG){?>
                         <input type="hidden" name="isv_op" value="<?php echo $converter->encode('registration') ?>" />
-                        <button class="btn btn-lg btn-success btn-block" type="submit" id="submit">Sign up</button>
+                        <button class="btn btn-lg btn-success btn-block" type="submit" id="submit"><?php echo $lang->translate('button_sign_up') ?></button>
                         <?php } else {?>
                         <div class="alert well alert-danger">
                         	Registration is currently disabled or is by invitation only.
