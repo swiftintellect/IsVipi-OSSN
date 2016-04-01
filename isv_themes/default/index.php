@@ -6,7 +6,7 @@
                 <div class="col-sm-7" id="home-img">
                     <div class="skill" style="margin-top:-25px">
 						<div class="betterwell" id="home-call">
-							<h3 class="home-h3"><? echo $lang->translate('welcome_to', array($isv_siteDetails['s_title'])) ?></h3>
+							<h3 class="home-h3"><?php echo $lang->translate('welcome_to', array($isv_siteDetails['s_title'])) ?></h3>
                             <hr />
                             <div class="col-md-12 home-p">
                             Meet new people that share in your interests, build your network of trusted friends and explore new avenues for interaction.
