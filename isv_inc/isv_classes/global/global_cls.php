@@ -112,7 +112,7 @@ class pageManager {
 	public function footerText(){
 		$siteInfo = new siteManager();
 		$isv_siteDetails = $siteInfo->getSiteInfo();
-		require_once ISVIPI_CLASSES_BASE . 'global/lang.php';
+		require_once ISVIPI_CLASSES_BASE . 'lang/lang.php';
 		$lang = new language(SITE_LANG);
 
 		echo $lang->translate('copyright', array(date('Y'),$isv_siteDetails['s_url'],$isv_siteDetails['s_title'],$isv_siteDetails['s_title']));

@@ -76,7 +76,7 @@
                         <button class="btn btn-lg btn-success btn-block" type="submit" id="submit"><?php echo $lang->translate('button_sign_up') ?></button>
                         <?php } else {?>
                         <div class="alert well alert-danger">
-                        	Registration is currently disabled or is by invitation only.
+                        	<?php echo $lang->translate('reg_disabled') ?>
                         </div>
                         <?php } ?>
                         </form>
