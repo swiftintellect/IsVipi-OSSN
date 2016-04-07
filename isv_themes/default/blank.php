@@ -1,6 +1,8 @@
 ﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
+<?php if (isLoggedIn()){?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
+<?php } ?>
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -23,7 +25,7 @@
             <!--end::members -->
 			
             
-            
+            <?php if (isLoggedIn()){?>
             <!-- announcements -->
             <section class="col-lg-3 announcements">
             	<div class="box box-solid">
@@ -32,7 +34,6 @@
                     </div>
                 </div>
             </section>
-            
             <!-- online friends -->
             <section class="col-lg-3 friends-sidebar">
             	<div class="box box-solid">
@@ -41,6 +42,7 @@
                     </div>
                 </div>
             </section>
+            <?php } ?>
             
             <div class="clear"></div>
             </section>

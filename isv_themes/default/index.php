@@ -9,14 +9,14 @@
 							<h3 class="home-h3"><?php echo $lang->translate('welcome_to', array($isv_siteDetails['s_title'])) ?></h3>
                             <hr />
                             <div class="col-md-12 home-p">
-                            Meet new people that share in your interests, build your network of trusted friends and explore new avenues for interaction.
+                            <?php echo $lang->translate('welcome_tag') ?>
                             </div>
                             <div style="clear:both"></div>
                             <hr />
                             <ul class="list-group font-black">
-                              <li class="list-group-item blue-gradient font-white"><?php echo number_format($stats->user_count_all('all')) ?> Registered Members</li>
-                              <li class="list-group-item blue-gradient font-white"><?php echo $stats->member_types('male') ?> Registered Male Members</li>
-                              <li class="list-group-item blue-gradient font-white"><?php echo $stats->member_types('female') ?> Registered Female Members</li>
+                              <li class="list-group-item blue-gradient font-white"><?php echo number_format($stats->user_count_all('all')) ?> <?php echo ucfirst($lang->translate('reg_members')) ?></li>
+                              <li class="list-group-item blue-gradient font-white"><?php echo $stats->member_types('male') ?> <?php echo ucfirst($lang->translate('reg_male_members')) ?></li>
+                              <li class="list-group-item blue-gradient font-white"><?php echo $stats->member_types('female') ?> <?php echo ucfirst($lang->translate('reg_female_members')) ?></li>
                             </ul>
                         </div>
                     </div>
@@ -25,47 +25,47 @@
                 <div class="col-sm-5">
                 	<div id="dimmedDiv"></div>
                     <div class="col-xs-12 well signup-div drop-shadow-light">
-                        <legend><i class="fa fa-user-plus"></i> <?php echo $lang->translate('title_sign_up') ?></legend>
+                        <legend><i class="fa fa-user-plus"></i> <?php echo $lang->translate('sign_up') ?></legend>
                         <form action="<?php echo ISVIPI_URL .'p/register' ?>" method="post" class="form" role="form" id="regForm">
                         <div class="row">
                             <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="username" placeholder="Username*" type="text"
+                                <input class="form-control" name="username" placeholder="<?php echo ucfirst($lang->translate('username')) ?>*" type="text"
                                     autofocus />
                             </div>
                             <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="name" placeholder="Full Name*" type="text"/>
+                                <input class="form-control" name="name" placeholder="<?php echo ucfirst($lang->translate('full_name')) ?>*" type="text"/>
                             </div>
                         </div>
-                        <input class="form-control" name="email" placeholder="Email*" type="email"/>
-                        <input class="form-control" name="pwd" placeholder="Password*" type="password"/>
-                        <input class="form-control" name="pwd2" placeholder="Re-enter Password*" type="password"/>
+                        <input class="form-control" name="email" placeholder="<?php echo ucfirst($lang->translate('email')) ?>*" type="email"/>
+                        <input class="form-control" name="pwd" placeholder="<?php echo ucfirst($lang->translate('password')) ?>*" type="password"/>
+                        <input class="form-control" name="pwd2" placeholder="<?php echo ucfirst($lang->translate('r_password')) ?>*" type="password"/>
                         <select class="form-control" name="country">
-                        	<option selected="selected" value="" disabled>Select Country*</option>
+                        	<option selected="selected" value="" disabled><?php echo ucfirst($lang->translate('select_country')) ?>*</option>
                         	<?php regCountrySelectOptions() ?>
                         </select>
                         <div class="row">
                         <div class="col-xs-6 col-md-7">
-                        <label class="font-black" for="">Date of Birth</label>
+                        <label class="font-black" for=""><?php echo $lang->translate('dob') ?></label>
                         <div class="clear"></div>
                         <select class="form-control prof-dob" name="dd">
-                        	<option selected="selected" value="" disabled>dd</option>
+                        	<option selected="selected" value="" disabled><?php echo $lang->translate('dd') ?></option>
                             <?php select_day() ?>
                         </select>
                         <select class="form-control prof-dob" name="mm">
-                        	<option selected="selected" value="" disabled>mm</option>
+                        	<option selected="selected" value="" disabled><?php echo $lang->translate('mm') ?></option>
                             <?php select_month() ?>
                         </select>
-                        <input type="number" class="form-control prof-dob" name="yyyy" placeholder="yyyy"/>
+                        <input type="number" class="form-control prof-dob" name="yyyy" placeholder="<?php echo $lang->translate('yyyy') ?>"/>
                          </div>
                          <div class="col-xs-6 col-md-5">
-                         <label for="" class="font-black">I am</label><br />
+                         <label for="" class="font-black"><?php echo ucfirst($lang->translate('i_am')) ?></label><br />
                         <label class="radio-inline">
                             <input type="radio" name="sex" id="inlineCheckbox1" value="male" checked/>
-                            <span class="font-black">Male</span>
+                            <span class="font-black"><?php echo ucfirst($lang->translate('male')) ?></span>
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="sex" id="inlineCheckbox2" value="female" />
-                            <span class="font-black">Female</span>
+                            <span class="font-black"><?php echo ucfirst($lang->translate('female')) ?></span>
                         </label>
                         </div>
                         </div>
@@ -73,7 +73,7 @@
                         <div class="alert success nodisplay" id="success"></div>
                         <?php if(ALLOW_USER_REG){?>
                         <input type="hidden" name="isv_op" value="<?php echo $converter->encode('registration') ?>" />
-                        <button class="btn btn-lg btn-success btn-block" type="submit" id="submit"><?php echo $lang->translate('button_sign_up') ?></button>
+                        <button class="btn btn-lg btn-success btn-block" type="submit" id="submit"><?php echo $lang->translate('sign_up') ?></button>
                         <?php } else {?>
                         <div class="alert well alert-danger">
                         	<?php echo $lang->translate('reg_disabled') ?>
