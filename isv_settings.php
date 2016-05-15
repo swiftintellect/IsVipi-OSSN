@@ -1,6 +1,6 @@
 <?php
 	/*** SITE SETTINGS ***/
-	define('ISV_VERSION', '2.0.1'); //IsVipi OSSN current installed version
+	define('ISV_VERSION', '2.0.2'); //IsVipi OSSN current installed version
 	define('ISV_ENCR_KEY', $isv_siteSettings['encry_key']); //Encryption Key
 	define('ISVIPI_ACT_THEME', ISVIPI_THEMES .$isv_siteDetails['s_theme'].'' .DIRECTORY_SEPARATOR); //current theme
 	define('ISV_DEFAULT_TZ', 'Atlantic/St_Helena'); //Default Timezone
