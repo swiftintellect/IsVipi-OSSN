@@ -40,7 +40,7 @@ class message {
 		exit();
 	}
 	
-	private function blocked ($me,$user){
+	public function blocked ($me,$user){
 		global $isv_db;
 		
 		$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM users_blocked WHERE (user1=? AND user2=?) OR (user2=? AND user1=?)"); 
@@ -58,7 +58,7 @@ class message {
 		}
 	}
 	
-	private function recipient_status($to_msg){
+	public function recipient_status($to_msg){
 		global $isv_db;
 		
 		$stmt = $isv_db->prepare ("SELECT status FROM users WHERE id=?"); 

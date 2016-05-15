@@ -612,6 +612,14 @@ function full_name_from_id($user_id){
 	return $fullname;
 }
 
+function fullname_from_username($username){
+	//get id from username
+	global $user_id;
+	id_from_username($username);
+	
+	//get fullname from id
+	return full_name_from_id($user_id);
+}
 function get_user_ip(){
 	$ipaddress = '';
     if (getenv('HTTP_CLIENT_IP'))
