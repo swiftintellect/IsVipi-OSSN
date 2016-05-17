@@ -5,7 +5,7 @@ class language {
     function language($lang) {
         if (file_exists(ISVIPI_ROOT . 'isv_lang/' . $lang . '.php')) {
             include(ISVIPI_ROOT . 'isv_lang/' . $lang . '.php');
-            $this->translation = $translation;
+            $this->translation = $lang;
         }
     }
 

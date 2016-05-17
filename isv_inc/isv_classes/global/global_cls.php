@@ -6,7 +6,7 @@ class pageManager {
 	
 	/*** if your guest and logged in head page is the same, call loadHead() function */ 
 	public function loadHead(){
-		global $p,$s_m,$isv_siteSettings,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$converter,$PAGE,$lang;
 		require_once(ISVIPI_ACT_THEME . 'ovr/head.php');
 	}
 	
@@ -17,7 +17,7 @@ class pageManager {
 		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 		$admin = new admin_security();
 		
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE,$lang;
 		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
 		} else if ($admin->admin_logged_in() && $p === 'index'){
@@ -29,7 +29,7 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadHeader(){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE,$lang;
 		require_once(ISVIPI_ACT_THEME . 'ovr/header.php');
 	}
 	
@@ -40,7 +40,7 @@ class pageManager {
 		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 		$admin = new admin_security();
 		
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$converter,$PAGE,$lang;
 		if (isLoggedIn() || ($admin->admin_logged_in() && $p !=='index')){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
 		} else if($admin->admin_logged_in() && $p === 'index'){
@@ -52,13 +52,13 @@ class pageManager {
 	
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadsideBar($sidebar){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE,$converter;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE,$converter,$lang;
 		require_once(ISVIPI_ACT_THEME . 'ovr/'.$sidebar.'.php');
 	}
 	
 	/*** if your guest and logged in footer page is the same, call loadFooter() function */ 
 	public function loadFooter(){
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE,$lang;
 		require_once(ISVIPI_ACT_THEME . 'ovr/footer.php');
 	}
 	
@@ -69,7 +69,7 @@ class pageManager {
 		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 		$admin = new admin_security();
 		
-		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
+		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE,$lang;
 		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
 		} else if ($admin->admin_logged_in() && $p === 'index'){
@@ -115,7 +115,7 @@ class pageManager {
 		require_once ISVIPI_CLASSES_BASE . 'lang/lang.php';
 		$lang = new language(SITE_LANG);
 
-		echo $lang->translate('copyright', array(date('Y'),$isv_siteDetails['s_url'],$isv_siteDetails['s_title'],$isv_siteDetails['s_title']));
+		echo 'Copyright &copy; '.date('Y').' <a href="'.$isv_siteDetails['s_url'].'" title="'.$isv_siteDetails['s_title'].'">'.$isv_siteDetails['s_title'].'</a>. Powered by <a href="//isvipi.org" title="Open Source Social Networking Software" target="_blank">IsVipi OSSN</a>.';
 	}
 	
 	public function trackSession(){

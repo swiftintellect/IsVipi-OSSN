@@ -23,28 +23,31 @@
 	define ('ISVIPI_ACT_ADMIN_URL', ISVIPI_URL .$isv_siteSettings['adminEnd'].'' .DIRECTORY_SEPARATOR); //admin url
 	
 	/*** Define language ***/
-	define ('SITE_LANG', $isv_siteDetails['s_lang']);
+	define ('SITE_LANG', $isv_siteDetails['s_lang']); //set site language
 	
 	/*** TIMEZONE SETTINGS ***/
 	if($isv_siteSettings['defaultTzone'] === 1){
-		date_default_timezone_set (ISV_DEFAULT_TZ);
+		date_default_timezone_set (ISV_DEFAULT_TZ); //set timezone to system default one
 	} else {
-		date_default_timezone_set ($isv_siteDetails['s_time_zone']);
+		date_default_timezone_set ($isv_siteDetails['s_time_zone']); //set timezone to admin defined
 	}
 
 	/*** HIDE PHP ERRORS SETTINGS ***/
 	if($isv_siteSettings['hide_errors'] === 1){
-		error_reporting(0);
+		error_reporting(0); //disable php site errors
 		ini_set('display_errors', 0);
 	}
 	
 	/*** CRON JOBS SETTINGS ***/
 	if($isv_siteSettings['sys_cron'] === 1){
-		require_once(ISVIPI_CRON_BASE .'cron.php');
+		require_once(ISVIPI_CRON_BASE .'cron.php'); //run system cronjob when someone loads a page on the site
 	}
 	
+	/*** SITE INDEXING ***/
+	define('DISCOURAGE_INDEXING', true); // allow/disallow search engines from indexing and following your site
+	
 	/*** IMAGE SIZES ***/
-	define('ISVIPI_THUMBS', '150x150_');
-	define('ISVIPI_600', '600x600_');
+	define('ISVIPI_THUMBS', '150x150_'); //photo thumbnails that appear as profile pictures
+	define('ISVIPI_600', '600x600_');//photos that load using lightbox
 
 ?>

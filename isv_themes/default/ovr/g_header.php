@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
+                        <span class="sr-only"><?php echo ucwords($lang->translate('toggle_navigation')) ?></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -14,16 +14,16 @@
                 </div>
 				
                 <div class="collapse navbar-collapse navbar-right" style="border:none !important">
-                <form action="<?php echo ISVIPI_URL .'p/users' ?>" method="post" class="navbar-form navbar-right" role="login">
+                <form action="<?php echo ISVIPI_URL .'p/users' ?>" method="post" class="navbar-form navbar-right" role="<?php echo ucwords($lang->translate('sign_in')) ?>">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="user" placeholder="Email or Username">
+                        <input type="text" class="form-control" name="user" placeholder="<?php echo ucwords($lang->translate('email_or_username')) ?>">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" name="pwd" placeholder="Password">
                     </div>
                     <input type="hidden" name="isv_op" value="<?php echo $converter->encode('signin') ?>" />
-                    <button type="submit" class="btn btn-success">Sign In</button>
-                    <a href="<?php echo ISVIPI_URL .'forgot' ?>" class="forgot-pwd">Forgot Password?</a>
+                    <button type="submit" class="btn btn-success"><?php echo ucwords($lang->translate('sign_in')) ?></button>
+                    <a href="<?php echo ISVIPI_URL .'forgot' ?>" class="forgot-pwd"><?php echo ucwords($lang->translate('forgot_pwd')) ?>?</a>
                 </form>
                 
                 </div>

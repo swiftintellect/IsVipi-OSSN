@@ -965,6 +965,7 @@ a:focus {
   padding: 0;
   list-style: none;
   overflow-x: hidden;
+  text-align:center;
 }
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a,

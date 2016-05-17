@@ -26,9 +26,9 @@
                           </div>
                           <!-- Message title and timestamp -->
 							<div class="accept-reject">
-                            	<strong>friend request</strong> &nbsp;
-                            	<a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$converter->encode($fn['id']).'/'.$converter->encode($fn['from_id']) ?>" class="btn bg-green btn-xs btn-flat">Accept</a>
-                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$converter->encode($fn['id']) ?>" class="btn bg-red btn-xs btn-flat">Ignore</a>
+                            	<strong><?php echo $lang->translate('friend_request') ?></strong> &nbsp;
+                            	<a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_accept').'/'.$converter->encode($fn['id']).'/'.$converter->encode($fn['from_id']) ?>" class="btn bg-green btn-xs btn-flat"><?php echo ucwords($lang->translate('accept')) ?></a>
+                                <a href="<?php echo ISVIPI_URL.'p/friends/'.$converter->encode('f_ignore').'/'.$converter->encode($fn['id']) ?>" class="btn bg-red btn-xs btn-flat"><?php echo ucwords($lang->translate('ignore')) ?></a>
                             </div>
                         </div>
                       </li><!-- end message -->
@@ -38,11 +38,11 @@
                   <li style="border-bottom:dotted thin #CCC; padding:5px;">
                     <!-- inner menu: contains the messages -->
                     <ul class="menu" style="padding:5px 10px">
-                    	<li>You do not have any friend request.</li>
+                    	<li><?php echo ucfirst($lang->translate('no_friend_request')) ?></li>
                     </ul>
                   </li>
                   <?php } ?>
-                  <li class="footer"><a href="<?php echo ISVIPI_URL .'friend_requests' ?>">View All</a></li>
+                  <li class="footer"><a href="<?php echo ISVIPI_URL .'friend_requests' ?>"><?php echo ucwords($lang->translate('view_all')) ?></a></li>
                 </ul>
               </li><!-- /.messages-menu -->
 
@@ -67,18 +67,18 @@
 							if(is_array($n_msg) && !empty($n_msg)) foreach ($n_msg as $key => $msg) {
 					  ?>
                         <a href="<?php echo ISVIPI_URL .'messages/'.$msg['username'] ?>">
-                          <i class="fa fa-envelope text-aqua"></i> <?php echo $msg['fullname'] ?> has sent you a message
+                          <i class="fa fa-envelope text-aqua"></i> <?php echo $msg['fullname'] ?> <?php echo ucwords($lang->translate('sent_new_msg')) ?>
                         </a>
                       <?php } ?>
                       <?php } else {?>
-                      	<ul class="menu" style="padding:5px 10px">
-                            <li>You have no new messages</li>
+                      	<ul class="menu" style="padding:10px; border-bottom:dotted thin #CCC">
+                            <li><?php echo ucfirst($lang->translate('no_new_msgs')) ?></li>
                         </ul>
                       <?php } ?> 
                       </li><!-- end notification -->
                     </ul>
                   </li>
-                  <li class="footer"><a href="<?php echo ISVIPI_URL .'messages/' ?>">View all</a></li>
+                  <li class="footer"><a href="<?php echo ISVIPI_URL .'messages/' ?>"><?php echo ucwords($lang->translate('view_all')) ?></a></li>
                 </ul>
               </li>
               <!-- Tasks Menu -->
@@ -109,7 +109,7 @@
                           </div>
 							<div class="accept-reject">
                             	<strong><?php echo $feed_n['notice'] ?></strong> &nbsp;
-                            	<a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($feed_n['feed_id']) ?>">post</a>
+                            	<a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($feed_n['feed_id']) ?>"><?php echo ucwords($lang->translate('post')) ?></a>
                             </div>
                         </div>
                       </li><!-- end message -->
@@ -119,10 +119,10 @@
                   	<li style="border-bottom:dotted thin #CCC; padding:5px;">
                     <!-- inner menu: contains the messages -->
                     <ul class="menu" style="padding:5px 10px">
-                    	<li>You do not have any new notifications.</li>
+                    	<li><?php echo ucfirst($lang->translate('no_new_notifs')) ?></li>
                     </ul>
                   </li>
                   <?php } ?>
-                  <li class="footer"><a href="<?php echo ISVIPI_URL .'feed_notifications' ?>">View all</a></li>
+                  <li class="footer"><a href="<?php echo ISVIPI_URL .'feed_notifications' ?>"><?php echo ucwords($lang->translate('view_all')) ?></a></li>
                 </ul>
               </li>

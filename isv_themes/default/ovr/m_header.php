@@ -14,7 +14,7 @@
         <nav class="navbar navbar-fixed-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"><?php echo ucwords($lang->translate('toggle_navigation')) ?></span>
           </a>
           <?php if(isset($PAGE[0]) && $PAGE[0] === 'search' && isset($PAGE[1]) && !empty($PAGE[1])){
 			  $st = $PAGE[1];
@@ -24,7 +24,7 @@
           <?php if(!$admin->admin_logged_in()){?>
           <form action="<?php echo ISVIPI_URL .'p/search/' ?>" method="post" class="search-form">
             <div class="input-group">
-              <input type="text" name="term" class="form-control" value="<?php echo $st ?>" placeholder="enter name or username" required>
+              <input type="text" name="term" class="form-control" value="<?php echo $st ?>" placeholder="<?php echo ucwords($lang->translate('name_or_username')) ?>" required>
               <span class="input-group-btn">
               	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('search') ?>" />
                 <button type="submit" name="search" class="btn search-btn"><i class="fa fa-search"></i></button>
@@ -48,10 +48,10 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i><span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/edit/' ?>">Edit Profile</a></li>
-                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/settings/' ?>">Account Settings</a></li>
+                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/edit/' ?>"><?php echo ucwords($lang->translate('edit_profile')) ?></a></li>
+                        <li><a href="<?php echo ISVIPI_URL .'profile/'.$memberinfo['username'].'/settings/' ?>"><?php echo ucwords($lang->translate('account_settings')) ?></a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="<?php echo ISVIPI_URL .'log_out/' ?>">Logout</a></li>
+                        <li><a href="<?php echo ISVIPI_URL .'log_out/' ?>"><?php echo ucwords($lang->translate('logout')) ?></a></li>
                       </ul>
                     </li>
                   </ul>
@@ -80,6 +80,6 @@
 		$back_uri = ISVIPI_ACT_ADMIN_URL .'dashboard/';
 	 ?>
      <div class="view-as-admin">
-     	You are viewing this page as an admin. <a href="<?php echo $back_uri ?>">Back to Admin Panel</a>
+     	<?php echo ucwords($lang->translate('viewing_as_admin',array($back_uri))) ?>
      </div>
      <?php } ?>

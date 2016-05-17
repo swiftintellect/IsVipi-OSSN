@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo SITE_LANG ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?php echo $s_m['meta_descr']; ?>">
     <meta name="keywords" content="<?php echo $s_m['meta_tags']; ?>">
     <meta name="generator" content="IsVipi OSSN">
+    <?php if(DISCOURAGE_INDEXING){?>
+    <meta name="robots" content="noindex, nofollow">
+    <?php } else { ?>
     <meta name="robots" content="index, follow">
+    <?php } ?>
     <title><?php siteTitle($p) ?></title>
 	
 	<!-- core CSS -->
