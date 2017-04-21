@@ -1,0 +1,149 @@
+* {
+  border-radius: 0 !important;
+}
+body {
+	padding-top: 90px;
+}
+.navbar-fixed-top {
+	background:#06F;
+	min-height:80px;
+}
+.navbar-fixed-top a {
+	color:#E5E5E5;
+	background-color:transparent !important;
+}
+.navbar-fixed-top a:hover {
+	color:#FFF;
+	background-color:transparent !important;
+}
+.navbar-fixed-top .navbar-header .navbar-brand {
+	width:180px;
+	
+}
+.navbar-fixed-top .navbar-header .navbar-brand img {
+	width:100%;
+}
+.lead {
+	padding-top:20px;
+	font-size:16px;
+	font-weight:500;
+}
+.container {
+	width:92%;
+}
+/**************************************************
+
+			INSTALLATION
+			
+**************************************************/
+.cont-holder {
+	background:#F2F2F2;
+	padding:10px;
+}
+.help-holder {
+	border:solid thin #F7F7F7;
+	padding:10px;
+	margin-left:10px;
+}
+.help-holder h3 {
+	border-bottom:solid thin #D8D8D8;
+	margin:10px 0;
+}
+.help-holder p {
+	font-size:14px;
+}
+.step-by-step {
+	padding:0 !important;
+	margin-bottom:5px;
+}
+.navbar-inner {
+	margin-left:-15px;
+}
+.step-by-step {
+	border-bottom:solid thin #D4D4D4 !important;
+	margin-bottom:10px;
+	padding-bottom:10px !important;
+}
+.step-by-step .navbar-inner ul li{
+	padding:20px 20px;
+	background:#CACACA;
+	color:#FFF;
+	min-width:120px;
+	display:inline-block;
+}
+
+.current{
+	background:#09F !important;
+	color:#FFF;
+}
+
+#rootwizard .tab-pane {
+	min-height:300px;
+	clear:both;
+	border-bottom:solid thin #D4D4D4 !important;
+	background:#FFF;
+	padding:10px;
+	display:block;
+}
+#rootwizard .tab-pane li {
+	line-height:25px;
+	list-style:none;
+}
+.passed {
+	color:#060;
+	font-size:14px;
+}
+.failed {
+	color:#900;
+	font-size:14px;
+}
+.clear {
+	clear:both !important;
+}
+.btn-styled {
+	padding:10px 40px;
+	border-radius:none !important;
+}
+.titles {
+	margin:10px;
+	border-bottom:solid thin #DBDBDB;
+}
+.check-passed {
+	background:#060;
+	color:#FFF;
+	padding:5px 20px;
+}
+.check-failed {
+	background:#900;
+	color:#FFF;
+	padding:5px 20px;
+}
+.error-alert {
+	padding:5px 10px;
+	background:#900;
+	color:#FFF;
+}
+.success-alert {
+	padding:5px 10px;
+	background:#060;
+	color:#FFF;
+}
+.completed-ins {
+	padding:0 10px;
+}
+.update-txt {
+	display:block;
+	width:100%;
+	padding:3px 10px;
+	color:#fff;
+	background:#09F;
+	text-align:left;
+	margin:0;
+}
+
+.update-txt2 {
+	display:block;
+	width:100%;
+	text-align:left;
+	margin:0;
+}

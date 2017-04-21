@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+  SetEnv HTTP_MOD_REWRITE On
+  
+  RewriteEngine On
+  RewriteRule !\.(gif|jpg|png|css|js|html|ico|zip|rar|pdf|xml|mp4|mpg|flv|swf|mkv|ogg|avi|woff|svg|eot|ttf|jar)$ index.php
+</IfModule>
+
+# directory browsing
+Options All -Indexes
