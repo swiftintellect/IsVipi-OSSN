@@ -85,6 +85,38 @@
 			return $res;
 		}
 		
+		public function get_sidebar_news($status){
+			global $isv_db;
+			
+			if($status === "all"){
+				$query = "";
+			} else {
+				$query = " WHERE status = $status";
+			}
+			
+			//get our news items
+			$stmt = $isv_db->prepare ("
+				SELECT id,title,news,status,pub_date from isv_news $query ORDER by id desc LIMIT 2
+			"); 
+			$stmt->execute();  
+			$stmt->store_result();
+			$stmt->bind_result($id,$title,$news,$n_status,$pub_date); 
+				$res = array();
+				while($stmt->fetch()){
+					$res[] = array(
+						'id' => $id,
+						'title' => $title,
+						'news' => $news,
+						'status' => $n_status,
+						'pub_date' => $pub_date
+					);
+				}
+			$stmt->close();
+			
+			//print_r($res); exit();
+			return $res;
+		}
+		
 		public function single_item($news_id){
 			global $isv_db;
 			

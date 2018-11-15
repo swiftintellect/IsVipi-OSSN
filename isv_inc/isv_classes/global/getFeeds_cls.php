@@ -60,6 +60,10 @@ class getFeeds {
 		f.att_description,
 		f.att_video,
 		f.att_image,
+		f.groupshare,
+		f.pageshare,
+		f.sharedgroup,
+		f.sharedpage,
 		fr.user1,
 		u.username,
 		p.fullname,
@@ -73,7 +77,7 @@ class getFeeds {
 		$sqlAllFeeds->execute(); 
 		$sqlAllFeeds->store_result(); 
 		$resultCount =  $sqlAllFeeds->num_rows();
-		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$attlink,$atttitle,$attdescription,$attvideo,$attimage,$this->friend_id,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
+		$sqlAllFeeds->bind_result($this->feedID,$this->feedUser,$this->feedText,$this->feedSharedText,$this->feedImg,$this->old_feed_id,$this->feedTime,$attlink,$atttitle,$attdescription,$attvideo,$attimage,$groupshare,$pageshare,$gshared,$pshared,$this->friend_id,$this->f_username,$this->f_fullname,$this->f_profilePIC); 
 		
 			while($sqlAllFeeds->fetch()){
 				$this->feed[] = array(
@@ -91,7 +95,11 @@ class getFeeds {
 					'att_image' => $attimage,
 					'feed_username' => $this->f_username,
 					'feed_fullname' => $this->f_fullname,
-					'feed_profilePIC' => $this->f_profilePIC
+					'feed_profilePIC' => $this->f_profilePIC,
+					'groupshare' => $groupshare,
+					'pageshare' => $pageshare,
+					'sharedgroup' => $gshared,
+					'sharedpage' => $pshared 
 				);
 			}
 		return $this->feed;

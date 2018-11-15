@@ -152,7 +152,7 @@
 		public function update_as_read($me,$other){
 			global $isv_db;
 			$stmt = $isv_db->prepare ("UPDATE user_pm SET read_time=UTC_TIMESTAMP()
-			WHERE (from_id=? AND to_id=?) AND (read_time='')"); 
+			WHERE (from_id=? AND to_id=? AND read_time IS NULL)"); 
 			$stmt->bind_param('ii', $other,$me);
 			$stmt->execute(); 
 			$stmt->close();

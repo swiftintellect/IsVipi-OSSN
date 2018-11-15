@@ -3,7 +3,7 @@
  * ----------
  */
 .skin-blue .main-header .navbar {
-  background-color: #3c8dbc;
+  background-color: #0B7BE3;
 }
 .skin-blue .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -23,13 +23,13 @@
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
   color: #f6f6f6;
-  background: rgba(0, 0, 0, 0.1);
+  background: #797979;
 }
 .skin-blue .main-header .navbar .sidebar-toggle {
   color: #fff;
 }
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
-  background-color: #367fa9;
+	background-color: #828282;
 }
 @media (max-width: 767px) {
   .skin-blue .main-header .navbar .dropdown-menu li.divider {
@@ -41,14 +41,17 @@
   .skin-blue .main-header .navbar .dropdown-menu li a:hover {
     background: #367fa9;
   }
+  .content-wrapper .box .box-header .dropdown .dropdown-menu {
+	  margin-left:-100px !important;
+  }
 }
 .skin-blue .main-header .logo {
-  background-color: #367fa9;
+  background-color: #0B7BE3;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }
 .skin-blue .main-header .logo:hover {
-  background-color: #357ca5;
+	background-color: #7F7F7F;
 }
 .skin-blue .main-header li.user-header {
   background-color: #3c8dbc;

@@ -187,7 +187,7 @@
                       <div class="clear"></div>
                       <div class="modal-footer modal-h">
                         <a href="#" class="btn btn-default pull-left" data-dismiss="modal">Cancel</a>
-                        <a href="<?php echo ISVIPI_URL .'aa/members/'.$converter->encode('act').'/'.$converter->encode($mi['id']) ?>" class="btn btn-primary">Yes, Activate Member</a>
+                        <a href="<?php echo ISVIPI_URL .'aa/members/'.$converter->encode('activate').'/'.$converter->encode($mi['id']) ?>" class="btn btn-primary">Yes, Activate Member</a>
                       </div>
                     </div>
                   </div>

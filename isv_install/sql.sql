@@ -3,14 +3,14 @@
 --
 CREATE TABLE IF NOT EXISTS `s_info` (
   `id` int(1) NOT NULL DEFAULT 1,
-  `s_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `s_title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `s_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `s_url` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `s_title` varchar(50) COLLATE utf8_unicode_ci NULL,
+  `s_email` varchar(50) COLLATE utf8_unicode_ci NULL,
   `s_lang` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
   `s_theme` varchar(30) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default',
-  `s_time_zone` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `s_time_zone` varchar(60) COLLATE utf8_unicode_ci NULL,
   `s_enable_ssl` int(1) NOT NULL DEFAULT 0,
-  `s_last_update_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `s_last_update_check` varchar(30) COLLATE utf8_unicode_ci NULL,
   `s_status` int(2) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -40,16 +40,16 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `user_profile` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL NOT NULL,
-  `fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `dob` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(100) COLLATE utf8_unicode_ci NULL,
+  `gender` varchar(10) COLLATE utf8_unicode_ci NULL,
+  `dob` varchar(20) COLLATE utf8_unicode_ci NULL,
   `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `city` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `profile_pic` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `cover_photo` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `hobbies` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `relshp_status` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(40) COLLATE utf8_unicode_ci NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci NULL,
+  `profile_pic` varchar(30) COLLATE utf8_unicode_ci NULL,
+  `cover_photo` varchar(30) COLLATE utf8_unicode_ci NULL,
+  `hobbies` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `relshp_status` varchar(100) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `user_id` bigint(20) NOT NULL,
   `feeds` int(1) NOT NULL DEFAULT 2,
   `phone` int(1) NOT NULL DEFAULT 2,
-  `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `time` varchar(30) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -101,10 +101,10 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 CREATE TABLE IF NOT EXISTS `admin_sessions` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sess_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` bigint(20) NOT NULL NOT NULL,
-  `user_ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `last_activity` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `sess_id` varchar(60) COLLATE utf8_unicode_ci NULL,
+  `user_id` bigint(20) NULL,
+  `user_ip` varchar(30) COLLATE utf8_unicode_ci NULL,
+  `last_activity` varchar(30) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -392,18 +392,18 @@ INSERT INTO `countries` (`id`, `iso`, `name`, `nicename`, `iso3`, `numcode`, `ph
 
 CREATE TABLE IF NOT EXISTS `s_settings` (
   `id` int(1) NOT NULL,
-  `user_reg` int(1) NOT NULL,
-  `sys_cron` int(1) NOT NULL,
-  `timezone` int(1) NOT NULL,
-  `admin_end` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `encry_key` varchar(24) COLLATE utf8_unicode_ci NOT NULL,
-  `logo_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `favicon` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `mobile` int(1) NOT NULL,
-  `plugins` int(1) NOT NULL,
-  `errors` int(1) NOT NULL,
-  `last_upd_check` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `upd_avail` int(1) NOT NULL,
+  `user_reg` int(1) NULL,
+  `sys_cron` int(1) NULL,
+  `timezone` int(1) NULL,
+  `admin_end` varchar(50) COLLATE utf8_unicode_ci NULL,
+  `encry_key` varchar(24) COLLATE utf8_unicode_ci NULL,
+  `logo_name` varchar(100) COLLATE utf8_unicode_ci NULL,
+  `favicon` varchar(100) COLLATE utf8_unicode_ci NULL,
+  `mobile` int(1) NULL,
+  `plugins` int(1) NULL,
+  `errors` int(1) NULL,
+  `last_upd_check` varchar(30) COLLATE utf8_unicode_ci NULL,
+  `upd_avail` int(1) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -490,16 +490,16 @@ INSERT INTO `f_settings` (`id`) VALUES
 CREATE TABLE IF NOT EXISTS `feeds` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
-  `text_feed` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `shared_feed` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `img_feed` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
-  `old_feed_id` bigint(20) NOT NULL,
-  `att_link` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `att_title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `att_description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `att_video` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `att_image` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `text_feed` longtext COLLATE utf8_unicode_ci NULL,
+  `shared_feed` longtext COLLATE utf8_unicode_ci NULL,
+  `img_feed` varchar(120) COLLATE utf8_unicode_ci NULL,
+  `old_feed_id` bigint(20) NULL,
+  `att_link` varchar(150) COLLATE utf8_unicode_ci NULL,
+  `att_title` varchar(150) COLLATE utf8_unicode_ci NULL,
+  `att_description` varchar(200) COLLATE utf8_unicode_ci NULL,
+  `att_video` varchar(200) COLLATE utf8_unicode_ci NULL,
+  `att_image` varchar(200) COLLATE utf8_unicode_ci NULL,
+  `time` varchar(30) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -648,7 +648,7 @@ CREATE TABLE IF NOT EXISTS `user_pm` (
   `from_id` bigint(20) NOT NULL,
   `to_id` bigint(20) NOT NULL,
   `message` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `read_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `read_time` varchar(30) COLLATE utf8_unicode_ci NULL,
   `sent_time` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `deleted_by` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
@@ -666,8 +666,8 @@ CREATE TABLE IF NOT EXISTS `isv_admin` (
   `name` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `status` int(1) NOT NULL DEFAULT 0,
   `level` int(1) NOT NULL DEFAULT 1,
-  `reg_date` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `reg_date` varchar(30) COLLATE utf8_unicode_ci NULL,
+  `ip` varchar(30) COLLATE utf8_unicode_ci NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -741,3 +741,245 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `upload_date` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- VERSION 2.1.0
+--
+
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `isv_plugins` (
+  `id` int(3) unsigned NOT NULL AUTO_INCREMENT,
+  `pluginname` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `displayname` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `developer` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `adminmenu` int(1) NOT NULL DEFAULT 0, 
+  `usermenu` int(1) NOT NULL DEFAULT 0,
+  `version` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `styles` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `js` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+INSERT INTO `isv_plugins` (`id`, `pluginname`, `displayname`, `description`, `developer`, `adminmenu`, `usermenu`, `version`, `styles`, `js`, `status`) 
+VALUES (NULL, 'pages', 'Pages', 'This plugin will let your users create pages in your community.', 'IsVipi OSSN', '0', '0', '1.0.0', 'pages,page', 'pages,page', '0');
+
+INSERT INTO `isv_plugins` (`id`, `pluginname`, `displayname`, `description`, `developer`, `adminmenu`, `usermenu`, `version`, `styles`, `js`, `status`) 
+VALUES (NULL, 'groups', 'Groups', 'This plugin will let your users create groups in your community.', 'IsVipi OSSN', '0', '0', '1.0.0', 'groups,group', 'groups,group', '0');
+
+CREATE TABLE IF NOT EXISTS `isv_groups` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `owner` bigint(20) NOT NULL,
+  `groupname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `grouptype` int(1) NOT NULL DEFAULT 1,
+  `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `cover` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `rules` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `fave` int(2) NOT NULL,
+  `status` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_group_members` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `groupid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `joindate` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_group_settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `groupid` bigint(20) NOT NULL,
+  `request_join` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_group_discussions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `groupid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `discussion` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `images` int(1) NOT NULL DEFAULT 0,
+  `att_link` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `att_title` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `att_description` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `att_video` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `att_image` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `timeposted` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_grouppost_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) NOT NULL,
+  `postid` bigint(20) NOT NULL,
+  `timeliked` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_group_comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `postid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `gcomment` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timeposted` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_groupcomment_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) NOT NULL,
+  `commentid` bigint(20) NOT NULL,
+  `timeliked` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_pages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `owner` bigint(20) NOT NULL,
+  `pagename` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `industry` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Academic',
+  `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `cover` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fave` int(2) NOT NULL DEFAULT 0,
+  `status` int(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_page_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `likedate` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_page_posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL,
+  `adminid` bigint(20) NOT NULL,
+  `post` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timeposted` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_pagepost_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) NOT NULL,
+  `postid` bigint(20) NOT NULL,
+  `timeliked` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_post_comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `postid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `gcomment` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timeposted` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_pagecomment_likes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) NOT NULL,
+  `commentid` bigint(20) NOT NULL,
+  `timeliked` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_banners` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `banner` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8_unicode_ci NULL,
+  `ntab` int(1) NOT NULL DEFAULT 1,
+  `uploadtime` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_group_images` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `groupid` bigint(20) NOT NULL,
+  `postid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `image` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_globalnotices` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) NOT NULL,
+  `notice` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `noticetime` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+ALTER TABLE `feeds` ADD `groupshare` BIGINT(20) NULL AFTER `att_image`, ADD `pageshare` BIGINT(20) NULL AFTER `groupshare`;
+
+ALTER TABLE `isv_page_posts` ADD `images` INT(1) NOT NULL DEFAULT '0' AFTER `post`;
+ALTER TABLE `isv_page_posts` ADD `att_link` VARCHAR(255) NULL AFTER `images`, ADD `att_title` VARCHAR(255) NULL AFTER `att_link`, ADD `att_description` VARCHAR(255) NULL AFTER `att_title`, ADD `att_video` VARCHAR(255) NULL AFTER `att_description`, ADD `att_image` VARCHAR(255) NULL AFTER `att_video`;
+CREATE TABLE IF NOT EXISTS `isv_page_images` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL,
+  `postid` bigint(20) NOT NULL,
+  `userid` bigint(20) NOT NULL,
+  `image` varchar(120) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+ALTER TABLE `feeds` ADD `sharedgroup` BIGINT(20) NULL AFTER `pageshare`, ADD `sharedpage` BIGINT(20) NULL AFTER `sharedgroup`;
+
+CREATE TABLE IF NOT EXISTS `isv_page_button` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL UNIQUE,
+  `button` int(2) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_page_phones` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL UNIQUE,
+  `phone` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `isv_page_contact` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL UNIQUE,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_page_signup` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL UNIQUE,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_page_emails` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `pageid` bigint(20) NOT NULL UNIQUE,
+  `email` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `isv_static_pages` (
+  `id` tinyint unsigned NOT NULL DEFAULT 1,
+  `aboutus` longtext COLLATE utf8_unicode_ci NULL,
+  `privacy` longtext COLLATE utf8_unicode_ci NULL,
+  `terms` longtext COLLATE utf8_unicode_ci NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `isv_static_pages` (`id`) VALUES ('1');

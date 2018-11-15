@@ -8,9 +8,92 @@
     <!-- REQUIRED JS SCRIPTS -->
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/bootstrap.min.js' ?>"></script>
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/app.min.js' ?>"></script>
+    <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/sticky/jquery.sticky-kit.min.js' ?>"></script>
+    <script>
+		$(document).ready(function() {
+		  $('.announcements').scrollToFixed({ marginTop: 55});
+		  $('.friends-sidebar').scrollToFixed({ marginTop: 55});
+		});
+    </script>
+    <?php if($p === "profile" || $p === "groups" || $p === "group" || $p === "pages" || $p === "page"){?>
+    	<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/lightbox/featherlight.js' ?>"></script>
+        <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/lightbox/featherlight.gallery.js' ?>"></script>
+    	<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/cropit/jquery.cropit.js' ?>"></script>
+        <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/dropzone/dropzone.js' ?>"></script>
+        <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/upload/js/jquery.filer.min.js' ?>"></script>
+        <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/link-preview/jquery.liveurl.js' ?>"></script>
+            <script>
+			$(document).ready(function() {
+				 $('#filer_input').filer({
+					changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-folder"></i></div><div class="jFiler-input-text"><h3>Click on this box</h3> <span style="display:inline-block; margin: 15px 0">or</span></div><a class="jFiler-input-choose-btn blue">Browse Files</a></div></div>',
+					showThumbs: true,
+					limit: 5,
+					maxSize: 10,
+					extensions: ['jpg', 'jpeg', 'png', 'gif'],
+					theme: "dragdropbox",
+					templates: {
+						box: '<ul class="jFiler-items-list jFiler-items-grid"></ul>',
+						item: '<li class="jFiler-item">\
+									<div class="jFiler-item-container">\
+										<div class="jFiler-item-inner">\
+											<div class="jFiler-item-thumb">\
+												<div class="jFiler-item-status"></div>\
+												<div class="jFiler-item-info">\
+													<span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name | limitTo: 25}}</b></span>\
+													<span class="jFiler-item-others">{{fi-size2}}</span>\
+												</div>\
+												{{fi-image}}\
+											</div>\
+											<div class="jFiler-item-assets jFiler-row">\
+												<ul class="list-inline pull-left"></ul>\
+												<ul class="list-inline pull-right">\
+													<li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
+												</ul>\
+											</div>\
+										</div>\
+									</div>\
+								</li>',
+						itemAppend: '<li class="jFiler-item">\
+										<div class="jFiler-item-container">\
+											<div class="jFiler-item-inner">\
+												<div class="jFiler-item-thumb">\
+													<div class="jFiler-item-status"></div>\
+													<div class="jFiler-item-info">\
+														<span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name | limitTo: 25}}</b></span>\
+														<span class="jFiler-item-others">{{fi-size2}}</span>\
+													</div>\
+													{{fi-image}}\
+												</div>\
+												<div class="jFiler-item-assets jFiler-row">\
+													<ul class="list-inline pull-left">\
+														<li><span class="jFiler-item-others">{{fi-icon}}</span></li>\
+													</ul>\
+													<ul class="list-inline pull-right">\
+														<li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
+													</ul>\
+												</div>\
+											</div>\
+										</div>\
+									</li>',
+						itemAppendToEnd: false,
+						removeConfirmation: true,
+						_selectors: {
+							list: '.jFiler-items-list',
+							item: '.jFiler-item',
+							remove: '.jFiler-item-trash-action'
+						}
+					}
+				});
+			});
+			</script>
+    <?php } ?>
+    
+    <!-- load plugin js -->
+    <?php $plugins->load_plugin_js($p) ?>
+    
     <?php 
 		//load only on feeds page
-		if($PAGE[0] == "home" || $PAGE[0] == "feeds" ){
+		if($PAGE[0] == "home" || $PAGE[0] == "feeds"  ){
 	
 	?>
 		<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/link-preview/jquery.liveurl.js' ?>"></script>
@@ -32,6 +115,7 @@
 						$('#text-update').append("<input type='hidden' id='tt' name='app_title' value=' " + data.title + " '/>");
 						$('#text-update').append("<input type='hidden' id='td' name='app_descr' value=' " + data.description + " '/>");
 						$('#text-update').append("<input type='hidden' id='tl' name='app_link' value=' " + data.url + " '/>");
+						$('#text-update').append("<input type='hidden' name='no_include' value=''/>");
 						
 						
 						var output = $('.liveurl');
@@ -41,12 +125,6 @@
                         output.find('.url').html(linkify(data.url));
                         output.find('.image').empty();
 						
-						$( "#text-update" ).submit(function( event ) {
-						  	close_preview();
-							$('#text-update').append("<input type='hidden' name='no_include' value=''/>");
-							$('#text-update').append("<input type='hidden' name='app_video' value=''/>");
-							$('#text-update').append("<input type='hidden' name='app_image' value=''/>");
-						});
                         output.find('.close').one('click', function(){
                             close_preview();
 							
@@ -68,9 +146,11 @@
                                 '<param name="movie"' +
                                       'value="' + data.video.file  + '"></param>' +
                                 '<param name="allowScriptAccess" value="always"></param>' +
+								'<param name="allowFullScreen" value="true" />' +
                                 '<embed src="' + data.video.file  + '"' +
                                       'type="application/x-shockwave-flash"' +
                                       'allowscriptaccess="always"' +
+									  'allowfullscreen="allowfullscreen"' +
                                       'width="' + data.video.width  + '" height="' + data.video.height  + '"></embed>' +
                             '</object>';
                             output.find('.video').html(video).show();
@@ -161,7 +241,7 @@
 				
 				function close_preview(){
 					var liveUrl     = $('.close').parent();
-                            liveUrl.hide('slow');
+                            liveUrl.hide('fast');
                             liveUrl.find('.video').html('').hide();
                             liveUrl.find('.image').html('');
                             liveUrl.find('.controls .prev').addClass('inactive');
@@ -174,6 +254,9 @@
 					
 				}
 				
+				function emptyAttachments(){
+					$('#text-update').append("<input type='hidden' name='no_include' value='no'/>");
+				}
 				
           </script>
           
@@ -205,12 +288,24 @@
 	
     <?php } ?>
     <script>
-		$('#notifications').on('click mouseover', function () {
+		/*$('#notifications').on('click mouseover', function () {
 			$('#notifications').timer('stop');
 		});
 		$('.content-wrapper').on('click', function () {
 			$('#notifications').timer('start');
-		});
+		});*/
+		
+		function markAsRead(action){
+			var action_uri = site_url +'/p/notices/' + encodeURIComponent(action);
+			$.post( action_uri, function( data ) {
+				//console.log(data);
+			});
+			if(action == 'notices' || action == 'global'){
+				setTimeout(function(){
+					$('#' + action + 'Count').fadeOut(1000);
+				}, 2000);
+			}
+		}
 		function linkify(inputText) {
 			var replacedText, replacePattern1, replacePattern2, replacePattern3;
 		
@@ -229,79 +324,6 @@
 			return replacedText;
 		}
 	</script>
-    <?php if($p === "profile" || $p === "home" || $p === "post"){?>
-    	<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/lightbox/featherlight.js' ?>"></script>
-        <script src="<?php echo ISVIPI_STYLE_URL . 'plugins/lightbox/featherlight.gallery.js' ?>"></script>
-        <?php if(isset($PAGE[2]) && $PAGE[2] ==="photos"){?>
-        	<script src="<?php echo ISVIPI_STYLE_URL . 'plugins/upload/js/jquery.filer.min.js' ?>"></script>
-            <script>
-			$(document).ready(function() {
-				 $('#filer_input').filer({
-    changeInput: '<div class="jFiler-input-dragDrop"><div class="jFiler-input-inner"><div class="jFiler-input-icon"><i class="icon-jfi-folder"></i></div><div class="jFiler-input-text"><h3>Click on this box</h3> <span style="display:inline-block; margin: 15px 0">or</span></div><a class="jFiler-input-choose-btn blue">Browse Files</a></div></div>',
-    showThumbs: true,
-	limit: 5,
-    maxSize: 10,
-    extensions: ['jpg', 'jpeg', 'png', 'gif'],
-    theme: "dragdropbox",
-    templates: {
-        box: '<ul class="jFiler-items-list jFiler-items-grid"></ul>',
-        item: '<li class="jFiler-item">\
-                    <div class="jFiler-item-container">\
-                        <div class="jFiler-item-inner">\
-                            <div class="jFiler-item-thumb">\
-                                <div class="jFiler-item-status"></div>\
-                                <div class="jFiler-item-info">\
-                                    <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name | limitTo: 25}}</b></span>\
-                                    <span class="jFiler-item-others">{{fi-size2}}</span>\
-                                </div>\
-                                {{fi-image}}\
-                            </div>\
-                            <div class="jFiler-item-assets jFiler-row">\
-                                <ul class="list-inline pull-left"></ul>\
-                                <ul class="list-inline pull-right">\
-                                    <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-                                </ul>\
-                            </div>\
-                        </div>\
-                    </div>\
-                </li>',
-        itemAppend: '<li class="jFiler-item">\
-                        <div class="jFiler-item-container">\
-                            <div class="jFiler-item-inner">\
-                                <div class="jFiler-item-thumb">\
-                                    <div class="jFiler-item-status"></div>\
-                                    <div class="jFiler-item-info">\
-                                        <span class="jFiler-item-title"><b title="{{fi-name}}">{{fi-name | limitTo: 25}}</b></span>\
-                                        <span class="jFiler-item-others">{{fi-size2}}</span>\
-                                    </div>\
-                                    {{fi-image}}\
-                                </div>\
-                                <div class="jFiler-item-assets jFiler-row">\
-                                    <ul class="list-inline pull-left">\
-                                        <li><span class="jFiler-item-others">{{fi-icon}}</span></li>\
-                                    </ul>\
-                                    <ul class="list-inline pull-right">\
-                                        <li><a class="icon-jfi-trash jFiler-item-trash-action"></a></li>\
-                                    </ul>\
-                                </div>\
-                            </div>\
-                        </div>\
-                    </li>',
-        itemAppendToEnd: false,
-        removeConfirmation: true,
-        _selectors: {
-            list: '.jFiler-items-list',
-            item: '.jFiler-item',
-            remove: '.jFiler-item-trash-action'
-        }
-    }
-});
-			});
-			</script>
-        <?php } ?>
-      <?php } ?>
-    
-    
 
   </body>
 </html>

@@ -14,7 +14,7 @@
                       <div class="news_item_date"><?php echo UTC2Local($n_item['pub_date']) ?></div>
                     </div>
                     <div class="news_item">
-                    	<?php echo $n_item['news'] ?>
+                    	<?php echo html_entity_decode($n_item['news']) ?>
                     </div>
                     <div class="clear"></div>
                     

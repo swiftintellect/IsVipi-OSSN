@@ -224,7 +224,7 @@
                           <a class="users-list-name" href="<?php echo ISVIPI_URL .'profile/'.$mi['username'] ?>" target="_blank">
 						  	<?php echo $mi['fullname'] ?>
                           </a>
-                          <span class="users-list-date">Today</span>
+                          <span class="users-list-date"><strong>Joined:</strong> <?php echo $mi['reg_date'] ?></span>
                         </li>
                       <?php } else {?>
                       	<li class="list-group-item">No members found.</li>
@@ -241,46 +241,42 @@
                 </div><!-- /.col -->
                 <!-- end: latest members -->
                 
-                <!-- latest rss feeds -->
                 <div class="col-md-6">
-                	<!-- Chat box -->
-              <div class="box box-success">
-                <div class="box-header">
-                  <i class="fa fa-comments-o"></i>
-                  <h3 class="box-title">Latest from <a href="//forum.isvipi.org" target="_blank">the community</a></h3>
-                </div>
-                <div class="box-body chat" id="chat-box">
-                
-                	<?php $l_feeds = $stats->get_latest_feeds(); 
-						$limit = 4;
-						for($x=0;$x<$limit;$x++) {
-							$title = str_replace(' & ', ' &amp; ', $l_feeds[$x]['title']);
-							$link = $l_feeds[$x]['guid'];
-							$description = $l_feeds[$x]['desc'];
-							$descr = truncate_($description, 20);
-							$date = date('M/d/Y', strtotime($l_feeds[$x]['date']));
-					?>
-                  <!-- community item -->
-                  <div class="item">
-                    <p class="message" style="margin-top:2px;">
-                      <a href="<?php echo $link ?>" class="name" target="_blank">
-                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo $date ?></small>
-                        <?php echo $title ?>
-                      </a>
-                      <?php echo $descr ?>
-                    </p>
-                  </div><!-- /.item -->
-                  <!-- chat item -->
-                  <?php } ?>
-                  
-                </div><!-- /.chat -->
-              </div><!-- /.box (chat box) -->
-                
-                </div>
-                <!-- end:: rss feeds -->
-
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Donate</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <p>If you think developers at IsVipi OSSN are doing a good job, consider saying thank you by making a donation to the project. Your donations go a long way towards motivating our developers. You can also choose to sponsor a version. To know more about sponsoring future versions, please <a href="http://isvipi.org/support/" target="_blank">drop us a line</a>.</p>
+                  <p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin-bottom:20px">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="ZMWP83F3ACBBC">
+                    <input type="hidden" name="on0" value="Donation Amount">
+                    <div class="col-md-5">
+                    <select name="os0" class="form-control">
+                        <option value="10">$10.00 USD</option>
+                        <option value="25">$25.00 USD</option>
+                        <option value="50">$50.00 USD</option>
+                        <option value="100">$100.00 USD</option>
+                        <option value="250">$250.00 USD</option>
+                        <option value="500">$500.00 USD</option>
+                        <option value="1000">$1,000.00 USD</option>
+                    </select> 
+                    </div>
+                    <div class="col-md-7">
+                    <input type="submit" class="btn btn-primary" name="submit" alt="PayPal - The safer, easier way to pay online!" value="Make a Donation">
+                    </div>
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+                  </p>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div>
               </div>
-
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->

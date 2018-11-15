@@ -30,8 +30,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <p>Jones Baraza</p> 
-                  <a href="https://twitter.com/JonesWiz" class="btn btn-social-icon btn-twitter" title="follow me on twitter" target="_blank"><i class="fa fa-twitter"></i></a>
-                  <a href="https://ke.linkedin.com/in/jones-baraza-71b981104" class="btn btn-social-icon btn-linkedin" title="lets connect on LinkedIn" target="_blank"><i class="fa fa-linkedin"></i></a>
+                  <a href="https://twitter.com/JonesBaraza" class="btn btn-social-icon btn-twitter" title="follow me on twitter" target="_blank"><i class="fa fa-twitter"></i></a>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
               
@@ -84,7 +83,7 @@
                 <div class="box-body">
                   <p>If you think developers at IsVipi OSSN are doing a good job, consider saying thank you by making a donation to the project. Your donations go a long way towards motivating our developers. You can also choose to sponsor a version. To know more about sponsoring future versions, please <a href="http://isvipi.org/support/" target="_blank">drop us a line</a>.</p>
                   <p>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="margin-bottom:20px">
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin-bottom:20px">
                     <input type="hidden" name="cmd" value="_s-xclick">
                     <input type="hidden" name="hosted_button_id" value="ZMWP83F3ACBBC">
                     <input type="hidden" name="on0" value="Donation Amount">

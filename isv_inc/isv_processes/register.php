@@ -110,11 +110,9 @@
 		
 		/** capture our variables **/
 		$userFields = array (
-			'Username' => cleanPOST('username'),
 			'Full Name' => cleanPOST('name'),
 			'Email' => cleanPOST('email'),
 			'Password' => cleanPOST('pwd'),
-			'Repeat Password' => cleanPOST('pwd2'),
 			'Country' => cleanPOST('country'),
 			'Date of Birth' => $d_o_b,
 			'Gender' => cleanPOST('sex')

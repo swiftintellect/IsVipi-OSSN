@@ -6,11 +6,11 @@
 ?>
 <?php if($allFriendsCount > 0 ){?>
 <div style="margin-top:-20px;">
-<?php if(is_array($userFriends)) foreach ($userFriends as $key => $friend_info) {?>
+<?php if(is_array($userFriends)) foreach ($userFriends as $key => $friend_info) {  ?>
     <div class="friend_sidebar">
-    	<a href="<?php echo ISVIPI_URL .'profile/'.$friend_info['m_username'] ?>">
+    	<a href="<?php echo ISVIPI_URL . 'profile/'. $friend_info['m_username'] ?>">
     	<li class="list-group-item">
-            <img class="square-circle" src="<?php echo user_pic($friend_info['m_profile_pic']) ?>" alt="<?php echo $friend_info['m_fullname'] ?>">
+            <img class="square-circle" src="<?php echo user_pic($friend_info['m_profile_pic']) ?>" width="100%" alt="<?php echo $friend_info['m_fullname'] ?>">
         <?php echo $friend_info['m_fullname'] ?> 
 		<div class="pull-right text-blue" style="margin-top:10px;"><?php echo is_online($friend_info['m_last_activity']) ?></div>
 	  

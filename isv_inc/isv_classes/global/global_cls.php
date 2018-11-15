@@ -6,6 +6,10 @@ class pageManager {
 	
 	/*** if your guest and logged in head page is the same, call loadHead() function */ 
 	public function loadHead(){
+		/** require our plugins class **/
+		require_once(ISVIPI_CLASSES_BASE .'plugins/class.plugins.php');
+		$plugins = new plugins();
+		
 		global $p,$s_m,$isv_siteSettings,$converter,$PAGE;
 		require_once(ISVIPI_ACT_THEME . 'ovr/head.php');
 	}
@@ -17,6 +21,10 @@ class pageManager {
 		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 		$admin = new admin_security();
 		
+		/** require our plugins class **/
+		require_once(ISVIPI_CLASSES_BASE .'plugins/class.plugins.php');
+		$plugins = new plugins();
+			
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
 		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){
 			require_once(ISVIPI_ACT_THEME . 'ovr/'.$logged.'.php');
@@ -53,11 +61,18 @@ class pageManager {
 	/*** if your guest and logged in header page is the same, call loadHeader() function */ 
 	public function loadsideBar($sidebar){
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$memberinfo,$PAGE,$converter;
+		
+		require_once(ISVIPI_CLASSES_BASE .'plugins/class.plugins.php');
+		$plugins = new plugins();
 		require_once(ISVIPI_ACT_THEME . 'ovr/'.$sidebar.'.php');
 	}
 	
 	/*** if your guest and logged in footer page is the same, call loadFooter() function */ 
 	public function loadFooter(){
+		/** require our plugins class **/
+		require_once(ISVIPI_CLASSES_BASE .'plugins/class.plugins.php');
+		$plugins = new plugins();
+		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
 		require_once(ISVIPI_ACT_THEME . 'ovr/footer.php');
 	}
@@ -68,6 +83,10 @@ class pageManager {
 	public function loadCustomFooter($guest,$logged){
 		require_once(ISVIPI_ADMIN_CLS_BASE .'init.cls.php');
 		$admin = new admin_security();
+		
+		/** require our plugins class **/
+		require_once(ISVIPI_CLASSES_BASE .'plugins/class.plugins.php');
+		$plugins = new plugins();
 		
 		global $p,$s_m,$isv_siteSettings,$isv_siteDetails,$converter,$PAGE;
 		if (isLoggedIn() || ($admin->admin_logged_in() && $p !== 'index')){

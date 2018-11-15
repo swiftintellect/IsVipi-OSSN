@@ -1,4 +1,7 @@
-﻿<?php global $admin; if(!$admin->admin_logged_in() || isset($_SESSION['isv_user_id'])){?>
+﻿<?php 
+	global $admin; 
+	if(!$admin->admin_logged_in() || isset($_SESSION['isv_user_id'])){
+?>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
 
@@ -39,6 +42,7 @@
             <li <?php if ($PAGE['0'] === "members"){?> class="active" <?php } ?>>
             	<a href="<?php echo ISVIPI_URL .'members/' ?>"><i class="fa fa-search"></i> <span>Browse</span></a>
             </li>
+            <?php $plugins->load_active_plugins($PAGE[0]); ?>
             <hr style="margin:10px 0" />
             <li class="logout">
             	<a href="<?php echo ISVIPI_URL .'log_out' ?>"><i class="fa fa-sign-out"></i> Logout</a>

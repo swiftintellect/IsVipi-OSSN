@@ -65,6 +65,40 @@
               </ul>
             </li>
             
+            <li class="treeview <?php if ($PAGE[1] === 'banner'){?> active <?php } ?>">
+              <a href="#">
+              	<i class="fa fa-newspaper-o"></i> <span>Advertisements</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li <?php if ($PAGE[1] == 'banner'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'banner' ?>">Banner </a></li>
+              </ul>
+            </li>
+            
+            <li class="treeview <?php if ($PAGE[1] === 'about_us' || $PAGE[1] === 'terms' || $PAGE[1] === 'privacy_policy'){?> active <?php } ?>">
+              <a href="#">
+              	<i class="fa fa-bookmark-o"></i> <span>Static Pages</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li <?php if ($PAGE[1] == 'banner'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'about_us' ?>">About Us</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li <?php if ($PAGE[1] == 'banner'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'terms' ?>">Terms & Conditions</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li <?php if ($PAGE[1] == 'banner'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'privacy_policy' ?>">Privacy Policy </a></li>
+              </ul>
+              
+            </li>
+            
+            <li class="treeview <?php if ($PAGE[1] === 'manage_plugins'){?> active <?php } ?>">
+              <a href="#">
+              	<i class="fa fa-plug"></i> <span>Plugins</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li <?php if ($PAGE[1] == 'banner'){?>class="active" <?php } ?>><a href="<?php echo ISVIPI_ACT_ADMIN_URL .'manage_plugins' ?>">Manage Plugins</a></li>
+              </ul>
+            </li>
+            
             <li class="treeview <?php if ($PAGE[1] === 'credits' || $PAGE[1] === 'support'){?> active <?php } ?>">
               <a href="#">
               	<i class="fa fa-question-circle"></i> <span>Help/Support</span> <i class="fa fa-angle-left pull-right"></i>

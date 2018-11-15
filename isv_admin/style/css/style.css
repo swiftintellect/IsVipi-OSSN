@@ -4785,3 +4785,7 @@ table.text-center th {
 .isv-update {
 	padding:10px;
 }
+.bn-img img{
+	width:60px;
+	height:70px;
+}

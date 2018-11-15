@@ -382,8 +382,8 @@ function user_friend_req_notices($user,$type,$limit){
 		p.profile_pic
 		FROM friend_requests fr 
 		LEFT JOIN users u ON fr.from_id = u.id
-		LEFT JOIN user_profile p ON p.user_id = u.id
-		WHERE fr.to_id=? $query $limit
+		LEFT JOIN user_profile p ON p.user_id = fr.from_id
+		WHERE fr.to_id=? $limit 
 	
 	"); 
 	$stmt->bind_param('i', $user);
@@ -560,6 +560,59 @@ function user_unread_messages($user,$limit){
 
 }
 
+function global_notices_count($user,$status){
+	global $isv_db;
+	
+	if($status == "all"){
+		$s = "";
+	} else {
+		$s = "AND status = $status";
+	}
+	$stmt = $isv_db->prepare ("SELECT COUNT(*) FROM isv_globalnotices WHERE userid=? $s"); 
+	$stmt->bind_param('i', $user);
+	$stmt->execute();  
+	$stmt->bind_result($count); 
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $count;
+}
+
+function global_notices($user,$limit,$status){
+	global $isv_db;
+	
+	if($status == "all"){
+		$s = "";
+	} else {
+		$s = "AND status = $status";
+	}
+	
+	if($limit == 'all'){
+		$l = '';
+	} else {
+		$l = "LIMIT $limit";
+	}
+	
+	$stmt = $isv_db->prepare ("SELECT id,userid,notice,noticetime,status FROM isv_globalnotices WHERE userid=? $s ORDER BY id DESC  $l"); 
+	$stmt->bind_param('i', $user);
+	$stmt->execute();  
+	$stmt->store_result();
+	$stmt->bind_result($id,$userid,$notice,$noticetime,$status); 
+	
+	$res = array();
+	while ($stmt->fetch()){
+		$res[] = array(
+			'id' => $id,
+			'userid' => $userid,
+			'notice' => $notice,
+			'noticetime' => $noticetime,
+			'status' => $status
+		);
+	}
+	$stmt->close();
+	
+	return $res;
+}
 function update_feed_as_read($feed_id){
 	global $isv_db;
 	
@@ -598,6 +651,21 @@ function id_from_username($username){
 	$stmt->close();
 }
 
+
+function username_from_id($uid){
+	global $isv_db,$user_id;
+	
+	$stmt = $isv_db->prepare ("SELECT username from users WHERE id=?"); 
+	$stmt->bind_param('i', $uid);
+	$stmt->execute(); 
+	$stmt->store_result();
+	$stmt->bind_result($username);
+	$stmt->fetch();
+	$stmt->close(); 
+	
+		return $username;
+}
+
 function full_name_from_id($user_id){
 	global $isv_db;
 	
@@ -612,6 +680,14 @@ function full_name_from_id($user_id){
 	return $fullname;
 }
 
+function fullname_from_username($username){
+	//get id from username
+	global $user_id;
+	id_from_username($username);
+	
+	//get fullname from id
+	return full_name_from_id($user_id);
+}
 function get_user_ip(){
 	$ipaddress = '';
     if (getenv('HTTP_CLIENT_IP'))
@@ -787,3 +863,160 @@ function tag_it($text){
     $text= preg_replace("/@(\w+)/", '&lt;a href="http://www.twitter.com/$1" target="_blank"&gt;@$1&lt;/a&gt;', $text); 
     return $text;
 }
+function base64_to_jpeg($base64_string, $output_file) {
+    $ifp = fopen($output_file, "wb"); 
+
+    $data = explode(',', $base64_string);
+
+    fwrite($ifp, base64_decode($data[1])); 
+    fclose($ifp); 
+
+    return $output_file; 
+}
+function fetchAssocStatement($stmt){
+    if($stmt->num_rows>0)
+    {
+        $result = array();
+        $md = $stmt->result_metadata();
+        $params = array();
+        while($field = $md->fetch_field()) {
+            $params[] = &$result[$field->name];
+        }
+        call_user_func_array(array($stmt, 'bind_result'), $params);
+        if($stmt->fetch())
+            return $result;
+    }
+
+    return null;
+}
+
+function site_uri(){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare("SELECT s_url from s_info WHERE id=1 LIMIT 1");
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->bind_result($s_url);
+	$stmt->fetch();
+	$stmt->close();	
+	
+	return $s_url;
+}
+
+function ad_banner($banner){
+	if(empty($banner)){
+		return ISVIPI_UPLOADS_URL . 'banners/noimage.png';
+	} else if (!empty($banner) && !file_exists(ISVIPI_UPLOADS_BASE . 'banners/'.$banner)){
+		return ISVIPI_UPLOADS_URL . 'banners/noimage.png';
+	} else if (!empty($banner) && file_exists(ISVIPI_UPLOADS_BASE . 'banners/'.$banner)){
+		return ISVIPI_UPLOADS_URL . 'banners/'.$banner;
+	}
+}
+
+function add_global_notice($uid,$notice){
+	global $isv_db;
+	
+	$stmt = $isv_db->prepare("INSERT INTO isv_globalnotices SET 
+		userid = ?,
+		notice = ?,
+		noticetime = UTC_TIMESTAMP() 
+	");
+	$stmt->bind_param('is',$uid,$notice);
+	$stmt->execute();
+	$stmt->close();
+}
+
+function groupname_from_id($id){
+	global $isv_db;
+			
+	$stmt = $isv_db->prepare("SELECT groupname FROM isv_groups WHERE id=?");
+	$stmt->bind_param('i',$id);
+	$stmt->execute();
+	$stmt->bind_result($groupname);
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $groupname;
+}
+
+function pagename_from_id($id){
+	global $isv_db;
+			
+	$stmt = $isv_db->prepare("SELECT pagename FROM isv_pages WHERE id=?");
+	$stmt->bind_param('i',$id);
+	$stmt->execute();
+	$stmt->bind_result($pagename);
+	$stmt->fetch();
+	$stmt->close();
+		
+	return $pagename;
+}
+
+function group_member($gid,$userid){
+		global $isv_db;
+			
+		$stmt = $isv_db->prepare("SELECT COUNT(*) FROM isv_group_members WHERE groupid=? AND userid=?");
+		$stmt->bind_param('ii',$gid,$userid);
+		$stmt->execute();
+		$stmt->bind_result($count);
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($count > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+		
+}
+
+
+function liked_page($pid,$userid){
+		global $isv_db;
+			
+		$stmt = $isv_db->prepare("SELECT COUNT(*) FROM isv_page_likes WHERE pageid=? AND userid=?");
+		$stmt->bind_param('ii',$pid,$userid);
+		$stmt->execute();
+		$stmt->bind_result($count);
+		$stmt->fetch();
+		$stmt->close();
+		
+		if($count > 0){
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+		
+}
+
+function group_cover_from_id($gid){
+		global $isv_db;
+		$stmt = $isv_db->prepare("SELECT cover FROM isv_groups WHERE id=?");
+		$stmt->bind_param('i',$gid);
+		$stmt->execute();
+		$stmt->bind_result($cover);
+		$stmt->fetch();
+		$stmt->close();
+
+		if(!empty($cover) && file_exists(ISVIPI_PLUGINS_BASE.'groups/uploads/'.$cover)){
+			echo ISVIPI_PLUGINS_URL.'groups/uploads/'.$cover;
+		} else {
+			echo ISVIPI_PLUGINS_URL.'groups/style/images/no-image.jpg';
+		}
+	}
+	
+	function page_cover_from_id($pid){
+		global $isv_db;
+		$stmt = $isv_db->prepare("SELECT cover FROM isv_pages WHERE id=?");
+		$stmt->bind_param('i',$pid);
+		$stmt->execute();
+		$stmt->bind_result($cover);
+		$stmt->fetch();
+		$stmt->close();
+
+		if(!empty($cover) && file_exists(ISVIPI_PLUGINS_BASE.'pages/uploads/'.$cover)){
+			echo ISVIPI_PLUGINS_URL.'pages/uploads/'.$cover;
+		} else {
+			echo ISVIPI_PLUGINS_URL.'pages/style/images/no-image.jpg';
+		}
+	}

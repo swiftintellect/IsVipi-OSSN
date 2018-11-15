@@ -1,13 +1,13 @@
-﻿<body class="hold-transition skin-blue sidebar-mini" style="margin-top:-20px;">
+﻿<body class="hold-transition skin-blue sidebar-mini" style="margin-top:-20px; background:#FFF">
 <div class="wrapper">
       <!-- Main Header -->
       <header class="main-header">
         <!-- Logo -->
-        <a href="<?php echo ISVIPI_URL .'home/' ?>" class="logo">
+        <a href="<?php echo ISVIPI_URL .'home/' ?>" class="logo" style="padding-top:3px">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><?php echo $isv_siteDetails['s_title'] ?></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><img src="<?php echo ISVIPI_STYLE_URL . 'site/imgs/'.$isv_siteSettings['logo'] ?>" alt="logo" height="47"></span>
+          <span class="logo-lg"><img src="<?php echo ISVIPI_STYLE_URL . 'site/imgs/'.$isv_siteSettings['logo'] ?>" alt="logo" height="40"></span>
         </a>
 		
         <!-- Header Navbar -->
@@ -75,6 +75,13 @@
    		<?php echo $_SESSION['isv_success']; unset($_SESSION['isv_success']); ?>
      </div>
      <?php } ?>
+     <script>
+		 $( document ).ready(function() {
+			 setTimeout(function(){
+			 	$('#global-alert').fadeOut(2000);
+			 }, 2000);
+		});
+	</script>
      
 	 <?php if ($admin->admin_logged_in()){ 
 		$back_uri = ISVIPI_ACT_ADMIN_URL .'dashboard/';

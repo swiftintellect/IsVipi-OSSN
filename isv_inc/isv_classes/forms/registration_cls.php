@@ -20,38 +20,24 @@ class userRegistration {
 				 exit();
 			}
 		}
+		
+		//generate a username for this person
+		$genUsername = uniqid();
+		
 		//assign our variables
-		$this->username = $userFields['Username'];
+		$this->username = $genUsername;
 		$this->name = $userFields['Full Name'];
 		$this->email = $userFields['Email'];
 		$this->password = $userFields['Password'];
-		$this->rPassword = $userFields['Repeat Password'];
 		$this->country = $userFields['Country'];
 		$this->dob = $userFields['Date of Birth'];
 		$this->sex = $userFields['Gender'];
 		
-		//validate username
-		/*(allow only alphanumeric,hyphen and underscores) */
-		if(preg_match('/[^a-z_\-0-9]/i', $this->username)){
-		  	$array['err'] = true;
-			$array['message'] = 'Username cannot have any space. It MUST be one word with 8 or more characters.';
-			echo json_encode($array);
-			exit();
-		}
-
-		if(strlen($this->username) < 6){
-			$array['err'] = true;
-			$array['message'] = 'Username MUST be 6 or more characters.';
-			echo json_encode($array);
-			exit();
-		}
 		//check if the username is already taken
 		if($this->isRegistered($this->username, 'username')){
-			$array['err'] = true;
-			$array['message'] = ''.$this->username.' is taken. Please try another.';
-			echo json_encode($array);
-			exit();
+			$this->username = $this->username.rand(5, 10);
 		}
+
 		//validate email
 		if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
 			$array['err'] = true;
@@ -72,14 +58,6 @@ class userRegistration {
 		if(strlen($this->password) < 8){
 			$array['err'] = true;
 			$array['message'] = 'Password MUST be 8 or more characters.';
-			echo json_encode($array);
-			exit();
-		}
-		
-		//check if the two passwords match
-		if ($this->password !== $this->rPassword){
-			$array['err'] = true;
-			$array['message'] = 'Password and Re-enter Password do not match.';
 			echo json_encode($array);
 			exit();
 		}

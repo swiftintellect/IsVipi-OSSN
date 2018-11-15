@@ -30,6 +30,18 @@
 						?>
                         <span class="sharedTtext">shared <?php echo $shtxt ?> <a href="<?php echo ISVIPI_URL .'post/'.$converter->encode($f['old_feed_id']) ?>" title="<?php echo $sh['s_from_fullname'] ?> update">post</a></span>
                         <?php } ?>
+                        <?php if(!empty($f['groupshare'])){?>
+                        	<span class="sharedTtext">shared a post from <a href="<?php echo ISVIPI_URL.'group/'.$converter->encode($f['groupshare'])?>"><?php echo groupname_from_id($f['groupshare']) ?></a></span>
+                        <?php } ?>
+                        <?php if(!empty($f['pageshare'])){?>
+                        	<span class="sharedTtext">shared a post from <a href="<?php echo ISVIPI_URL.'page/'.$converter->encode($f['pageshare'])?>"><?php echo pagename_from_id($f['pageshare']) ?></a></span>
+                        <?php } ?>
+                        <?php if(!empty($f['sharedgroup'])){?>
+                        	<span class="sharedTtext">shared a group ~ <a href="<?php echo ISVIPI_URL.'group/'.$converter->encode($f['sharedgroup'])?>"><?php echo groupname_from_id($f['sharedgroup']) ?></a></span>
+                        <?php } ?>
+                        <?php if(!empty($f['sharedpage'])){?>
+                        	<span class="sharedTtext">shared a page ~ <a href="<?php echo ISVIPI_URL.'page/'.$converter->encode($f['sharedpage'])?>"><?php echo pagename_from_id($f['sharedpage']) ?></a></span>
+                        <?php } ?>
                     </div>
                     <span class='description' style="display:block">&nbsp; <i class="fa fa-clock-o"></i> <?php echo elapsedTime($f['feed_time']) ?></span>
                   </div><!-- /.user-block -->
@@ -44,8 +56,38 @@
                       <li>
                       	<a href="javascript:void(0)" onclick="deleteFeed(<?php echo $f['feed_id'] ?>, '<?php echo $converter->encode('delete')?>');">Delete</a>
                       </li>
+                      <li>
+                      	<a href="#" data-toggle="modal" data-target="#edit_f<?php echo $f['feed_id'] ?>">Edit</a>
+                      </li>
+                      
+                      
                     </ul>
                    </ul>
+                   
+                   <!-- Edit Feed Modal-->
+                    <div class="modal fade" id="edit_f<?php echo $f['feed_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="block">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Edit Post</h4>
+                          </div>
+                          <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST">
+                          <div class="modal-body">
+                             <div class="form-group">
+                            	<textarea class="form-control" rows="10" name="post" required="required"><?php echo $f['feed_text'] ?></textarea>
+                          	</div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <input type="hidden" name="fid" value="<?php echo $converter->encode($f['feed_id']) ?>" />
+                           	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('edit') ?>" />
+                            <input type="submit" class="btn btn-primary" value="Edit Post" />
+                          </div>
+                          </form>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                     <?php } ?>
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
@@ -63,11 +105,84 @@
                   </a>
                   <?php }?>
                   
+                  <!-------------------------------
+               	  ------/ GROUP SHARED ----------
+                 --------------------------------->
+                 <?php if(!empty($f['sharedgroup'])){?>	
+                	<div class="box box-solid members">
+                    	<div class="row">
+                        	<div class="col-md-12 cover-photo">
+                            	<img class="" src="<?php echo group_cover_from_id($f['sharedgroup']) ?>" alt="cover photo" style="width: 100%;max-height: 100%">
+                            </div>
+                            <div style="margin-top:10px;padding:10px 0;">
+                            	<div class="pull-left" style="margin-top:5px">
+                                	<a href="<?php echo ISVIPI_URL.'group/'.$converter->encode($f['sharedgroup'])?>" style="font-family:Verdana, Geneva, sans-serif; font-size:20px">
+                                    	<?php echo groupname_from_id($f['sharedgroup']) ?>
+                                   	</a>
+                                </div>
+                                <div class="pull-right" style="margin-top:5px">
+                                <?php if(!group_member($f['sharedgroup'],$_SESSION['isv_user_id'])){?>
+                                	<a href="<?php echo ISVIPI_URL .'plugins/groups/join/'.$converter->encode('join').'/'.$converter->encode($f['sharedgroup']) ?>" class="btn btn-default btn-sm">
+                                		Join Group
+                                    </a>
+                                <?php } else { ?>
+                                	<a href="<?php echo ISVIPI_URL .'plugins/groups/join/'.$converter->encode('leave').'/'.$converter->encode($f['sharedgroup']) ?>" class="btn btn-default btn-sm">
+                                		Leave Group
+                                    </a>
+                                
+                                <?php } ?>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+               	 <?php } ?> 
+                <!-------------------------------
+               	 ------/ END SHARED GROUP ---
+                --------------------------------->
+                
+                <!-------------------------------
+               	  ------/ PAGE SHARED ----------
+                 --------------------------------->
+                 <?php if(!empty($f['sharedpage'])){?>	
+                	<div class="box box-solid members">
+                    	<div class="row">
+                        	<div class="col-md-12 cover-photo">
+                            	<img class="" src="<?php echo page_cover_from_id($f['sharedpage']) ?>" alt="cover photo" style="width: 100%;max-height: 100%">
+                            </div>
+                            <div style="margin-top:10px;padding:10px 0;">
+                            	<div class="pull-left" style="margin-top:5px">
+                                	<a href="<?php echo ISVIPI_URL.'page/'.$converter->encode($f['sharedpage'])?>" style="font-family:Verdana, Geneva, sans-serif; font-size:20px">
+                                    	<?php echo pagename_from_id($f['sharedpage']) ?>
+                                   	</a>
+                                </div>
+                                <div class="pull-right" style="margin-top:5px">
+                                <?php if(liked_page($f['sharedpage'],$_SESSION['isv_user_id'])){?>
+                                	<a href="<?php echo ISVIPI_URL .'plugins/pages/like/'.$converter->encode('like').'/'.$converter->encode($f['sharedpage']) ?>" class="btn btn-default btn-sm">
+                                		<i class="fa fa-thumbs-up"></i> Like
+                                    </a>
+                                <?php } else { ?>
+                                	<a href="<?php echo ISVIPI_URL .'plugins/pages/like/'.$converter->encode('unlike').'/'.$converter->encode($f['sharedpage']) ?>" class="btn btn-default btn-sm">
+                                		<i class="fa fa-thumbs-down"></i> Unlike
+                                    </a>
+                                <?php } ?>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+               	 <?php } ?> 
+                <!-------------------------------
+               	 ------/ END SHARED PAGE ---
+                --------------------------------->
+                  
                   <!-- post attachement if is not video-->
                   <?php if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (empty($f['att_video']))){?>
                   	<div class="col-md-12">
                     	<div class="attachment-block clearfix">
+                        	<?php if(!empty($f['att_image'])){?>
                             <img class="attachment-img" src="<?php echo $f['att_image'] ?>" alt="attachment image">
+                            <?php } ?>
                             <div class="attachment-pushed">
                               <h4 class="attachment-heading">
                               	<a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>
@@ -87,7 +202,11 @@
                     <!--if it is a video -->
                   <?php } else if ((!empty($f['att_link']) || !empty($f['att_title']) || !empty($f['att_description'])) && (!empty($f['att_video']))){?>
                   <div class="att_video">
-                  	<embed type="application/x-shockwave-flash" src="<?php echo $f['att_video'] ?>" allowscriptaccess="always" allowfullscreen="true" scale="aspect" controller="true" width="100%" height="75%"></embed>
+                      <object type="application/x-shockwave-flash" data="<?php echo $f['att_video'] ?>" width="100%" height="75%">
+                        <param name="movie" value="<?php echo $f['att_video'] ?>">
+                        <param name="allowFullScreen" value="true">
+                        <param name="allowScriptAccess" value="always">
+                      </object>
                     <div class="clear"></div>
                     <div class="title">
                         <a href="<?php echo $f['att_link'] ?>" target="_blank"><?php echo $f['att_title'] ?></a>

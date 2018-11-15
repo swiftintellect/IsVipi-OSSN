@@ -87,6 +87,7 @@
 		 	exit();
 		}
 		
+		$message = html_entity_decode ( $message );
 		//validate email
 		if(!filter_var($email, FILTER_SANITIZE_EMAIL)){
 			$_SESSION['isv_error'] = 'Please provide a valid email';
@@ -150,6 +151,8 @@
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
+		
+		$message = html_entity_decode ( $message );
 		
 		if($type !== "all" && $type !== "active" && $type !== "inactive" && $type !== "suspended" && $type !== "pending_deletion"){
 			$_SESSION['isv_error'] = 'Please select a valid user group.';

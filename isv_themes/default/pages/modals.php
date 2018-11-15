@@ -27,36 +27,54 @@
 </div><!-- /.modal -->
 
 
+<style>
+#newCover .cropit-preview {
+	width: 850px;
+	height: 250px;
+}
+</style>
 <!-- upload cover photo modal-->
-<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="cover">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    <form action="<?php echo ISVIPI_URL .'p/member' ?>" method="post" enctype="multipart/form-data" id="imgFeed" runat="server">
-      <div class="modal-header">
+<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="cover" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-cover-size">
+    <div class="modal-content" style="padding:20px">
+    <div class="modal-header" style="margin-bottom:20px;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Upload Cover Photo</h4>
+        <h4 class="modal-title">Upload Cover Image</h4>
       </div>
-      <div class="modal-body">
-      	<div class="alert alert-info" style="padding:10px">
-        	Your cover photo should be approximately 800px by 250 px
-        </div>
-      	<div class="fileUpload btn btn-upload">
-        	<span>Click to Choose Image</span>
-           	<input type="file" class="upload" name="cover" id="imgInp2"/>
-      	</div>
-       	<img id="preview2" src="<?php echo ISVIPI_STYLE_URL.'/default/images/preview.png' ?>"/>
-       	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('cover_pic') ?>" />
-      	<div class="clear"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Upload</button>
-      </div>
-      </form>
+		<form action="<?php echo ISVIPI_URL .'p/profileimages' ?>" id="newCover" method="POST">
+          <div class="image-editor">
+            <input type="file" class="cropit-image-input">
+            <div class="cropit-preview"></div>
+            <div class="image-size-label">
+              Resize image
+            </div>
+            <input type="range" class="cropit-image-zoom-input">
+            <input type="hidden" name="image-data" class="hidden-image-data" />
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script>
+	$(function() {
+        $('.image-editor').cropit({ smallImage: 'allow' });
 
+        $('form').submit(function() {
+          // Move cropped image data to hidden input
+          var imageData = $('.image-editor').cropit('export');
+          $('.hidden-image-data').val(imageData);
+
+          // Print HTTP request params
+          var formValue = $(this).serialize();
+          $('#result-data').text(formValue);
+
+          // Prevent the form from actually submitting
+          //return false;
+        });
+      });
+</script>
 <!------------------------------------------------------------!>
         <!-- FEED IMAGE PREVIEW -->
         <script>

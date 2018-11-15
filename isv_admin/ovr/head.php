@@ -24,7 +24,7 @@
     <!-- load jquery -->
     <script src="<?php echo ISVIPI_STYLE_URL . 'default/js/jquery.js' ?>"></script>
     
-    <?php if($PAGE[1] == "admin_news" || $PAGE[1] == "admin_emails"){ ?>
+    <?php if($PAGE[1] == "admin_news" || $PAGE[1] == "admin_emails" || $PAGE[1] == "about_us" || $PAGE[1] == "terms" || $PAGE[1] == "privacy_policy"){ ?>
     	<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <?php } ?>
     <?php if($PAGE[1] == "add_new"){ ?>

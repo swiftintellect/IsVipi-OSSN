@@ -33,6 +33,7 @@
   .navbar-collapse {
     padding-left: 0;
     padding-right: 0;
+	z-index:999999;
   }
 
   .recent-work-wrap .recent-work-inner h3 a {
@@ -183,12 +184,24 @@
   .blog .blog-item .entry-meta > span a{
     font-size: 10px;
   }
+  
 }
 
 /* xs */
 @media (max-width: 767px) {
   .container > .navbar-header, .container > .navbar-collapse{
     margin-left: 0;
+	position:relative;
+	z-index:99;
+  }
+  .lead-title {
+		display:none;
+	}
+  .navbar-form {
+	  background:#797979;
+  }
+  .forgot-pwd {
+	  margin-top:-25px;
   }
 
   .top-number{
@@ -295,11 +308,23 @@
   #home-img {
 	  display:none !important;
   }
+  #middle .container {
+		width:100%;
+		padding:0;
+		margin-top:-40px;
+	}
 
 }
 
 /* XS Portrait */
 @media (max-width: 480px) {
-
+	#middle .container {
+		width:100%;
+		padding:0;
+		margin-top:-40px;
+	}
+	.lead-title {
+		display:none;
+	}
 }
 

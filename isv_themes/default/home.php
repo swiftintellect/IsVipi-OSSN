@@ -1,5 +1,4 @@
-﻿
-<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
+﻿<?php $pageManager->loadCustomHead('g_head','m_head'); ?>
 <?php $pageManager->loadCustomHeader('g_header','m_header'); ?>
 <?php $pageManager->loadsideBar('sidebar'); ?>
 	<?php require_once(ISVIPI_ACT_THEME .'ovr/feed-post-scripts.php') ?>
@@ -20,7 +19,7 @@
                      	<div class="tab-content">
                   			<div class="tab-pane active" id="update-timeline">
                             <form action="<?php echo ISVIPI_URL .'p/feeds' ?>" method="POST" id="text-update">
-                            	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="What's on your mind?" ></textarea>
+                            	<textarea name="feed" class="form-control no-bottom-border" rows="2" placeholder="Shout to the world!" ></textarea>
                             	<input type="hidden" name="isv_op" value="<?php echo $converter->encode('new-feed') ?>" />
                                 <div class="form-group">
                                 <button type="submit" class="btn btn-sm btn-primary pull-right">Post</button>
@@ -89,9 +88,8 @@
                 </div>
                 
                 <div id="tFeeds">
-					<script>
-						loadTimeline(<?php echo ISV_FEEDS_TO_LOAD ?>);
-					</script>
+                	<?php require_once(ISVIPI_PAGES_BASE .'feeds.php') ?>
+					
 				</div>
 					
              <div class="clear"></div> 
@@ -100,7 +98,7 @@
             
             
             <!-- announcements -->
-            <section class="col-lg-3 announcements">
+            <section class="announcements col-lg-3">
             	<div class="box box-solid">
                     <div class="box-header">
                     	<?php require_once(ISVIPI_ACT_THEME .'pages/news.php') ?>
@@ -109,7 +107,7 @@
             </section>
             
             <!-- online friends -->
-            <section class="col-lg-3 friends-sidebar">
+            <section class="friends-sidebar col-lg-3" id="friends-sidebar">
             	<div class="box box-solid">
                     <div class="box-header">
                     	<?php require_once(ISVIPI_ACT_THEME .'pages/friends_sidebar.php') ?>

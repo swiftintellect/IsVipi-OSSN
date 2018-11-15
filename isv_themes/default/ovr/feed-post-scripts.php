@@ -14,11 +14,11 @@
 						$('#errorLog').css('display','none');
 						$('#text-update').clearForm();
 						$('#text-update').resetForm();
-						$('.liveurl-loader').hide();
-						//reload our timeline
+						close_preview();
 						loadTimeline();
-						$finished = true;
-						$(':input').val('');
+						emptyAttachments();
+						//$finished = true;
+						//$(':input').val('');
 					}
 					$('input[type="submit"]').prop('disabled', false);
 					$("#processing").hide();

@@ -167,10 +167,10 @@
     margin: 10px 0 0 0;    
 }
 
-.post textarea {
+/*.post textarea {
     width: 600px;
     height: 140px;
-}
+}*/
 
 .liveurl-loader {
     display: none;

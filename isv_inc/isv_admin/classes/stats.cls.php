@@ -163,6 +163,7 @@
 		  $stmt = $isv_db->prepare ("
 			SELECT 
 				u.username,
+				u.reg_date,
 				p.fullname,
 				p.profile_pic 
 			FROM users u
@@ -171,12 +172,13 @@
 		"); 
 		$stmt->execute(); 
 		$stmt->store_result(); 
-		$stmt->bind_result($username,$fullname,$ppic); 
+		$stmt->bind_result($username,$reg_date,$fullname,$ppic); 
 		$count = $stmt->num_rows();
 		$members = array();
 		while($stmt->fetch()){
 				$members[] = array(
 					'username' => $username,
+					'reg_date'  => $reg_date,
 					'fullname' => $fullname,
 					'profile_pic' => $ppic,
 					'count' => $count,

@@ -16,7 +16,7 @@
     <script src="<?php echo ISVIPI_ADMIN_URL .'style/js/app.min.js' ?>"></script>
     
     <!-- load the bootstrap ckeditor editor on select pages -->
-    <?php if($PAGE[1] == "admin_news" || $PAGE[1] == "admin_emails"){ ?>
+    <?php if($PAGE[1] == "admin_news" || $PAGE[1] == "admin_emails" || $PAGE[1] == "about_us" || $PAGE[1] == "terms" || $PAGE[1] == "privacy_policy"){ ?>
     	<script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
         <script>
 		  $(function () {

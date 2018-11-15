@@ -16,7 +16,7 @@
 		with this program; if not, write to the Free Software Foundation, Inc.,
 		51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 	 ******************************************************/ 
-	 
+	$res = array();
 	 if(!isset($_SERVER['HTTP_REFERER']) || empty ($_SERVER['HTTP_REFERER'])){
 		$_SESSION['isv_error'] = 'ACTION NOT ALLOWED!';
 		notFound404Err();
@@ -80,17 +80,30 @@
 	if ($operation === 'cover_pic'){
 		
 		//check if an image is set
-		if (!is_uploaded_file($_FILES['cover']['tmp_name'])) {
-			 $_SESSION['isv_error'] = 'Please select an image to upload.';
-			 header('location:'.$from_url.'');
-			 exit();
+		if (!isset($_POST['image-data'])) {
+			$res['error'] = true;
+			$res['msg'] = 'Cover picture missing. Please try again.';
+			echo json_encode($res); exit();
 		}
 		
-		$cover = $_FILES['cover'];
+		//decode image and save it
+		$save_path = ISVIPI_UPLOADS_BASE .'cover/';
 		
-		/** change cover pic **/
-		$ppic = new member($_SESSION['isv_user_id']);
-		$ppic->cover_photo($cover);
+		$newfilename = str_replace('.', '', $_SESSION['isv_user_id'] . str_replace(' ', '', microtime()) . 'cover').'.jpg';
+		$filename_path = $save_path.$newfilename; 
+		$cover = base64_to_jpeg($_POST['image-data'],$filename_path);
+		
+		//save in the database
+		$stmt = $isv_db->prepare("UPDATE user_profile SET cover_photo=? WHERE user_id=?");
+		$stmt->bind_param('si',$newfilename,$_SESSION['isv_user_id']);
+		$stmt->execute();
+		$stmt->close();
+		
+		//return success
+		$res['error'] = false;
+		$res['msg'] = 'Update successful';
+		echo json_encode($res); exit();
+
 	}
 	
 	/*** EDIT PROFILE **/

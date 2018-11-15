@@ -14,7 +14,7 @@ class emails {
 		$mail = new PHPMailer;
 		
 		// Set PHPMailer to use the sendmail transport
-		$mail->isSendmail();
+		//$mail->isSendmail();
 		
 		//Set who the message is to be sent from
 		$mail->setFrom(ISV_DEFAULT_EMAIL_FROM, ISV_SITE_TITLE);
@@ -57,7 +57,7 @@ class emails {
 		$mail = new PHPMailer;
 		
 		// Set PHPMailer to use the sendmail transport
-		$mail->isSendmail();
+		//$mail->isSendmail();
 		
 		//Set who the message is to be sent from
 		$mail->setFrom(ISV_DEFAULT_EMAIL_FROM, ISV_SITE_TITLE);

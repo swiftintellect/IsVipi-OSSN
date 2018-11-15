@@ -77,7 +77,7 @@
             <div class="col-md-6">
             	<div class="box box-warning">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Vulnerable Files</h3>
+                      <h3 class="box-title">Security Check</h3>
                       <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       </div><!-- /.box-tools -->

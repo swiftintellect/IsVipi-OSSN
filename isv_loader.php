@@ -4,7 +4,7 @@
 		require_once ('isv_inc/isv_pre_install/prompt.php');
 		exit();
 	} 
-	
+
 	/*** load important files **/
 	require_once 'isv_inc/isv_db/db.php';
 	require_once 'isv_init.php';
@@ -55,6 +55,12 @@
 		include_once ISVIPI_PROCESS_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
 	} else if ($PAGE[0] === 'aa') {
 		include_once ISVIPI_ADMIN_PROC_BASE.preg_replace('/[^\w]/','',$PAGE[1]).'.php';
+	} else if($PAGE[0] === 'plugins'){
+		if(isset($PAGE[2])){
+			include_once ISVIPI_PLUGINS_BASE.$PAGE[1].'/processes/'.preg_replace('/[^\w]/','',$PAGE[2]).'.php';
+		} else {
+			notFound404Err();
+		}
 	}  else if ($PAGE[0] === $isv_siteSettings['adminEnd']) {
 		if(!isset($PAGE[1])){
 			include_once ISVIPI_ADMIN_BASE.preg_replace('/[^\w]/','','login').'.php';
