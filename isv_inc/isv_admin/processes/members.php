@@ -163,10 +163,8 @@
 		 	header('location:'.$from_url.'');
 		 	exit();
 		}
-		
-		$users = cleanPOST('user_id');
-		
-		$member->mass_activate($users);
+
+		$member->mass_activate($_POST['user_id']);
 	}
 	
 	if ($op === 'mass-sus'){
@@ -177,9 +175,7 @@
 		 	exit();
 		}
 		
-		$users = cleanPOST('user_id');
-		
-		$member->mass_suspend($users);
+		$member->mass_suspend($_POST['user_id']);
 		
 	}
 	
@@ -190,9 +186,7 @@
 		 	exit();
 		}
 		
-		$users = cleanPOST('user_id');
-		
-		$member->mass_unsuspend($users);
+		$member->mass_unsuspend($_POST['user_id']);
 		
 	}
 	
@@ -203,9 +197,7 @@
 		 	exit();
 		}
 		
-		$users = cleanPOST('user_id');
-		
-		$member->mass_delete($users);
+		$member->mass_delete($_POST['user_id']);
 		
 	}
 	
@@ -216,9 +208,7 @@
 		 	exit();
 		}
 		
-		$users = cleanPOST('user_id');
-		
-		$member->mass_undelete($users);
+		$member->mass_undelete($_POST['user_id']);
 		
 	}
 	

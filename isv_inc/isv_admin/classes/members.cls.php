@@ -254,7 +254,6 @@
 		
 		public function mass_activate($users){
 			global $isv_db;
-			
 			$from_url = $_SERVER['HTTP_REFERER'];
 			
 			foreach ($users as $id){
@@ -263,7 +262,7 @@
 					 header('location:'.$from_url.'');
 					 exit();
 				}
-				
+
 				//activate user
 				$stmt = $isv_db->prepare("UPDATE users SET status=1 WHERE id=? AND status=0");
 				$stmt->bind_param('i',$id);
